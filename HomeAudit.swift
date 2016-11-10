@@ -18,7 +18,7 @@ struct Page {
     let details:String
 }
 
-class Home: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class HomeAudit: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     let pages:[Page] = {
         

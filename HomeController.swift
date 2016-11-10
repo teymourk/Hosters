@@ -11,31 +11,31 @@ import FirebaseMessaging
 
 class HomeController: UIViewController {
     
-    let instructionPages:Home = {
+    let instructionPages:HomeAudit = {
         
         let layout = UICollectionViewFlowLayout()
             layout.minimumLineSpacing = 0
             layout.scrollDirection = .horizontal
-        let page = Home(frame: .zero, collectionViewLayout: layout)
+        let page = HomeAudit(frame: .zero, collectionViewLayout: layout)
             page.translatesAutoresizingMaskIntoConstraints = false
         return page
         
     }()
     
+    let seperator:UIView = {
+        let view = UIView()
+            view.backgroundColor = .lightGray
+            view.translatesAutoresizingMaskIntoConstraints = false
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        setupView()
+
         view.backgroundColor = .white
         
-        view.addSubview(instructionPages)
-        
-        //Pages Constrains
-        instructionPages.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        instructionPages.bottomAnchor.constraint(equalTo: login.topAnchor, constant: -50).isActive = true
-        instructionPages.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
-        instructionPages.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
-        
+        setupView()
+        setupAuditPage()
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -73,6 +73,23 @@ class HomeController: UIViewController {
         return button
     }()
     
+    func setupAuditPage() {
+        
+        view.addSubview(instructionPages)
+        view.addSubview(seperator)
+        
+        //Pages Constrains
+        instructionPages.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        instructionPages.bottomAnchor.constraint(equalTo: login.topAnchor, constant: -50).isActive = true
+        instructionPages.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
+        instructionPages.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
+        
+        //Seperatro Constraints
+        seperator.topAnchor.constraint(equalTo: instructionPages.bottomAnchor).isActive = true
+        seperator.widthAnchor.constraint(equalTo: self.view.widthAnchor).isActive = true
+        seperator.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+    }
+    
     func setupView() {
         
         view.addSubview(register)
@@ -98,7 +115,7 @@ class HomeController: UIViewController {
     
     func onLoginBtn(_ sender:UIButton) {
         
-        let loginView = LoginVC()
+        let loginView = LoginVC2()
         self.navigationController?.pushViewController(loginView, animated: true)
         self.navigationController?.navigationBar.isHidden = true
     }

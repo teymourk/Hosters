@@ -136,8 +136,6 @@ class RegisterVC: UIViewController, UITextFieldDelegate, UIImagePickerController
         setupView()
         
         tapGesture(self, actions: "onProfileImage:", object: profileImage, numberOfTaps: 1)
-        setupKeyBoardObserver()
-        
     }
     
     func onBackBtn(_ sender:UIButton) {
@@ -186,42 +184,7 @@ class RegisterVC: UIViewController, UITextFieldDelegate, UIImagePickerController
         
         picker.dismiss(animated: true, completion: nil)
     }
-    
-    func setupKeyBoardObserver() {
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow(_ :)), name: NSNotification.Name.UIKeyboardWillShow, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardWillShow(_ :)), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
-    }
-    
-    func handleKeyboardWillShow(_ notification: Notification) {
-        
-        //let keyboardFrame = notification.userInfo?[UIKeyboardFrameEndUserInfoKey]?.CGRectValue()
-        //let isKeyboardShowing = notification.name == UIKeyboardWillShowNotification
-        
-//        if isKeyboardShowing {
-//            
-//            registerBtn.setBackgroundImage(UIImage(named: "rsz_login"), forState: .Normal)
-//            registerBtn.setTitle("Sign Up", forState: .Normal)
-//            registeBtnTopAnchar?.constant = (keyboardFrame?.height)!
-//            
-//            print(view.frame.h(keyboardFrame?.height)!)
-//            
-//        } else {
-//            
-//            registerBtn.setBackgroundImage(UIImage(named: "signin"), forState: .Normal)
-//            registerBtn.setTitle("Sign Up", forState: .Normal)
-//            registerBtnXAnchor?.constant = 0
-//            registeBtnTopAnchar?.constant = 30
-//        }
-//        
-//        UIView.animateWithDuration(0.5, delay: 0, options: .CurveEaseIn, animations: {
-//            
-//            self.view.layoutIfNeeded()
-//            
-//            }, completion: nil)
-    }
-    
+
     func onRegisterFireBase(_ sender:UIButton) {
         
         handleRegister()
@@ -271,7 +234,7 @@ class RegisterVC: UIViewController, UITextFieldDelegate, UIImagePickerController
                 storageRef.put(uploadData, metadata: nil) { (metaData, error) in
                     
                     if error != nil {
-                        print(error)
+                        
                         return
                     }
                     
@@ -300,7 +263,7 @@ class RegisterVC: UIViewController, UITextFieldDelegate, UIImagePickerController
         facebookLogin.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
             
             if error != nil {
-                print(error)
+                
                 return
                 
             } else if result?.isCancelled == true {
@@ -314,6 +277,23 @@ class RegisterVC: UIViewController, UITextFieldDelegate, UIImagePickerController
                 
             }
         }
+    }
+    
+    func setupButtons() {
+        
+        view.addSubview(registerBtn)
+        view.addSubview(facebookBtn)
+        
+        //Register Button
+        registerBtnXAnchor = registerBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0)
+        registerBtnXAnchor?.isActive = true
+        registeBtnTopAnchar = registerBtn.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 30)
+        registeBtnTopAnchar?.isActive = true
+        
+        //Facebook Button
+        facebookBtn.leftAnchor.constraint(equalTo: profileImage.leftAnchor, constant: 20).isActive = true
+        facebookBtn.topAnchor.constraint(equalTo: registerBtn.bottomAnchor, constant: 20).isActive = true
+        
     }
         
     override var prefersStatusBarHidden : Bool {
@@ -339,8 +319,6 @@ class RegisterVC: UIViewController, UITextFieldDelegate, UIImagePickerController
         view.addSubview(profileImage)
         view.addSubview(usernameTxtFiled)
         view.addSubview(displayNameTxtFiled)
-        view.addSubview(registerBtn)
-        view.addSubview(facebookBtn)
         
         //BackBtn
         view.addConstrainstsWithFormat("H:|-15-[v0]", views: backBtn)
@@ -409,14 +387,6 @@ class RegisterVC: UIViewController, UITextFieldDelegate, UIImagePickerController
         //Top
         view.addConstraint(NSLayoutConstraint(item: displayNameTxtFiled, attribute: .centerY, relatedBy: .equal, toItem: usernameTxtFiled, attribute: .centerY, multiplier: 1, constant: 30))
         
-        //Register Button
-        registerBtnXAnchor = registerBtn.centerXAnchor.constraint(equalTo: view.centerXAnchor, constant: 0)
-        registerBtnXAnchor?.isActive = true
-        registeBtnTopAnchar = registerBtn.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 30)
-        registeBtnTopAnchar?.isActive = true
-        
-        //Facebook Button
-        facebookBtn.leftAnchor.constraint(equalTo: profileImage.leftAnchor, constant: 20).isActive = true
-        facebookBtn.topAnchor.constraint(equalTo: registerBtn.bottomAnchor, constant: 20).isActive = true
+        setupButtons()
     }
 }

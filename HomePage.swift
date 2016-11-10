@@ -322,4 +322,8 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
             }
         }
     }
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
 }
