@@ -115,7 +115,7 @@ class HomeController: UIViewController {
     
     func onLoginBtn(_ sender:UIButton) {
         
-        let loginView = LoginVC2()
+        let loginView = LoginVC()
         self.navigationController?.pushViewController(loginView, animated: true)
         self.navigationController?.navigationBar.isHidden = true
     }

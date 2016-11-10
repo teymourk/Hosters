@@ -22,8 +22,8 @@ class HomeAudit: UICollectionView, UICollectionViewDelegate, UICollectionViewDat
     
     let pages:[Page] = {
         
-        let firstPage = Page(imageName: "eventP", title: "Check Something", details: "This pages does something cool")
-        let secondPage = Page(imageName: "eventP2", title: "Doesnt check Something", details: "Do something Cool")
+        let firstPage = Page(imageName: "eventP", title: "Check In With Friends", details: "You can checkin to near locations and let your friends know where you are!")
+        let secondPage = Page(imageName: "eventP2", title: "Share your moments", details: "Upload Images before and after the event to share your moments with friends")
         let thirdPage = Page(imageName: "eventP3", title: "SALAMA CHETORYE", details: "man khoobam")
         let fourthPage = Page(imageName: "eventP4", title: "NEMIDOOONAM", details: "SALAM CHETORY PESAR")
         

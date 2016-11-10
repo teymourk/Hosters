@@ -11,7 +11,7 @@ import Firebase
 import MBProgressHUD
 import FBSDKLoginKit
 
-class LoginVC2: RegisterVC {
+class LoginVC: RegisterVC {
 
     override func viewDidLoad() {
         super.viewDidLoad()
