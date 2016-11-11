@@ -146,8 +146,8 @@ class PostInfoAndPictures: UICollectionViewController, UICollectionViewDelegateF
         let label = UILabel()
             label.textColor = darkGray
             label.font = UIFont(name: "Prompt", size: 17)
-        label.text = "No Images For This Posts 😢"
-        label.translatesAutoresizingMaskIntoConstraints = false
+            label.text = "No Images For This Posts 😢"
+            label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     

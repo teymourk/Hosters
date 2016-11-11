@@ -27,8 +27,8 @@ class PhotoLibrary: UIViewController, UICollectionViewDelegate, UICollectionView
     
     lazy var photoLibraryCollection:UICollectionView = {
         let layout = UICollectionViewFlowLayout()
-        layout.minimumLineSpacing = 0
-        layout.minimumInteritemSpacing = 0
+            layout.minimumLineSpacing = 0
+            layout.minimumInteritemSpacing = 0
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
             cv.backgroundColor = .clear
             cv.delegate = self
