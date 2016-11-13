@@ -120,18 +120,6 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
         return view
     }()
     
-//        if let seconds = post.timeEnded?.doubleValue, let status = post.status {
-//            
-//            let timestampDate = Date(timeIntervalSince1970: seconds)
-//            
-//            let active = UIImage(named: "ok_filled")
-//            let time = UIImage(named: "clock-1")
-//            
-//            activeLabel.text = status == true ? "ACTIVE" : "Ended \(timestampDate.Time()) Ago"
-//            activeImage.image = status == true ? active : time
-//        }
-    
-
     var friendsFeedView:HomePage?
     
     lazy var feedAllPhotosVC:PicturesInsideCell = {

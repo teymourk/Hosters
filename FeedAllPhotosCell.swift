@@ -29,18 +29,18 @@ class FeedAllPhotosCell: BaseCell {
         return img
     }()
     
-//    lazy var loaderIndicator:UIActivityIndicatorView = {
-//        let loader = UIActivityIndicatorView(activityIndicatorStyle: .white)
-//            loader.center = self.center
-//            loader.color = darkGray
-//        return loader
-//    }()
+    lazy var loaderIndicator:UIActivityIndicatorView = {
+        let loader = UIActivityIndicatorView(activityIndicatorStyle: .white)
+            loader.center = self.center
+            loader.color = darkGray
+        return loader
+    }()
     
     override func setupView() {
         super.setupView()
         
         addSubview(_images)
-       // addSubview(loaderIndicator)
+        addSubview(loaderIndicator)
         
         //AllImages Constrains
         addConstrainstsWithFormat("H:|[v0]|", views: _images)

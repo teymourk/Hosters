@@ -50,8 +50,6 @@ class PostInfoAndPictures: UICollectionViewController, UICollectionViewDelegateF
         
         let feedType = UIBarButtonItem(image: UIImage(named: "Grid"), style: .plain, target: self, action: #selector(onFeedType(_ :)))
         navigationItem.rightBarButtonItem = feedType
-        
-        navigationController?.removeBackButtonText()
     }
     
     func onFeedType(_ sender: UIBarButtonItem) {

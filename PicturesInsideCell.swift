@@ -14,13 +14,12 @@ private let CELL_ID = "cellId"
 class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
     
     var cellHeight:CGFloat!
+    var timer:Timer?
+
     
     var allImages:[PostImages]? {
         didSet{
-            
-            timer?.invalidate()
-            timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(handleReloading), userInfo: nil, repeats: false)
-            
+
             if allImages?.count == nil {
                 
                 self.setupMap()
@@ -33,13 +32,6 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
             
             picturesCollectionView.reloadData()
         }
-    }
-    
-    var timer:Timer?
-    
-    func handleReloading() {
-        
-        self.picturesCollectionView.reloadData()
     }
     
     var feedCell:FeedCell?
@@ -68,7 +60,9 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
     
     fileprivate func locationNameForView() {
         
-        guard let lat = feedCell?.postsDetails?.latitude, let long = feedCell?.postsDetails?.longtitude, let locationName = feedCell?.postsDetails?.location else {return}
+        guard let lat = feedCell?.postsDetails?.latitude,
+            let long = feedCell?.postsDetails?.longtitude,
+            let locationName = feedCell?.postsDetails?.location else {return}
         
         let location = CLLocationCoordinate2DMake(CLLocationDegrees(lat), CLLocationDegrees(long))
         let span = MKCoordinateSpanMake(0.05, 0.05)
@@ -105,48 +99,42 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = picturesCollectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as! FeedAllPhotosCell
+        let index = 0
         
-        if let postImages = self.allImages?[(indexPath as NSIndexPath).item] {
-        
-            cell.postedImages = postImages
-            cell.feedAllPhotos = self
-        }
+        handleImageChanging(cell: cell)
         
         return cell
     }
-    
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if let imagesCount = allImages?.count {
-            
-            if imagesCount == 1 {
-                
-                if (indexPath as NSIndexPath).item == 0 {
-                
-                    return CGSize(width: frame.width, height: frame.height)
-                }
-                
-            } else if imagesCount == 2 {
-                
-                return CGSize(width: frame.width / 2, height: frame.height)
+        return CGSize(width: frame.width, height: frame.height)
+    }
+    
+    fileprivate func handleImageChanging(cell:FeedAllPhotosCell) {
+
         
-            } else if imagesCount == 4 {
+        
+        var index = 0
+        
+        timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { (timer) in
+            
+            if let postImages = self.allImages?[index] {
                 
-                if (indexPath as NSIndexPath).item == 3 {
-                    
-                    return CGSize(width: frame.width, height: frame.height / 2)
-                }
+                index = index + 1
                 
-            } else if imagesCount == 5 {
-                                
-                if (indexPath as NSIndexPath).item == 4 {
+                cell.postedImages = postImages
+                cell.feedAllPhotos = self
+            }
+            
+            if let count = self.allImages?.count {
+                
+                if index == count {
                     
-                    return CGSize(width: frame.width / 1.5 , height: frame.height / 2)
+                    index = 0
                 }
             }
-        }
-        
-        return CGSize(width: frame.width/3, height: frame.height / 2)
+        })
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
