@@ -36,6 +36,14 @@ class ActivityDetailsHeader: BaseCell {
                 
                 date.text = postStatus == true ? "Add Photo Using Camera" : "Add Photo Using Photo Library"
             }
+            
+            if let poster = postDetails?.poster {
+                
+                if poster != FirebaseRef.database.currentUser.key {
+                    
+                    camera.removeFromSuperview()
+                }
+            }
         }
     }
     

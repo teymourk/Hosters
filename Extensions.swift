@@ -125,6 +125,31 @@ extension UICollectionViewCell {
             self.alpha = 1
         })
     }
+
+}
+
+extension UINavigationController {
+    
+    func removeBackButtonText() {
+        
+        if let BackButtonText = self.navigationBar.topItem {
+            
+            BackButtonText.backBarButtonItem = UIBarButtonItem(title: "", style: .plain, target: nil, action: nil)
+        }
+    }
+}
+
+extension UICollectionViewCell {
+    
+    func setCellShadow() {
+        
+        self.layer.masksToBounds = false
+        self.layer.cornerRadius = 3.0
+        self.layer.shadowOpacity = 0.8
+        self.layer.shadowRadius = 3.0
+        self.layer.shadowOffset = CGSize(width: 0, height: 2.0)
+        self.layer.shadowColor = UIColor(red: 157/255, green: 157/255, blue: 157/255, alpha: 1).cgColor
+    }
 }
 
 //Clear Footer For table

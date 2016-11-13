@@ -68,7 +68,7 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
         super.viewDidLoad()
         
         navigationController?.navigationBar.isTranslucent = false
-        collectionView?.backgroundColor = UIColor(white: 0.90, alpha: 1)
+        collectionView?.backgroundColor = .white
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: CELL_IDENTEFITER)
         collectionView?.alwaysBounceVertical = true
         collectionView?.addSubview(refreshController)
@@ -96,6 +96,8 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
                 cell.menuOptions.tag = (indexPath as NSIndexPath).item
                 cell.feedAllPhotosVC.index = indexPath
                 pushImages(cell, posts: posts)
+                
+                cell.setCellShadow()
             }
     
             return cell
@@ -250,7 +252,6 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
         }
     }
     
-    
     var orangeSeperator:UIView = {
         let seperator = UIView()
             seperator.backgroundColor = orange
@@ -309,7 +310,10 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
         do {
             
             let fetchRequest: NSFetchRequest<Posts> = Posts.fetchRequest()
+                fetchRequest.sortDescriptors = [NSSortDescriptor(key: "timePosted", ascending: false)]
+            
             let imageRequest: NSFetchRequest<PostImages> = PostImages.fetchRequest()
+                imageRequest.sortDescriptors = [NSSortDescriptor(key: "timePosted", ascending: false)]
             
             try self.userPosts = (context.fetch(fetchRequest))
             let imagesArray = try(context.fetch(imageRequest))
@@ -321,7 +325,7 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
         } catch let err {
             print(err)
         }
-        
+    
         refreshController.endRefreshing()
     }
 }

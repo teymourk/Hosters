@@ -11,7 +11,6 @@ import CoreLocation
 import CoreData
 import Firebase
 
-
 class getPostsData: NSObject {
     
     class func getPostsFromFireBase() {
@@ -37,17 +36,15 @@ class getPostsData: NSObject {
     
     class func fetchUsers(poster:String, post:Posts) {
         
-        //guard let poster = post.poster else {return}
-        
         do {
             let request:NSFetchRequest<Users> = Users.fetchRequest()
                 //request.predicate = NSPredicate(format: "posts.poster = %@", "FQiVFkjSDTb5FjJF1YdGjOl7uAy2")
             
             let usersArray = try(context.fetch(request))
             
-            let f = usersArray.filter({$0.userKey == poster})
+            let filteredUsers = usersArray.filter({$0.userKey == poster})
             
-            for user in f {
+            for user in filteredUsers {
                 
                 post.users = user
             }
@@ -87,7 +84,22 @@ class getPostsData: NSObject {
         
         if let privacy = dictionary["Privacy"] as? String {
             posts.privacy = privacy
-            
+        }
+        
+        if let timePosted = dictionary["Time"] as? Double {
+            posts.timePosted = timePosted
+        }
+        
+        if let timeEnded = dictionary["TimeEnded"] as? Double {
+            posts.timeEnded = timeEnded
+        }
+        
+        if let latitude = dictionary["Latitude"] as? Int16 {
+            posts.latitude = latitude
+        }
+        
+        if let longtitude = dictionary["Longtitude"] as? Int16 {
+            posts.longtitude = longtitude
         }
         
         do {

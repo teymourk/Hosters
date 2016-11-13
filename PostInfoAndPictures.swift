@@ -19,8 +19,7 @@ class PostInfoAndPictures: UICollectionViewController, UICollectionViewDelegateF
             if postedImages?.count != nil {
             
                 emptyText.removeFromSuperview()
-                timer?.invalidate()
-                timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(handleReloading), userInfo: nil, repeats: false)
+                collectionView?.reloadData()
                 
             } else {
                 
@@ -31,11 +30,6 @@ class PostInfoAndPictures: UICollectionViewController, UICollectionViewDelegateF
     
     var timer:Timer?
     var isGrid:Bool = Bool()
-    
-    func handleReloading() {
-        
-        self.collectionView?.reloadData()
-    }
     
     var postDetails:Posts?
     var taggedUsers = [Users]()
@@ -52,10 +46,12 @@ class PostInfoAndPictures: UICollectionViewController, UICollectionViewDelegateF
         navigationController?.navigationBar.isTranslucent = false
         collectionView!.register(AllPicturesFeedCell.self, forCellWithReuseIdentifier: CELL_ID)
         collectionView?.register(ActivityDetailsHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HEADER_ID)
-        collectionView?.backgroundColor = UIColor(white: 0.90, alpha: 1)
+        collectionView?.backgroundColor = .white
         
         let feedType = UIBarButtonItem(image: UIImage(named: "Grid"), style: .plain, target: self, action: #selector(onFeedType(_ :)))
         navigationItem.rightBarButtonItem = feedType
+        
+        navigationController?.removeBackButtonText()
     }
     
     func onFeedType(_ sender: UIBarButtonItem) {
@@ -112,6 +108,7 @@ class PostInfoAndPictures: UICollectionViewController, UICollectionViewDelegateF
         cell.like.tag = (indexPath as NSIndexPath).item
         cell.menuOptions.tag = (indexPath as NSIndexPath).item
         cell.handleCellAnimation()
+        cell.setCellShadow()
         
         if isGrid {
             
@@ -161,18 +158,18 @@ class PostInfoAndPictures: UICollectionViewController, UICollectionViewDelegateF
 
     func onCamera() {
         
-        if let postDetail = postDetails {
+        guard let postDetail = postDetails else {return}
+        
+        if postDetails?.status == false {
             
-            if postDetails?.status == false {
-                
-                let photoLibraryVC = PhotoLibrary()
-                photoLibraryVC.postKey = postDetail.postKey
-                
-                let navController = UINavigationController(rootViewController: photoLibraryVC)
-                self.present(navController, animated: true, completion: nil)
-                return
-            }
+            let photoLibraryVC = PhotoLibrary()
+            photoLibraryVC.postKey = postDetail.postKey
+            
+            let navController = UINavigationController(rootViewController: photoLibraryVC)
+            self.present(navController, animated: true, completion: nil)
+            return
         }
+        
         
         let cameraVC = AddImages()
             cameraVC.activePostsDetails = postDetails

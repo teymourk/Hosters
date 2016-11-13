@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 
 class getImagesData: NSObject {
@@ -32,6 +33,27 @@ class getImagesData: NSObject {
             }
         })
     }
+    
+    class func fetchUsers(poster:String, postImages:PostImages) {
+        
+        do {
+            
+            let request:NSFetchRequest<Users> = Users.fetchRequest()
+            //request.predicate = NSPredicate(format: "posts.poster = %@", "FQiVFkjSDTb5FjJF1YdGjOl7uAy2")
+            
+            let usersArray = try(context.fetch(request))
+            
+            let f = usersArray.filter({$0.userKey == poster})
+            
+            for user in f {
+                
+                postImages.users = user
+            }
+            
+        } catch let err {
+            print(err)
+        }
+    }
 
     init(postKey:String, imageKey:String, postImagesDic:Dictionary<String,AnyObject>) {
         
@@ -47,10 +69,16 @@ class getImagesData: NSObject {
         
         if let poster = postImagesDic["poster"] as? String {
             images.poster = poster
+            
+            getImagesData.fetchUsers(poster: poster, postImages: images)
         }
         
         if let caption = postImagesDic["description"] as? String {
             images.caption = caption
+        }
+        
+        if let timePosted = postImagesDic["timePosted"] as? Double {
+            images.timePosted = timePosted
         }
     }
 }

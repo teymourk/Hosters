@@ -32,7 +32,7 @@ class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDat
             layout.minimumLineSpacing = 0
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
             cv.translatesAutoresizingMaskIntoConstraints = false
-            cv.backgroundColor = UIColor(white: 0.82, alpha: 1)
+            cv.backgroundColor = .white
             cv.contentInset = UIEdgeInsetsMake(40, 0, 0, 0)
             cv.scrollIndicatorInsets = UIEdgeInsetsMake(40, 0, 0, 0)
             cv.isPagingEnabled = true
@@ -42,7 +42,6 @@ class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         return cv
     }()
     
-
     var peopleTagged:peopleWith = {
         let pw = peopleWith()
         return pw
@@ -71,11 +70,9 @@ class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
         if (indexPath as NSIndexPath).item == 1 {
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ENDED_POST_ID, for: indexPath) as! EndedPostCell
-            //setupGuideLabel("Add Image To Activity That Ended via Photo Library")
             cell.addOrPostVC = self
             return cell
         }
@@ -83,19 +80,19 @@ class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         if (indexPath as NSIndexPath).item == 2 {
         
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CREATE_NEW, for: indexPath) as! CreatePostCell
-            //setupGuideLabel("Check-In")
             cell.addOrdPostVC = self
 
             return cell
         }
-        
+    
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as! PostPictureCell
-        //setupGuideLabel("Add Image To An Existing Activity Happening Now")
         cell.addOrPostVC = self
+            
         return cell
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
         return CGSize(width: view.frame.width, height: view.frame.height)
     }
     
@@ -137,9 +134,22 @@ class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         let indexPath = IndexPath(item: Int(index), section: 0)
         menuBar.menuCollectionView.selectItem(at: indexPath, animated: true, scrollPosition: UICollectionViewScrollPosition())
         
-        self.view.endEditing(true)
+        switch Int(index) {
+        case 1:
+            setupGuideLabel("Add Image To Activity That Ended via Photo Library")
+            break
+        case 2:
+            setupGuideLabel("Check-In")
+            break
+        case 0:
+            setupGuideLabel("Add Image To An Existing Activity Happening Now")
+            break
+            
+        default: break
+        }
         
         navigationItem.title = menuItems[Int(index)]
+        self.view.endEditing(true)
     }
     
     func scrollToMenuIndex(_ menuIndex: Int) {

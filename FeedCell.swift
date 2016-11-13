@@ -28,6 +28,12 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
             if let imageURl = users.profileImage {
                 profileImage.getImagesBack(url: imageURl, placeHolder: "Profile")
             }
+            
+            let active = UIImage(named: "ok_filled")
+            let time = UIImage(named: "clock-1")
+            
+            activeLabel.text = posts.status == true ? "Active" : "Ended Ago"
+            activeImage.image = posts.status == true ? active : time
         }
     }
     

@@ -42,6 +42,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().shadowImage = UIImage()
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         
+        
         application.statusBarStyle = .lightContent
         
         if Reachability.isInternetAvailable() {

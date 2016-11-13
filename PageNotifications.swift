@@ -17,7 +17,7 @@ class PageNotifications: NSObject {
             label.font = UIFont(name: "Prompt", size: 12)
             label.layer.borderWidth = 2
             label.layer.borderColor = UIColor.white.cgColor
-            label.backgroundColor = .green
+            label.backgroundColor = UIColor.rgb(39, green: 153, blue: 21)
             label.numberOfLines = 2
         return label
     }()
