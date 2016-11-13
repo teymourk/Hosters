@@ -140,11 +140,14 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
              
                 let imagesArray = postImages[postKey]
                 
-                let activityAbout = PostInfoAndPictures(collectionViewLayout: UICollectionViewFlowLayout())
+                let layout = UICollectionViewFlowLayout()
+                    layout.scrollDirection = .horizontal
+                
+                let activityAbout = PostInfoAndPictures(collectionViewLayout: layout)
                     activityAbout.postDetails = post
                     activityAbout.postedImages = imagesArray
                 
-                navigationController?.pushViewController(activityAbout, animated: true)
+                navigationController?.present(activityAbout, animated: false, completion: nil)
             }
         }
     }

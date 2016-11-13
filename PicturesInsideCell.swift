@@ -99,7 +99,6 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         let cell = picturesCollectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as! FeedAllPhotosCell
-        let index = 0
         
         handleImageChanging(cell: cell)
         
@@ -113,13 +112,14 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
     
     fileprivate func handleImageChanging(cell:FeedAllPhotosCell) {
 
-        
-        
+        cell.loaderIndicator.startAnimating()
         var index = 0
         
         timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { (timer) in
             
             if let postImages = self.allImages?[index] {
+                
+                cell.loaderIndicator.stopAnimating()
                 
                 index = index + 1
                 

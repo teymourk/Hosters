@@ -29,18 +29,6 @@ class AllPicturesFeedCell:BaseCell {
             
                 caption.text = postCaption
             }
-            
-//            if let postLikes = postImages?.likes {
-//                likeCount.text  = "\(postLikes.count)"
-//                likes = postLikes.count
-//                handleIfLiked(postLikes)
-//            }
-    
-//            if let seconds = postImages?.timePosted?.doubleValue {
-//                
-//                let timeStampDate = Date(timeIntervalSince1970: seconds)
-//                date.text = timeStampDate.Time()
-//            }
         }
     }
     
@@ -82,7 +70,8 @@ class AllPicturesFeedCell:BaseCell {
     
     var username:UILabel = {
         let label = UILabel()
-            label.font = UIFont(name: "Prompt", size: 14)
+            label.font = UIFont(name: "Prompt", size: 17)
+            label.textColor = .white
         return label
     }()
     
@@ -102,13 +91,6 @@ class AllPicturesFeedCell:BaseCell {
         return txt
     }()
     
-    var dimmedView:UIView = {
-        let view = UIView()
-            view.backgroundColor = UIColor.gray
-            view.alpha = 0.7
-        return view
-    }()
-    
     lazy var menuOptions:UIButton = {
         let menu = UIButton()
             menu.setImage(UIImage(named: "menu_2"), for: UIControlState())
@@ -118,7 +100,6 @@ class AllPicturesFeedCell:BaseCell {
     
     func onMenu(_ sender:UIButton) {
         
-        allPicturesFeed?.onMenuOptions(sender)
     }
     
     var allPicturesFeed:PostInfoAndPictures?
@@ -126,22 +107,7 @@ class AllPicturesFeedCell:BaseCell {
     
     func handleLiking(_ sender: UIButton) {
         
-        allPicturesFeed?.handleLiking(sender)
-        
-        if likes == nil {
-            likes = 0
-        }
-        
-        if sender.currentImage == UIImage(named: "novel-empty") {
-            
-            likes = likes! + 1
-            likeCount.text = "\(likes!)"
-            setupImageAnumation()
-            
-        } else {
-            likes = likes! - 1
-            likeCount.text = "\(likes!)"
-        }
+        setupImageAnumation()
     }
     
     func handleIfLiked(_ usersLikes:[String:AnyObject]) {
@@ -157,8 +123,8 @@ class AllPicturesFeedCell:BaseCell {
     
     var likeImageAnimation:UIImageView = {
         let image = UIImageView()
-        image.image = UIImage(named: "heart_balloon_filled")
-        image.contentMode = .scaleAspectFill
+            image.image = UIImage(named: "heart_balloon_filled")
+            image.contentMode = .scaleAspectFill
         return image
     }()
     
@@ -193,7 +159,6 @@ class AllPicturesFeedCell:BaseCell {
         addSubview(username)
         addSubview(date)
         addSubview(menuOptions)
-        postedImage.addSubview(dimmedView)
         postedImage.addSubview(caption)
         postedImage.contentMode = .scaleAspectFill
         
@@ -221,13 +186,7 @@ class AllPicturesFeedCell:BaseCell {
         
         //PostedImage Constraints
         addConstrainstsWithFormat("H:|[v0]|", views: postedImage)
-        addConstrainstsWithFormat("V:[v0]", views: postedImage)
-        
-        //Heigh
-        addConstraint(NSLayoutConstraint(item: postedImage, attribute: .height, relatedBy: .equal, toItem: postedImage, attribute: .height, multiplier: 0, constant: HEIGHE_IMAGE))
-        
-        //Top
-        addConstraint(NSLayoutConstraint(item: postedImage, attribute: .top, relatedBy: .equal, toItem: profileImage, attribute: .bottom, multiplier: 1, constant: 10))
+        addConstrainstsWithFormat("V:|[v0]|", views: postedImage)
         
         //Like Constraints
         addConstrainstsWithFormat("H:|-15-[v0(30)]", views: like)
@@ -250,38 +209,13 @@ class AllPicturesFeedCell:BaseCell {
         addConstrainstsWithFormat("H:|[v0]|", views: seperator)
         addConstrainstsWithFormat("V:[v0(1.5)]|", views: seperator)
         
-        
-        //DimmedView Constrains
-        postedImage.addConstrainstsWithFormat("H:|[v0]|", views: dimmedView)
-        postedImage.addConstrainstsWithFormat("V:[v0(50)]|", views: dimmedView)
-        
         //Caption Constrains
         postedImage.addConstrainstsWithFormat("H:|-10-[v0]|", views: caption)
         postedImage.addConstrainstsWithFormat("V:[v0(40)]-10-|", views: caption)
         
-        
         //MenuOptions Constrains
         addConstrainstsWithFormat("H:[v0]-10-|", views: menuOptions)
         addConstrainstsWithFormat("V:[v0]-10-|", views: menuOptions)
-    }
-    
-    func setupGridView() {
-        
-        addSubview(postedImage)
-        
-        profileImage.removeFromSuperview()
-        username.removeFromSuperview()
-        caption.removeFromSuperview()
-        dimmedView.removeFromSuperview()
-        menuOptions.removeFromSuperview()
-        like.removeFromSuperview()
-        date.removeFromSuperview()
-        
-        postedImage.contentMode = .scaleAspectFill
-        
-        //PostedImage Constraints
-        addConstrainstsWithFormat("H:|[v0]|", views: postedImage)
-        addConstrainstsWithFormat("V:|[v0]|", views: postedImage)
     }
     
     override func setupView() {
