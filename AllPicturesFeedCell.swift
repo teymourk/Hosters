@@ -13,11 +13,11 @@ class AllPicturesFeedCell:BaseCell {
     var postImages:PostImages? {
         didSet {
             
-            if let user = postImages?.user {
+            if let user = postImages?.users {
                 username.text = user.username
             }
             
-            if let userImage = postImages?.user?.profileImage {
+            if let userImage = postImages?.users?.profileImage {
                 profileImage.getImagesBack(url: userImage, placeHolder: "Profile")
             }
             
@@ -25,26 +25,22 @@ class AllPicturesFeedCell:BaseCell {
                 postedImage.getImagesBack(url: postImage, placeHolder: "emptyImage")
             }
             
-            if let postCaption = postImages?.description {
-                caption.text = postCaption
-                
-            }
+            if let postCaption = postImages?.caption  {
             
-            if let postLikes = postImages?.likes {
-                likeCount.text  = "\(postLikes.count)"
-                likes = postLikes.count
-                handleIfLiked(postLikes)
-            }
-            
-            if let postCaption = postImages?.description {
                 caption.text = postCaption
             }
             
-            if let seconds = postImages?.timePosted?.doubleValue {
-                
-                let timeStampDate = Date(timeIntervalSince1970: seconds)
-                date.text = timeStampDate.Time()
-            }
+//            if let postLikes = postImages?.likes {
+//                likeCount.text  = "\(postLikes.count)"
+//                likes = postLikes.count
+//                handleIfLiked(postLikes)
+//            }
+    
+//            if let seconds = postImages?.timePosted?.doubleValue {
+//                
+//                let timeStampDate = Date(timeIntervalSince1970: seconds)
+//                date.text = timeStampDate.Time()
+//            }
         }
     }
     

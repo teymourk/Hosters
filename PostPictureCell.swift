@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 private let CELL_ID = "CELL_ID"
 
@@ -90,22 +91,15 @@ class PostPictureCell: BaseCell, UICollectionViewDelegateFlowLayout, UICollectio
    
     func handleFetchingActivePosts() {
         
-        Posts.getFeedPosts(UIRefreshControl()) { (posts, nil) in
-
-            let currentUserUID = FirebaseRef.database.currentUser.key
-
-            let currentUserPostsFilter = posts.filter({$0.poster == currentUserUID})
-
-            //Get Active Posts
-            let activePostFilter = currentUserPostsFilter.filter({$0.statusLight == true})
-
-            if activePostFilter.count != 0 {
-                self.activePosts = activePostFilter
-                self.emptyText.removeFromSuperview()
-                
-            } else{
-                self.handleSettingEmptyTextWhenNoPosts()
-            }
+        do {
+            
+            let request:NSFetchRequest<Posts> = Posts.fetchRequest()
+            request.predicate = NSPredicate(format: "status = %@", NSNumber(booleanLiteral: true))
+            
+            try self.activePosts = context.fetch(request)
+            
+        } catch let err {
+            print(err)
         }
     }
     

@@ -45,21 +45,21 @@ class UserProfileHeaderCell: BaseCell {
                 }
             }
             
-            if let trackersCount = profileDetails?.trackers?.count {
-             
-                _trackers.setTitle("Trackers \(trackersCount)", for: UIControlState())
-                
-            } else {
-                _trackers.setTitle("Trackers \(0)", for: UIControlState())
-            }
-            
-            if let trackingCount = profileDetails?.tracking?.count {
-                
-                _tracking.setTitle("Tracking \(trackingCount)", for: UIControlState())
-                
-            } else {
-                _tracking.setTitle("Tracking \(0)", for: UIControlState())
-            }
+//            if let trackersCount = profileDetails?.trackers?.count {
+//             
+//                _trackers.setTitle("Trackers \(trackersCount)", for: UIControlState())
+//                
+//            } else {
+//                _trackers.setTitle("Trackers \(0)", for: UIControlState())
+//            }
+//            
+//            if let trackingCount = profileDetails?.tracking?.count {
+//                
+//                _tracking.setTitle("Tracking \(trackingCount)", for: UIControlState())
+//                
+//            } else {
+//                _tracking.setTitle("Tracking \(0)", for: UIControlState())
+//            }
         }
     }
     

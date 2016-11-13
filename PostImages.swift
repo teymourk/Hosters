@@ -9,112 +9,48 @@
 import UIKit
 
 
-class PostImages {
+class getImagesData: NSObject {
     
-    private var _poster:String?
-    private var _imageURL:String?
-    private var _likes:[String:AnyObject]?
-    private var _ImagesKey:String?
-    private var _description:String?
-    private var _postKey:String?
-    private var _timePosted:NSNumber?
-    
-    var user:Users!
-    
-    var poster:String? {
-        return _poster
-    }
-    
-    var imageURL:String? {
-        return _imageURL
-    }
-    
-    var imageKey:String? {
-        return _ImagesKey
-    }
-    
-    var timePosted:NSNumber? {
-        return _timePosted
-    }
-    
-    var likes:[String:AnyObject]? {
-        return _likes
-    }
-    
-    var description:String? {
-        return _description
-    }
-    
-    var postKey:String? {
-        return _postKey
-    }
-    
-    init(postKey:String, imageKey:String, postImagesDic:Dictionary<String,AnyObject>) {
+    class func getImagesFromFireBase(_ postKey:String?) {
         
-        self._ImagesKey = imageKey
-        self._postKey = postKey
+        appDelegate.clearCoreData(entity: "PostImages")
         
-        if let imageURL = postImagesDic["ImgURL"] as? String {
-            self._imageURL = imageURL
-        }
+        guard let postKey = postKey else {return}
         
-        if let likes = postImagesDic["likes"] as? [String:AnyObject] {
-            self._likes = likes
-        }
-        
-        if let poster = postImagesDic["poster"] as? String {
-            self._poster = poster
-        }
-        
-        if let description = postImagesDic["description"] as? String {
-            self._description = description
-        }
-        
-        if let timePosted = postImagesDic["timePosted"] as? NSNumber {
-            self._timePosted = timePosted
-        }
-    }
-    
-    class func getPostImagesData(_ postKey:String?, completion: @escaping (([PostImages]) -> Void)) {
-        
-        FirebaseRef.database.REF_PHOTO.child(postKey!).observe(.value, with: {
+        FirebaseRef.database.REF_PHOTO.child(postKey).observe(.value, with: {
             snapshot in
             
-            let postDic = snapshot.value as? [String:AnyObject]
-            var imagesArray = [PostImages]()
-            
-            if let postsDic = postDic {
+            if let snapData = snapshot.value as? [String:AnyObject] {
                 
-                for(key, posts) in postsDic {
+                for(key, imageObj) in snapData  {
                     
-                    let images = PostImages(postKey: snapshot.key,imageKey: key, postImagesDic: posts as! [String:AnyObject])
-                    
-                    FirebaseRef.database.REF_USERS.child(images.poster!).observeSingleEvent(of: .value, with: {
-                        snapshot in
-                        
-                        Users.getUsersDataFromFB(snapshot.value! as AnyObject, completion: { (users) in
-                            
-                            for user in users {
-                                
-                                images.user = user
-                                imagesArray.append(images)
-                            }
-                        })
-                        
-                        DispatchQueue.main.async {
-                            completion(imagesArray)
-                        }
-                    })
-                }
-                
-            } else {
-                
-                imagesArray.removeAll()
-                DispatchQueue.main.async {
-                    completion(imagesArray)
-                    
+                    if let imageObjDic = imageObj as? [String:AnyObject] {
+                     
+                        _ = getImagesData(postKey: postKey, imageKey: key, postImagesDic: imageObjDic)
+                    }
                 }
             }
         })
+    }
+
+    init(postKey:String, imageKey:String, postImagesDic:Dictionary<String,AnyObject>) {
+        
+        let images = PostImages(context: context)
+        
+        images.imageKey = imageKey
+        images.postKey = postKey
+        
+        if let imageURL = postImagesDic["ImgURL"] as? String {
+            
+            images.imageURL = imageURL
+        }
+        
+        if let poster = postImagesDic["poster"] as? String {
+            images.poster = poster
+        }
+        
+        if let caption = postImagesDic["description"] as? String {
+            images.caption = caption
+        }
     }
 }

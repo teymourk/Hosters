@@ -7,29 +7,22 @@
 //
 
 import UIKit
+import CoreData
 
 class EndedPostCell: PostPictureCell {
     
     //Duplicated. Will Fix later
     override func handleFetchingActivePosts() {
         
-        Posts.getFeedPosts(UIRefreshControl()) { (posts, nil) in
+        do {
+            let request:NSFetchRequest<Posts> = Posts.fetchRequest()
+                request.predicate = NSPredicate(format: "status = %@", NSNumber(booleanLiteral: false))
             
-            let currentUserUID = FirebaseRef.database.currentUser.key
+            try self.activePosts = context.fetch(request)
             
-            let currentUserPostsFilter = posts.filter({$0.poster == currentUserUID})
-            
-            //Get Active Posts
-            let activePostFilter = currentUserPostsFilter.filter({$0.statusLight == false})
-            
-            if activePostFilter.count != 0 {
-                self.activePosts = activePostFilter
-                self.emptyText.removeFromSuperview()
-                
-            } else{
-                self.handleSettingEmptyTextWhenNoPosts()
-            }
-            
+        } catch let err {
+            print(err)
+
         }
     }
     

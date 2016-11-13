@@ -24,7 +24,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         //Batch.startWithAPIKey(BATCH_API_KEY)
-                
+        
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         window?.rootViewController = UINavigationController(rootViewController: HomeController())
@@ -43,7 +44,31 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         application.statusBarStyle = .lightContent
         
+        if Reachability.isInternetAvailable() {
+            
+            getUsersData.getUsersFromFireBase()
+            getPostsData.getPostsFromFireBase()
+        }
+        
         return true
+    }
+    
+    func clearCoreData(entity:String) {
+        
+        do {
+            
+            let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
+            
+            if let objects = try(context.fetch(fetchRequest)) as? [NSManagedObject] {
+                
+                for object in objects {
+                    context.delete(object)
+                }
+            }
+        
+        } catch let err {
+            print(err)
+        }
     }
     
     func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {

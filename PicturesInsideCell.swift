@@ -22,7 +22,12 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
             timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(handleReloading), userInfo: nil, repeats: false)
             
             if allImages?.count == nil {
-                setupMap()
+                
+                
+                    
+                    self.setupMap()
+                
+            
                 return
                 
             } else {
@@ -67,16 +72,16 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
     
     fileprivate func locationNameForView() {
         
-        guard let lat = feedCell?.posts?.latitude, let long = feedCell?.posts?.longitude, let locationName = feedCell?.posts?.location else {return}
-        
-        let location = CLLocationCoordinate2DMake(lat, long)
-        let span = MKCoordinateSpanMake(0.05, 0.05)
-        let region = MKCoordinateRegionMake(location, span)
-        let annotation = MKPointAnnotation()
-            annotation.coordinate = location
-            annotation.title = locationName
-        mapView.setRegion(region, animated: true)
-        mapView.addAnnotation(annotation)
+//        guard let lat = feedCell?.posts?.latitude, let long = feedCell?.posts?.longitude, let locationName = feedCell?.posts?.location else {return}
+//        
+//        let location = CLLocationCoordinate2DMake(lat, long)
+//        let span = MKCoordinateSpanMake(0.05, 0.05)
+//        let region = MKCoordinateRegionMake(location, span)
+//        let annotation = MKPointAnnotation()
+//            annotation.coordinate = location
+//            annotation.title = locationName
+//        mapView.setRegion(region, animated: true)
+//        mapView.addAnnotation(annotation)
         
     }
     

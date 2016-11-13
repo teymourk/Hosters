@@ -75,7 +75,7 @@ class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         if (indexPath as NSIndexPath).item == 1 {
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ENDED_POST_ID, for: indexPath) as! EndedPostCell
-            setupGuideLabel("Add Image To Activity That Ended via Photo Library")
+            //setupGuideLabel("Add Image To Activity That Ended via Photo Library")
             cell.addOrPostVC = self
             return cell
         }
@@ -83,14 +83,14 @@ class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         if (indexPath as NSIndexPath).item == 2 {
         
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CREATE_NEW, for: indexPath) as! CreatePostCell
-            setupGuideLabel("Check-In")
+            //setupGuideLabel("Check-In")
             cell.addOrdPostVC = self
 
             return cell
         }
         
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as! PostPictureCell
-        setupGuideLabel("Add Image To An Existing Activity Happening Now")
+        //setupGuideLabel("Add Image To An Existing Activity Happening Now")
         cell.addOrPostVC = self
         return cell
     }

@@ -12,20 +12,8 @@ class Tracking: SearchUsers {
  
     var key:String? = String()
     
-    override func getAllUsers() {
+    override func fetchUsersFromData() {
         
-        if let userKey = key {
-            
-            Users.getFriendsFromFB(userKey, friends: "Tracking") { (users) in
-                
-                if users.count == 0 {
-                    self.handleErrorWhenNoUsers()
-                    
-                } else {
-                    self.allUsers = users
-                }
-            }
-        }
     }
 }
 
@@ -33,19 +21,7 @@ class Trackers: SearchUsers {
     
     var key:String? = String()
     
-    override func getAllUsers() {
+    override func fetchUsersFromData() {
         
-        if let userKey = key {
-            
-            Users.getFriendsFromFB(userKey, friends: "Trackers") { (users) in
-                
-                if users.count == 0 {
-                    self.handleErrorWhenNoUsers()
-                    
-                } else {
-                    self.allUsers = users
-                }
-            }
-        }
     }
 }

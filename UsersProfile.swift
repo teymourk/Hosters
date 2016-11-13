@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import CoreData
 
 private let headerId = "headerId"
 
@@ -44,7 +45,6 @@ class UsersProfile: HomePage, UserProfileHeaderDelegate {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         if let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: headerId, for: indexPath) as? UserProfileHeaderCell {
-            
             
             header.profileDetails = profileDetails
             header.delegate = self
@@ -86,27 +86,19 @@ class UsersProfile: HomePage, UserProfileHeaderDelegate {
         navigationController?.present(navController, animated: true, completion: nil)
     }
         
-    override func getUsersPosts() {
+    override func fetchPostsFromData() {
         
         guard let userKey = profileDetails?.userKey else {return}
         
-        self.userPosts?.removeAll()
-        Posts.getFeedPosts(UIRefreshControl()) { (allPosts, images) in
+        do {
             
-            let filteredPost = allPosts.filter({$0.poster == userKey})
+            let fetchRequest: NSFetchRequest<Posts> = Posts.fetchRequest()
+                fetchRequest.predicate = NSPredicate(format: "users.userKey = %@", userKey)
             
-            self.handleSettingExistinPostImages(filteredPost, allImages: images)
-            self.userPosts = filteredPost
+            try self.userPosts = context.fetch(fetchRequest)
             
-            if self.userPosts?.count == 0  {
-                
-                self.handlePageWhenTheyAreNoPosts()
-                
-            } else {
-                
-                self.emptyPostLabel.removeFromSuperview()
-                self.inviteContact.removeFromSuperview()
-            }
+        } catch let err{
+            print(err)
         }
     }
     
@@ -131,8 +123,8 @@ class UsersProfile: HomePage, UserProfileHeaderDelegate {
         guard let userKey = profileDetails?.userKey else {return}
         
         let tracking = Tracking()
-        tracking.title = "Tracking"
-        tracking.key = userKey
+            tracking.title = "Tracking"
+            tracking.key = userKey
         navigationController?.pushViewController(tracking, animated: true)
     }
     

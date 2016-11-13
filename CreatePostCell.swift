@@ -130,10 +130,7 @@ class CreatePostCell: BaseCell, UITextFieldDelegate, CLLocationManagerDelegate {
     
     func handleGettingTaggedUsersFromFirebase() {
         
-        Posts.getTaggedUsers(self.taggedFriends as [String : AnyObject]) { (TaggedUsers) in
-            
-            self.peopleTagged.taggedUsersArray = TaggedUsers
-        }
+
     }
     
     func handleButtonColor() {
@@ -230,7 +227,6 @@ class CreatePostCell: BaseCell, UITextFieldDelegate, CLLocationManagerDelegate {
     
     
     fileprivate func handleCreatingPost() {
-        
         
         guard let latitude = locationManager?.location?.coordinate.latitude, let longtitude = locationManager?.location?.coordinate.longitude else { return }
         

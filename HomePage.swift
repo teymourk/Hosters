@@ -9,6 +9,7 @@
 import UIKit
 import MBProgressHUD
 import MapKit
+import CoreData
 
 private let CELL_IDENTEFITER = "Cell"
 private let HEADER_ID = "HeaderId"
@@ -18,9 +19,7 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
     var userPosts:[Posts]? {
         didSet{
         
-            //Use This To Reduce Amount of reloading causing to get wrong cells.
-            reloadTimer?.invalidate()
-            reloadTimer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(handleReloading), userInfo: nil, repeats: false)
+            collectionView?.reloadData()
         }
     }
      
@@ -36,7 +35,7 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
 
     lazy var refreshController:UIRefreshControl = {
         let refresher = UIRefreshControl()
-            refresher.tintColor = .red
+            refresher.tintColor = .gray
             refresher.addTarget(self, action: #selector(onRefreshPage), for: .valueChanged)
         return refresher
     }()
@@ -50,16 +49,19 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
         let postPictures = PicturesInsideCell()
         return postPictures
     }()
-
-    func onRefreshPage() {
-        
-        getUsersPosts()
-        refreshController.endRefreshing()
-    }
     
-    func handleReloading() {
+    func onRefreshPage() {
+    
+        if Reachability.isInternetAvailable() {
         
-        self.collectionView?.reloadData()
+        getPostsData.getPostsFromFireBase()
+        perform(#selector(fetchPostsFromData), with: nil, afterDelay: 0.5)
+            
+        } else {
+            
+            pageNotification.showNotification("Not Connected To The Internet 😭")
+            refreshController.endRefreshing()
+        }
     }
     
     override func viewDidLoad() {
@@ -72,13 +74,13 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
         collectionView?.addSubview(refreshController)
         
         locationManager?.requestWhenInUseAuthorization()
-        
-        getUsersPosts()
         setupOrangeSeperator()
+        
+        perform(#selector(fetchPostsFromData), with: nil, afterDelay: 1)
+        
     }
     
     // MARK: UICollectionViewDataSource
-    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return userPosts?.count ?? 0
     }
@@ -89,7 +91,7 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
         
             if let posts = userPosts?[(indexPath as NSIndexPath).row] {
 
-                cell.posts = posts
+                cell.postsDetails = posts
                 cell.friendsFeedView = self
                 cell.menuOptions.tag = (indexPath as NSIndexPath).item
                 cell.feedAllPhotosVC.index = indexPath
@@ -194,7 +196,7 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
                 
             }))
             
-            if post.statusLight == true {
+            if post.status == true {
             
                 let postRef = FirebaseRef.database.REF_POSTS.child("\(post.postKey!)")
                 let timeEnded:CGFloat = CGFloat(Date().timeIntervalSince1970)
@@ -302,28 +304,24 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
         inviteContact.topAnchor.constraint(equalTo: emptyPostLabel.bottomAnchor, constant: 10).isActive = true
     }
     
-    //Friends Feed
-    func getUsersPosts() {
+    func fetchPostsFromData() {
         
-        self.userPosts?.removeAll()
-        Posts.getFeedPosts(refreshController) { (allPosts, images) in
+        do {
             
-            self.handleSettingExistinPostImages(allPosts, allImages: images)
-            self.userPosts = allPosts
+            let fetchRequest: NSFetchRequest<Posts> = Posts.fetchRequest()
+            let imageRequest: NSFetchRequest<PostImages> = PostImages.fetchRequest()
             
-            if self.userPosts?.count == 0  {
-                
-                self.handlePageWhenTheyAreNoPosts()
-                
-            } else {
-                
-                self.emptyPostLabel.removeFromSuperview()
-                self.inviteContact.removeFromSuperview()
-            }
+            try self.userPosts = (context.fetch(fetchRequest))
+            let imagesArray = try(context.fetch(imageRequest))
+            
+            guard let postsArray = userPosts else {return}
+
+            self.handleSettingExistinPostImages(postsArray, allImages: imagesArray)
+            
+        } catch let err {
+            print(err)
         }
-    }
-    
-    override var preferredStatusBarStyle: UIStatusBarStyle {
-        return .lightContent
+        
+        refreshController.endRefreshing()
     }
 }

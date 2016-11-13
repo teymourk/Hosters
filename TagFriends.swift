@@ -66,16 +66,6 @@ class TagFriends: SearchUsers {
         navigationItem.rightBarButtonItem = done
     }
     
-    override func getAllUsers() {
-    
-        let userKey = FirebaseRef.database.currentUser.key
-            
-        Users.getFriendsFromFB(userKey, friends: "Tracking") { (users) in
-                
-            self.allUsers = users
-        }
-    }
-    
     func onCancel(_ sneder:UIButton) {
         
         self.dismiss(animated: true, completion: nil)

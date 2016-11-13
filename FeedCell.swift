@@ -12,16 +12,21 @@ import MapKit
 //Fix Variable
 
 class FeedCell: BaseCell, CLLocationManagerDelegate {
-    var posts:Posts? {
+    var postsDetails:Posts? {
         didSet {
             
-            if let user = posts?.user {
-                
-                cellConfigure(posts!, user: user)
-            }
+            guard let posts = postsDetails else {return}
+            guard let users = postsDetails?.users else {return}
             
-            if let title = posts?.postDescription {
-                postTitle.text = title
+            //PostDetails
+            postTitle.text = posts.postDescription
+            location.setTitle(posts.location, for: .normal)
+            
+            //UsersDetails
+            usernameLabel.text = users.username
+            
+            if let imageURl = users.profileImage {
+                profileImage.getImagesBack(url: imageURl, placeHolder: "Profile")
             }
         }
     }
@@ -51,7 +56,7 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
         return image
     }()
     
-    var username:UILabel = {
+    var usernameLabel:UILabel = {
         let label = UILabel()
             label.textColor = .black
             label.font =  UIFont(name: "Prompt", size: 14)
@@ -105,50 +110,21 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
     
     let bottomDataSeperator:UIView = {
         let view = UIView()
-        view.backgroundColor = .lightGray
+            view.backgroundColor = .lightGray
         return view
     }()
     
-    //Configuring Cell properties
-    func cellConfigure(_ post:Posts, user:Users) {
-        
-        if let postUsername = user.username {
-            username.text = postUsername
-        }
-        
-        if let profileURL = user.profileImage {
-            profileImage.getImagesBack(url: profileURL, placeHolder: "Profile")
-        }
-        
-        if let postLocation = posts?.location {
-            location.setTitle(postLocation, for: UIControlState())
-        }
-        
-        if let userName = user.username {
-            
-            username.text = userName
-        }
-        
-        if let peopleWithCount = post.tagged?.count {
-            
-            peopleWithIcon.setTitle("\(peopleWithCount)", for: UIControlState())
-            
-        } else {
-            
-            peopleWithIcon.setTitle("\(0)", for: UIControlState())
-        }
-        
-        if let seconds = post.timeEnded?.doubleValue, let status = post.statusLight {
-            
-            let timestampDate = Date(timeIntervalSince1970: seconds)
-            
-            let active = UIImage(named: "ok_filled")
-            let time = UIImage(named: "clock-1")
-            
-            activeLabel.text = status == true ? "ACTIVE" : "Ended \(timestampDate.Time()) Ago"
-            activeImage.image = status == true ? active : time
-        }
-    }
+//        if let seconds = post.timeEnded?.doubleValue, let status = post.status {
+//            
+//            let timestampDate = Date(timeIntervalSince1970: seconds)
+//            
+//            let active = UIImage(named: "ok_filled")
+//            let time = UIImage(named: "clock-1")
+//            
+//            activeLabel.text = status == true ? "ACTIVE" : "Ended \(timestampDate.Time()) Ago"
+//            activeImage.image = status == true ? active : time
+//        }
+    
 
     var friendsFeedView:HomePage?
     
@@ -174,7 +150,7 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
         addSubview(location)
         addSubview(locationIcon)
         addSubview(profileImage)
-        addSubview(username)
+        addSubview(usernameLabel)
         addSubview(peopleWithIcon)
         addSubview(arrowIndicatior)
         addSubview(menuOptions)
@@ -236,14 +212,14 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
         addConstraint(NSLayoutConstraint(item: profileImage, attribute: .top, relatedBy: .equal, toItem: feedAllPhotosVC, attribute: .bottom, multiplier: 1, constant: 15))
         
         //username Cosntraints
-        addConstrainstsWithFormat("H:[v0]|", views: username)
-        addConstrainstsWithFormat("V:[v0]", views: username)
+        addConstrainstsWithFormat("H:[v0]|", views: usernameLabel)
+        addConstrainstsWithFormat("V:[v0]", views: usernameLabel)
         
         //Left
-        addConstraint(NSLayoutConstraint(item: username, attribute: .left, relatedBy: .equal, toItem: profileImage, attribute: .right, multiplier: 1, constant: 7))
+        addConstraint(NSLayoutConstraint(item: usernameLabel, attribute: .left, relatedBy: .equal, toItem: profileImage, attribute: .right, multiplier: 1, constant: 7))
         
         //CenterY
-        addConstraint(NSLayoutConstraint(item: username, attribute: .centerY, relatedBy: .equal, toItem: profileImage, attribute: .centerY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: usernameLabel, attribute: .centerY, relatedBy: .equal, toItem: profileImage, attribute: .centerY, multiplier: 1, constant: 0))
         
         //PeopleWith
         addConstrainstsWithFormat("H:[v0(30)]-15-|", views: peopleWithIcon)
@@ -257,7 +233,7 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
         addConstrainstsWithFormat("V:[v0(15)]", views: arrowIndicatior)
         
         //CenterY
-        addConstraint(NSLayoutConstraint(item: arrowIndicatior, attribute: .centerY, relatedBy: .equal, toItem: username, attribute: .centerY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: arrowIndicatior, attribute: .centerY, relatedBy: .equal, toItem: usernameLabel, attribute: .centerY, multiplier: 1, constant: 0))
         
         
         //ArrowIndicator Constraints

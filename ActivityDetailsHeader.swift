@@ -21,16 +21,16 @@ class ActivityDetailsHeader: BaseCell {
                 location.setTitle(locationName, for: UIControlState())
             }
             
-            if let tagged = postDetails?.tagged {
-                
-                Posts.getTaggedUsers(tagged, completion: { (users) in
-                    
-                    self.peopleTagged.taggedUsersArray = users
-
-                })
-            }
+//            if let tagged = postDetails?.tagged {
+//                
+//                Posts.getTaggedUsers(tagged, completion: { (users) in
+//                    
+//                    self.peopleTagged.taggedUsersArray = users
+//
+//                })
+//            }
             
-            if let postStatus = postDetails?.statusLight {
+            if let postStatus = postDetails?.status {
                 
                 postStatus == true ? camera.setImage(UIImage(named: "camera"), for: UIControlState()) : camera.setImage(UIImage(named: "library"), for: UIControlState())
                 

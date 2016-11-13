@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 
 import UIKit
@@ -51,8 +52,8 @@ class SearchUsers: UITableViewController, UISearchResultsUpdating {
         tableView.contentInset = UIEdgeInsetsMake(-1, 0, 0, 0)
         tableView.rowHeight = 70
         tableView.clearFooter()
-        
-        getAllUsers()
+    
+        fetchUsersFromData()
     }
     
     lazy var emptyText:UILabel = {
@@ -111,7 +112,7 @@ class SearchUsers: UITableViewController, UISearchResultsUpdating {
         
         return cell
     }
-    
+                
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let usersProfileVc = UsersProfile(collectionViewLayout: UICollectionViewFlowLayout())
@@ -143,6 +144,20 @@ class SearchUsers: UITableViewController, UISearchResultsUpdating {
         }
     }
     
+    func fetchUsersFromData() {
+        
+        do {
+            
+            let fetchRequest: NSFetchRequest<Users> = Users.fetchRequest()
+            
+            try allUsers = (context.fetch(fetchRequest))
+            
+        } catch let err {
+            
+            print(err)
+        }
+    }
+    
     
     func handleErrorWhenNoUsers() {
         
@@ -150,20 +165,5 @@ class SearchUsers: UITableViewController, UISearchResultsUpdating {
         
         emptyText.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
         emptyText.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-    }
-    
-    func getAllUsers() {
-        
-        FirebaseRef.database.REF_USERS.observeSingleEvent(of: .value, with: {
-            snapshot in
-        
-            if let snapData = snapshot.value {
-             
-                Users.getUsersDataFromFB(snapData as AnyObject, completion: { (users) in
-                    
-                    self.allUsers = users
-                })
-            }
-        })
     }
 }

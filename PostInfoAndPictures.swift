@@ -163,7 +163,7 @@ class PostInfoAndPictures: UICollectionViewController, UICollectionViewDelegateF
         
         if let postDetail = postDetails {
             
-            if postDetails?.statusLight == false {
+            if postDetails?.status == false {
                 
                 let photoLibraryVC = PhotoLibrary()
                 photoLibraryVC.postKey = postDetail.postKey
@@ -232,7 +232,7 @@ class PostInfoAndPictures: UICollectionViewController, UICollectionViewDelegateF
         
         let photoRef = FirebaseRef.database.REF_PHOTO.child("\(postKey)/\(post.imageKey!)/likes")
     
-        var likes = post.likes
+        //var likes = post.likes
         
         DispatchQueue.main.async(execute: {
             
@@ -240,8 +240,8 @@ class PostInfoAndPictures: UICollectionViewController, UICollectionViewDelegateF
                 
                 sender.setImage(UIImage(named: "novel-empty"), for: UIControlState())
                 
-                likes?.removeValue(forKey: FirebaseRef.database.currentUser.key)
-                photoRef.setValue(likes)
+                //likes?.removeValue(forKey: FirebaseRef.database.currentUser.key)
+                //photoRef.setValue(likes)
                 
             } else {
                 

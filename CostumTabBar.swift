@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 class CostumeTabBar: UITabBarController {
     
@@ -42,8 +43,6 @@ class CostumeTabBar: UITabBarController {
         let userProfileNavigationController = UINavigationController(rootViewController: profilePage)
         userProfileNavigationController.tabBarItem.image = UIImage(named: "profile-1")
         
-        getCurrentUsrsInfo(profilePage)
-        
         //TabBarItem: Notification
         let notifications = Notifications(collectionViewLayout: UICollectionViewFlowLayout())
         notifications.navigationItem.title = "Notifications"
@@ -52,7 +51,6 @@ class CostumeTabBar: UITabBarController {
         
         navigationItem.hidesBackButton = true
         viewControllers = [homeNavigationController, searchNavigationController, addImageNavigationController,notificationsNavigationController, userProfileNavigationController]
-        
     }
     
     func setupTopBorderLayer() {
@@ -65,17 +63,5 @@ class CostumeTabBar: UITabBarController {
         tabBar.clipsToBounds = true
         tabBar.isTranslucent = false
         tabBar.barStyle = .black
-    }
-
-func getCurrentUsrsInfo(_ userProfile:UsersProfile) {
-        
-        FirebaseRef.database.currentUser.child("/user").observeSingleEvent(of: .value, with: {
-            snapshot in
-            
-            let userDic = snapshot.value as? [String:AnyObject]
-            let user = Users(userKey: FirebaseRef.database.currentUser.key, userDictionary: userDic!)
-            
-            userProfile.profileDetails = user
-        })
     }
 }
