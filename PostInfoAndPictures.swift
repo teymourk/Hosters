@@ -11,7 +11,7 @@ import UIKit
 private let CELL_ID = "CellId"
 private let HEADER_ID = "HeaderId"
 
-class PostInfoAndPictures: UICollectionViewController, UICollectionViewDelegateFlowLayout {
+class PostInfoAndPictures: UICollectionViewController, UICollectionViewDelegateFlowLayout, AllPostsImagesDelegate {
     
     var postedImages:[PostImages]? {
         didSet {
@@ -27,6 +27,9 @@ class PostInfoAndPictures: UICollectionViewController, UICollectionViewDelegateF
     
         collectionView!.register(AllPicturesFeedCell.self, forCellWithReuseIdentifier: CELL_ID)
         collectionView?.backgroundColor = .white
+        collectionView?.showsHorizontalScrollIndicator = false
+        collectionView?.isScrollEnabled = false
+        collectionView?.isPagingEnabled = true
     }
     
     // MARK: UICollectionViewDataSource
@@ -39,6 +42,7 @@ class PostInfoAndPictures: UICollectionViewController, UICollectionViewDelegateF
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as! AllPicturesFeedCell
     
         cell.postImages = postedImages![(indexPath as NSIndexPath).item]
+        cell.delegate = self
         cell.allPicturesFeed = self
         cell.setCellShadow()
         cell.setupListView()
@@ -59,6 +63,33 @@ class PostInfoAndPictures: UICollectionViewController, UICollectionViewDelegateF
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         
         return 0
+    }
+    
+    func onImages(sender: UITapGestureRecognizer) {
+        
+        var currentIndex:Int?
+        
+        if let index = collectionView?.indexPathsForVisibleItems {
+            
+            for visibleIndex in index {
+                
+                currentIndex = visibleIndex.item
+            }
+            
+            currentIndex = currentIndex! + 1
+            
+            guard let imagesCount = postedImages?.count, let indexCount = currentIndex else {return}
+            
+            if currentIndex == imagesCount {
+                
+                self.dismiss(animated: true, completion: nil)
+                
+            } else {
+                
+                let indexPath = IndexPath(item: indexCount, section: 0)
+                collectionView?.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition(), animated: true)
+            }
+        }
     }
     
     override var prefersStatusBarHidden: Bool {

@@ -39,9 +39,9 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
     
     var activeLabel:UILabel = {
         let label = UILabel()
-        label.textAlignment = .right
-        label.textColor = .black
-        label.font = UIFont.boldSystemFont(ofSize: 10)
+            label.textAlignment = .right
+            label.textColor = .black
+            label.font = UIFont.boldSystemFont(ofSize: 10)
         return label
     }()
     
@@ -65,13 +65,13 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
     var usernameLabel:UILabel = {
         let label = UILabel()
             label.textColor = .black
-            label.font =  UIFont(name: "Prompt", size: 14)
+            label.font =  UIFont(name: "NotoSans", size: 14)
         return label
     }()
 
     var postTitle:UILabel = {
         let label = UILabel()
-            label.font = UIFont(name: "Prompt", size: 12)
+            label.font = UIFont(name: "NotoSans", size: 12)
             label.textColor = darkGray
             label.numberOfLines = 2
         return label

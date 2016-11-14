@@ -8,7 +8,14 @@
 
 import UIKit
 
+protocol AllPostsImagesDelegate: class {
+    
+    func onImages(sender: UITapGestureRecognizer)
+}
+
 class AllPicturesFeedCell:BaseCell {
+    
+    var delegate:AllPostsImagesDelegate?
     
     var postImages:PostImages? {
         didSet {
@@ -37,21 +44,8 @@ class AllPicturesFeedCell:BaseCell {
             image.clipsToBounds = true
             image.layer.borderWidth = 0.5
             image.layer.borderColor = UIColor.white.cgColor
+            image.isUserInteractionEnabled = true
         return image
-    }()
-    
-    lazy var like:UIButton = {
-        let btn = UIButton()
-            btn.setImage(UIImage(named: "novel-empty"), for: UIControlState())
-            btn.addTarget(self, action: #selector(handleLiking(_ :)), for: .touchUpInside)
-        return btn
-    }()
-    
-    var likeCount:UILabel = {
-        let label = UILabel()
-            label.textColor = darkGray
-            label.font = UIFont.systemFont(ofSize: 15)
-        return label
     }()
     
     var seperator:UIView = {
@@ -70,55 +64,48 @@ class AllPicturesFeedCell:BaseCell {
     
     var username:UILabel = {
         let label = UILabel()
-            label.font = UIFont(name: "Prompt", size: 17)
+            label.font = UIFont(name: "NotoSans-Bold", size: 13)
             label.textColor = .white
         return label
     }()
     
-    var date:UILabel = {
+    var timePosted:UILabel = {
         let label = UILabel()
-            label.font = UIFont.systemFont(ofSize: 10)
+            label.text = "45 Min Ago"
+            label.textColor = .white
+            label.font = UIFont(name: "NotoSans-Bold", size: 13)
         return label
     }()
     
-    var caption:UITextView = {
-        let txt = UITextView()
-            txt.textColor = .white
-            txt.font = UIFont(name: "NotoSans", size: 13)
-            txt.isScrollEnabled = false
-            txt.isEditable = false
-            txt.backgroundColor = .clear
-        return txt
+    var caption:UILabel = {
+        let label = UILabel()
+            label.textColor = .white
+            label.font = UIFont(name: "NotoSans-Bold", size: 18)
+            label.backgroundColor = .clear
+            label.numberOfLines = 2
+        return label
     }()
     
     lazy var menuOptions:UIButton = {
         let menu = UIButton()
             menu.setImage(UIImage(named: "menu_2"), for: UIControlState())
-            menu.addTarget(self, action: #selector(onMenu(_ :)), for: .touchUpInside)
+            //menu.addTarget(self, action: #selector(onMenu(_ :)), for: .touchUpInside)
         return menu
     }()
     
-    func onMenu(_ sender:UIButton) {
+    func onImage(_ sender: UITapGestureRecognizer) {
         
+        if delegate != nil {
+            
+            delegate?.onImages(sender: sender)
+        }
     }
     
     var allPicturesFeed:PostInfoAndPictures?
-    var likes:Int?
     
     func handleLiking(_ sender: UIButton) {
         
         setupImageAnumation()
-    }
-    
-    func handleIfLiked(_ usersLikes:[String:AnyObject]) {
-        
-        for users in usersLikes.keys {
-            
-            if users.contains(FirebaseRef.database.currentUser.key) {
-                
-                like.setImage(UIImage(named: "novel_filled"), for: UIControlState())
-            }
-        }
     }
     
     var likeImageAnimation:UIImageView = {
@@ -144,20 +131,16 @@ class AllPicturesFeedCell:BaseCell {
     
     override func prepareForReuse() {
         
-        like.setImage(UIImage(named: "novel-empty"), for: UIControlState())
-        likeCount.text = nil
         caption.text = nil
     }
     
     func setupListView() {
         
         addSubview(postedImage)
-        addSubview(like)
-        addSubview(likeCount)
         addSubview(seperator)
         addSubview(profileImage)
         addSubview(username)
-        addSubview(date)
+        addSubview(timePosted)
         addSubview(menuOptions)
         postedImage.addSubview(caption)
         postedImage.contentMode = .scaleAspectFill
@@ -178,32 +161,15 @@ class AllPicturesFeedCell:BaseCell {
         
         
         //Date Constraints
-        addConstrainstsWithFormat("H:[v0]-15-|", views: date)
-        addConstrainstsWithFormat("V:[v0(12)]", views: date)
+        addConstrainstsWithFormat("H:[v0]-15-|", views: timePosted)
+        addConstrainstsWithFormat("V:[v0(15)]", views: timePosted)
         
         //CenterY
-        addConstraint(NSLayoutConstraint(item: date, attribute: .centerY, relatedBy: .equal, toItem: profileImage, attribute: .centerY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: timePosted, attribute: .centerY, relatedBy: .equal, toItem: profileImage, attribute: .centerY, multiplier: 1, constant: 0))
         
         //PostedImage Constraints
         addConstrainstsWithFormat("H:|[v0]|", views: postedImage)
         addConstrainstsWithFormat("V:|[v0]|", views: postedImage)
-        
-        //Like Constraints
-        addConstrainstsWithFormat("H:|-15-[v0(30)]", views: like)
-        addConstrainstsWithFormat("V:[v0(30)]", views: like)
-        
-        //Top
-        addConstraint(NSLayoutConstraint(item: like, attribute: .top, relatedBy: .equal, toItem: postedImage, attribute: .bottom, multiplier: 1, constant: 4))
-        
-        //Like Count
-        addConstrainstsWithFormat("H:[v0]", views: likeCount)
-        addConstrainstsWithFormat("V:[v0]", views: likeCount)
-        
-        //CenterY
-        addConstraint(NSLayoutConstraint(item: likeCount, attribute: .centerY, relatedBy: .equal, toItem: like, attribute: .centerY, multiplier: 1, constant: 0))
-        
-        //Left
-        addConstraint(NSLayoutConstraint(item: likeCount, attribute: .left, relatedBy: .equal, toItem: like, attribute: .right, multiplier: 1, constant: 4))
         
         //Seperator Constraints
         addConstrainstsWithFormat("H:|[v0]|", views: seperator)
@@ -211,7 +177,7 @@ class AllPicturesFeedCell:BaseCell {
         
         //Caption Constrains
         postedImage.addConstrainstsWithFormat("H:|-10-[v0]|", views: caption)
-        postedImage.addConstrainstsWithFormat("V:[v0(40)]-10-|", views: caption)
+        postedImage.addConstrainstsWithFormat("V:[v0(40)]-40-|", views: caption)
         
         //MenuOptions Constrains
         addConstrainstsWithFormat("H:[v0]-10-|", views: menuOptions)
@@ -222,6 +188,8 @@ class AllPicturesFeedCell:BaseCell {
         super.setupView()
         
         backgroundColor = .white
+        
+        tapGesture(self, actions: "onImage:", object: postedImage, numberOfTaps: 1)
         
         setupListView()
     }
