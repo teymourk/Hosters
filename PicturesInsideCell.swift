@@ -16,7 +16,6 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
     var cellHeight:CGFloat!
     var timer:Timer?
 
-    
     var allImages:[PostImages]? {
         didSet{
 
@@ -46,6 +45,8 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
         let mp = MKMapView()
             mp.isScrollEnabled = false
             mp.isZoomEnabled = false
+            mp.layer.masksToBounds = true
+            mp.layer.cornerRadius = 6
         return mp
     }()
     
@@ -82,8 +83,10 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
             layout.minimumLineSpacing = 0
             layout.minimumInteritemSpacing = 0
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
-            cv.backgroundColor = .clear
+            cv.layer.masksToBounds = true
+            cv.layer.cornerRadius = 6
             cv.isScrollEnabled = false
+            cv.backgroundColor = .clear
             cv.delegate = self
             cv.dataSource = self
         return cv
@@ -100,6 +103,13 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
         
         let cell = picturesCollectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as! FeedAllPhotosCell
         
+        if let images = allImages?[indexPath.item] {
+            
+            cell.postedImages = images
+            cell.layer.masksToBounds = true
+            cell.layer.cornerRadius = 6
+        }
+        
         handleImageChanging(cell: cell)
         
         return cell
@@ -112,27 +122,33 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
     
     fileprivate func handleImageChanging(cell:FeedAllPhotosCell) {
 
-        cell.loaderIndicator.startAnimating()
-        var index = 0
-        
-        timer = Timer.scheduledTimer(withTimeInterval: 2, repeats: true, block: { (timer) in
+        timer?.invalidate()
+        timer = Timer.scheduledTimer(withTimeInterval: 2.5, repeats: true, block: { (timer) in
             
-            if let postImages = self.allImages?[index] {
+            var currentIndex:Int?
+            
+            let index = self.picturesCollectionView.indexPathsForVisibleItems
                 
-                cell.loaderIndicator.stopAnimating()
+            for visibleIndex in index {
                 
-                index = index + 1
-                
-                cell.postedImages = postImages
-                cell.feedAllPhotos = self
+                currentIndex = visibleIndex.item
             }
             
-            if let count = self.allImages?.count {
+            currentIndex = currentIndex! + 1
+            
+            guard let imagesCount = self.allImages?.count else {return}
+            
+            if currentIndex == imagesCount {
                 
-                if index == count {
-                    
-                    index = 0
-                }
+                currentIndex = 0
+                let indexPath = IndexPath(item: currentIndex!, section: 0)
+                self.picturesCollectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition(), animated: true)
+                return
+                
+            } else {
+             
+                let indexPath = IndexPath(item: currentIndex!, section: 0)
+                self.picturesCollectionView.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition(), animated: true)
             }
         })
     }

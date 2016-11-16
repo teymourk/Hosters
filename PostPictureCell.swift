@@ -69,6 +69,8 @@ class PostPictureCell: BaseCell, UICollectionViewDelegateFlowLayout, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
+        
+        
         return CGSize(width: frame.width, height: FEED_CELL_HEIGHT/4)
     }
 

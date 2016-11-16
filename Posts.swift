@@ -57,8 +57,10 @@ class getPostsData: NSObject {
     init(postKeys:String, dictionary: Dictionary<String, AnyObject>) {
         
         let posts = Posts(context: context)
+        let taggedUsers = TaggedUsers(context: context)
         
         posts.postKey = postKeys
+        taggedUsers.postKey = postKeys
         
         if let description = dictionary["Description"] as? String {
             posts.postDescription = description
@@ -100,6 +102,15 @@ class getPostsData: NSObject {
         
         if let longtitude = dictionary["Longtitude"] as? Int16 {
             posts.longtitude = longtitude
+        }
+        
+        if let tagged = dictionary["Tagged"] as? [String:AnyObject] {
+            
+            posts.taggedUsers = Int16(tagged.count)
+            
+            for key in tagged.keys  { 
+                print(key)
+            }
         }
         
         do {

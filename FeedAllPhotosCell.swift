@@ -26,21 +26,15 @@ class FeedAllPhotosCell: BaseCell {
             img.clipsToBounds = true
             img.layer.borderWidth = 0.5
             img.layer.borderColor = UIColor.white.cgColor
+            img.layer.masksToBounds = true
+            img.layer.cornerRadius = 6
         return img
-    }()
-    
-    lazy var loaderIndicator:UIActivityIndicatorView = {
-        let loader = UIActivityIndicatorView(activityIndicatorStyle: .white)
-            loader.center = self.center
-            loader.color = darkGray
-        return loader
     }()
     
     override func setupView() {
         super.setupView()
         
         addSubview(_images)
-        addSubview(loaderIndicator)
         
         //AllImages Constrains
         addConstrainstsWithFormat("H:|[v0]|", views: _images)

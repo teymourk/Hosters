@@ -113,14 +113,10 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
-        return 10
-    }
-    
-    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        
-        didSelectOnPost(indexPath)
+        return 15
     }
  
+
     fileprivate func pushImages(_ cell:FeedCell, posts:Posts) {
         
         if let postKey = posts.postKey {
@@ -152,18 +148,6 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
         }
     }
     
-    fileprivate func handlePushingIntoAllPhotosFeed(_ key:String) {
-        
-        let photosFeed = PostInfoAndPictures(collectionViewLayout: UICollectionViewFlowLayout())
-        navigationController?.pushViewController(photosFeed, animated: true)
-    }
-    
-    func onNotifications(_ sender:UIBarButtonItem) {
-    
-        let notificationVC = Notifications()
-        navigationController?.pushViewController(notificationVC, animated: true)
-    }
-        
     lazy var updatePostView:EditPost = {
         let up = EditPost()
             up.friendsFeed = self
@@ -325,6 +309,12 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
 
             self.handleSettingExistinPostImages(postsArray, allImages: imagesArray)
             
+            if postsArray.count == 0 {
+                
+                onRefreshPage()
+                return
+            }
+        
         } catch let err {
             print(err)
         }

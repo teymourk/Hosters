@@ -93,9 +93,27 @@ class UsersProfile: HomePage, UserProfileHeaderDelegate {
         do {
             
             let fetchRequest: NSFetchRequest<Posts> = Posts.fetchRequest()
+                fetchRequest.sortDescriptors = [NSSortDescriptor(key: "timePosted", ascending: false)]
                 fetchRequest.predicate = NSPredicate(format: "users.userKey = %@", userKey)
             
+            let imageRequest: NSFetchRequest<PostImages> = PostImages.fetchRequest()
+            
             try self.userPosts = context.fetch(fetchRequest)
+            let imagesArray = try(context.fetch(imageRequest))
+            
+            if let posts = userPosts {
+                
+                for post in posts {
+                    
+                    guard let postKey = post.postKey else {return}
+                    
+                    imageRequest.predicate = NSPredicate(format: "postKey = %@", postKey)
+                    imageRequest.sortDescriptors = [NSSortDescriptor(key: "timePosted", ascending: false)]
+                    
+                    self.handleSettingExistinPostImages(posts, allImages: imagesArray)
+                
+                }
+            }
             
         } catch let err{
             print(err)

@@ -53,7 +53,7 @@ class getUsersData: NSObject {
         if let likes = userDictionary["likes"] as? Int {
             users.likes = Int16(likes)
         }
-        
+    
         do {
             try(context.save())
             

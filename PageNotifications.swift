@@ -12,7 +12,7 @@ class PageNotifications: NSObject {
     
     var notifcationTitle:UILabel = {
         let label = UILabel()
-            label.textColor = darkGray
+            label.textColor = .white
             label.textAlignment = .center
             label.font = UIFont(name: "Prompt", size: 12)
             label.layer.borderWidth = 2

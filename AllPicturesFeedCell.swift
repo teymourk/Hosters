@@ -11,6 +11,8 @@ import UIKit
 protocol AllPostsImagesDelegate: class {
     
     func onImages(sender: UITapGestureRecognizer)
+    func onImageSwipe(sender: UISwipeGestureRecognizer)
+    func onMenu(_ sender:UIButton)
 }
 
 class AllPicturesFeedCell:BaseCell {
@@ -42,17 +44,11 @@ class AllPicturesFeedCell:BaseCell {
     var postedImage:UIImageView = {
         let image = UIImageView()
             image.clipsToBounds = true
-            image.layer.borderWidth = 0.5
-            image.layer.borderColor = UIColor.white.cgColor
+            image.contentMode = .scaleAspectFill
             image.isUserInteractionEnabled = true
         return image
     }()
     
-    var seperator:UIView = {
-        let view = UIView()
-            view.backgroundColor = .lightGray
-        return view
-    }()
     
     var profileImage:UIImageView = {
         let image = UIImageView()
@@ -89,15 +85,28 @@ class AllPicturesFeedCell:BaseCell {
     lazy var menuOptions:UIButton = {
         let menu = UIButton()
             menu.setImage(UIImage(named: "menu_2"), for: UIControlState())
-            //menu.addTarget(self, action: #selector(onMenu(_ :)), for: .touchUpInside)
+            menu.addTarget(self, action: #selector(onMenu(_ :)), for: .touchUpInside)
         return menu
     }()
     
     func onImage(_ sender: UITapGestureRecognizer) {
         
-        if delegate != nil {
-            
+        if delegate != nil {            
             delegate?.onImages(sender: sender)
+        }
+    }
+    
+    func onImageSwipe(sender: UISwipeGestureRecognizer) {
+        
+        if delegate != nil {
+            delegate?.onImageSwipe(sender: sender)
+        }
+    }
+    
+    func onMenu(_ sender: UIButton) {
+        
+        if delegate != nil {
+            delegate?.onMenu(sender)
         }
     }
     
@@ -137,7 +146,6 @@ class AllPicturesFeedCell:BaseCell {
     func setupListView() {
         
         addSubview(postedImage)
-        addSubview(seperator)
         addSubview(profileImage)
         addSubview(username)
         addSubview(timePosted)
@@ -171,10 +179,6 @@ class AllPicturesFeedCell:BaseCell {
         addConstrainstsWithFormat("H:|[v0]|", views: postedImage)
         addConstrainstsWithFormat("V:|[v0]|", views: postedImage)
         
-        //Seperator Constraints
-        addConstrainstsWithFormat("H:|[v0]|", views: seperator)
-        addConstrainstsWithFormat("V:[v0(1.5)]|", views: seperator)
-        
         //Caption Constrains
         postedImage.addConstrainstsWithFormat("H:|-10-[v0]|", views: caption)
         postedImage.addConstrainstsWithFormat("V:[v0(40)]-40-|", views: caption)
@@ -186,11 +190,9 @@ class AllPicturesFeedCell:BaseCell {
     
     override func setupView() {
         super.setupView()
-        
-        backgroundColor = .white
-        
+                
         tapGesture(self, actions: "onImage:", object: postedImage, numberOfTaps: 1)
-        
+    
         setupListView()
     }
 }

@@ -20,10 +20,17 @@
         <attribute name="postKey" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="privacy" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="status" optional="YES" attributeType="Boolean" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="taggedUsers" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="timeEnded" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="timePosted" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <relationship name="images" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PostImages" inverseName="posts" inverseEntity="PostImages" syncable="YES"/>
+        <relationship name="tagged" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="TaggedUsers" inverseName="posts" inverseEntity="TaggedUsers" syncable="YES"/>
         <relationship name="users" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Users" inverseName="posts" inverseEntity="Users" syncable="YES"/>
+    </entity>
+    <entity name="TaggedUsers" representedClassName="TaggedUsers" syncable="YES" codeGenerationType="class">
+        <attribute name="postKey" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="userKey" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="posts" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Posts" inverseName="tagged" inverseEntity="Posts" syncable="YES"/>
     </entity>
     <entity name="Users" representedClassName="Users" syncable="YES" codeGenerationType="class">
         <attribute name="likes" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
@@ -33,10 +40,12 @@
         <attribute name="username" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="images" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PostImages" inverseName="users" inverseEntity="PostImages" syncable="YES"/>
         <relationship name="posts" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Posts" inverseName="users" inverseEntity="Posts" syncable="YES"/>
+        <relationship name="tagged" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="TaggedUsers" syncable="YES"/>
     </entity>
     <elements>
-        <element name="PostImages" positionX="-243" positionY="-171" width="128" height="165"/>
-        <element name="Posts" positionX="-425" positionY="-9" width="128" height="240"/>
-        <element name="Users" positionX="9" positionY="3" width="128" height="148"/>
+        <element name="PostImages" positionX="-279" positionY="-99" width="128" height="165"/>
+        <element name="Posts" positionX="-603" positionY="-100" width="128" height="268"/>
+        <element name="TaggedUsers" positionX="-270" positionY="236" width="128" height="88"/>
+        <element name="Users" positionX="9" positionY="12" width="128" height="163"/>
     </elements>
 </model>

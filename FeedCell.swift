@@ -9,8 +9,6 @@
 import UIKit
 import MapKit
 
-//Fix Variable
-
 class FeedCell: BaseCell, CLLocationManagerDelegate {
     var postsDetails:Posts? {
         didSet {
@@ -28,6 +26,8 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
             if let imageURl = users.profileImage {
                 profileImage.getImagesBack(url: imageURl, placeHolder: "Profile")
             }
+            
+            peopleWithIcon.setTitle("\(posts.taggedUsers)", for: UIControlState())
             
             let active = UIImage(named: "ok_filled")
             let time = UIImage(named: "clock-1")

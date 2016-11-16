@@ -257,6 +257,13 @@ func tapGesture(_ target:AnyObject, actions:String, object:AnyObject, numberOfTa
     object.addGestureRecognizer(tapGesture)
 }
 
+func swipeGesture(_ target:AnyObject, actions:String, object:AnyObject, direction:UISwipeGestureRecognizerDirection) {
+    
+    let swipeGesture = UISwipeGestureRecognizer(target: target, action: Selector(actions))
+    swipeGesture.direction = direction
+    object.addGestureRecognizer(swipeGesture)
+}
+
 // MARK: Time Helper
 extension Date {
     

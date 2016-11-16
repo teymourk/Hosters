@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import CoreData
 
 private let CELL_ID = "CellId"
 private let HEADER_ID = "HeaderId"
@@ -26,10 +27,10 @@ class PostInfoAndPictures: UICollectionViewController, UICollectionViewDelegateF
         super.viewDidLoad()
     
         collectionView!.register(AllPicturesFeedCell.self, forCellWithReuseIdentifier: CELL_ID)
-        collectionView?.backgroundColor = .white
         collectionView?.showsHorizontalScrollIndicator = false
         collectionView?.isScrollEnabled = false
         collectionView?.isPagingEnabled = true
+
     }
     
     // MARK: UICollectionViewDataSource
@@ -42,6 +43,7 @@ class PostInfoAndPictures: UICollectionViewController, UICollectionViewDelegateF
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as! AllPicturesFeedCell
     
         cell.postImages = postedImages![(indexPath as NSIndexPath).item]
+        cell.menuOptions.tag = indexPath.item
         cell.delegate = self
         cell.allPicturesFeed = self
         cell.setCellShadow()
@@ -64,6 +66,11 @@ class PostInfoAndPictures: UICollectionViewController, UICollectionViewDelegateF
         
         return 0
     }
+    
+    var pageNotification:PageNotifications = {
+        let pn = PageNotifications()
+        return pn
+    }()
     
     func onImages(sender: UITapGestureRecognizer) {
         
@@ -90,6 +97,56 @@ class PostInfoAndPictures: UICollectionViewController, UICollectionViewDelegateF
                 collectionView?.scrollToItem(at: indexPath, at: UICollectionViewScrollPosition(), animated: true)
             }
         }
+    }
+    
+    func onImageSwipe(sender: UISwipeGestureRecognizer) {
+        
+        print("SALAM")
+    }
+    
+    func onMenu(_ sender: UIButton) {
+        
+        let index = IndexPath(item: sender.tag, section: 0)
+        let images = postedImages![(index as NSIndexPath).item]
+        
+        guard let postKey = postDetails?.postKey, let imageKey = images.imageKey else { return }
+        
+        let imagesRef = FirebaseRef.database.REF_PHOTO.child("\(postKey)/\(imageKey)")
+        
+        let alertController = UIAlertController(title: "Options", message: "Choose one of the following.", preferredStyle: .actionSheet)
+        
+        alertController.addAction(UIAlertAction(title: "View Details", style: .default, handler: {
+            alert in
+            
+            self.dismiss(animated: true, completion: nil)
+            
+        }))
+        
+        if images.poster == FirebaseRef.database.currentUser.key {
+            
+            alertController.addAction(UIAlertAction(title: "Delete Image", style: .destructive, handler: {
+                alert in
+                
+                imagesRef.removeValue()
+                self.postedImages?.remove(at: index.item)
+                self.pageNotification.showNotification("Images Was Successfully Removed.")
+                
+            }))
+            
+        } else {
+            
+            alertController.addAction(UIAlertAction(title: "Report Image", style: .default, handler: {
+                alert in
+                
+                self.pageNotification.showNotification("Thank You. Image was reported")
+                
+            }))
+            
+        }
+        
+        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
+        
+        self.present(alertController, animated: true, completion: nil)
     }
     
     override var prefersStatusBarHidden: Bool {

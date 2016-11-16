@@ -73,7 +73,8 @@ class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         if (indexPath as NSIndexPath).item == 1 {
             
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ENDED_POST_ID, for: indexPath) as! EndedPostCell
-            cell.addOrPostVC = self
+                cell.addOrPostVC = self
+            
             return cell
         }
         
@@ -86,7 +87,7 @@ class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         }
     
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as! PostPictureCell
-        cell.addOrPostVC = self
+            cell.addOrPostVC = self
             
         return cell
     }
