@@ -17,7 +17,7 @@ class getPostsData: NSObject {
         
         appDelegate.clearCoreData(entity: "Posts")
         
-        FirebaseRef.database.REF_POSTS.observe(.value, with: {
+        FirebaseRef.database.REF_POSTS.observeSingleEvent(of: .value, with: {
             snapshot in
             
             if let snapData = snapshot.value as? [String:AnyObject] {
@@ -109,7 +109,7 @@ class getPostsData: NSObject {
             posts.taggedUsers = Int16(tagged.count)
             
             for key in tagged.keys  { 
-                print(key)
+                
             }
         }
         

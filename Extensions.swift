@@ -159,17 +159,7 @@ extension UITableView {
         
         let view = UIView(frame: CGRect.zero)
         self.tableFooterView = view
-        self.backgroundView = view
         
-    }
-}
-
-extension UINavigationController {
-    
-    func pushingNavigationControllerHelper(_ viewController:UIViewController) {
-        
-        self.pushViewController(viewController, animated: true)
-        self.navigationBar.isHidden = true
     }
 }
 

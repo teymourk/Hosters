@@ -16,7 +16,7 @@ class getUsersData: NSObject {
         
         appDelegate.clearCoreData(entity: "Users")
         
-        FirebaseRef.database.REF_USERS.observe(.value, with: {
+        FirebaseRef.database.REF_USERS.observeSingleEvent(of: .value, with: {
             snapshot in
             
             if let snapData = snapshot.value as? [String:AnyObject] {
@@ -50,10 +50,6 @@ class getUsersData: NSObject {
             users.profileImage = profileImage
         }
         
-        if let likes = userDictionary["likes"] as? Int {
-            users.likes = Int16(likes)
-        }
-    
         do {
             try(context.save())
             

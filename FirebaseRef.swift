@@ -50,6 +50,5 @@ class FirebaseRef {
     func createFireBaseUser(_ uid:String, user: Dictionary<String, AnyObject>) {
         
         REF_USERS.child("\(uid)/user").setValue(user)
-        
     }
 }

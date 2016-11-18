@@ -255,6 +255,24 @@ class CreatePostCell: BaseCell, UITextFieldDelegate, CLLocationManagerDelegate {
         
         postRef.setValue(postData)
         
+        let posts = Posts(context: context)
+            posts.status = true
+            posts.privacy = privacy
+            posts.poster = poster
+            posts.postDescription = postTitle
+            posts.location = location
+            posts.address = address
+            posts.timePosted = timeStamp
+            posts.timeEnded = timeStamp
+            posts.latitude = Int16(latitude)
+            posts.longtitude = Int16(longtitude)
+        
+        do {
+            try context.save()
+        } catch let err {
+            print(err)
+        }
+        
         spiningHud.hide(animated: true)
         self._postTitle.text = ""
         self._locationlabel.text = ""

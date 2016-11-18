@@ -43,6 +43,8 @@ class CostumeTabBar: UITabBarController {
         let userProfileNavigationController = UINavigationController(rootViewController: profilePage)
         userProfileNavigationController.tabBarItem.image = UIImage(named: "profile-1")
         
+        getCurrentUserInfo(profilePage: profilePage)
+        
         //TabBarItem: Notification
         let notifications = Notifications(collectionViewLayout: UICollectionViewFlowLayout())
         notifications.navigationItem.title = "Notifications"
@@ -63,5 +65,37 @@ class CostumeTabBar: UITabBarController {
         tabBar.clipsToBounds = true
         tabBar.isTranslucent = false
         tabBar.barStyle = .black
+    }
+    
+    fileprivate func getCurrentUserInfo(profilePage:UsersProfile) {
+
+        FirebaseRef.database.currentUser.observe(.value, with: {
+            snapshot in
+            
+            if let snapshotData = snapshot.value as? [String:AnyObject] {
+                
+                for(_, userObj) in snapshotData {
+                    
+                    if let name = userObj["name"] as? String, let username = userObj["username"] as? String, let profileImage = userObj["profileImage"] as? String {
+                     
+                        let currenUser = Users(context: context)
+                    
+                        currenUser.name = name
+                        currenUser.username = username
+                        currenUser.profileImage = profileImage
+                        currenUser.userKey = FirebaseRef.database.currentUser.key
+                        
+                        profilePage.profileDetails = currenUser
+                        
+                        do {
+                            try(context.save())
+                            
+                        } catch let err {
+                            print(err)
+                        }
+                    }
+                }
+            }
+        })
     }
 }

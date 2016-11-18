@@ -23,6 +23,8 @@ class UsersProfile: HomePage, UserProfileHeaderDelegate {
             
             if let userKey = profileDetails?.userKey {
                 
+                fetchFilteredUsers(userKey: userKey)
+                
                 if userKey != FirebaseRef.database.currentUser.key {
                     
                     inviteContact.isHidden = true
@@ -38,8 +40,16 @@ class UsersProfile: HomePage, UserProfileHeaderDelegate {
         collectionView?.alwaysBounceVertical = false
         collectionView?.register(UserProfileHeaderCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerId)
         
+        tabBarController?.tabBar.isHidden = false
+        
         setupNavBar()
-        refreshController.removeFromSuperview()
+        fetchPostsFromData()
+    }
+    
+    fileprivate func fetchFilteredUsers(userKey: String) {
+        
+        let keyPredicate = NSPredicate(format: "poster = %@", userKey)
+        fetchController.fetchRequest.predicate = keyPredicate
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
@@ -53,7 +63,6 @@ class UsersProfile: HomePage, UserProfileHeaderDelegate {
         }
         
         return UICollectionReusableView()
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -85,44 +94,11 @@ class UsersProfile: HomePage, UserProfileHeaderDelegate {
         let navController = UINavigationController(rootViewController: settingsVC)
         navigationController?.present(navController, animated: true, completion: nil)
     }
-        
-    override func fetchPostsFromData() {
-        
-        guard let userKey = profileDetails?.userKey else {return}
-        
-        do {
-            
-            let fetchRequest: NSFetchRequest<Posts> = Posts.fetchRequest()
-                fetchRequest.sortDescriptors = [NSSortDescriptor(key: "timePosted", ascending: false)]
-                fetchRequest.predicate = NSPredicate(format: "users.userKey = %@", userKey)
-            
-            let imageRequest: NSFetchRequest<PostImages> = PostImages.fetchRequest()
-            
-            try self.userPosts = context.fetch(fetchRequest)
-            let imagesArray = try(context.fetch(imageRequest))
-            
-            if let posts = userPosts {
-                
-                for post in posts {
-                    
-                    guard let postKey = post.postKey else {return}
-                    
-                    imageRequest.predicate = NSPredicate(format: "postKey = %@", postKey)
-                    imageRequest.sortDescriptors = [NSSortDescriptor(key: "timePosted", ascending: false)]
-                    
-                    self.handleSettingExistinPostImages(posts, allImages: imagesArray)
-                
-                }
-            }
-            
-        } catch let err{
-            print(err)
-        }
-    }
     
     func onSettings(_ sender:UIBarButtonItem) {
         
         let settingsVC = Settings()
+            settingsVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(settingsVC, animated: true)
     }
     

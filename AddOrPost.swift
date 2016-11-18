@@ -199,6 +199,5 @@ class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         
         view.addConstrainstsWithFormat("H:|[v0]|", views: activePostsCollectionView)
         view.addConstrainstsWithFormat("V:|-40-[v0]|", views: activePostsCollectionView)
-
     }
 }

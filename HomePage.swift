@@ -14,15 +14,8 @@ import CoreData
 private let CELL_IDENTEFITER = "Cell"
 private let HEADER_ID = "HeaderId"
 
-class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate {
+class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate, NSFetchedResultsControllerDelegate {
     
-    var userPosts:[Posts]? {
-        didSet{
-        
-            collectionView?.reloadData()
-        }
-    }
-     
     var postImages = [String:[PostImages]]()
     var reloadTimer:Timer?
     
@@ -54,8 +47,7 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
     
         if Reachability.isInternetAvailable() {
         
-        getPostsData.getPostsFromFireBase()
-        perform(#selector(fetchPostsFromData), with: nil, afterDelay: 0.5)
+           // perform(#selector(fetchPostsFromData), with: nil, afterDelay: 0.5)
             
         } else {
             
@@ -77,29 +69,29 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
         setupOrangeSeperator()
         
         perform(#selector(fetchPostsFromData), with: nil, afterDelay: 1)
-        
+    
     }
     
     // MARK: UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return userPosts?.count ?? 0
+        
+        return fetchController.sections?[0].numberOfObjects ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_IDENTEFITER, for: indexPath) as? FeedCell {
         
-            if let posts = userPosts?[(indexPath as NSIndexPath).row] {
+            let posts = fetchController.object(at: indexPath)
 
-                cell.postsDetails = posts
-                cell.friendsFeedView = self
-                cell.menuOptions.tag = (indexPath as NSIndexPath).item
-                cell.feedAllPhotosVC.index = indexPath
-                pushImages(cell, posts: posts)
-                
-                cell.setCellShadow()
-            }
-    
+            cell.postsDetails = posts
+            cell.friendsFeedView = self
+            cell.menuOptions.tag = (indexPath as NSIndexPath).item
+            cell.feedAllPhotosVC.index = indexPath
+            pushImages(cell, posts: posts)
+            
+            cell.setCellShadow()
+            
             return cell
         }
     
@@ -115,7 +107,7 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
         
         return 15
     }
- 
+
 
     fileprivate func pushImages(_ cell:FeedCell, posts:Posts) {
         
@@ -130,21 +122,20 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
     //Pushing Post Information
     func didSelectOnPost(_ indexPath:IndexPath) {
         
-        if let post = userPosts?[(indexPath as NSIndexPath).item] {
+        let post = fetchController.object(at: indexPath)
             
-            if let postKey = post.postKey {
-             
-                let imagesArray = postImages[postKey]
-                
-                let layout = UICollectionViewFlowLayout()
-                    layout.scrollDirection = .horizontal
-                
-                let activityAbout = PostInfoAndPictures(collectionViewLayout: layout)
-                    activityAbout.postDetails = post
-                    activityAbout.postedImages = imagesArray
-                
-                navigationController?.present(activityAbout, animated: false, completion: nil)
-            }
+        if let postKey = post.postKey {
+         
+            let imagesArray = postImages[postKey]
+            
+            let layout = UICollectionViewFlowLayout()
+                layout.scrollDirection = .horizontal
+            
+            let activityAbout = PostInfoAndPictures(collectionViewLayout: layout)
+                activityAbout.postDetails = post
+                activityAbout.postedImages = imagesArray
+            
+            navigationController?.present(activityAbout, animated: false, completion: nil)
         }
     }
     
@@ -157,23 +148,15 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
     func onMenuOptions(_ sender:UIButton) {
         
         let index = IndexPath(item: sender.tag, section: 0)
-        let post = userPosts![(index as NSIndexPath).item]
+        let post = fetchController.object(at: index)
         guard let postkey = post.postKey else {return}
         
         let postRef = FirebaseRef.database.REF_POSTS.child(postkey)
         
         let alertConteoller = UIAlertController(title: "Option", message: "Please choose one of the followings.", preferredStyle: .actionSheet)
+            alertConteoller.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: nil))
         
         if post.poster == FirebaseRef.database.currentUser.key {
-            
-            alertConteoller.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: {
-                alert in
-                
-                postRef.removeValue()
-                self.pageNotification.showNotification("Post Successfully Removed 👍")
-                self.userPosts?.remove(at: (index as NSIndexPath).item)
-                
-            }))
             
             alertConteoller.addAction(UIAlertAction(title: "Edit Post", style: .default, handler: {
                 alert in
@@ -190,7 +173,7 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
                 let postRef = FirebaseRef.database.REF_POSTS.child("\(post.postKey!)")
                 let timeEnded:CGFloat = CGFloat(Date().timeIntervalSince1970)
             
-                alertConteoller.addAction(UIAlertAction(title: "End Posting", style: .default, handler: {
+                alertConteoller.addAction(UIAlertAction(title: "End Posting", style: .destructive, handler: {
                     alert in
                     
                     self.pageNotification.showNotification("Post Ended. Users can no longer Post Images 😭")
@@ -200,8 +183,11 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
                 }))
             }
             
-            alertConteoller.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {
+            alertConteoller.addAction(UIAlertAction(title: "Delete", style: .destructive, handler: {
                 alert in
+                
+                postRef.removeValue()
+                self.pageNotification.showNotification("Post Successfully Removed 👍")
                 
             }))
             
@@ -211,11 +197,6 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
                 alert in
                 
                 self.pageNotification.showNotification("Request Sent To Host. Please Wait on their response 🙇")
-                
-            }))
-            
-            alertConteoller.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: {
-                alert in
                 
             }))
         }
@@ -292,33 +273,74 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
         inviteContact.topAnchor.constraint(equalTo: emptyPostLabel.bottomAnchor, constant: 10).isActive = true
     }
     
+    lazy var fetchController:NSFetchedResultsController<Posts> = {
+        let fetch: NSFetchRequest<Posts> = Posts.fetchRequest()
+        fetch.sortDescriptors = [NSSortDescriptor(key: "timePosted", ascending: false)]
+        let frc = NSFetchedResultsController(fetchRequest: fetch, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        self.fetchController = frc
+        frc.delegate = self
+        return frc
+    }()
+    
+    var blockOperations = [BlockOperation]()
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+    
+        if let indexPath = newIndexPath {
+            
+            
+            
+            switch type {
+            
+            case .insert:
+                blockOperations.append(BlockOperation(block: {
+                    
+                    self.collectionView?.insertItems(at: [indexPath])
+                }))
+                
+                break
+                
+            case .delete:
+                collectionView?.deleteItems(at: [indexPath])
+                break
+                
+            case .update:
+                if let cell = collectionView?.cellForItem(at: indexPath) as? FeedCell {
+                    
+                    let post = fetchController.object(at: indexPath)
+                    cell.postsDetails = post
+                }
+                
+                break
+                
+            default: break
+            }
+        }
+    }
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        
+        collectionView?.performBatchUpdates({ 
+            
+            for operation in self.blockOperations {
+                operation.start()
+            }
+            
+        }, completion: nil)
+    }
+    
     func fetchPostsFromData() {
         
         do {
             
-            let fetchRequest: NSFetchRequest<Posts> = Posts.fetchRequest()
-                fetchRequest.sortDescriptors = [NSSortDescriptor(key: "timePosted", ascending: false)]
+            try fetchController.performFetch()
             
-            let imageRequest: NSFetchRequest<PostImages> = PostImages.fetchRequest()
-                imageRequest.sortDescriptors = [NSSortDescriptor(key: "timePosted", ascending: false)]
+        } catch let error {
             
-            try self.userPosts = (context.fetch(fetchRequest))
-            let imagesArray = try(context.fetch(imageRequest))
-            
-            guard let postsArray = userPosts else {return}
-
-            self.handleSettingExistinPostImages(postsArray, allImages: imagesArray)
-            
-            if postsArray.count == 0 {
-                
-                onRefreshPage()
-                return
-            }
-        
-        } catch let err {
-            print(err)
+            print(error)
         }
-    
+        
+        collectionView?.reloadData()
         refreshController.endRefreshing()
     }
 }

@@ -96,9 +96,12 @@ class PostPictureCell: BaseCell, UICollectionViewDelegateFlowLayout, UICollectio
         do {
             
             let request:NSFetchRequest<Posts> = Posts.fetchRequest()
-            request.predicate = NSPredicate(format: "status = %@", NSNumber(booleanLiteral: true))
+                request.predicate = NSPredicate(format: "poster = %@", FirebaseRef.database.currentUser.key)
             
-            try self.activePosts = context.fetch(request)
+            let active = try(context.fetch(request))
+            
+            let activeFileter = active.filter({$0.status == true})
+            self.activePosts = activeFileter
             
         } catch let err {
             print(err)

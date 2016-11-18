@@ -29,10 +29,6 @@ class UserProfileHeaderCell: BaseCell {
                 _fullName.text = fullname
             }
     
-            if let postlikes = profileDetails?.likes {
-                likes.text = "Likes \(postlikes)"
-            }
-            
             if let userKey = profileDetails?.userKey {
                 
                 if userKey == FirebaseRef.database.currentUser.key {
@@ -45,21 +41,9 @@ class UserProfileHeaderCell: BaseCell {
                 }
             }
             
-//            if let trackersCount = profileDetails?.trackers?.count {
-//             
-//                _trackers.setTitle("Trackers \(trackersCount)", for: UIControlState())
-//                
-//            } else {
-//                _trackers.setTitle("Trackers \(0)", for: UIControlState())
-//            }
-//            
-//            if let trackingCount = profileDetails?.tracking?.count {
-//                
-//                _tracking.setTitle("Tracking \(trackingCount)", for: UIControlState())
-//                
-//            } else {
-//                _tracking.setTitle("Tracking \(0)", for: UIControlState())
-//            }
+            _trackers.setTitle("Trackers \(0)", for: UIControlState())
+           
+            _tracking.setTitle("Tracking \(0)", for: UIControlState())
         }
     }
     
@@ -78,22 +62,7 @@ class UserProfileHeaderCell: BaseCell {
             label.textAlignment = .center
         return label
     }()
-    
-    var likes:UILabel = {
-        let label = UILabel()
-            label.font = UIFont(name: "NotoSans", size: 15)
-            label.textColor = .lightGray
-            label.textAlignment = .center
-        return label
-    }()
-    
-    var _likeLogo:UIImageView = {
-        let logo = UIImageView()
-            logo.image = UIImage(named: "heart")
-            logo.contentMode = .scaleAspectFill
-        return logo
-    }()
-    
+
     lazy var _trackers:UIButton = {
         let btn = UIButton()
             btn.setTitleColor(darkGray, for: UIControlState())
@@ -154,8 +123,6 @@ class UserProfileHeaderCell: BaseCell {
         
         addSubview(profileImage)
         addSubview(_fullName)
-        addSubview(likes)
-        addSubview(_likeLogo)
         addSubview(_trackers)
         addSubview(_tracking)
         addSubview(editProfile_Follow_Button)
@@ -171,24 +138,6 @@ class UserProfileHeaderCell: BaseCell {
         
         //Left
         addConstraint(NSLayoutConstraint(item: _fullName, attribute: .left, relatedBy: .equal, toItem: profileImage, attribute: .right, multiplier: 1, constant: 10))
-        
-        //Like Logo
-        addConstrainstsWithFormat("H:[v0]", views: _likeLogo)
-        
-        //Top
-        addConstraint(NSLayoutConstraint(item: _likeLogo, attribute: .top, relatedBy: .equal, toItem: _fullName, attribute: .bottom, multiplier: 1, constant: 10))
-        
-        //Left
-        addConstraint(NSLayoutConstraint(item: _likeLogo, attribute: .left, relatedBy: .equal, toItem: profileImage, attribute: .right, multiplier: 1, constant: 10))
-        
-        //Likes Constraints
-        addConstrainstsWithFormat("H:[v0]", views: likes)
-        
-        //CenterY
-        addConstraint(NSLayoutConstraint(item: likes, attribute: .centerY, relatedBy: .equal, toItem: _likeLogo, attribute: .centerY, multiplier: 1, constant: 0))
-        
-        //Left
-        addConstraint(NSLayoutConstraint(item: likes, attribute: .left, relatedBy: .equal, toItem: _likeLogo, attribute: .right, multiplier: 1, constant: 5))
         
         //Bio Constraints
         addConstrainstsWithFormat("H:|-10-[v0(100)]-40-[v1(100)]", views: _trackers, _tracking)

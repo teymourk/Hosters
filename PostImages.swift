@@ -18,7 +18,7 @@ class getImagesData: NSObject {
         
         guard let postKey = postKey else {return}
         
-        FirebaseRef.database.REF_PHOTO.child(postKey).observe(.value, with: {
+        FirebaseRef.database.REF_PHOTO.child(postKey).observeSingleEvent(of: .value, with: {
             snapshot in
             
             if let snapData = snapshot.value as? [String:AnyObject] {
@@ -26,7 +26,7 @@ class getImagesData: NSObject {
                 for(key, imageObj) in snapData  {
                     
                     if let imageObjDic = imageObj as? [String:AnyObject] {
-                     
+                      
                         _ = getImagesData(postKey: postKey, imageKey: key, postImagesDic: imageObjDic)
                     }
                 }

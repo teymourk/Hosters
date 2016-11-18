@@ -41,6 +41,8 @@ class SearchUsers: UITableViewController, UISearchResultsUpdating {
         tableView.reloadData()
     }
     
+    
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -52,7 +54,12 @@ class SearchUsers: UITableViewController, UISearchResultsUpdating {
         tableView.contentInset = UIEdgeInsetsMake(-1, 0, 0, 0)
         tableView.rowHeight = 70
         tableView.clearFooter()
+    }
     
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+    
+        tabBarController?.tabBar.isHidden = false
         fetchUsersFromData()
     }
     
@@ -116,6 +123,7 @@ class SearchUsers: UITableViewController, UISearchResultsUpdating {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let usersProfileVc = UsersProfile(collectionViewLayout: UICollectionViewFlowLayout())
+            usersProfileVc.refreshController.beginRefreshing()
         
         if searchBar.isActive {
             
@@ -129,6 +137,7 @@ class SearchUsers: UITableViewController, UISearchResultsUpdating {
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
+        usersProfileVc.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(usersProfileVc, animated: true)
     }
     
@@ -149,6 +158,7 @@ class SearchUsers: UITableViewController, UISearchResultsUpdating {
         do {
             
             let fetchRequest: NSFetchRequest<Users> = Users.fetchRequest()
+                fetchRequest.predicate = NSPredicate(format: "userKey != %@", FirebaseRef.database.currentUser.key)
             
             try allUsers = (context.fetch(fetchRequest))
             
@@ -157,7 +167,6 @@ class SearchUsers: UITableViewController, UISearchResultsUpdating {
             print(err)
         }
     }
-    
     
     func handleErrorWhenNoUsers() {
         
