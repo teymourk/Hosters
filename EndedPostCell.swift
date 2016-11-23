@@ -11,19 +11,15 @@ import CoreData
 
 class EndedPostCell: PostPictureCell {
     
-    //Duplicated. Will Fix later
-    override func handleFetchingActivePosts() {
+    override func didMoveToSuperview() {
+        super.didMoveToSuperview()
         
-        do {
-            let request:NSFetchRequest<Posts> = Posts.fetchRequest()
-                request.predicate = NSPredicate(format: "status = %@", NSNumber(booleanLiteral: false))
-            
-            try self.activePosts = context.fetch(request)
-            
-        } catch let err {
-            print(err)
-
-        }
+        let posterPredicate = NSPredicate(format: "poster = %@", FirebaseRef.database.currentUser.key)
+        let statusPredicate = NSPredicate(format: "status = %@", NSNumber(booleanLiteral: false))
+        
+        fetchController.fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [posterPredicate,statusPredicate])
+        
+        handleFetchingPosts()
     }
     
     override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

@@ -36,11 +36,17 @@ class MenuBar: BaseView, UICollectionViewDelegateFlowLayout, UICollectionViewDel
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as! MenuBarCell
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as? MenuBarCell {
+            
+            if let imagesName = menuItems?[indexPath.item] {
+                
+                cell.image.image = UIImage(named: imagesName)
+            }
+            
+            return cell
+        }
         
-        cell.menuLabel.text = menuItems?[(indexPath as NSIndexPath).item]
-        
-        return cell
+        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -98,41 +104,47 @@ class MenuBar: BaseView, UICollectionViewDelegateFlowLayout, UICollectionViewDel
 
 class MenuBarCell: BaseCell {
 
-    var menuLabel:UILabel = {
-        let label = UILabel()
-            label.textAlignment = .center
-            label.textColor = .white
-            label.font = UIFont(name: "NotoSans", size: 14)
-        return label
+//    var menuLabel:UILabel = {
+//        let label = UILabel()
+//            label.textAlignment = .center
+//            label.textColor = .white
+//            label.font = UIFont(name: "NotoSans", size: 14)
+//        return label
+//    }()
+    
+    let image:UIImageView = {
+        let image = UIImageView()
+            image.contentMode = .scaleAspectFill
+       return image
     }()
     
     override var isHighlighted: Bool {
         didSet {
-            menuLabel.textColor = isHighlighted ? orange : .white
+            //image.backgroundColor = isHighlighted ? orange : .white
         }
     }
     
     override var isSelected: Bool {
         didSet {
-            menuLabel.textColor = isSelected ? orange : .white
+            //image.backgroundColor = isSelected ? orange : .white
         }
     }
     
     override func setupView() {
         super.setupView()
         
-        addSubview(menuLabel)
+        addSubview(image)
         backgroundColor = darkGray
         
         //Icons Constraints
-        addConstrainstsWithFormat("H:[v0(90)]", views: menuLabel)
-        addConstrainstsWithFormat("V:[v0(30)]", views: menuLabel)
+        addConstrainstsWithFormat("H:[v0(25)]", views: image)
+        addConstrainstsWithFormat("V:[v0(25)]", views: image)
         
         //CenterX
-        addConstraint(NSLayoutConstraint(item: menuLabel, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: image, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
         
         //CenterY
-        addConstraint(NSLayoutConstraint(item: menuLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: image, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
     }
 }
 

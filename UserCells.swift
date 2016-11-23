@@ -16,10 +16,6 @@ class UsersCells: BaseTCell {
                 _username.text = username
             }
             
-            if let likes = users?.likes {
-                _likes.text = "\(likes) Likes"
-            }
-            
             if let profileImageURL = users?.profileImage {
                 _profileImage.getImagesBack(url: profileImageURL, placeHolder: "Profile")
             }
@@ -31,7 +27,6 @@ class UsersCells: BaseTCell {
     }
     
     var searchUsersVC:SearchUsers?
-    //var frinedsVC:UserFriends?
     
     var _profileImage:UIImageView = {
         let image = UIImageView()
@@ -46,20 +41,6 @@ class UsersCells: BaseTCell {
             label.textColor = .darkGray
             label.font = UIFont.boldSystemFont(ofSize: 12)
         return label
-    }()
-    
-    var _likes:UILabel = {
-        let label = UILabel()
-            label.textColor = .lightGray
-            label.font = UIFont.systemFont(ofSize: 12)
-        return label
-    }()
-    
-    var _likeLogo:UIImageView = {
-        let logo = UIImageView()
-            logo.image = UIImage(named: "heart")
-            logo.contentMode = .scaleAspectFill
-        return logo
     }()
     
     lazy var _follow_following:UIButton = {
@@ -86,9 +67,7 @@ class UsersCells: BaseTCell {
         super.setupView()
         
         addSubview(_profileImage)
-        addSubview(_likes)
         addSubview(_username)
-        addSubview(_likeLogo)
         addSubview(_follow_following)
         
         backgroundColor = .white
@@ -106,25 +85,6 @@ class UsersCells: BaseTCell {
         
         //Right of ProfileImage
         addConstraint(NSLayoutConstraint(item: _username, attribute: .left, relatedBy: .equal, toItem: _profileImage, attribute: .right, multiplier: 1, constant: 10))
-        
-        //Full Name Constraints
-        addConstrainstsWithFormat("H:[v0]", views: _likeLogo)
-        addConstrainstsWithFormat("V:[v0]", views: _likeLogo)
-        
-        //Top
-        addConstraint(NSLayoutConstraint(item: _likeLogo, attribute: .top, relatedBy: .equal, toItem: _username, attribute: .bottom, multiplier: 1, constant: 4))
-        
-        //Right of ProfileImage
-        addConstraint(NSLayoutConstraint(item: _likeLogo, attribute: .left, relatedBy: .equal, toItem: _profileImage, attribute: .right, multiplier: 1, constant: 10))
-        
-        //like
-        addConstrainstsWithFormat("H:[v0]", views: _likes)
-        
-        //CenterY of name
-        addConstraint(NSLayoutConstraint(item: _likes, attribute: .centerY, relatedBy: .equal, toItem: _likeLogo, attribute: .centerY, multiplier: 1, constant: 0))
-    
-        //Left
-        addConstraint(NSLayoutConstraint(item: _likes, attribute: .left, relatedBy: .equal, toItem: _likeLogo, attribute: .right, multiplier: 1, constant: 4))
         
         //Follow/Unfollow Constraints
         addConstrainstsWithFormat("H:[v0(70)]-20-|", views: _follow_following)

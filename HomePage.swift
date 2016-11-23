@@ -14,10 +14,16 @@ import CoreData
 private let CELL_IDENTEFITER = "Cell"
 private let HEADER_ID = "HeaderId"
 
-class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate, NSFetchedResultsControllerDelegate {
+class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate, NSFetchedResultsControllerDelegate, PicturesInsideCellDelegate {
     
     var postImages = [String:[PostImages]]()
-    var reloadTimer:Timer?
+    
+//    lazy var refreshController:UIRefreshControl = {
+//        let refresher = UIRefreshControl()
+//        refresher.tintColor = .gray
+//        refresher.addTarget(self, action: #selector(onRefreshPage), for: .valueChanged)
+//        return refresher
+//    }()
     
     lazy var locationManager:CLLocationManager? = {
         let manager = CLLocationManager()
@@ -26,13 +32,6 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
         return manager
     }()
 
-    lazy var refreshController:UIRefreshControl = {
-        let refresher = UIRefreshControl()
-            refresher.tintColor = .gray
-            refresher.addTarget(self, action: #selector(onRefreshPage), for: .valueChanged)
-        return refresher
-    }()
-    
     let pageNotification:PageNotifications = {
         let notification = PageNotifications()
         return notification
@@ -43,33 +42,38 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
         return postPictures
     }()
     
+    let noPostView:NoPostsView = {
+        let NP = NoPostsView()
+        return NP
+    }()
+    
     func onRefreshPage() {
     
         if Reachability.isInternetAvailable() {
         
-           // perform(#selector(fetchPostsFromData), with: nil, afterDelay: 0.5)
+            
             
         } else {
             
+            //refreshController.endRefreshing()
             pageNotification.showNotification("Not Connected To The Internet 😭")
-            refreshController.endRefreshing()
         }
     }
     
     override func viewDidLoad() {
+        
         super.viewDidLoad()
         
         navigationController?.navigationBar.isTranslucent = false
         collectionView?.backgroundColor = .white
         collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: CELL_IDENTEFITER)
         collectionView?.alwaysBounceVertical = true
-        collectionView?.addSubview(refreshController)
+        //collectionView?.addSubview(refreshController)
         
         locationManager?.requestWhenInUseAuthorization()
-        setupOrangeSeperator()
-        
-        perform(#selector(fetchPostsFromData), with: nil, afterDelay: 1)
+        setupSeperator()
     
+        perform(#selector(fetchPostsFromData), with: nil, afterDelay: 2)
     }
     
     // MARK: UICollectionViewDataSource
@@ -85,11 +89,10 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
             let posts = fetchController.object(at: indexPath)
 
             cell.postsDetails = posts
-            cell.friendsFeedView = self
             cell.menuOptions.tag = (indexPath as NSIndexPath).item
-            cell.feedAllPhotosVC.index = indexPath
-            pushImages(cell, posts: posts)
-            
+            cell.feedAllPhotosVC.postKey = posts.postKey
+            cell.feedAllPhotosVC.delegate = self
+            cell.friendsFeedView = self
             cell.setCellShadow()
             
             return cell
@@ -107,44 +110,13 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
         
         return 15
     }
-
-
-    fileprivate func pushImages(_ cell:FeedCell, posts:Posts) {
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        if let postKey = posts.postKey {
-            
-            let imagesArray = postImages[postKey]
-            
-            cell.feedAllPhotosVC.allImages = imagesArray
-        }
+        return UIEdgeInsets(top: 15,
+                            left: 0, bottom: 0, right: 0)
     }
-    
-    //Pushing Post Information
-    func didSelectOnPost(_ indexPath:IndexPath) {
-        
-        let post = fetchController.object(at: indexPath)
-            
-        if let postKey = post.postKey {
-         
-            let imagesArray = postImages[postKey]
-            
-            let layout = UICollectionViewFlowLayout()
-                layout.scrollDirection = .horizontal
-            
-            let activityAbout = PostInfoAndPictures(collectionViewLayout: layout)
-                activityAbout.postDetails = post
-                activityAbout.postedImages = imagesArray
-            
-            navigationController?.present(activityAbout, animated: false, completion: nil)
-        }
-    }
-    
-    lazy var updatePostView:EditPost = {
-        let up = EditPost()
-            up.friendsFeed = self
-        return up
-    }()
-    
+
     func onMenuOptions(_ sender:UIButton) {
         
         let index = IndexPath(item: sender.tag, section: 0)
@@ -160,12 +132,7 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
             
             alertConteoller.addAction(UIAlertAction(title: "Edit Post", style: .default, handler: {
                 alert in
-                
-                guard let description = post.postDescription else {return}
-                
-                self.updatePostView.showMenu(description, privacy: "")
-                self.updatePostView.postKey = post.postKey
-                
+            
             }))
             
             if post.status == true {
@@ -204,130 +171,47 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
         self.present(alertConteoller, animated: true, completion: nil)
     }
     
-    func handleSettingExistinPostImages(_ allPosts:[Posts], allImages:[PostImages]?) {
-        
-        for post in allPosts {
-            
-            if let filteredImages = allImages?.filter({$0.postKey == post.postKey}) {
-                
-                for value in filteredImages.enumerated() {
-                    
-                    guard let postKey = value.element.postKey else {return}
-                    
-                    self.postImages[postKey] = filteredImages
-                }
-            }
-        }
-    }
-    
-    var orangeSeperator:UIView = {
+    var seperator:UIView = {
         let seperator = UIView()
             seperator.backgroundColor = orange
             seperator.translatesAutoresizingMaskIntoConstraints = false
         return seperator
     }()
-    
-    lazy var emptyPostLabel:UILabel = {
-        let label = UILabel()
-            label.textColor = darkGray
-            label.font = UIFont(name: "Prompt", size: 17)
-            label.text = "No Posts.Try Inviting Your Friend 💩 🙄"            
-            label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    lazy var inviteContact:UIButton = {
-        let button = UIButton()
-            button.setTitle("Invite Your Contact", for: UIControlState())
-            button.titleLabel?.font = UIFont(name: "NotoSans", size: 20)
-            button.setTitleColor(.white, for: UIControlState())
-            button.setBackgroundImage(UIImage(named: "signin"), for: UIControlState())
-            button.addTarget(self, action: #selector(self.onInviteContact(_:)), for: .touchUpInside)
-            button.translatesAutoresizingMaskIntoConstraints = false
-        return button
-    }()
-    
-    func onInviteContact(_ sender:UIButton) {
         
-        pageNotification.showNotification("WORKING ON THE FEATURE")
+    func setupSeperator() {
+        
+        view.addSubview(seperator)
+        
+        seperator.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        seperator.heightAnchor.constraint(equalToConstant:2).isActive = true
+        seperator.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
     }
     
-    func setupOrangeSeperator() {
+    func setupNoPostView(text:String) {
         
-        view.addSubview(orangeSeperator)
+        view.addSubview(noPostView)
         
-        orangeSeperator.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        orangeSeperator.heightAnchor.constraint(equalToConstant: 2).isActive = true
-        orangeSeperator.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-    }
-    
-    func handlePageWhenTheyAreNoPosts() {
+        view.addConstrainstsWithFormat("H:|[v0]|", views: noPostView)
+        view.addConstrainstsWithFormat("V:|[v0]|", views: noPostView)
         
-        view.addSubview(emptyPostLabel)
-        view.addSubview(inviteContact)
-        
-        emptyPostLabel.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        emptyPostLabel.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
-        
-        inviteContact.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        inviteContact.topAnchor.constraint(equalTo: emptyPostLabel.bottomAnchor, constant: 10).isActive = true
+        noPostView.emptyPostLabel.text = text
     }
     
     lazy var fetchController:NSFetchedResultsController<Posts> = {
         let fetch: NSFetchRequest<Posts> = Posts.fetchRequest()
-        fetch.sortDescriptors = [NSSortDescriptor(key: "timePosted", ascending: false)]
+            fetch.sortDescriptors = [NSSortDescriptor(key: "timePosted", ascending: false)]
         let frc = NSFetchedResultsController(fetchRequest: fetch, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-        self.fetchController = frc
-        frc.delegate = self
+            frc.delegate = self
         return frc
     }()
     
-    var blockOperations = [BlockOperation]()
-    
-    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
-    
-        if let indexPath = newIndexPath {
-            
-            
-            
-            switch type {
-            
-            case .insert:
-                blockOperations.append(BlockOperation(block: {
-                    
-                    self.collectionView?.insertItems(at: [indexPath])
-                }))
-                
-                break
-                
-            case .delete:
-                collectionView?.deleteItems(at: [indexPath])
-                break
-                
-            case .update:
-                if let cell = collectionView?.cellForItem(at: indexPath) as? FeedCell {
-                    
-                    let post = fetchController.object(at: indexPath)
-                    cell.postsDetails = post
-                }
-                
-                break
-                
-            default: break
-            }
-        }
-    }
-    
-    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
-        
-        collectionView?.performBatchUpdates({ 
-            
-            for operation in self.blockOperations {
-                operation.start()
-            }
-            
-        }, completion: nil)
-    }
+    lazy var fetchControllers:NSFetchedResultsController<PostImages> = {
+        let fetch: NSFetchRequest<PostImages> = PostImages.fetchRequest()
+        fetch.sortDescriptors = [NSSortDescriptor(key: "timePosted", ascending: false)]
+        let frc = NSFetchedResultsController(fetchRequest: fetch, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+        frc.delegate = self
+        return frc
+    }()
     
     func fetchPostsFromData() {
         
@@ -335,12 +219,66 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
             
             try fetchController.performFetch()
             
-        } catch let error {
             
-            print(error)
+            if fetchController.sections?[0].numberOfObjects == 0 {
+                setupNoPostView(text: "No Posts.Try Inviting Your Friend 💩 🙄")
+            }
+                    
+        } catch let error {
+            print("ERROR IS \(error)")
         }
-        
         collectionView?.reloadData()
-        refreshController.endRefreshing()
+        //refreshController.endRefreshing()
+    }
+    
+    var operations = [BlockOperation]()
+    
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+        
+        collectionView?.performBatchUpdates({
+            
+            for operation in self.operations {
+                operation.start()
+            }
+            
+        }, completion: nil)
+    }
+    
+    func controller(_ controller: NSFetchedResultsController<NSFetchRequestResult>, didChange anObject: Any, at indexPath: IndexPath?, for type: NSFetchedResultsChangeType, newIndexPath: IndexPath?) {
+        
+        if let indexPath = newIndexPath {
+            
+            switch type {
+                
+            case .insert:
+                operations.append(BlockOperation(block: {
+                    self.collectionView?.insertItems(at: [indexPath])
+                    
+                    if self.noPostView.isDescendant(of: self.view) {
+                        self.noPostView.removeFromSuperview()
+                    }
+                    
+                }))
+                
+                break
+            case .delete:
+                collectionView?.deleteItems(at: [indexPath])
+                break
+                
+            default: break
+            }
+        }
+    }
+    
+    //MARK: PicturesInsideCell Delegate
+    
+    func onImages(images: [PostImages]) {
+        
+        let layout = UICollectionViewFlowLayout()
+            layout.scrollDirection = .horizontal
+        let postImages = PostInfoAndPictures(collectionViewLayout: layout)
+        postImages.postedImages = images
+        
+        navigationController?.present(postImages, animated: false, completion: nil)
     }
 }

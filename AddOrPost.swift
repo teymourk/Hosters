@@ -12,7 +12,7 @@ private let CELL_ID = "CELL_ID"
 private let CREATE_NEW = "CREATE_ID"
 private let ENDED_POST_ID = "Ended_ID"
 
-class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, createPostsDelegate {
     
     var activePosts:[Posts]? {
         didSet{
@@ -76,12 +76,12 @@ class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDat
                 cell.addOrPostVC = self
             
             return cell
-        }
-        
-        if (indexPath as NSIndexPath).item == 2 {
+            
+        } else if (indexPath as NSIndexPath).item == 2 {
         
             let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CREATE_NEW, for: indexPath) as! CreatePostCell
-            cell.addOrdPostVC = self
+                cell.addOrdPostVC = self
+                cell.delegete = self
 
             return cell
         }
@@ -100,30 +100,6 @@ class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
         menuBar.horizontalBarLeftAncherContraint?.constant = scrollView.contentOffset.x / 3
-    }
-    
-    fileprivate func showAlert(_ postKey:String) {
-        
-        let alertController = UIAlertController(title: "Warning", message: "You have an active post. You must end it this one to create an new one.", preferredStyle: .alert)
-        
-        alertController.addAction(UIAlertAction(title: "Cancel", style: .cancel, handler: { (alert) in
-            
-            let index = IndexPath(item: 0, section: 0)
-            
-            self.menuBar.menuCollectionView.selectItem(at: index, animated: true, scrollPosition: UICollectionViewScrollPosition())
-            self.scrollToMenuIndex(0)
-        }))
-        
-        alertController.addAction(UIAlertAction(title: "End Current Post", style: .destructive, handler: { (alert) in
-            
-            let postRef = FirebaseRef.database.REF_POSTS.child("\(postKey)")
-            let timeEnded:CGFloat = CGFloat(Date().timeIntervalSince1970)
-            postRef.updateChildValues(["Status":false])
-            postRef.updateChildValues(["TimeEnded":timeEnded])
-            
-        }))
-        
-        self.present(alertController, animated: true, completion: nil)
     }
     
     
@@ -161,7 +137,7 @@ class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     
     lazy var menuBar:MenuBar = {
         let mb = MenuBar()
-            mb.menuItems = ["Active Posts", "Ended Posts", "Create New"]
+            mb.menuItems = ["Online", "Offline", "Create New"]
             mb.addOrPostVC = self
         return mb
     }()
@@ -175,16 +151,22 @@ class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         return label
     }()
     
+
     func setupGuideLabel(_ guide:String) {
         
-        view.addSubview(guideLabel)
-        
-        view.addConstrainstsWithFormat("H:|[v0]|", views: guideLabel)
-        view.addConstrainstsWithFormat("V:[v0(30)]", views: guideLabel)
-        
-        view.addConstraint(NSLayoutConstraint(item: guideLabel, attribute: .top, relatedBy: .equal, toItem: menuBar, attribute: .bottom, multiplier: 1, constant: 0))
-        
         guideLabel.text = guide
+    }
+    
+    var googleLocationVC:GoogleLocationsVC? = GoogleLocationsVC()
+    
+    //Mark: CreatePostDelegate
+    func onLocation(sender: UIButton) {
+        
+        if let nearLocations = googleLocationVC {
+         
+            let navController = UINavigationController(rootViewController: nearLocations)
+            navigationController?.present(navController, animated: true, completion: nil)
+        }
     }
     
     func setupView() {
@@ -193,11 +175,20 @@ class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         
         view.addSubview(menuBar)
         view.addSubview(activePostsCollectionView)
+        view.addSubview(guideLabel)
         
         view.addConstrainstsWithFormat("H:|[v0]|", views: menuBar)
         view.addConstrainstsWithFormat("V:|[v0(40)]", views: menuBar)
         
         view.addConstrainstsWithFormat("H:|[v0]|", views: activePostsCollectionView)
         view.addConstrainstsWithFormat("V:|-40-[v0]|", views: activePostsCollectionView)
+        
+        view.addConstrainstsWithFormat("H:|[v0]|", views: guideLabel)
+        view.addConstrainstsWithFormat("V:[v0(30)]", views: guideLabel)
+        
+        view.addConstraint(NSLayoutConstraint(item: guideLabel, attribute: .top, relatedBy: .equal, toItem: menuBar, attribute: .bottom, multiplier: 1, constant: 0))
+        
+        setupGuideLabel("Add Image To An Existing Activity Happening Now")
+    
     }
 }

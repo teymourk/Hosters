@@ -80,5 +80,13 @@ class getImagesData: NSObject {
         if let timePosted = postImagesDic["timePosted"] as? Double {
             images.timePosted = timePosted
         }
+        
+        do {
+            
+            try(context.save())
+            
+        } catch let err {
+            print(err)
+        }
     }
 }

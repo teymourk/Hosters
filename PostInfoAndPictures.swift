@@ -26,11 +26,10 @@ class PostInfoAndPictures: UICollectionViewController, UICollectionViewDelegateF
     override func viewDidLoad() {
         super.viewDidLoad()
     
-        collectionView!.register(AllPicturesFeedCell.self, forCellWithReuseIdentifier: CELL_ID)
+        collectionView?.register(AllPicturesFeedCell.self, forCellWithReuseIdentifier: CELL_ID)
         collectionView?.showsHorizontalScrollIndicator = false
         collectionView?.isScrollEnabled = false
         collectionView?.isPagingEnabled = true
-
     }
     
     // MARK: UICollectionViewDataSource
@@ -40,16 +39,23 @@ class PostInfoAndPictures: UICollectionViewController, UICollectionViewDelegateF
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as! AllPicturesFeedCell
-    
-        cell.postImages = postedImages![(indexPath as NSIndexPath).item]
-        cell.menuOptions.tag = indexPath.item
-        cell.delegate = self
-        cell.allPicturesFeed = self
-        cell.setCellShadow()
-        cell.setupListView()
         
-        return cell
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as? AllPicturesFeedCell {
+            
+            if let images = postedImages?[indexPath.item] {
+            
+                cell.postImages = images
+                cell.menuOptions.tag = indexPath.item
+                cell.delegate = self
+                cell.allPicturesFeed = self
+                cell.setCellShadow()
+                cell.setupListView()
+            }
+            
+            return cell
+        }
+    
+        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

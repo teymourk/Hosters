@@ -96,20 +96,27 @@ class getPostsData: NSObject {
             posts.timeEnded = timeEnded
         }
         
-        if let latitude = dictionary["Latitude"] as? Int16 {
+        if let latitude = dictionary["Latitude"] as? Double {
             posts.latitude = latitude
         }
         
-        if let longtitude = dictionary["Longtitude"] as? Int16 {
+        if let longtitude = dictionary["Longtitude"] as? Double {
             posts.longtitude = longtitude
         }
         
-        if let tagged = dictionary["Tagged"] as? [String:AnyObject] {
-            
-            posts.taggedUsers = Int16(tagged.count)
-            
-            for key in tagged.keys  { 
+        let tagUsers = TaggedUsers(context: context)
+        var tag = Set<TaggedUsers>()
+        
+        if let tagedUsers = dictionary["Tagged"] as? [String:AnyObject] {
+         
+            for key in tagedUsers.keys {
                 
+                tagUsers.postKey = postKeys
+                tagUsers.userKey = key
+                
+                tag.insert(tagUsers)
+                
+                posts.tagged = tag as NSSet?
             }
         }
         

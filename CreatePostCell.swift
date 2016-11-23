@@ -10,6 +10,11 @@ import MBProgressHUD
 import MapKit
 import Firebase
 
+protocol createPostsDelegate {
+    
+    func onLocation(sender: UIButton)
+}
+
 class CreatePostCell: BaseCell, UITextFieldDelegate, CLLocationManagerDelegate {
     
     override func setupView() {
@@ -19,6 +24,8 @@ class CreatePostCell: BaseCell, UITextFieldDelegate, CLLocationManagerDelegate {
     }
         
     var addOrdPostVC:AddOrPost?
+    var nearLocations:GoogleLocationsVC?
+    var delegete:createPostsDelegate?
     
     lazy var _postTitle:UITextField = {
         let textField = UITextField()
@@ -95,17 +102,21 @@ class CreatePostCell: BaseCell, UITextFieldDelegate, CLLocationManagerDelegate {
     
     var postOptionsView:UIView = {
         let view = UIView()
-        view.backgroundColor = darkGray
+            view.backgroundColor = darkGray
         return view
     }()
     
     var placeAddress:String? = String()
-    //var latitude:CLLocationDegrees! = CLLocationDegrees()
-    //var longtitude:CLLocationDegrees! = CLLocationDegrees()
+    var locationCordinates:CLLocationCoordinate2D?
     var taggedFriends = [String:Bool]()
     
     override func didMoveToSuperview() {
         super.didMoveToSuperview()
+        
+        if let createcCell = addOrdPostVC?.googleLocationVC {
+            
+            createcCell.createPostVC = self
+        }
         
         setupPostOptions()
         setupCreateConstrains()
@@ -115,6 +126,16 @@ class CreatePostCell: BaseCell, UITextFieldDelegate, CLLocationManagerDelegate {
         NotificationCenter.default.addObserver(self, selector: #selector(handleKeyboardNotification), name: NSNotification.Name.UIKeyboardWillHide, object: nil)
         
         handleButtonColor()
+    }
+    
+    override func prepareForReuse() {
+        super.prepareForReuse()
+        
+        setupCreateConstrains()
+        setupPostOptions()
+        setupPeopleTaggedView()
+        handleButtonColor()
+        handleChangingTagFriendsBtn()
     }
     
     func handleChangingTagFriendsBtn() {
@@ -193,15 +214,14 @@ class CreatePostCell: BaseCell, UITextFieldDelegate, CLLocationManagerDelegate {
                 
             } else {
                 
-                self.handlePushingToLocation()
+                if delegete != nil {
+                    
+                    delegete?.onLocation(sender: sender)
+                }
             }
         }
     }
     
-    func handlePushingToLocation() {
-
-        _locationlabel.text = "Current Location"
-    }
 
     func onPrivacy(_ sender:UIButton) {
 
@@ -220,18 +240,15 @@ class CreatePostCell: BaseCell, UITextFieldDelegate, CLLocationManagerDelegate {
     
     lazy var locationManager:CLLocationManager? = {
         let lm = CLLocationManager()
-        lm.delegate = self
-        lm.desiredAccuracy = kCLLocationAccuracyBest
+            lm.delegate = self
+            lm.desiredAccuracy = kCLLocationAccuracyBest
         return lm
     }()
     
-    
     fileprivate func handleCreatingPost() {
         
-        guard let latitude = locationManager?.location?.coordinate.latitude, let longtitude = locationManager?.location?.coordinate.longitude else { return }
-        
-        //let latitude =
-        //let longtitude = self.longtitude
+        guard let locationPickedCordinates = locationCordinates else {return}
+
         let poster = FirebaseRef.database.currentUser.key
         let privacy = _privacyLabel.text
         let timeStamp = Date().timeIntervalSince1970
@@ -246,38 +263,50 @@ class CreatePostCell: BaseCell, UITextFieldDelegate, CLLocationManagerDelegate {
             return
         }
         
-        let postData = ["Description": postTitle, "Poster":poster, "Address":address, "Location":location, "Status":true, "Privacy":privacy!,"Latitude":latitude, "Longtitude":longtitude, "Time":timeStamp, "TimeEnded":timeStamp, "Tagged":taggedFriends] as [String : Any]
+        let postData = ["Description": postTitle, "Poster":poster, "Address":address, "Location":location, "Status":true, "Privacy":privacy!,"Latitude":locationPickedCordinates.latitude, "Longtitude":locationPickedCordinates.longitude, "Time":timeStamp, "TimeEnded":timeStamp, "Tagged":taggedFriends] as [String : Any]
         
         let spiningHud = MBProgressHUD.showAdded(to: self, animated: true)
         let postRef = FirebaseRef.database.REF_POSTS.childByAutoId()
         
         spiningHud.label.text = "Creating..."
         
-        postRef.setValue(postData)
-        
-        let posts = Posts(context: context)
+        postRef.setValue(postData, withCompletionBlock: {
+            (error, completion)in
+            
+            if error != nil {
+                self.notficationView.showNotification("Error creating post")
+                spiningHud.hide(animated: true)
+            }
+            
+            let posts = Posts(context: context)
             posts.status = true
             posts.privacy = privacy
             posts.poster = poster
+            posts.postKey = postRef.key
             posts.postDescription = postTitle
             posts.location = location
             posts.address = address
             posts.timePosted = timeStamp
             posts.timeEnded = timeStamp
-            posts.latitude = Int16(latitude)
-            posts.longtitude = Int16(longtitude)
+            posts.latitude = locationPickedCordinates.latitude
+            posts.longtitude = locationPickedCordinates.longitude
+            
+            do {
+                try context.save()
+                
+            } catch let err {
+                print(err)
+            }
+            
+            self.notficationView.showNotification("Your post was successfully created.")
+            spiningHud.hide(animated: true)
+            
+        })
         
-        do {
-            try context.save()
-        } catch let err {
-            print(err)
-        }
         
-        spiningHud.hide(animated: true)
         self._postTitle.text = ""
         self._locationlabel.text = ""
-        self._addLocation.setImage(UIImage(named: "pin"), for: UIControlState())
-        self.notficationView.showNotification("Your post was successfully created.")
+        self._addLocation.setImage(UIImage(named: "pin"), for: .normal)
         
         let index = IndexPath(item: 0, section: 0)
         

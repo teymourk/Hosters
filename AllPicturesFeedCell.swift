@@ -21,22 +21,23 @@ class AllPicturesFeedCell:BaseCell {
     
     var postImages:PostImages? {
         didSet {
-            
-            if let user = postImages?.users {
-                username.text = user.username
+
+            if let userInfo = postImages?.users {
+                
+                if let username = userInfo.username, let profileImgURL = userInfo.profileImage {
+                                        
+                    self.username.text = username
+                    profileImage.getImagesBack(url: profileImgURL, placeHolder: "Profile")
+                }
             }
             
-            if let userImage = postImages?.users?.profileImage {
-                profileImage.getImagesBack(url: userImage, placeHolder: "Profile")
-            }
-            
-            if let postImage = postImages?.imageURL {
-                postedImage.getImagesBack(url: postImage, placeHolder: "emptyImage")
-            }
-            
-            if let postCaption = postImages?.caption  {
-            
-                caption.text = postCaption
+            if let imgURL = postImages?.imageURL, let imgCaption = postImages?.caption, let seconds = postImages?.timePosted {
+                
+                postedImage.getImagesBack(url: imgURL, placeHolder: "emptyImage")
+                caption.text = imgCaption
+                
+                let timeStamp = Date(timeIntervalSince1970: seconds)
+                timePosted.text = "\(timeStamp.Time()) ago"
             }
         }
     }
@@ -60,16 +61,15 @@ class AllPicturesFeedCell:BaseCell {
     
     var username:UILabel = {
         let label = UILabel()
-            label.font = UIFont(name: "NotoSans-Bold", size: 13)
+            label.font = UIFont(name: "NotoSans", size: 15)
             label.textColor = .white
         return label
     }()
     
     var timePosted:UILabel = {
         let label = UILabel()
-            label.text = "45 Min Ago"
             label.textColor = .white
-            label.font = UIFont(name: "NotoSans-Bold", size: 13)
+            label.font = UIFont(name: "NotoSans", size: 15)
         return label
     }()
     
@@ -170,7 +170,7 @@ class AllPicturesFeedCell:BaseCell {
         
         //Date Constraints
         addConstrainstsWithFormat("H:[v0]-15-|", views: timePosted)
-        addConstrainstsWithFormat("V:[v0(15)]", views: timePosted)
+        addConstrainstsWithFormat("V:[v0(25)]", views: timePosted)
         
         //CenterY
         addConstraint(NSLayoutConstraint(item: timePosted, attribute: .centerY, relatedBy: .equal, toItem: profileImage, attribute: .centerY, multiplier: 1, constant: 0))

@@ -202,12 +202,34 @@ class AddImages: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
                 if let imageURL = metaData?.downloadURL()?.absoluteString {
                     
                     picturesDic = ["ImgURL":imageURL as NSString, "description":description as NSString, "poster":FirebaseRef.database.currentUser.key as NSString, "timePosted":timePosted as NSNumber]
+                    
+                    ref.setValue(picturesDic, withCompletionBlock: {
+                        (error, refrence) in
+                        
+                        if error != nil {
+                            
+                            self.pageNotification.showNotification("Error Posting Photo")
+                            spiningHud.hide(animated: true)
+                        }
+                        
+//                        let postImages = PostImages(context: context)
+//                        postImages.postKey = postKey
+//                        postImages.poster = FirebaseRef.database.currentUser.key
+//                        postImages.imageKey = ref.key
+//                        postImages.caption = description
+//                        postImages.timePosted = Double(timePosted)
+//                        postImages.imageURL = imageURL
+//                        
+//                        do {
+//                            try context.save()
+//                            
+//                        } catch let err {
+//                            print(err)
+//                        }
+                    })
                 }
                 
-                ref.setValue(picturesDic)
-                
-                self.dismiss(animated: true, completion: { 
-                    
+                self.dismiss(animated: true, completion: {
                     spiningHud.hide(animated: true)
                 })
             }
@@ -217,7 +239,7 @@ class AddImages: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
                 
                 if let progressPercentage = snapshot.progress?.fractionCompleted {
                     
-                    let percentage = Int(progressPercentage * 100)
+                    let percentage = Double(progressPercentage * 100)
                     
                     spiningHud.label.text = "\(percentage)%"
                 }
@@ -242,7 +264,7 @@ class AddImages: UIViewController, UITextFieldDelegate, UIImagePickerControllerD
     
         setupView()
         setupNavBar()
-        cameraManager.addPreviewLayerToView(self.cameraVC, newCameraOutputMode: .stillImage)
+        _ = cameraManager.addPreviewLayerToView(self.cameraVC, newCameraOutputMode: .stillImage)
     }
     
     override func viewDidAppear(_ animated: Bool) {

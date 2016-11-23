@@ -8,24 +8,44 @@
 
 import UIKit
 import MapKit
+import CoreData
+
+protocol PicturesInsideCellDelegate: class {
+    
+    func onImages(images:[PostImages])
+}
 
 private let CELL_ID = "cellId"
 
-class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate {
+    
+    var delegate:PicturesInsideCellDelegate?
     
     var cellHeight:CGFloat!
     var timer:Timer?
-
-    var allImages:[PostImages]? {
-        didSet{
-
-            if allImages?.count == nil {
-                
-                self.setupMap()
-                return
-                
-            } else {
     
+    var postKey:String? {
+        didSet {
+            if let key = postKey {
+                
+                filterArray(key: key)
+            }
+        }
+    }
+
+    var allImages:[PostImages]?
+    
+    var filteredImages:[PostImages]? {
+        didSet {
+            
+            if let postImage = filteredImages {
+                
+                if postImage.isEmpty {
+                    
+                    setupMap()
+                    return
+                }
+                
                 mapView.removeFromSuperview()
             }
             
@@ -35,19 +55,53 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
     
     var feedCell:FeedCell?
     
+    func filterArray(key:String) {
+        
+        if let images = self.allImages {
+            
+            let filteredImage = images.filter({$0.postKey == key})
+            
+            self.filteredImages = filteredImage
+        }
+    }
+    
     override func didMoveToSuperview() {
-        super.didMoveToSuperview()
         
         feedCell?.friendsFeedView?.picturesForPosts = self
+        
+        do {
+            try fetchController.performFetch()
+            
+            if let images = fetchController.fetchedObjects {
+                
+                self.allImages = images
+            }
+            
+        } catch let err {
+            print(err)
+        }
     }
     
     var mapView:MKMapView = {
         let mp = MKMapView()
             mp.isScrollEnabled = false
             mp.isZoomEnabled = false
-            mp.layer.masksToBounds = true
-            mp.layer.cornerRadius = 6
         return mp
+    }()
+    
+    var coverImage:UIImageView = {
+        let img = UIImageView()
+            img.contentMode = .scaleAspectFill
+            img.layer.masksToBounds = true
+        return img
+    }()
+    
+    lazy var fetchController:NSFetchedResultsController<PostImages> = {
+        let fetch: NSFetchRequest<PostImages> = PostImages.fetchRequest()
+            fetch.sortDescriptors = [NSSortDescriptor(key: "timePosted", ascending: false)]
+        let frc = NSFetchedResultsController(fetchRequest: fetch, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
+            frc.delegate = self
+        return frc
     }()
     
     func setupMap() {
@@ -59,19 +113,25 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
         addConstrainstsWithFormat("V:|[v0]|", views: mapView)
     }
     
+    func setupCoverImage() {
+    
+        addSubview(coverImage)
+        
+        addConstrainstsWithFormat("H:|[v0]|", views: coverImage)
+        addConstrainstsWithFormat("V:|[v0]|", views: coverImage)
+    }
+    
     fileprivate func locationNameForView() {
         
         guard let lat = feedCell?.postsDetails?.latitude,
-            let long = feedCell?.postsDetails?.longtitude,
-            let locationName = feedCell?.postsDetails?.location else {return}
-        
+            let long = feedCell?.postsDetails?.longtitude else {return}
+       
         let location = CLLocationCoordinate2DMake(CLLocationDegrees(lat), CLLocationDegrees(long))
         let span = MKCoordinateSpanMake(0.05, 0.05)
         let region = MKCoordinateRegionMake(location, span)
         
         let annotation = MKPointAnnotation()
             annotation.coordinate = location
-            annotation.title = locationName
         
         mapView.setRegion(region, animated: true)
         mapView.addAnnotation(annotation)
@@ -82,6 +142,7 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
         let layout = UICollectionViewFlowLayout()
             layout.minimumLineSpacing = 0
             layout.minimumInteritemSpacing = 0
+            layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
             cv.layer.masksToBounds = true
             cv.layer.cornerRadius = 6
@@ -94,25 +155,23 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
 
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return allImages?.count ?? 0
+        return self.filteredImages?.count ?? 0
     }
-    
-    var index:IndexPath?
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = picturesCollectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as! FeedAllPhotosCell
-        
-        if let images = allImages?[indexPath.item] {
+        if let cell = picturesCollectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as? FeedAllPhotosCell {
             
-            cell.postedImages = images
-            cell.layer.masksToBounds = true
-            cell.layer.cornerRadius = 6
+            if let images = self.filteredImages?[indexPath.item] {
+                
+                cell.postedImages = images
+                handleImageChanging(cell: cell)
+            }
+            
+            return cell
         }
         
-        handleImageChanging(cell: cell)
-        
-        return cell
+        return UICollectionViewCell()
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -123,7 +182,7 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
     fileprivate func handleImageChanging(cell:FeedAllPhotosCell) {
 
         timer?.invalidate()
-        timer = Timer.scheduledTimer(withTimeInterval: 2.5, repeats: true, block: { (timer) in
+        timer = Timer.scheduledTimer(withTimeInterval: 3, repeats: true, block: { (timer) in
             
             var currentIndex:Int?
             
@@ -136,7 +195,7 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
             
             currentIndex = currentIndex! + 1
             
-            guard let imagesCount = self.allImages?.count else {return}
+            guard let imagesCount = self.filteredImages?.count else {return}
             
             if currentIndex == imagesCount {
                 
@@ -155,11 +214,10 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if let feeds = feedCell {
-            
-            if let indexForImages = index {
-            
-                feeds.friendsFeedView?.didSelectOnPost(indexForImages)
+        if let images = filteredImages {
+    
+            if delegate != nil {
+                delegate?.onImages(images: images)
             }
         }
     }

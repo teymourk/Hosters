@@ -27,12 +27,12 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
                 profileImage.getImagesBack(url: imageURl, placeHolder: "Profile")
             }
             
-            peopleWithIcon.setTitle("\(posts.taggedUsers)", for: UIControlState())
-            
             let active = UIImage(named: "ok_filled")
             let time = UIImage(named: "clock-1")
             
-            activeLabel.text = posts.status == true ? "Active" : "Ended Ago"
+            let timeStamp = Date(timeIntervalSince1970: posts.timeEnded)
+            
+            activeLabel.text = posts.status == true ? "Active" : "Ended \(timeStamp.Time()) ago"
             activeImage.image = posts.status == true ? active : time
         }
     }
@@ -52,7 +52,7 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
     
     lazy var profileImage:UIImageView = {
         let image = UIImageView()
-            image.layer.cornerRadius = 2
+            image.layer.cornerRadius = 15
             image.layer.borderWidth = 0.5
             image.layer.borderColor = darkGray.cgColor
             image.layer.masksToBounds = true
@@ -104,16 +104,6 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
         return menu
     }()
     
-    var peopleWithIcon:UIButton = {
-        let image = UIButton()
-            image.setImage(UIImage(named: "group"), for: UIControlState())
-            image.titleEdgeInsets = UIEdgeInsetsMake(0, 5, 0, 0)
-            image.titleLabel?.font = UIFont.systemFont(ofSize: 12)
-            image.setTitleColor(.lightGray, for: UIControlState())
-            image.contentMode = .scaleAspectFill
-        return image
-    }()
-    
     let bottomDataSeperator:UIView = {
         let view = UIView()
             view.backgroundColor = .lightGray
@@ -125,6 +115,7 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
     lazy var feedAllPhotosVC:PicturesInsideCell = {
         let fp = PicturesInsideCell()
             fp.feedCell = self
+            fp.alpha = 0.7
         return fp
     }()
     
@@ -138,27 +129,24 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
     override func setupView() {
         super.setupView()
         
+        backgroundColor = .white
+        
+        addSubview(feedAllPhotosVC)
+        addSubview(profileImage)
+        addSubview(usernameLabel)
+        addSubview(arrowIndicatior)
+        addSubview(menuOptions)
         addSubview(activeLabel)
         addSubview(activeImage)
         addSubview(postTitle)
         addSubview(location)
         addSubview(locationIcon)
-        addSubview(profileImage)
-        addSubview(usernameLabel)
-        addSubview(peopleWithIcon)
-        addSubview(arrowIndicatior)
-        addSubview(menuOptions)
-        addSubview(feedAllPhotosVC)
+        
         addSubview(bottomDataSeperator)
         
-        backgroundColor = .white
-    
         //Active Image Constraints
         addConstrainstsWithFormat("H:[v0(15)]-10-|", views: activeImage)
-        addConstrainstsWithFormat("V:|-7-[v0(15)]", views: activeImage)
-        
-        //CenterY
-        addConstraint(NSLayoutConstraint(item: activeImage, attribute: .centerY, relatedBy: .equal, toItem: postTitle, attribute: .centerY, multiplier: 1, constant: 0))
+        addConstrainstsWithFormat("V:|-5-[v0(15)]", views: activeImage)
         
         //Active Label
         addConstrainstsWithFormat("H:[v0(300)]", views: activeLabel)
@@ -171,11 +159,11 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
         addConstraint(NSLayoutConstraint(item: activeLabel, attribute: .centerY, relatedBy: .equal, toItem: activeImage, attribute: .centerY, multiplier: 1, constant: 0))
         
         //postTitle Constrainsts
-        addConstrainstsWithFormat("H:|-15-[v0]-30-|", views: postTitle)
-        addConstrainstsWithFormat("V:[v0]", views: postTitle)
+        addConstrainstsWithFormat("H:|-10-[v0]-30-|", views: postTitle)
+        addConstrainstsWithFormat("V:[v0]-35-|", views: postTitle)
         
         //Location Constraints 
-        addConstrainstsWithFormat("H:|-15-[v0]-5-[v1]", views: locationIcon,location)
+        addConstrainstsWithFormat("H:|-10-[v0]-5-[v1]", views: locationIcon,location)
         addConstrainstsWithFormat("V:[v0]", views: location)
         addConstrainstsWithFormat("V:[v0]", views: locationIcon)
         
@@ -186,8 +174,8 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
         addConstraint(NSLayoutConstraint(item: locationIcon, attribute: .centerY, relatedBy: .equal, toItem: location, attribute: .centerY, multiplier: 1, constant: 0))
         
         //FeedAllphotosVC Constraints
-        addConstrainstsWithFormat("H:|-15-[v0]-15-|", views: feedAllPhotosVC)
-        addConstrainstsWithFormat("V:[v0]", views: feedAllPhotosVC)
+        addConstrainstsWithFormat("H:|[v0]|", views: feedAllPhotosVC)
+        addConstrainstsWithFormat("V:|-45-[v0]", views: feedAllPhotosVC)
         
         allphotosFeedHeight = NSLayoutConstraint(item: feedAllPhotosVC, attribute: .height, relatedBy: .equal, toItem: feedAllPhotosVC, attribute: .height, multiplier: 0, constant: 192)
         
@@ -195,15 +183,9 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
         
         self.addConstraint(height)
         
-        //Top
-        addConstraint(NSLayoutConstraint(item: feedAllPhotosVC, attribute: .top, relatedBy: .equal, toItem: location, attribute: .bottom, multiplier: 1, constant: 2))
-        
         //ProfileImage Cosntraints
-        addConstrainstsWithFormat("H:|-15-[v0(40)]", views: profileImage)
-        addConstrainstsWithFormat("V:[v0(40)]", views: profileImage)
-        
-        //Top
-        addConstraint(NSLayoutConstraint(item: profileImage, attribute: .top, relatedBy: .equal, toItem: feedAllPhotosVC, attribute: .bottom, multiplier: 1, constant: 15))
+        addConstrainstsWithFormat("H:|-10-[v0(30)]", views: profileImage)
+        addConstrainstsWithFormat("V:|-5-[v0(30)]", views: profileImage)
         
         //username Cosntraints
         addConstrainstsWithFormat("H:[v0]|", views: usernameLabel)
@@ -213,29 +195,22 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
         addConstraint(NSLayoutConstraint(item: usernameLabel, attribute: .left, relatedBy: .equal, toItem: profileImage, attribute: .right, multiplier: 1, constant: 7))
         
         //CenterY
-        addConstraint(NSLayoutConstraint(item: usernameLabel, attribute: .centerY, relatedBy: .equal, toItem: profileImage, attribute: .centerY, multiplier: 1, constant: 0))
-        
-        //PeopleWith
-        addConstrainstsWithFormat("H:[v0(30)]-15-|", views: peopleWithIcon)
-        addConstrainstsWithFormat("V:[v0]", views: peopleWithIcon)
-        
-        //CenterY
-        addConstraint(NSLayoutConstraint(item: peopleWithIcon, attribute: .centerY, relatedBy: .equal, toItem: location, attribute: .centerY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: usernameLabel, attribute: .centerY, relatedBy: .equal, toItem: profileImage, attribute: .centerY, multiplier: 1, constant: 5))
         
         //ArrowIndicator Constraints
         addConstrainstsWithFormat("H:[v0(10)]-10-|", views: arrowIndicatior)
         addConstrainstsWithFormat("V:[v0(15)]", views: arrowIndicatior)
         
         //CenterY
-        addConstraint(NSLayoutConstraint(item: arrowIndicatior, attribute: .centerY, relatedBy: .equal, toItem: usernameLabel, attribute: .centerY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: arrowIndicatior, attribute: .bottom, relatedBy: .equal, toItem: feedAllPhotosVC, attribute: .bottom, multiplier: 1, constant: -5))
         
         
         //ArrowIndicator Constraints
         addConstrainstsWithFormat("H:[v0]-5-|", views: menuOptions)
         addConstrainstsWithFormat("V:[v0]", views: menuOptions)
         
-        //Top
-        addConstraint(NSLayoutConstraint(item: menuOptions, attribute: .top, relatedBy: .equal, toItem: arrowIndicatior, attribute: .bottom, multiplier: 1, constant: 5))
+        //CenterY
+        addConstraint(NSLayoutConstraint(item: menuOptions, attribute: .centerY, relatedBy: .equal, toItem: location, attribute: .centerY, multiplier: 1, constant: 0))
         
         //Bottom Constraint
         addConstrainstsWithFormat("H:|[v0]|", views: bottomDataSeperator)

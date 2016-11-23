@@ -13,7 +13,6 @@ import FirebaseMessaging
 import FirebaseInstanceID
 import FBSDKLoginKit
 
-
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
@@ -36,7 +35,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         //NavigationBar Changes
         UINavigationBar.appearance().barTintColor =  darkGray
-        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "NotoSans", size:20)!]
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.white, NSFontAttributeName: UIFont(name: "Prompt", size:20)!]
 
         //UINavigationShadow
         UINavigationBar.appearance().shadowImage = UIImage()

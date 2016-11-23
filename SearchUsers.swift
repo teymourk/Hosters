@@ -18,30 +18,15 @@ class SearchUsers: UITableViewController, UISearchResultsUpdating {
     
     var searchedUsers:[Users]? {
         didSet {
-            setupTimer()
+            tableView.reloadData()
         }
     }
     
     var allUsers:[Users]? {
         didSet{
-            setupTimer()
+            tableView.reloadData()
         }
     }
-    
-    func setupTimer() {
-        
-        timer?.invalidate()
-        timer = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(handleReloading), userInfo: nil, repeats: false)
-    }
-    
-    var timer:Timer?
-    
-    func handleReloading() {
-        
-        tableView.reloadData()
-    }
-    
-    
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -54,13 +39,15 @@ class SearchUsers: UITableViewController, UISearchResultsUpdating {
         tableView.contentInset = UIEdgeInsetsMake(-1, 0, 0, 0)
         tableView.rowHeight = 70
         tableView.clearFooter()
+        
+        fetchUsersFromData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
         tabBarController?.tabBar.isHidden = false
-        fetchUsersFromData()
+        
     }
     
     lazy var emptyText:UILabel = {
@@ -123,7 +110,6 @@ class SearchUsers: UITableViewController, UISearchResultsUpdating {
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
         let usersProfileVc = UsersProfile(collectionViewLayout: UICollectionViewFlowLayout())
-            usersProfileVc.refreshController.beginRefreshing()
         
         if searchBar.isActive {
             
@@ -147,6 +133,7 @@ class SearchUsers: UITableViewController, UISearchResultsUpdating {
         let searchBarTxt = searchController.searchBar.text?.lowercased()
         
         if !searchBarTxt!.isEmpty {
+            
             self.searchedUsers = allUsers?.filter({($0.username?.lowercased().contains(searchBarTxt!))!})
         } else {
             self.searchedUsers = allUsers

@@ -26,8 +26,6 @@ class FeedAllPhotosCell: BaseCell {
             img.clipsToBounds = true
             img.layer.borderWidth = 0.5
             img.layer.borderColor = UIColor.white.cgColor
-            img.layer.masksToBounds = true
-            img.layer.cornerRadius = 6
         return img
     }()
     

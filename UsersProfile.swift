@@ -27,8 +27,8 @@ class UsersProfile: HomePage, UserProfileHeaderDelegate {
                 
                 if userKey != FirebaseRef.database.currentUser.key {
                     
-                    inviteContact.isHidden = true
-                    emptyPostLabel.text = "\(username) hase no posts 🙄"
+//                    inviteContact.isHidden = true
+//                    emptyPostLabel.text = "\(username) hase no posts 🙄"
                 }
             }
         }
@@ -70,17 +70,15 @@ class UsersProfile: HomePage, UserProfileHeaderDelegate {
         return CGSize(width: view.frame.width, height: 180)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAtIndex section: Int) -> UIEdgeInsets {
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
         return UIEdgeInsets(top: 20,
-                            left: 0,
-                            bottom: 0,
-                            right: 0)
+                            left: 0, bottom: 0, right: 0)
     }
     
     func setupNavBar() {
         
-        let settings = UIBarButtonItem(image: UIImage(named: "settings")?.withRenderingMode(.alwaysOriginal),
+        let settings = UIBarButtonItem(image: UIImage(named: "settings")?.withRenderingMode(.alwaysTemplate),
                                        style: .plain,
                                        target: self,
                                        action: #selector(onSettings(_ :)))

@@ -148,7 +148,7 @@ extension UICollectionViewCell {
         self.layer.shadowOpacity = 0.8
         self.layer.shadowRadius = 3.0
         self.layer.shadowOffset = CGSize(width: 0, height: 2.0)
-        self.layer.shadowColor = UIColor(red: 157/255, green: 157/255, blue: 157/255, alpha: 1).cgColor
+        self.layer.shadowColor = UIColor.rgb(157, green: 157, blue: 157).cgColor
     }
 }
 
@@ -172,7 +172,7 @@ extension UIButton {
             
             if let trackingDic = snapshot.value as? [String:AnyObject] {
                 
-                trackingDic.contains(where: {$0.0 == userKey}) ? self.setTitle("Tracking", for: UIControlState()) : self.setTitle("Track", for: UIControlState())
+                trackingDic.contains(where: {$0.0 == userKey}) ? self.setTitle("Following", for: UIControlState()) : self.setTitle("Follow", for: UIControlState())
                 
                 self.backgroundColor = trackingDic.contains(where: {$0.0 == userKey}) ? orange :  .white
             }
@@ -191,7 +191,7 @@ extension UIButton {
           
             trackingRef.removeValue()
             userTrackersRef.removeValue()
-            sender.setTitle("Track", for: UIControlState())
+            sender.setTitle("Follow", for: UIControlState())
             sender.backgroundColor = .white
         })
     }
@@ -208,7 +208,7 @@ extension UIButton {
         
             trackingRef.updateChildValues([userTotrack.userKey! : true])
             userTrackersRef.updateChildValues([FirebaseRef.database.currentUser.key : true])
-            sender.setTitle("Tracking", for: UIControlState())
+            sender.setTitle("Following", for: UIControlState())
             sender.backgroundColor = orange
             
             
