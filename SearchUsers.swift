@@ -31,6 +31,14 @@ class SearchUsers: UITableViewController, UISearchResultsUpdating {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        setupTableView()
+        
+        let predicate = NSPredicate(format: "userKey != %@", FirebaseRef.database.currentUser.key)
+        fetchUsersFromData(userPredicate: predicate)
+    }
+    
+    func setupTableView() {
+        
         navigationController?.navigationBar.isTranslucent = false
         
         tableView.register(UsersCells.self, forCellReuseIdentifier: CELL_ID)
@@ -39,15 +47,12 @@ class SearchUsers: UITableViewController, UISearchResultsUpdating {
         tableView.contentInset = UIEdgeInsetsMake(-1, 0, 0, 0)
         tableView.rowHeight = 70
         tableView.clearFooter()
-        
-        fetchUsersFromData()
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
     
         tabBarController?.tabBar.isHidden = false
-        
     }
     
     lazy var emptyText:UILabel = {
@@ -140,17 +145,16 @@ class SearchUsers: UITableViewController, UISearchResultsUpdating {
         }
     }
     
-    func fetchUsersFromData() {
+    func fetchUsersFromData(userPredicate:NSPredicate) {
         
         do {
             
             let fetchRequest: NSFetchRequest<Users> = Users.fetchRequest()
-                fetchRequest.predicate = NSPredicate(format: "userKey != %@", FirebaseRef.database.currentUser.key)
+                fetchRequest.predicate = userPredicate
             
             try allUsers = (context.fetch(fetchRequest))
             
         } catch let err {
-            
             print(err)
         }
     }

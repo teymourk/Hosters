@@ -7,13 +7,20 @@
 
 
 import UIKit
+import CoreData
 
 class Tracking: SearchUsers {
  
     var key:String? = String()
     
-    override func fetchUsersFromData() {
+    override func viewDidLoad() {
         
+        if let userKey = key {
+            setupTableView()
+            
+            let predicate = NSPredicate(format: "userKey == %@", userKey)
+            fetchUsersFromData(userPredicate: predicate)
+        }
     }
 }
 
@@ -21,7 +28,13 @@ class Trackers: SearchUsers {
     
     var key:String? = String()
     
-    override func fetchUsersFromData() {
+    override func viewDidLoad() {
         
+        if let userKey = key {
+            
+            setupTableView()
+            let predicate = NSPredicate(format: "userKey == %@", userKey)
+            fetchUsersFromData(userPredicate: predicate)
+        }
     }
 }

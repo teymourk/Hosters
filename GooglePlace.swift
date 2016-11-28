@@ -17,7 +17,7 @@ class GooglePlace {
     let address: String
     let coordinate: CLLocationCoordinate2D
     var photoReference: String?
-    var photo: UIImage?
+    var rating:Double?
     
     init(dictionary:[String : AnyObject])
     {
@@ -31,5 +31,7 @@ class GooglePlace {
         coordinate = CLLocationCoordinate2DMake(lat, lng)
         
         photoReference = json["photos"][0]["photo_reference"].string
+        
+        rating = json["rating"].doubleValue
     }
 }

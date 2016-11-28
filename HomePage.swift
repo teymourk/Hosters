@@ -51,11 +51,8 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
     
         if Reachability.isInternetAvailable() {
         
-            
-            
         } else {
             
-            //refreshController.endRefreshing()
             pageNotification.showNotification("Not Connected To The Internet 😭")
         }
     }
@@ -207,9 +204,9 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
     
     lazy var fetchControllers:NSFetchedResultsController<PostImages> = {
         let fetch: NSFetchRequest<PostImages> = PostImages.fetchRequest()
-        fetch.sortDescriptors = [NSSortDescriptor(key: "timePosted", ascending: false)]
+            fetch.sortDescriptors = [NSSortDescriptor(key: "timePosted", ascending: false)]
         let frc = NSFetchedResultsController(fetchRequest: fetch, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-        frc.delegate = self
+            frc.delegate = self
         return frc
     }()
     
@@ -221,14 +218,14 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
             
             
             if fetchController.sections?[0].numberOfObjects == 0 {
-                setupNoPostView(text: "No Posts.Try Inviting Your Friend 💩 🙄")
+                //setupNoPostView(text: "No Posts.Try Inviting Your Friend 💩 🙄")
             }
                     
         } catch let error {
             print("ERROR IS \(error)")
         }
+        
         collectionView?.reloadData()
-        //refreshController.endRefreshing()
     }
     
     var operations = [BlockOperation]()

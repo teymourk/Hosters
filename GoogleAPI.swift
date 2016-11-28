@@ -15,7 +15,6 @@ import SwiftyJSON
 //PHOTO REFRENCE
 //https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=&key=AIzaSyC4StcqHSO6EuYx56D_mCoUJBCwvHSo8Xo
 
-
 class GoogleAPI {
     
     let apiKey = "AIzaSyC4StcqHSO6EuYx56D_mCoUJBCwvHSo8Xo"

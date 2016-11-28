@@ -50,6 +50,34 @@ class getUsersData: NSObject {
             users.profileImage = profileImage
         }
         
+        let usersFollowers = Followers(context: context)
+        var followersSet: Set<Followers> = Set<Followers>()
+        
+        if let trackers = userDictionary["Friends"]?["Trackers"] as? [String:AnyObject] {
+            
+            for userKey in trackers.keys {
+                
+                usersFollowers.userKey = userKey
+                followersSet.insert(usersFollowers)
+            }
+            
+            users.followers = followersSet as NSSet?
+        }
+        
+        let usersFollowing = Following(context: context)
+        var followingSet: Set<Following> = Set<Following>()
+        
+        if let tracking = userDictionary["Friends"]?["Tracking"] as? [String:AnyObject] {
+            
+            for key in tracking.keys {
+                
+                usersFollowing.userKey = key
+                followingSet.insert(usersFollowing)
+            }
+            
+            users.following = followingSet as NSSet?
+        }
+        
         do {
             try(context.save())
             

@@ -86,14 +86,11 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
         let mp = MKMapView()
             mp.isScrollEnabled = false
             mp.isZoomEnabled = false
+            mp.layer.masksToBounds = true
+            mp.layer.cornerRadius = 10
+            mp.layer.borderWidth = 0.5
+            mp.layer.borderColor = UIColor.lightGray.cgColor
         return mp
-    }()
-    
-    var coverImage:UIImageView = {
-        let img = UIImageView()
-            img.contentMode = .scaleAspectFill
-            img.layer.masksToBounds = true
-        return img
     }()
     
     lazy var fetchController:NSFetchedResultsController<PostImages> = {
@@ -109,16 +106,8 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
         addSubview(mapView)
         locationNameForView()
         
-        addConstrainstsWithFormat("H:|[v0]|", views: mapView)
+        addConstrainstsWithFormat("H:|-25-[v0]-25-|", views: mapView)
         addConstrainstsWithFormat("V:|[v0]|", views: mapView)
-    }
-    
-    func setupCoverImage() {
-    
-        addSubview(coverImage)
-        
-        addConstrainstsWithFormat("H:|[v0]|", views: coverImage)
-        addConstrainstsWithFormat("V:|[v0]|", views: coverImage)
     }
     
     fileprivate func locationNameForView() {
@@ -146,6 +135,8 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
             cv.layer.masksToBounds = true
             cv.layer.cornerRadius = 6
+            cv.layer.borderWidth = 0.5
+            cv.layer.borderColor = UIColor.lightGray.cgColor
             cv.isScrollEnabled = false
             cv.backgroundColor = .clear
             cv.delegate = self
@@ -230,7 +221,7 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
         addSubview(picturesCollectionView)
         
         //PicturesCollectionView Constraints
-        addConstrainstsWithFormat("H:|[v0]|", views: picturesCollectionView)
+        addConstrainstsWithFormat("H:|-25-[v0]-25-|", views: picturesCollectionView)
         addConstrainstsWithFormat("V:|[v0]|", views: picturesCollectionView)
     }
 }

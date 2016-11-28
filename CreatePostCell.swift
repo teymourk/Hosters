@@ -27,6 +27,9 @@ class CreatePostCell: BaseCell, UITextFieldDelegate, CLLocationManagerDelegate {
     var nearLocations:GoogleLocationsVC?
     var delegete:createPostsDelegate?
     
+    var photoRefrence:String?
+    var rating:Double?
+    
     lazy var _postTitle:UITextField = {
         let textField = UITextField()
             textField.placeholder = "Enter Your Title"
@@ -255,7 +258,7 @@ class CreatePostCell: BaseCell, UITextFieldDelegate, CLLocationManagerDelegate {
         
         guard let address = placeAddress else { return }
         
-        guard let postTitle = _postTitle.text , postTitle != "", let location = _locationlabel.text , location != "" else {
+        guard let postTitle = _postTitle.text, let location = _locationlabel.text, let refrence = photoRefrence, let ratings = rating else {
             
             let errorTitle = _postTitle.text!.isEmpty ? "Your Title is empty" : "Please pick a location to continue"
             
@@ -263,7 +266,7 @@ class CreatePostCell: BaseCell, UITextFieldDelegate, CLLocationManagerDelegate {
             return
         }
         
-        let postData = ["Description": postTitle, "Poster":poster, "Address":address, "Location":location, "Status":true, "Privacy":privacy!,"Latitude":locationPickedCordinates.latitude, "Longtitude":locationPickedCordinates.longitude, "Time":timeStamp, "TimeEnded":timeStamp, "Tagged":taggedFriends] as [String : Any]
+        let postData = ["Description": postTitle, "Poster":poster, "Address":address, "Location":location, "Status":true, "Privacy":privacy!,"Latitude":locationPickedCordinates.latitude, "Longtitude":locationPickedCordinates.longitude, "Time":timeStamp, "TimeEnded":timeStamp, "Tagged":taggedFriends, "Refrence":refrence, "Rating":ratings] as [String : Any]
         
         let spiningHud = MBProgressHUD.showAdded(to: self, animated: true)
         let postRef = FirebaseRef.database.REF_POSTS.childByAutoId()

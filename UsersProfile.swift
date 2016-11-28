@@ -24,12 +24,7 @@ class UsersProfile: HomePage, UserProfileHeaderDelegate {
             if let userKey = profileDetails?.userKey {
                 
                 fetchFilteredUsers(userKey: userKey)
-                
-                if userKey != FirebaseRef.database.currentUser.key {
-                    
-//                    inviteContact.isHidden = true
-//                    emptyPostLabel.text = "\(username) hase no posts 🙄"
-                }
+                setupNavBar(userKey: userKey)
             }
         }
     }
@@ -41,8 +36,7 @@ class UsersProfile: HomePage, UserProfileHeaderDelegate {
         collectionView?.register(UserProfileHeaderCell.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: headerId)
         
         tabBarController?.tabBar.isHidden = false
-        
-        setupNavBar()
+    
         fetchPostsFromData()
     }
     
@@ -76,48 +70,74 @@ class UsersProfile: HomePage, UserProfileHeaderDelegate {
                             left: 0, bottom: 0, right: 0)
     }
     
-    func setupNavBar() {
+    func setupNavBar(userKey:String) {
         
-        let settings = UIBarButtonItem(image: UIImage(named: "settings")?.withRenderingMode(.alwaysTemplate),
-                                       style: .plain,
-                                       target: self,
-                                       action: #selector(onSettings(_ :)))
+        var rightButton:UIBarButtonItem?
         
-        navigationItem.rightBarButtonItem = settings
+        if userKey != FirebaseRef.database.currentUser.key {
+         
+            rightButton = UIBarButtonItem(title: "...",
+                                          style: .plain,
+                                          target: self,
+                                          action: #selector(onSettings(_ :)))
+            
+        } else {
+            
+            let image = UIImage(named: "settings")?.withRenderingMode(.alwaysTemplate)
+            
+            rightButton = UIBarButtonItem(image: image,
+                                          style: .plain,
+                                          target: self,
+                                          action: #selector(onSettings(_ :)))
+        }
+        
+        
+        navigationItem.rightBarButtonItem = rightButton
     }
     
-    func onSettings() {
-        
-        let settingsVC = Settings()
-        let navController = UINavigationController(rootViewController: settingsVC)
-        navigationController?.present(navController, animated: true, completion: nil)
-    }
     
     func onSettings(_ sender:UIBarButtonItem) {
         
+        if sender.title == "..." {
+            return
+        }
+        
         let settingsVC = Settings()
-            settingsVC.hidesBottomBarWhenPushed = true
         navigationController?.pushViewController(settingsVC, animated: true)
     }
     
     func onTrackers(_ sender: UIButton) {
         
-        guard let userKey = profileDetails?.userKey else {return}
+        guard let userKey = profileDetails?.followers else {return}
         
-        let trackers = Trackers()
-        trackers.title = "Trackers"
-        trackers.key = userKey
-        navigationController?.pushViewController(trackers, animated: true)
+        if let followers = userKey.allObjects as? [Followers] {
+            
+            for follower in followers {
+                
+                let trackers = Trackers()
+                    trackers.key = follower.userKey
+                    trackers.title = "Followers"
+                
+                navigationController?.pushViewController(trackers, animated: true)
+            }
+        }
     }
     
     func onTracking(_ sender: UIButton) {
         
-        guard let userKey = profileDetails?.userKey else {return}
+        guard let userKey = profileDetails?.following else {return}
         
-        let tracking = Tracking()
-            tracking.title = "Tracking"
-            tracking.key = userKey
-        navigationController?.pushViewController(tracking, animated: true)
+        if let followings = userKey.allObjects as? [Following] {
+        
+            for following in followings {
+                
+                let tracking = Tracking()
+                tracking.title = "Follwoing"
+                tracking.key = following.userKey
+            
+                navigationController?.pushViewController(tracking, animated: true)
+            }
+        }
     }
     
     func onEditProfile(_ sender: UIButton) {
@@ -131,14 +151,14 @@ class UsersProfile: HomePage, UserProfileHeaderDelegate {
             
         } else {
             
-            if sender.title(for: UIControlState()) == "Tracking" {
+            if sender.title(for: UIControlState()) == "Following" {
                 
-                sender.setTitle("Track", for: UIControlState())
+                sender.setTitle("Follow", for: UIControlState())
                 sender.backgroundColor = .gray
                 
             } else {
                 
-                sender.setTitle("Tracking", for: UIControlState())
+                sender.setTitle("Following", for: UIControlState())
                 sender.backgroundColor = orange
             }
         }

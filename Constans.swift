@@ -22,7 +22,7 @@ let KEY_UID = "uid"
 //FeedCell Height
 
 //ScreenHeigh
-let FEED_CELL_HEIGHT: CGFloat = ((UIScreen.main.bounds.height) / 2) - 75
+let FEED_CELL_HEIGHT: CGFloat = ((UIScreen.main.bounds.height) / 2)
 let HEIGHT_PREVIEW = (UIScreen.main.bounds.width) * 9 / 16
 let HEIGHE_IMAGE = (UIScreen.main.bounds.height) * 9 / 16 + (UIScreen.main.bounds.width / 3) * 9 / 16
 

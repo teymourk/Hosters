@@ -57,10 +57,9 @@ class getPostsData: NSObject {
     init(postKeys:String, dictionary: Dictionary<String, AnyObject>) {
         
         let posts = Posts(context: context)
-        let taggedUsers = TaggedUsers(context: context)
+        let tag = Tagged(context: context)
         
         posts.postKey = postKeys
-        taggedUsers.postKey = postKeys
         
         if let description = dictionary["Description"] as? String {
             posts.postDescription = description
@@ -104,19 +103,26 @@ class getPostsData: NSObject {
             posts.longtitude = longtitude
         }
         
-        let tagUsers = TaggedUsers(context: context)
-        var tag = Set<TaggedUsers>()
+        if let photoRefrence = dictionary["Refrence"] as? String {
+            posts.photoRefrence = photoRefrence
+        }
+        
+        if let ratings = dictionary["Rating"] as? Double {
+            posts.rating = ratings
+        }
         
         if let tagedUsers = dictionary["Tagged"] as? [String:AnyObject] {
-         
+        
+            var tagSet:Set<Tagged> = Set<Tagged>()
+ 
             for key in tagedUsers.keys {
                 
-                tagUsers.postKey = postKeys
-                tagUsers.userKey = key
+                tag.userKey = key
+                tag.postKey = postKeys
                 
-                tag.insert(tagUsers)
+                tagSet.insert(tag)
                 
-                posts.tagged = tag as NSSet?
+                posts.tagged = NSSet(object: tag)
             }
         }
         

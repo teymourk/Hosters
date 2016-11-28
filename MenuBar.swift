@@ -137,8 +137,8 @@ class MenuBarCell: BaseCell {
         backgroundColor = darkGray
         
         //Icons Constraints
-        addConstrainstsWithFormat("H:[v0(25)]", views: image)
-        addConstrainstsWithFormat("V:[v0(25)]", views: image)
+        addConstrainstsWithFormat("H:[v0(20)]", views: image)
+        addConstrainstsWithFormat("V:[v0(20)]", views: image)
         
         //CenterX
         addConstraint(NSLayoutConstraint(item: image, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))

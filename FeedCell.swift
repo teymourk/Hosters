@@ -16,16 +16,12 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
             guard let posts = postsDetails else {return}
             guard let users = postsDetails?.users else {return}
             
-            //PostDetails
-            postTitle.text = posts.postDescription
-            location.setTitle(posts.location, for: .normal)
+            placeDetails.postTitle.text = posts.postDescription
+            placeDetails.location.text = posts.location
+            placeDetails.rating.text = "Rating: \(posts.rating)"
             
             //UsersDetails
             usernameLabel.text = users.username
-            
-            if let imageURl = users.profileImage {
-                profileImage.getImagesBack(url: imageURl, placeHolder: "Profile")
-            }
             
             let active = UIImage(named: "ok_filled")
             let time = UIImage(named: "clock-1")
@@ -34,6 +30,17 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
             
             activeLabel.text = posts.status == true ? "Active" : "Ended \(timeStamp.Time()) ago"
             activeImage.image = posts.status == true ? active : time
+            
+            if let imageURl = users.profileImage {
+                profileImage.getImagesBack(url: imageURl, placeHolder: "Profile")
+            }
+            
+            if let photoRefrence = posts.photoRefrence {
+                
+                let url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=\(photoRefrence)&key=AIzaSyC4StcqHSO6EuYx56D_mCoUJBCwvHSo8Xo"
+                
+                placeDetails.locationIcon.getImagesBack(url: url, placeHolder: "Profile")
+            }
         }
     }
     
@@ -68,38 +75,16 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
             label.font =  UIFont(name: "NotoSans", size: 14)
         return label
     }()
-
-    var postTitle:UILabel = {
-        let label = UILabel()
-            label.font = UIFont(name: "NotoSans", size: 12)
-            label.textColor = darkGray
-            label.numberOfLines = 2
-        return label
-    }()
     
-    var location:UIButton = {
-        let button = UIButton()
-            button.titleLabel?.font = UIFont(name: "NotoSans", size: 13)
-            button.setTitleColor(.lightGray, for: UIControlState())
-        return button
-    }()
-    
-    var locationIcon:UIImageView = {
-        let img = UIImageView()
-            img.contentMode = .scaleAspectFit
-            img.image = UIImage(named: "pin-1")
-        return img
-    }()
-    
-    var arrowIndicatior:UIImageView = {
-        let image = UIImageView()
-            image.image = UIImage(named: "righArrow")
-        return image
-    }()
+//    var arrowIndicatior:UIImageView = {
+//        let image = UIImageView()
+//            image.image = UIImage(named: "righArrow")
+//        return image
+//    }()
     
     lazy var menuOptions:UIButton = {
         let menu = UIButton()
-            menu.setImage(UIImage(named: "menu_2"), for: UIControlState())
+            menu.setTitle("...", for: .normal)
             menu.addTarget(self, action: #selector(onMenu(_ :)), for: .touchUpInside)
         return menu
     }()
@@ -126,6 +111,11 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
         friendsFeedView?.onMenuOptions(sender)
     }
     
+    var placeDetails:PlaceDetails = {
+        let pd = PlaceDetails()
+        return pd
+    }()
+
     override func setupView() {
         super.setupView()
         
@@ -134,15 +124,12 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
         addSubview(feedAllPhotosVC)
         addSubview(profileImage)
         addSubview(usernameLabel)
-        addSubview(arrowIndicatior)
+        //addSubview(arrowIndicatior)
         addSubview(menuOptions)
         addSubview(activeLabel)
-        addSubview(activeImage)
-        addSubview(postTitle)
-        addSubview(location)
-        addSubview(locationIcon)
-        
+        addSubview(activeImage)        
         addSubview(bottomDataSeperator)
+        addSubview(placeDetails)
         
         //Active Image Constraints
         addConstrainstsWithFormat("H:[v0(15)]-10-|", views: activeImage)
@@ -158,20 +145,6 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
         //CenterY
         addConstraint(NSLayoutConstraint(item: activeLabel, attribute: .centerY, relatedBy: .equal, toItem: activeImage, attribute: .centerY, multiplier: 1, constant: 0))
         
-        //postTitle Constrainsts
-        addConstrainstsWithFormat("H:|-10-[v0]-30-|", views: postTitle)
-        addConstrainstsWithFormat("V:[v0]-35-|", views: postTitle)
-        
-        //Location Constraints 
-        addConstrainstsWithFormat("H:|-10-[v0]-5-[v1]", views: locationIcon,location)
-        addConstrainstsWithFormat("V:[v0]", views: location)
-        addConstrainstsWithFormat("V:[v0]", views: locationIcon)
-        
-        //Top
-        addConstraint(NSLayoutConstraint(item: location, attribute: .top, relatedBy: .equal, toItem: postTitle, attribute: .bottom, multiplier: 1, constant: 0))
-        
-        //CenterY Icon
-        addConstraint(NSLayoutConstraint(item: locationIcon, attribute: .centerY, relatedBy: .equal, toItem: location, attribute: .centerY, multiplier: 1, constant: 0))
         
         //FeedAllphotosVC Constraints
         addConstrainstsWithFormat("H:|[v0]|", views: feedAllPhotosVC)
@@ -197,23 +170,23 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
         //CenterY
         addConstraint(NSLayoutConstraint(item: usernameLabel, attribute: .centerY, relatedBy: .equal, toItem: profileImage, attribute: .centerY, multiplier: 1, constant: 5))
         
-        //ArrowIndicator Constraints
-        addConstrainstsWithFormat("H:[v0(10)]-10-|", views: arrowIndicatior)
-        addConstrainstsWithFormat("V:[v0(15)]", views: arrowIndicatior)
-        
-        //CenterY
-        addConstraint(NSLayoutConstraint(item: arrowIndicatior, attribute: .bottom, relatedBy: .equal, toItem: feedAllPhotosVC, attribute: .bottom, multiplier: 1, constant: -5))
-        
-        
-        //ArrowIndicator Constraints
-        addConstrainstsWithFormat("H:[v0]-5-|", views: menuOptions)
-        addConstrainstsWithFormat("V:[v0]", views: menuOptions)
-        
-        //CenterY
-        addConstraint(NSLayoutConstraint(item: menuOptions, attribute: .centerY, relatedBy: .equal, toItem: location, attribute: .centerY, multiplier: 1, constant: 0))
-        
         //Bottom Constraint
         addConstrainstsWithFormat("H:|[v0]|", views: bottomDataSeperator)
         addConstrainstsWithFormat("V:[v0(1.5)]|", views: bottomDataSeperator)
+        
+        addConstrainstsWithFormat("H:|-10-[v0]-10-|", views: placeDetails)
+        addConstrainstsWithFormat("V:[v0(100)]-5-|", views: placeDetails)
+        
+        addConstrainstsWithFormat("H:[v0]-10-|", views: menuOptions)
+        addConstrainstsWithFormat("V:|-20-[v0]", views: menuOptions)
     }
 }
+
+
+
+
+
+
+
+
+

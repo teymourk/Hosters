@@ -92,6 +92,8 @@ class GoogleLocationsVC: UITableViewController, CLLocationManagerDelegate, UITex
             self.createPostVC?.locationCordinates = place.coordinate
             self.createPostVC?._locationlabel.text = place.name
             self.createPostVC?._addLocation.setImage(UIImage(named: "geo_fence_filled-1"), for: .normal)
+            self.createPostVC?.photoRefrence = place.photoReference
+            self.createPostVC?.rating = place.rating
         }
         
         dismiss(animated: true, completion: nil)

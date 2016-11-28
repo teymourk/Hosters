@@ -43,7 +43,7 @@ class CostumeTabBar: UITabBarController {
         let userProfileNavigationController = UINavigationController(rootViewController: profilePage)
         userProfileNavigationController.tabBarItem.image = UIImage(named: "profile-1")
         
-        getCurrentUserInfo(profilePage: profilePage)
+        //getCurrentUserInfo(profilePage: profilePage)
         
         //TabBarItem: Notification
         let notifications = Notifications(collectionViewLayout: UICollectionViewFlowLayout())

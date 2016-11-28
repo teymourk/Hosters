@@ -41,9 +41,11 @@ class UserProfileHeaderCell: BaseCell {
                 }
             }
             
-            _trackers.setTitle("Trackers \(0)", for: UIControlState())
-           
-            _tracking.setTitle("Tracking \(0)", for: UIControlState())
+            if let followings = profileDetails?.following, let followers = profileDetails?.followers {
+                
+                _tracking.setTitle("Tracking \(followings.count)", for: .normal)
+                _trackers.setTitle("Trackers \(followers.count)", for: .normal)
+            }
         }
     }
     
