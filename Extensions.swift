@@ -152,6 +152,38 @@ extension UICollectionViewCell {
     }
 }
 
+extension Double {
+    
+    func setRating(image:UIImageView) {
+        
+        switch self {
+            
+        case 0:
+            image.image = UIImage(named: "0")
+        case 1:
+            image.image = UIImage(named: "1")
+        case 1.1...1.9:
+            image.image = UIImage(named: "1.5")
+        case 2:
+            image.image = UIImage(named: "2")
+        case 2.1...2.9:
+            image.image = UIImage(named: "2.5")
+        case 3:
+            image.image = UIImage(named: "3")
+        case 3.1...3.9:
+            image.image = UIImage(named: "3.5")
+        case 4:
+            image.image = UIImage(named: "4")
+        case 4.1...4.9:
+            image.image = UIImage(named: "4.5")
+        case 5:
+            image.image = UIImage(named: "5")
+        default: break
+            
+        }
+    }
+}
+
 //Clear Footer For table
 extension UITableView {
     

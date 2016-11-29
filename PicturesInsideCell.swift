@@ -88,7 +88,7 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
             mp.isZoomEnabled = false
             mp.layer.masksToBounds = true
             mp.layer.cornerRadius = 10
-            mp.layer.borderWidth = 0.5
+            mp.layer.borderWidth = 1
             mp.layer.borderColor = UIColor.lightGray.cgColor
         return mp
     }()

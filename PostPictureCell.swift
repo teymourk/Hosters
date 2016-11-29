@@ -24,6 +24,7 @@ class PostPictureCell: BaseCell, UICollectionViewDelegateFlowLayout, UICollectio
     
     lazy var postPicturesForActivitiesCV: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
+    
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
             cv.backgroundColor = .white
             cv.contentInset = UIEdgeInsetsMake(30, 0, 0, 0)

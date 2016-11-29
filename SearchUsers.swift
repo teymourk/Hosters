@@ -114,22 +114,17 @@ class SearchUsers: UITableViewController, UISearchResultsUpdating {
                 
     override func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         
-        let usersProfileVc = UsersProfile(collectionViewLayout: UICollectionViewFlowLayout())
-        
         if searchBar.isActive {
             
-            let user = searchedUsers![(indexPath as NSIndexPath).item]
-            usersProfileVc.profileDetails = user
+            _ = searchedUsers![(indexPath as NSIndexPath).item]
             
         } else {
             
-            let user = allUsers![(indexPath as NSIndexPath).item]
-            usersProfileVc.profileDetails = user
+            _ = allUsers![(indexPath as NSIndexPath).item]
+            
         }
         
         tableView.deselectRow(at: indexPath, animated: true)
-        usersProfileVc.hidesBottomBarWhenPushed = true
-        navigationController?.pushViewController(usersProfileVc, animated: true)
     }
     
     //Mark: - SearchBarDelegate
