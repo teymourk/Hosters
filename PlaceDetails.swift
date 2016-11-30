@@ -18,25 +18,18 @@ class PlaceDetails: UIView {
         return label
     }()
     
-//    var rating:UILabel = {
-//        let label = UILabel()
-//            label.font = UIFont(name: "NotoSans", size: 12)
-//            label.textColor = .white
-//        return label
-//    }()
-    
     var ratingIcon:UIImageView = {
         let img = UIImageView()
-        img.contentMode = .scaleAspectFill
-        img.layer.masksToBounds = true
-        img.image = UIImage(named: "test")
+            img.contentMode = .scaleAspectFill
+            img.layer.masksToBounds = true
+            img.image = UIImage(named: "test")
         return img
     }()
     
     var location:UILabel = {
         let label = UILabel()
-            label.font = UIFont(name: "NotoSans", size: 13)
-            label.textColor = .white
+            label.font = UIFont(name: "NotoSans", size: 14)
+            label.textColor = darkGray
         return label
     }()
     
@@ -57,12 +50,14 @@ class PlaceDetails: UIView {
         
         layer.masksToBounds = true
         layer.cornerRadius = 4
+        layer.borderWidth = 2
+        layer.borderColor = UIColor.lightGray.cgColor
         
         addSubview(postTitle)
         addSubview(location)
         addSubview(locationIcon)
         addSubview(ratingIcon)
-        backgroundColor = UIColor(white: 0.5, alpha: 1)
+        backgroundColor = UIColor(white: 0.7, alpha: 1)
         
         addConstrainstsWithFormat("H:|-10-[v0(80)]", views: locationIcon)
         addConstrainstsWithFormat("V:|-10-[v0(60)]", views: locationIcon)

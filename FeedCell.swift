@@ -18,7 +18,8 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
             placeDetails.postTitle.text = posts.postDescription
             placeDetails.location.text = posts.location
             
-            posts.rating.setRating(image: placeDetails.ratingIcon)
+            placeDetails.ratingIcon.setRating(rating: posts.rating)
+            
             
             if let photoRefrence = posts.photoRefrence {
                 
@@ -52,7 +53,7 @@ class FeedCell: BaseCell, CLLocationManagerDelegate {
         
         addSubview(feedAllPhotosVC)
         addSubview(placeDetails)
-        
+    
         //FeedAllphotosVC Constraints
         addConstrainstsWithFormat("H:|[v0]|", views: feedAllPhotosVC)
         addConstrainstsWithFormat("V:|-15-[v0]", views: feedAllPhotosVC)

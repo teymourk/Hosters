@@ -48,7 +48,6 @@ class PostInfoAndPictures: UICollectionViewController, UICollectionViewDelegateF
                 cell.menuOptions.tag = indexPath.item
                 cell.delegate = self
                 cell.allPicturesFeed = self
-                cell.setCellShadow()
                 cell.setupListView()
             }
             

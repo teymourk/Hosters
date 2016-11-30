@@ -29,6 +29,12 @@ class MenuBar: BaseView, UICollectionViewDelegateFlowLayout, UICollectionViewDel
         return cv
     }()
     
+    let bottomSeperator:UIView = {
+        let ts = UIView()
+            ts.backgroundColor = .lightGray
+        return ts
+    }()
+    
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
         return menuItems?.count ?? 0
@@ -38,9 +44,9 @@ class MenuBar: BaseView, UICollectionViewDelegateFlowLayout, UICollectionViewDel
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as? MenuBarCell {
             
-            if let imagesName = menuItems?[indexPath.item] {
+            if let label = menuItems?[indexPath.item] {
                 
-                cell.image.image = UIImage(named: imagesName)
+                cell.menuLabel.text = label
             }
             
             return cell
@@ -50,7 +56,7 @@ class MenuBar: BaseView, UICollectionViewDelegateFlowLayout, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: frame.width/4, height: frame.height)
+        return CGSize(width: frame.width/3, height: frame.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -63,7 +69,7 @@ class MenuBar: BaseView, UICollectionViewDelegateFlowLayout, UICollectionViewDel
     func setupHorizontalBarView() {
         
         let horizontalBarView = UIView()
-            horizontalBarView.backgroundColor = orange
+            horizontalBarView.backgroundColor = .white
             horizontalBarView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(horizontalBarView)
         
@@ -71,8 +77,8 @@ class MenuBar: BaseView, UICollectionViewDelegateFlowLayout, UICollectionViewDel
         horizontalBarLeftAncherContraint?.isActive = true
         
         horizontalBarView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/3).isActive = true
-        horizontalBarView.heightAnchor.constraint(equalToConstant: 4).isActive = true
+        horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/2).isActive = true
+        horizontalBarView.heightAnchor.constraint(equalToConstant: 2).isActive = true
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -86,6 +92,8 @@ class MenuBar: BaseView, UICollectionViewDelegateFlowLayout, UICollectionViewDel
     override func setupView() {
         super.setupView()
         
+        addSubview(bottomSeperator)
+        
         self.clipsToBounds = true
         let selectedIndex = IndexPath(item: 0, section: 0)
         menuCollectionView.selectItem(at: selectedIndex, animated: false, scrollPosition: UICollectionViewScrollPosition())
@@ -97,54 +105,51 @@ class MenuBar: BaseView, UICollectionViewDelegateFlowLayout, UICollectionViewDel
 
         //CollectionView Constraints
         addConstrainstsWithFormat("H:|[v0]|", views: menuCollectionView)
-        addConstrainstsWithFormat("V:|[v0]|", views: menuCollectionView)
+        addConstrainstsWithFormat("V:|[v0]-0.5-|", views: menuCollectionView)
         
+        addConstrainstsWithFormat("H:|[v0]|", views: bottomSeperator)
+        addConstrainstsWithFormat("V:[v0(0.5)]|", views: bottomSeperator)
     }
 }
 
 class MenuBarCell: BaseCell {
 
-//    var menuLabel:UILabel = {
-//        let label = UILabel()
-//            label.textAlignment = .center
-//            label.textColor = .white
-//            label.font = UIFont(name: "NotoSans", size: 14)
-//        return label
-//    }()
-    
-    let image:UIImageView = {
-        let image = UIImageView()
-            image.contentMode = .scaleAspectFill
-       return image
+    var menuLabel:UILabel = {
+        let label = UILabel()
+            label.textAlignment = .center
+            label.textColor = .white
+            label.font = UIFont(name: "NotoSans", size: 14)
+        return label
     }()
     
     override var isHighlighted: Bool {
         didSet {
-            //image.backgroundColor = isHighlighted ? orange : .white
+            menuLabel.textColor = isHighlighted ? orange : .white
         }
     }
     
     override var isSelected: Bool {
         didSet {
-            //image.backgroundColor = isSelected ? orange : .white
+            menuLabel.textColor = isSelected ? orange : .white
         }
     }
     
     override func setupView() {
         super.setupView()
         
-        addSubview(image)
+        addSubview(menuLabel)
         backgroundColor = darkGray
         
         //Icons Constraints
-        addConstrainstsWithFormat("H:[v0(20)]", views: image)
-        addConstrainstsWithFormat("V:[v0(20)]", views: image)
+        addConstrainstsWithFormat("H:|[v0]|", views: menuLabel)
+        addConstrainstsWithFormat("V:|[v0]|", views: menuLabel)
         
         //CenterX
-        addConstraint(NSLayoutConstraint(item: image, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: menuLabel, attribute: .centerX, relatedBy: .equal, toItem: self, attribute: .centerX, multiplier: 1, constant: 0))
         
         //CenterY
-        addConstraint(NSLayoutConstraint(item: image, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
+        addConstraint(NSLayoutConstraint(item: menuLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
+
     }
 }
 

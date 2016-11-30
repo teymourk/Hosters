@@ -2,10 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
-	<key>NSLocationAlwaysUsageDescription</key>
-	<string>TYLOO NEEDS TO ACCESS YOUR LOCATION</string>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -32,7 +28,7 @@
 		</dict>
 	</array>
 	<key>CFBundleVersion</key>
-	<string>3</string>
+	<string>4</string>
 	<key>FacebookAppID</key>
 	<string>237162286651569</string>
 	<key>FacebookDisplayName</key>
@@ -55,6 +51,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Tyloo Will Use Your Camra When Posting For Events</string>
+	<key>NSLocationAlwaysUsageDescription</key>
+	<string>TYLOO NEEDS TO ACCESS YOUR LOCATION</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Tyloo Requires to use your location.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
@@ -89,5 +87,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

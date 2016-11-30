@@ -24,22 +24,33 @@ class CostumeTabBar: UITabBarController {
         let layout = UICollectionViewFlowLayout()
             layout.sectionHeadersPinToVisibleBounds = true
         let friendsFeedView = HomePage(collectionViewLayout: layout)
-        friendsFeedView.navigationItem.title = "Home"
+            friendsFeedView.navigationItem.title = "Home"
         let homeNavigationController = UINavigationController(rootViewController: friendsFeedView)
-        homeNavigationController.tabBarItem.image = UIImage(named: "home-normal")
+            homeNavigationController.tabBarItem.image = UIImage(named: "home-normal")
         
         //TabBarItem: Search
         let search = SearchUsers()
-        search.navigationItem.title = "Search"
+            search.navigationItem.title = "Search"
         let searchNavigationController = UINavigationController(rootViewController: search)
-        searchNavigationController.tabBarItem.image = UIImage(named: "search-normal")
+            searchNavigationController.tabBarItem.image = UIImage(named: "search-normal")
         
         //TabbarItem: Add/Take Images
         let addPictureView = AddOrPost()
-        addPictureView.navigationItem.title = "Active Posts"
+            addPictureView.navigationItem.title = "Active Posts"
         let addImageNavigationController = UINavigationController(rootViewController: addPictureView)
-        addImageNavigationController.tabBarItem.image = UIImage(named: "add")
+            addImageNavigationController.tabBarItem.image = UIImage(named: "add")
+        
+        //TabBarItem: Notification
+        let notifications = Notifications(collectionViewLayout: UICollectionViewFlowLayout())
+            notifications.navigationItem.title = "Notifications"
+        let notificationsNavigationController = UINavigationController(rootViewController: notifications)
+            notificationsNavigationController.tabBarItem.image = UIImage(named: "notifications")
     
+        //TabBarItem: Profile
+        let profilePage = UsersProfile(collectionViewLayout: UICollectionViewFlowLayout())
+        let userProfileNavigationController = UINavigationController(rootViewController: profilePage)
+            userProfileNavigationController.tabBarItem.image = UIImage(named: "profile-1")
+        
         navigationItem.hidesBackButton = true
         viewControllers = [homeNavigationController, addImageNavigationController, searchNavigationController]
     }

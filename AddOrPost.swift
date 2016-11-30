@@ -11,6 +11,7 @@ import UIKit
 private let CELL_ID = "CELL_ID"
 private let CREATE_NEW = "CREATE_ID"
 private let ENDED_POST_ID = "Ended_ID"
+private let HEADER_ID = "HEADER_ID"
 
 class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, createPostsDelegate {
     
@@ -47,15 +48,12 @@ class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         return pw
     }()
     
-    
-    var userHasActivePost:Bool? = Bool()
     var postKey:String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
         activePostsCollectionView.register(PostPictureCell.self, forCellWithReuseIdentifier: CELL_ID)
-        activePostsCollectionView.register(EndedPostCell.self, forCellWithReuseIdentifier: ENDED_POST_ID)
         activePostsCollectionView.register(CreatePostCell.self, forCellWithReuseIdentifier: CREATE_NEW)
         navigationController?.navigationBar.isTranslucent = false
         view.backgroundColor = .white
@@ -63,33 +61,33 @@ class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         setupView()
     }
     
+
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 3
+        return 2
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
         if (indexPath as NSIndexPath).item == 1 {
-            
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: ENDED_POST_ID, for: indexPath) as! EndedPostCell
-                cell.addOrPostVC = self
-            
-            return cell
-            
-        } else if (indexPath as NSIndexPath).item == 2 {
         
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CREATE_NEW, for: indexPath) as! CreatePostCell
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CREATE_NEW, for: indexPath) as? CreatePostCell {
+             
                 cell.addOrdPostVC = self
                 cell.delegete = self
-
-            return cell
+                
+                return cell
+            }
         }
     
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as! PostPictureCell
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as? PostPictureCell {
+            
             cell.addOrPostVC = self
             
-        return cell
+            return cell
+        }
+        
+        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -99,11 +97,10 @@ class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        menuBar.horizontalBarLeftAncherContraint?.constant = scrollView.contentOffset.x / 3
+        menuBar.horizontalBarLeftAncherContraint?.constant = scrollView.contentOffset.x / 2
     }
     
-    
-    let menuItems = ["Active Posts", "Ended Posts", "Create New"]
+    let menuItems = ["Posts", "Create New"]
     
     func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
         
@@ -113,9 +110,6 @@ class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         
         switch Int(index) {
         case 1:
-            setupGuideLabel("Add Image To Activity That Ended via Photo Library")
-            break
-        case 2:
             setupGuideLabel("Check-In")
             break
         case 0:
@@ -137,7 +131,7 @@ class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDat
     
     lazy var menuBar:MenuBar = {
         let mb = MenuBar()
-            mb.menuItems = ["Online", "Offline", "Create New"]
+            mb.menuItems = ["Posts", "Create New"]
             mb.addOrPostVC = self
         return mb
     }()
@@ -151,7 +145,6 @@ class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         return label
     }()
     
-
     func setupGuideLabel(_ guide:String) {
         
         guideLabel.text = guide
@@ -189,6 +182,5 @@ class AddOrPost: UIViewController, UICollectionViewDelegate, UICollectionViewDat
         view.addConstraint(NSLayoutConstraint(item: guideLabel, attribute: .top, relatedBy: .equal, toItem: menuBar, attribute: .bottom, multiplier: 1, constant: 0))
         
         setupGuideLabel("Add Image To An Existing Activity Happening Now")
-    
     }
 }

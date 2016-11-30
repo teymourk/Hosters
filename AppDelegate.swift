@@ -23,7 +23,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         FIRApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
-        //Batch.startWithAPIKey(BATCH_API_KEY)
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()

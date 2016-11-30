@@ -139,9 +139,9 @@ extension UINavigationController {
     }
 }
 
-extension UICollectionViewCell {
+extension UIView {
     
-    func setCellShadow() {
+    func setShadow() {
         
         self.layer.masksToBounds = false
         self.layer.cornerRadius = 3.0
@@ -152,32 +152,32 @@ extension UICollectionViewCell {
     }
 }
 
-extension Double {
+extension UIImageView {
     
-    func setRating(image:UIImageView) {
+    func setRating(rating:Double) {
         
-        switch self {
+        switch rating {
             
         case 0:
-            image.image = UIImage(named: "0")
+            self.image = UIImage(named: "0")
         case 1:
-            image.image = UIImage(named: "1")
+            self.image = UIImage(named: "1")
         case 1.1...1.9:
-            image.image = UIImage(named: "1.5")
+            self.image = UIImage(named: "15")
         case 2:
-            image.image = UIImage(named: "2")
+            self.image = UIImage(named: "2")
         case 2.1...2.9:
-            image.image = UIImage(named: "2.5")
+            self.image = UIImage(named: "25")
         case 3:
-            image.image = UIImage(named: "3")
+            self.image = UIImage(named: "3")
         case 3.1...3.9:
-            image.image = UIImage(named: "3.5")
+            self.image = UIImage(named: "35")
         case 4:
-            image.image = UIImage(named: "4")
+            self.image = UIImage(named: "4")
         case 4.1...4.9:
-            image.image = UIImage(named: "4.5")
+            self.image = UIImage(named: "45")
         case 5:
-            image.image = UIImage(named: "5")
+            self.image = UIImage(named: "5")
         default: break
             
         }
@@ -191,7 +191,6 @@ extension UITableView {
         
         let view = UIView(frame: CGRect.zero)
         self.tableFooterView = view
-        
     }
 }
 

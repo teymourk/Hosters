@@ -15,19 +15,10 @@ private let HEADER_ID = "HeaderId"
 
 class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, CLLocationManagerDelegate, NSFetchedResultsControllerDelegate, PicturesInsideCellDelegate, postHeaderDelegate {
     
-    var postImages = [String:[PostImages]]()
-    
-    //    lazy var refreshController:UIRefreshControl = {
-    //        let refresher = UIRefreshControl()
-    //        refresher.tintColor = .gray
-    //        refresher.addTarget(self, action: #selector(onRefreshPage), for: .valueChanged)
-    //        return refresher
-    //    }()
-    
     lazy var locationManager:CLLocationManager? = {
         let manager = CLLocationManager()
-        manager.delegate = self
-        manager.desiredAccuracy = kCLLocationAccuracyBest
+            manager.delegate = self
+            manager.desiredAccuracy = kCLLocationAccuracyBest
         return manager
     }()
     
@@ -69,9 +60,7 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
         
         locationManager?.requestWhenInUseAuthorization()
         
-        setupSeperator()
-        
-        perform(#selector(fetchPostsFromData), with: nil, afterDelay: 1.5)
+        perform(#selector(fetchPostsFromData), with: nil, afterDelay: 2)
     }
     
     // MARK: UICollectionViewDataSource
@@ -86,6 +75,7 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        
         return 5
     }
     
@@ -226,9 +216,9 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
     
     lazy var fetchControllers:NSFetchedResultsController<PostImages> = {
         let fetch: NSFetchRequest<PostImages> = PostImages.fetchRequest()
-        fetch.sortDescriptors = [NSSortDescriptor(key: "timePosted", ascending: false)]
+            fetch.sortDescriptors = [NSSortDescriptor(key: "timePosted", ascending: false)]
         let frc = NSFetchedResultsController(fetchRequest: fetch, managedObjectContext: context, sectionNameKeyPath: nil, cacheName: nil)
-        frc.delegate = self
+            frc.delegate = self
         return frc
     }()
     
@@ -238,9 +228,8 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
             
             try fetchController.performFetch()
             
-            
-            if fetchController.sections?[0].numberOfObjects == 0 {
-                //setupNoPostView(text: "No Posts.Try Inviting Your Friend 💩 🙄")
+            if fetchController.sections?.count == 0 {
+                setupNoPostView(text: "No Posts.Try Inviting Your Friend 💩 🙄")
             }
             
         } catch let error {
@@ -252,7 +241,7 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
     
     var operations = [BlockOperation]()
     
-    func controllerWillChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
+    func controllerDidChangeContent(_ controller: NSFetchedResultsController<NSFetchRequestResult>) {
         
         collectionView?.performBatchUpdates({
             
@@ -271,14 +260,15 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
                 
             case .insert:
                 operations.append(BlockOperation(block: {
+
                     self.collectionView?.insertItems(at: [indexPath])
-                    
+          
                     if self.noPostView.isDescendant(of: self.view) {
                         self.noPostView.removeFromSuperview()
                     }
                     
                 }))
-                
+        
                 break
             case .delete:
                 collectionView?.deleteItems(at: [indexPath])
@@ -287,8 +277,6 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
             default: break
             }
         }
-        
-        collectionView?.reloadData()
     }
     
     //MARK: PicturesInsideCell Delegate
@@ -296,9 +284,9 @@ class HomePage: UICollectionViewController, UICollectionViewDelegateFlowLayout, 
     func onImages(images: [PostImages]) {
         
         let layout = UICollectionViewFlowLayout()
-        layout.scrollDirection = .horizontal
+            layout.scrollDirection = .horizontal
         let postImages = PostInfoAndPictures(collectionViewLayout: layout)
-        postImages.postedImages = images
+            postImages.postedImages = images
         
         navigationController?.present(postImages, animated: false, completion: nil)
     }
