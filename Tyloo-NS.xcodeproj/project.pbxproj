@@ -7,21 +7,70 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0B2EE8321EA6F53900148E50 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2EE8311EA6F53900148E50 /* RegisterVC.swift */; };
+		0B3974F91EA9D7760011ABD7 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3974F81EA9D7760011ABD7 /* MenuBar.swift */; };
+		0B8F85431EA6EF1F0001BC05 /* Postsheader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8F85421EA6EF1F0001BC05 /* Postsheader.swift */; };
+		0BBCCB641EAA90D7003A50CB /* EventsPages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCCB631EAA90D7003A50CB /* EventsPages.swift */; };
+		0BBCCB661EAA9128003A50CB /* HomePageDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCCB651EAA9128003A50CB /* HomePageDelegates.swift */; };
+		0BBCCB681EAA9461003A50CB /* CustomeTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCCB671EAA9461003A50CB /* CustomeTabBar.swift */; };
+		0BBCCB6A1EAAACEA003A50CB /* EventHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCCB691EAAACEA003A50CB /* EventHeader.swift */; };
+		5D12030B1609A0DFE0DF11A2 /* Pods_Tyloo_NS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B50C21B3D80E14391184251D /* Pods_Tyloo_NS.framework */; };
+		AB2EFDB31D0E29E000B21A18 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2EFDB21D0E29E000B21A18 /* FeedCell.swift */; };
+		AB2EFDB51D0E29FD00B21A18 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2EFDB41D0E29FD00B21A18 /* BaseCell.swift */; };
+		AB2EFDB91D0E346100B21A18 /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2EFDB81D0E346100B21A18 /* Constans.swift */; };
+		AB32C23A1D31ED9900F65F2F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB32C2391D31ED9900F65F2F /* GoogleService-Info.plist */; };
+		AB344B011DD84852004236E5 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB344B001DD84852004236E5 /* Reachability.swift */; };
+		AB34B8B91D30B0BD00B2F4E0 /* PageNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB34B8B81D30B0BD00B2F4E0 /* PageNotifications.swift */; };
+		AB7136161D10C6B000BB1BF2 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7136151D10C6B000BB1BF2 /* Events.swift */; };
+		AB752B591D3C3B970001ED05 /* Prompt-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB752B581D3C3B970001ED05 /* Prompt-ExtraLight.ttf */; };
+		AB7E87AA1D0CE39E00750B76 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7E87A91D0CE39E00750B76 /* Extensions.swift */; };
+		AB7E87AE1D0CF2F200750B76 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7E87AD1D0CF2F200750B76 /* HomePage.swift */; };
+		AB8376B91D83203A0083B94C /* CompleteFacebookRegister.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB8376B81D83203A0083B94C /* CompleteFacebookRegister.swift */; };
+		ABB582831D3059BC0070C387 /* NotoSans-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ABB5827F1D3059BC0070C387 /* NotoSans-Bold.ttf */; };
+		ABB582841D3059BC0070C387 /* NotoSans-BoldItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ABB582801D3059BC0070C387 /* NotoSans-BoldItalic.ttf */; };
+		ABB582851D3059BC0070C387 /* NotoSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ABB582811D3059BC0070C387 /* NotoSans-Italic.ttf */; };
+		ABB582861D3059BC0070C387 /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ABB582821D3059BC0070C387 /* NotoSans-Regular.ttf */; };
+		ABBFAA041D0FC13000BB4D5C /* FirebaseRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBFAA031D0FC13000BB4D5C /* FirebaseRef.swift */; };
+		ABC4F2011D494E940001368B /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC4F2001D494E940001368B /* HomeController.swift */; };
 		ABC77A731D0C916600C46DD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC77A721D0C916600C46DD0 /* AppDelegate.swift */; };
-		ABC77A751D0C916600C46DD0 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC77A741D0C916600C46DD0 /* ViewController.swift */; };
-		ABC77A781D0C916600C46DD0 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABC77A761D0C916600C46DD0 /* Main.storyboard */; };
 		ABC77A7A1D0C916600C46DD0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABC77A791D0C916600C46DD0 /* Assets.xcassets */; };
-		ABC77A7D1D0C916600C46DD0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABC77A7B1D0C916600C46DD0 /* LaunchScreen.storyboard */; };
+		ABCBD8F01DD29A6E008D0CAF /* HomeAudit.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCBD8EF1DD29A6E008D0CAF /* HomeAudit.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0B2EE8311EA6F53900148E50 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
+		0B3974F81EA9D7760011ABD7 /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
+		0B8F85421EA6EF1F0001BC05 /* Postsheader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Postsheader.swift; sourceTree = "<group>"; };
+		0BBCCB631EAA90D7003A50CB /* EventsPages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsPages.swift; sourceTree = "<group>"; };
+		0BBCCB651EAA9128003A50CB /* HomePageDelegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageDelegates.swift; sourceTree = "<group>"; };
+		0BBCCB671EAA9461003A50CB /* CustomeTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomeTabBar.swift; sourceTree = "<group>"; };
+		0BBCCB691EAAACEA003A50CB /* EventHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventHeader.swift; sourceTree = "<group>"; };
+		935C9218E9E69F16D26533FE /* Pods-Tyloo-NS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tyloo-NS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tyloo-NS/Pods-Tyloo-NS.debug.xcconfig"; sourceTree = "<group>"; };
+		95BB14EB45E07915A78B0265 /* Pods-Tyloo-NS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tyloo-NS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tyloo-NS/Pods-Tyloo-NS.release.xcconfig"; sourceTree = "<group>"; };
+		AB2EFDB21D0E29E000B21A18 /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
+		AB2EFDB41D0E29FD00B21A18 /* BaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
+		AB2EFDB81D0E346100B21A18 /* Constans.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
+		AB32C2391D31ED9900F65F2F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
+		AB344B001DD84852004236E5 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
+		AB34B8B81D30B0BD00B2F4E0 /* PageNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageNotifications.swift; sourceTree = "<group>"; };
+		AB7136151D10C6B000BB1BF2 /* Events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
+		AB752B581D3C3B970001ED05 /* Prompt-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Prompt-ExtraLight.ttf"; sourceTree = "<group>"; };
+		AB7E87A91D0CE39E00750B76 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		AB7E87AD1D0CF2F200750B76 /* HomePage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
+		AB8376B81D83203A0083B94C /* CompleteFacebookRegister.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompleteFacebookRegister.swift; sourceTree = "<group>"; };
+		AB9B3D551D8B0A2B002EFAB0 /* Tyloo-NS.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = "Tyloo-NS.entitlements"; sourceTree = "<group>"; };
+		ABB5827F1D3059BC0070C387 /* NotoSans-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Bold.ttf"; sourceTree = "<group>"; };
+		ABB582801D3059BC0070C387 /* NotoSans-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-BoldItalic.ttf"; sourceTree = "<group>"; };
+		ABB582811D3059BC0070C387 /* NotoSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Italic.ttf"; sourceTree = "<group>"; };
+		ABB582821D3059BC0070C387 /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
+		ABBFAA031D0FC13000BB4D5C /* FirebaseRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseRef.swift; sourceTree = "<group>"; };
+		ABC4F2001D494E940001368B /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		ABC77A6F1D0C916600C46DD0 /* Tyloo-NS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tyloo-NS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABC77A721D0C916600C46DD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		ABC77A741D0C916600C46DD0 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		ABC77A771D0C916600C46DD0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		ABC77A791D0C916600C46DD0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		ABC77A7C1D0C916600C46DD0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		ABC77A7E1D0C916600C46DD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABCBD8EF1DD29A6E008D0CAF /* HomeAudit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAudit.swift; sourceTree = "<group>"; };
+		B50C21B3D80E14391184251D /* Pods_Tyloo_NS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tyloo_NS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,17 +78,104 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5D12030B1609A0DFE0DF11A2 /* Pods_Tyloo_NS.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B3974FA1EA9E5580011ABD7 /* Event_Cells */ = {
+			isa = PBXGroup;
+			children = (
+				AB2EFDB21D0E29E000B21A18 /* FeedCell.swift */,
+				0BBCCB691EAAACEA003A50CB /* EventHeader.swift */,
+			);
+			name = Event_Cells;
+			sourceTree = "<group>";
+		};
+		1B18AACF3E6669CB53EF5096 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				935C9218E9E69F16D26533FE /* Pods-Tyloo-NS.debug.xcconfig */,
+				95BB14EB45E07915A78B0265 /* Pods-Tyloo-NS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		AB2EFDB11D0E292400B21A18 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				ABAF8CF31DD501DB00B193A8 /* BasePages */,
+				AB7E87AD1D0CF2F200750B76 /* HomePage.swift */,
+				0BBCCB651EAA9128003A50CB /* HomePageDelegates.swift */,
+				0BBCCB631EAA90D7003A50CB /* EventsPages.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		AB7E87A71D0CE36200750B76 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				0B3974FA1EA9E5580011ABD7 /* Event_Cells */,
+				AB2EFDB41D0E29FD00B21A18 /* BaseCell.swift */,
+				AB34B8B81D30B0BD00B2F4E0 /* PageNotifications.swift */,
+				0B8F85421EA6EF1F0001BC05 /* Postsheader.swift */,
+				0B3974F81EA9D7760011ABD7 /* MenuBar.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		AB7E87A81D0CE39300750B76 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				AB2EFDB81D0E346100B21A18 /* Constans.swift */,
+				AB7E87A91D0CE39E00750B76 /* Extensions.swift */,
+				AB344B001DD84852004236E5 /* Reachability.swift */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
+		ABAF8CF31DD501DB00B193A8 /* BasePages */ = {
+			isa = PBXGroup;
+			children = (
+				ABC4F2001D494E940001368B /* HomeController.swift */,
+				ABCBD8EF1DD29A6E008D0CAF /* HomeAudit.swift */,
+				0B2EE8311EA6F53900148E50 /* RegisterVC.swift */,
+				AB8376B81D83203A0083B94C /* CompleteFacebookRegister.swift */,
+				0BBCCB671EAA9461003A50CB /* CustomeTabBar.swift */,
+			);
+			name = BasePages;
+			sourceTree = "<group>";
+		};
+		ABB5827E1D3059A60070C387 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				AB752B581D3C3B970001ED05 /* Prompt-ExtraLight.ttf */,
+				ABB5827F1D3059BC0070C387 /* NotoSans-Bold.ttf */,
+				ABB582801D3059BC0070C387 /* NotoSans-BoldItalic.ttf */,
+				ABB582811D3059BC0070C387 /* NotoSans-Italic.ttf */,
+				ABB582821D3059BC0070C387 /* NotoSans-Regular.ttf */,
+			);
+			name = Resources;
+			sourceTree = "<group>";
+		};
+		ABBFA9FC1D0F959B00BB4D5C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ABBFAA031D0FC13000BB4D5C /* FirebaseRef.swift */,
+				AB7136151D10C6B000BB1BF2 /* Events.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
 		ABC77A661D0C916600C46DD0 = {
 			isa = PBXGroup;
 			children = (
 				ABC77A711D0C916600C46DD0 /* Tyloo-NS */,
 				ABC77A701D0C916600C46DD0 /* Products */,
+				1B18AACF3E6669CB53EF5096 /* Pods */,
+				D45737E2BB8062EA8CCB1734 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -54,14 +190,26 @@
 		ABC77A711D0C916600C46DD0 /* Tyloo-NS */ = {
 			isa = PBXGroup;
 			children = (
+				AB9B3D551D8B0A2B002EFAB0 /* Tyloo-NS.entitlements */,
 				ABC77A721D0C916600C46DD0 /* AppDelegate.swift */,
-				ABC77A741D0C916600C46DD0 /* ViewController.swift */,
-				ABC77A761D0C916600C46DD0 /* Main.storyboard */,
+				ABBFA9FC1D0F959B00BB4D5C /* Model */,
+				ABB5827E1D3059A60070C387 /* Resources */,
+				AB2EFDB11D0E292400B21A18 /* Controller */,
+				AB7E87A81D0CE39300750B76 /* Helper */,
+				AB7E87A71D0CE36200750B76 /* View */,
 				ABC77A791D0C916600C46DD0 /* Assets.xcassets */,
-				ABC77A7B1D0C916600C46DD0 /* LaunchScreen.storyboard */,
 				ABC77A7E1D0C916600C46DD0 /* Info.plist */,
+				AB32C2391D31ED9900F65F2F /* GoogleService-Info.plist */,
 			);
 			path = "Tyloo-NS";
+			sourceTree = "<group>";
+		};
+		D45737E2BB8062EA8CCB1734 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B50C21B3D80E14391184251D /* Pods_Tyloo_NS.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -71,9 +219,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = ABC77A811D0C916600C46DD0 /* Build configuration list for PBXNativeTarget "Tyloo-NS" */;
 			buildPhases = (
+				8C5216182BF73F565E1468FB /* [CP] Check Pods Manifest.lock */,
 				ABC77A6B1D0C916600C46DD0 /* Sources */,
 				ABC77A6C1D0C916600C46DD0 /* Frameworks */,
 				ABC77A6D1D0C916600C46DD0 /* Resources */,
+				68E0F62581A80A4EA1261E6E /* [CP] Embed Pods Frameworks */,
+				E28A567395580605845FE578 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -91,11 +242,21 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Kiarash Teymoury";
 				TargetAttributes = {
 					ABC77A6E1D0C916600C46DD0 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = LC5873RCDE;
+						LastSwiftMigration = 0800;
+						SystemCapabilities = {
+							com.apple.BackgroundModes = {
+								enabled = 1;
+							};
+							com.apple.Push = {
+								enabled = 1;
+							};
+						};
 					};
 				};
 			};
@@ -122,44 +283,95 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABC77A7D1D0C916600C46DD0 /* LaunchScreen.storyboard in Resources */,
+				ABB582861D3059BC0070C387 /* NotoSans-Regular.ttf in Resources */,
+				ABB582851D3059BC0070C387 /* NotoSans-Italic.ttf in Resources */,
+				ABB582841D3059BC0070C387 /* NotoSans-BoldItalic.ttf in Resources */,
+				ABB582831D3059BC0070C387 /* NotoSans-Bold.ttf in Resources */,
+				AB752B591D3C3B970001ED05 /* Prompt-ExtraLight.ttf in Resources */,
 				ABC77A7A1D0C916600C46DD0 /* Assets.xcassets in Resources */,
-				ABC77A781D0C916600C46DD0 /* Main.storyboard in Resources */,
+				AB32C23A1D31ED9900F65F2F /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		68E0F62581A80A4EA1261E6E /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tyloo-NS/Pods-Tyloo-NS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8C5216182BF73F565E1468FB /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E28A567395580605845FE578 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tyloo-NS/Pods-Tyloo-NS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		ABC77A6B1D0C916600C46DD0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ABC77A751D0C916600C46DD0 /* ViewController.swift in Sources */,
+				0BBCCB661EAA9128003A50CB /* HomePageDelegates.swift in Sources */,
+				ABC4F2011D494E940001368B /* HomeController.swift in Sources */,
+				AB2EFDB91D0E346100B21A18 /* Constans.swift in Sources */,
+				AB7136161D10C6B000BB1BF2 /* Events.swift in Sources */,
+				0BBCCB681EAA9461003A50CB /* CustomeTabBar.swift in Sources */,
+				0B2EE8321EA6F53900148E50 /* RegisterVC.swift in Sources */,
+				0B8F85431EA6EF1F0001BC05 /* Postsheader.swift in Sources */,
 				ABC77A731D0C916600C46DD0 /* AppDelegate.swift in Sources */,
+				AB2EFDB51D0E29FD00B21A18 /* BaseCell.swift in Sources */,
+				AB34B8B91D30B0BD00B2F4E0 /* PageNotifications.swift in Sources */,
+				AB8376B91D83203A0083B94C /* CompleteFacebookRegister.swift in Sources */,
+				AB344B011DD84852004236E5 /* Reachability.swift in Sources */,
+				ABBFAA041D0FC13000BB4D5C /* FirebaseRef.swift in Sources */,
+				0BBCCB641EAA90D7003A50CB /* EventsPages.swift in Sources */,
+				AB7E87AE1D0CF2F200750B76 /* HomePage.swift in Sources */,
+				0B3974F91EA9D7760011ABD7 /* MenuBar.swift in Sources */,
+				AB2EFDB31D0E29E000B21A18 /* FeedCell.swift in Sources */,
+				0BBCCB6A1EAAACEA003A50CB /* EventHeader.swift in Sources */,
+				AB7E87AA1D0CE39E00750B76 /* Extensions.swift in Sources */,
+				ABCBD8F01DD29A6E008D0CAF /* HomeAudit.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
-
-/* Begin PBXVariantGroup section */
-		ABC77A761D0C916600C46DD0 /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ABC77A771D0C916600C46DD0 /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
-		ABC77A7B1D0C916600C46DD0 /* LaunchScreen.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				ABC77A7C1D0C916600C46DD0 /* Base */,
-			);
-			name = LaunchScreen.storyboard;
-			sourceTree = "<group>";
-		};
-/* End PBXVariantGroup section */
 
 /* Begin XCBuildConfiguration section */
 		ABC77A7F1D0C916600C46DD0 /* Debug */ = {
@@ -176,8 +388,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -199,7 +413,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -222,8 +436,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -239,9 +455,10 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.2;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -249,23 +466,41 @@
 		};
 		ABC77A821D0C916600C46DD0 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 935C9218E9E69F16D26533FE /* Pods-Tyloo-NS.debug.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Tyloo-NS/Tyloo-NS.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = LC5873RCDE;
 				INFOPLIST_FILE = "Tyloo-NS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Q-Aproject.Tyloo-NS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Debug;
 		};
 		ABC77A831D0C916600C46DD0 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 95BB14EB45E07915A78B0265 /* Pods-Tyloo-NS.release.xcconfig */;
 			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_ENTITLEMENTS = "Tyloo-NS/Tyloo-NS.entitlements";
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				DEVELOPMENT_TEAM = LC5873RCDE;
 				INFOPLIST_FILE = "Tyloo-NS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Q-Aproject.Tyloo-NS";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
+				SWIFT_VERSION = 3.0;
 			};
 			name = Release;
 		};
@@ -288,6 +523,7 @@
 				ABC77A831D0C916600C46DD0 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
