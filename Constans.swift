@@ -19,8 +19,6 @@ let orange = UIColor.rgb(50, green: 141, blue: 225)
 let KEY_UID = "uid"
 
 
-//FeedCell Height
-
 //ScreenHeigh
 let FEED_CELL_HEIGHT: CGFloat = ((UIScreen.main.bounds.height) / 2) - 80
 let HEIGHT_PREVIEW = (UIScreen.main.bounds.width) * 9 / 16

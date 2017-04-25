@@ -64,15 +64,6 @@ class HomeController: UIViewController {
         return button
     }()
     
-    lazy var login:UIButton = {
-        let button = UIButton()
-        button.setTitle("LogIn", for: UIControlState())
-        button.titleLabel?.font = UIFont(name: "NotoSans", size: 16)
-        button.setTitleColor(.lightGray, for: UIControlState())
-        button.addTarget(self, action: #selector(self.onLoginBtn(_:)), for: .touchUpInside)
-        return button
-    }()
-    
     func setupAuditPage() {
         
         view.addSubview(instructionPages)
@@ -80,7 +71,7 @@ class HomeController: UIViewController {
         
         //Pages Constrains
         instructionPages.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
-        instructionPages.bottomAnchor.constraint(equalTo: login.topAnchor, constant: -50).isActive = true
+        instructionPages.bottomAnchor.constraint(equalTo: register.topAnchor, constant: -50).isActive = true
         instructionPages.leftAnchor.constraint(equalTo: view.leftAnchor).isActive = true
         instructionPages.rightAnchor.constraint(equalTo: view.rightAnchor).isActive = true
         
@@ -93,15 +84,10 @@ class HomeController: UIViewController {
     func setupView() {
         
         view.addSubview(register)
-        view.addSubview(login)
-        
+    
         //Register Button Cosntraints
         self.view.addConstrainstsWithFormat("H:|-20-[v0]-20-|", views: register)
         self.view.addConstrainstsWithFormat("V:[v0(40)]-80-|", views: register)
-        
-        //LogIn Button Constrains
-        self.view.addConstrainstsWithFormat("H:[v0]-40-|", views: login)
-        self.view.addConstrainstsWithFormat("V:[v0]-40-|", views: login)
     }
     
     //Mark - OnButtons
@@ -110,13 +96,6 @@ class HomeController: UIViewController {
         
         let regsiterView = RegisterVC()
         self.navigationController?.pushViewController(regsiterView, animated: true)
-        self.navigationController?.navigationBar.isHidden = true
-    }
-    
-    func onLoginBtn(_ sender:UIButton) {
-        
-        let loginView = LoginVC()
-        self.navigationController?.pushViewController(loginView, animated: true)
         self.navigationController?.navigationBar.isHidden = true
     }
     

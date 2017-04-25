@@ -17,8 +17,8 @@ class MenuBar: BaseView, UICollectionViewDelegateFlowLayout, UICollectionViewDel
             menuCollectionView.reloadData()
         }
     }
-
-    var addOrPostVC:AddOrPost?
+    
+    var homePage:HomePage?
     
     lazy var menuCollectionView:UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -56,7 +56,7 @@ class MenuBar: BaseView, UICollectionViewDelegateFlowLayout, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: frame.width/3, height: frame.height)
+        return CGSize(width: frame.width/6, height: frame.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -69,24 +69,24 @@ class MenuBar: BaseView, UICollectionViewDelegateFlowLayout, UICollectionViewDel
     func setupHorizontalBarView() {
         
         let horizontalBarView = UIView()
-            horizontalBarView.backgroundColor = .white
-            horizontalBarView.translatesAutoresizingMaskIntoConstraints = false
+        horizontalBarView.backgroundColor = .white
+        horizontalBarView.translatesAutoresizingMaskIntoConstraints = false
         addSubview(horizontalBarView)
         
         horizontalBarLeftAncherContraint = horizontalBarView.leftAnchor.constraint(equalTo: self.leftAnchor)
         horizontalBarLeftAncherContraint?.isActive = true
         
         horizontalBarView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/2).isActive = true
+        horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/4).isActive = true
         horizontalBarView.heightAnchor.constraint(equalToConstant: 2).isActive = true
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let x = CGFloat((indexPath as NSIndexPath).item) * frame.width / 3
+        let x = CGFloat((indexPath as NSIndexPath).item) * frame.width / 7
         horizontalBarLeftAncherContraint?.constant = x
-    
-        addOrPostVC?.scrollToMenuIndex((indexPath as NSIndexPath).item)
+        
+        //addOrPostVC?.scrollToMenuIndex((indexPath as NSIndexPath).item)
     }
     
     override func setupView() {
@@ -97,12 +97,12 @@ class MenuBar: BaseView, UICollectionViewDelegateFlowLayout, UICollectionViewDel
         self.clipsToBounds = true
         let selectedIndex = IndexPath(item: 0, section: 0)
         menuCollectionView.selectItem(at: selectedIndex, animated: false, scrollPosition: UICollectionViewScrollPosition())
-                
+        
         menuCollectionView.register(MenuBarCell.self, forCellWithReuseIdentifier: CELL_ID)
         addSubview(menuCollectionView)
         
         setupHorizontalBarView()
-
+        
         //CollectionView Constraints
         addConstrainstsWithFormat("H:|[v0]|", views: menuCollectionView)
         addConstrainstsWithFormat("V:|[v0]-0.5-|", views: menuCollectionView)
@@ -113,12 +113,12 @@ class MenuBar: BaseView, UICollectionViewDelegateFlowLayout, UICollectionViewDel
 }
 
 class MenuBarCell: BaseCell {
-
+    
     var menuLabel:UILabel = {
         let label = UILabel()
-            label.textAlignment = .center
-            label.textColor = .white
-            label.font = UIFont(name: "NotoSans", size: 14)
+        label.textAlignment = .center
+        label.textColor = .white
+        label.font = UIFont(name: "NotoSans", size: 12)
         return label
     }()
     
@@ -149,7 +149,7 @@ class MenuBarCell: BaseCell {
         
         //CenterY
         addConstraint(NSLayoutConstraint(item: menuLabel, attribute: .centerY, relatedBy: .equal, toItem: self, attribute: .centerY, multiplier: 1, constant: 0))
-
+        
     }
 }
 

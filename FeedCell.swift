@@ -9,66 +9,49 @@
 import UIKit
 import MapKit
 
-class FeedCell: BaseCell, CLLocationManagerDelegate {
-    var postsDetails:Posts? {
+private let CELL_EVENTS = "Cell_Evets"
+
+class FeedCell: BaseCell {
+    
+    var _eventDetails:Events? {
         didSet {
+            guard let eventDetails = _eventDetails else {return}
             
-            guard let posts = postsDetails else {return}
-            
-            placeDetails.postTitle.text = posts.postDescription
-            placeDetails.location.text = posts.location
-            
-            placeDetails.ratingIcon.setRating(rating: posts.rating)
-            
-            
-            if let photoRefrence = posts.photoRefrence {
+            if let coverURL = eventDetails.coverURL  {
                 
-                let url = "https://maps.googleapis.com/maps/api/place/photo?maxwidth=400&photoreference=\(photoRefrence)&key=AIzaSyC4StcqHSO6EuYx56D_mCoUJBCwvHSo8Xo"
-                
-                placeDetails.locationIcon.getImagesBack(url: url, placeHolder: "Profile")
+                coverImage.getImagesBack(url: coverURL, placeHolder: "emptyImage")
             }
         }
     }
     
-    var friendsFeedView:HomePage?
-    
-    lazy var feedAllPhotosVC:PicturesInsideCell = {
-        let fp = PicturesInsideCell()
-            fp.feedCell = self
-            fp.alpha = 0.7
-        return fp
+    let coverImage:UIImageView = {
+        let image = UIImageView()
+            image.backgroundColor = .red
+            image.layer.masksToBounds = true
+            image.contentMode = .scaleAspectFill
+        return image
     }()
     
-    var allphotosFeedHeight:NSLayoutConstraint?
-    
-    var placeDetails:PlaceDetails = {
-        let pd = PlaceDetails()
-        return pd
+    let segmentedControl:UISegmentedControl = {
+        let segment = UISegmentedControl(items: ["Call","Direction", "Photos"])
+            segment.backgroundColor = darkGray
+        return segment
     }()
-
+    
     override func setupView() {
         super.setupView()
         
-        backgroundColor = .white
+        addSubview(coverImage)
         
-        addSubview(feedAllPhotosVC)
-        addSubview(placeDetails)
-    
-        //FeedAllphotosVC Constraints
-        addConstrainstsWithFormat("H:|[v0]|", views: feedAllPhotosVC)
-        addConstrainstsWithFormat("V:|-15-[v0]", views: feedAllPhotosVC)
+        addConstrainstsWithFormat("H:|[v0]|", views: coverImage)
+        addConstrainstsWithFormat("V:|[v0]|", views: coverImage)
         
-        allphotosFeedHeight = NSLayoutConstraint(item: feedAllPhotosVC, attribute: .height, relatedBy: .equal, toItem: feedAllPhotosVC, attribute: .height, multiplier: 0, constant: 175)
+        addSubview(segmentedControl)
         
-        guard let height = allphotosFeedHeight else {return}
-        
-        self.addConstraint(height)
-        
-        addConstrainstsWithFormat("H:|-5-[v0]-5-|", views: placeDetails)
-        addConstrainstsWithFormat("V:[v0(100)]-5-|", views: placeDetails)
+        addConstrainstsWithFormat("H:|[v0]|", views: segmentedControl)
+        addConstrainstsWithFormat("V:[v0(40)]|", views: segmentedControl)
     }
 }
-
 
 
 

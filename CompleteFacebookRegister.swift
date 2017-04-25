@@ -105,7 +105,7 @@ class CompleteFacebookRegister: UIViewController, UITextFieldDelegate {
         FBSDKGraphRequest(graphPath: "me", parameters: parameters).start { (connection, results, error) in
             
             if error != nil {
-                print(error)
+                print(error ?? "")
                 return
             }
             
@@ -115,6 +115,7 @@ class CompleteFacebookRegister: UIViewController, UITextFieldDelegate {
                     
                     self.userFacebookName.text  = ("\(first_name) \(last_name)")
                 }
+                
                 
                 if let picture = result["picture"] as? NSDictionary, let data = picture["data"] as? NSDictionary, let url = data["url"] as? String {
                     
@@ -137,7 +138,7 @@ class CompleteFacebookRegister: UIViewController, UITextFieldDelegate {
             storageRef.put(uploadData, metadata: nil) { (metaData, error) in
                 
                 if error != nil {
-                    print(error)
+                    print(error ?? "")
                     return
                 }
                 
@@ -149,9 +150,11 @@ class CompleteFacebookRegister: UIViewController, UITextFieldDelegate {
                     
                     print("Successfully Created The User")
                     UserDefaults.standard.setValue(userUID, forKey: KEY_UID)
-                    let tabarController = CostumeTabBar()
+                    
+                    let homePage = HomePage(collectionViewLayout: UICollectionViewFlowLayout())
+                    let navController = UINavigationController(rootViewController: homePage)
+                    self.present(navController, animated: false, completion: nil)
                     self.navigationController?.setNavigationBarHidden(true, animated: false)
-                    self.navigationController?.pushViewController(tabarController, animated: true)
                     progressHUD.hide(animated: true)
                 }
             }
@@ -165,7 +168,7 @@ class CompleteFacebookRegister: UIViewController, UITextFieldDelegate {
         FIRAuth.auth()?.signIn(with: facebookCredentials, completion: { (facebookUser, error) in
             
             if error != nil {
-                print(error)
+                print(error ?? "")
                 return
             }
             
