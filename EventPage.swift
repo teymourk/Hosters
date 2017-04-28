@@ -31,6 +31,6 @@ class EventPage: UIViewController {
         view.backgroundColor = .white
         navigationController?.navigationBar.isTranslucent = false
         
-        pageNotfication.showNotification("Working On The Layout")
+     
     }
 }
