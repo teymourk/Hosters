@@ -12,16 +12,11 @@ import CoreData
 import FBSDKCoreKit
 
 private let CELL_FEED = "Cell_FEED"
-private let HEADER_ID = "Header_ID"
+private let HEADER_ID = "HEADER_ID"
 
 class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     
-    var events:[[Events]]? {
-        didSet {
-            
-            self.collectionView?.reloadData()
-        }
-    }
+    var eventsDictionary:[Int:[Events]]? = [Int:[Events]]()
     
     lazy var locationManager:CLLocationManager? = {
         let manager = CLLocationManager()
@@ -46,24 +41,48 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         super.viewDidLoad()
         
         self.navigationController?.navigationBar.isTranslucent = false
-        self.view.backgroundColor = .white
-    
+        
         locationManager?.requestWhenInUseAuthorization()
 
-        collectionView?.register(FeedCell.self, forCellWithReuseIdentifier: CELL_FEED)
-        collectionView?.register(EventHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HEADER_ID)
+        collectionView?.register(HomeCell.self, forCellWithReuseIdentifier: CELL_FEED)
+        collectionView?.register(LiveEvents.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HEADER_ID)
         collectionView?.addSubview(refresher)
-        collectionView?.backgroundColor = .white
+        collectionView?.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        collectionView?.backgroundColor = UIColor(white: 0.9, alpha: 1)
         
         fetchEvents()
     }
     
+    internal func eventTypeFetch(index:Int, type:String) {
+        
+        Events.fetchEventsFromFacebook(refresher:refresher, type: type) { (events) in
+            
+            if !events.isEmpty {
+                
+                self.eventsDictionary?[index] = events
+                self.collectionView?.reloadData()
+                
+            } else {
+                
+                print("NO EVENTS FOUND")
+            }
+        }
+    }
+    
     func fetchEvents() {
         
-        Events.fetchEventsFromFacebook(refresher:refresher, type: "not_replied") { (events) in
-            
-            self.events = events
-        }
+        eventTypeFetch(index: 0, type: "not_replied")
+        eventTypeFetch(index: 1, type: "attending")
+        eventTypeFetch(index: 2, type: "maybe")
+        eventTypeFetch(index: 3, type: "declined")
+    }
+    
+    internal func navigateToEventDetails(eventDetail:Events) {
+        
+        let eventPage = EventPage()
+            eventPage._eventDetails = eventDetail
+        self.navigationController?.pushViewController(eventPage, animated: true)
     }
     
     func onRefreshPage() {
@@ -76,14 +95,5 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         }
         
         refresher.endRefreshing()
-    }
-    
-
-    var seperator:UIView = {
-        let seperator = UIView()
-            seperator.backgroundColor = orange
-            seperator.translatesAutoresizingMaskIntoConstraints = false
-        return seperator
-    }()
-    
+    }    
 }
