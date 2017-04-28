@@ -176,7 +176,7 @@ class Events: NSObject {
                 
                 for arrayObj in dataArray {
                     
-                    if let dataDic = arrayObj as? NSDictionary, let event_id = dataDic["id"] as? String {
+                    if let dataDic = arrayObj as? NSDictionary {
                         
                         let eventsObj = Events(dictionary: dataDic)
                         
