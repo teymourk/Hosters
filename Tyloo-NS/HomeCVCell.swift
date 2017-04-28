@@ -78,6 +78,6 @@ extension HomeCVCell: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return CGSize(width: (frame.width) - (frame.width / 7),
-                      height: FEED_CELL_HEIGHT - 70)
+                      height: FEED_CELL_HEIGHT - 90)
     }
 }

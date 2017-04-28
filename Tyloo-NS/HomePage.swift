@@ -80,7 +80,7 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     
     internal func navigateToEventDetails(eventDetail:Events) {
         
-        let eventPage = EventPage()
+        let eventPage = EventDetailsPage(collectionViewLayout: UICollectionViewFlowLayout())
             eventPage._eventDetails = eventDetail
         self.navigationController?.pushViewController(eventPage, animated: true)
     }

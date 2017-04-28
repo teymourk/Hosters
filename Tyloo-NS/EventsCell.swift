@@ -36,25 +36,6 @@ class EventsCell: BaseCell {
                     location.text = "Location Not Available 🤔"
                 }
                 
-                if let status = eventDetails.rsvp_status {
-                    
-                    switch status {
-    
-                    case "unsure":
-                        segmentController.selectedSegmentIndex = 0
-                        break
-                    case "attending":
-                        segmentController.selectedSegmentIndex = 1
-                        break
-                    case "declined":
-                        segmentController.selectedSegmentIndex = 2
-                        break
-                    default:
-                        segmentController.selectedSegmentIndex = 3
-                        break
-                    }
-                }
-                
                 if let interestedCount = eventDetails.interested_count, let declinedCount = eventDetails.declined_count, let attendingCount = eventDetails.attending_count {
                     
                     guestCounts.text = "✅ Going: \(attendingCount) . 🤔 Interested: \(interestedCount) . ❌ Not Going: \(declinedCount)"
@@ -64,6 +45,7 @@ class EventsCell: BaseCell {
     
     let headerView:HeaderView = {
         let hd = HeaderView()
+            hd.translatesAutoresizingMaskIntoConstraints = false
         return hd
     }()
     
@@ -72,6 +54,7 @@ class EventsCell: BaseCell {
             image.contentMode = .scaleAspectFill
             image.layer.masksToBounds = true
             image.image = UIImage(named: "emptyCover")
+            image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
@@ -91,18 +74,9 @@ class EventsCell: BaseCell {
         return label
     }()
     
-    var segmentController:UISegmentedControl = {
-        let segment = UISegmentedControl(items: ["Interested", "Going","Not Going", "No Response"])
-        segment.tintColor = .lightGray
-        segment.isUserInteractionEnabled = false
-        segment.translatesAutoresizingMaskIntoConstraints = false
-        return segment
-    }()
-    
     let guestCounts:UILabel = {
         let label = UILabel()
             label.textColor = .black
-            label.text = "jeijfeifjeifjeijfeijfeifjef"
             label.font = UIFont(name: "Prompt", size: 12)
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -146,14 +120,6 @@ class EventsCell: BaseCell {
         guestCounts.leftAnchor.constraint(equalTo: title.leftAnchor).isActive = true
         guestCounts.topAnchor.constraint(equalTo: location.bottomAnchor, constant:5).isActive = true
         guestCounts.heightAnchor.constraint(equalToConstant: 15).isActive = true
-        
-        addSubview(segmentController)
-        
-        segmentController.leftAnchor.constraint(equalTo: leftAnchor, constant: -4).isActive = true
-        segmentController.rightAnchor.constraint(equalTo: rightAnchor, constant: 4).isActive = true
-        segmentController.topAnchor.constraint(equalTo: guestCounts.bottomAnchor, constant: 5).isActive = true
-        segmentController.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        
     }
 }
 

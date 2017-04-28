@@ -8,42 +8,61 @@
 
 import UIKit
 
-class EventPage: UIViewController {
-    
-    var _eventDetails:Events? {
-        didSet {
-            
-            guard let eventDetails = _eventDetails else {return}
-            
-            if let imageURL = eventDetails.coverURL {
-                
-                coverImage.getImagesBack(url: imageURL, placeHolder: "emptyImage")
-            }
-        }
-    }
-    
-    var coverImage:UIImageView = {
-        let image = UIImageView()
-            image.contentMode = .scaleAspectFill
-            image.layer.masksToBounds = true
-        return image
-    }()
-    
-    
-    let pageNotfication:PageNotifications = {
-        let pg = PageNotifications()
-        return pg
-    }()
+private let CELL_FEED = "Cell_FEED"
+private let HEADER_ID = "HEADER_ID"
 
+class EventDetailsPage: UICollectionViewController {
+    
+    var _eventDetails:Events? 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "Event Page"
 
-        view.backgroundColor = .white
+        collectionView?.backgroundColor = .white
         navigationController?.navigationBar.isTranslucent = false
-        
-        view.addConstrainstsWithFormat("H:|[v0]|", views: coverImage)
-        view.addConstrainstsWithFormat("V:|[v0(50)]", views: coverImage)
+        collectionView?.register(EventDetailsCell.self, forCellWithReuseIdentifier: CELL_FEED)
+
     }
 }
+
+extension EventDetailsPage:  UICollectionViewDelegateFlowLayout {
+    
+    //Mark: CollectionView Delegate/DataSource
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+        
+        return 1
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+        
+        
+        if indexPath.item == 0 {
+
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_FEED, for: indexPath) as? EventDetailsCell {
+            
+                if let eventDetails = _eventDetails {
+                    
+                    cell._eventDetails = eventDetails
+                }
+                
+                return cell
+            }
+        }
+        
+        return BaseCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        return CGSize(width: view.frame.width,
+                      height: FEED_CELL_HEIGHT - 30)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        
+        return 5
+    }
+}
+
