@@ -17,35 +17,19 @@ class CostumeTabBar: UITabBarController {
         self.tabBar.isTranslucent = false
         
         let layout = UICollectionViewFlowLayout()
-            layout.sectionHeadersPinToVisibleBounds = true
-        
-        let invitedEvents = HomePage(collectionViewLayout: layout)
-        invitedEvents.navigationItem.title = "Invited"
-        let navigationController = UINavigationController(rootViewController: invitedEvents)
-        navigationController.tabBarItem.title = "Invited"
-        
-        let attendingEvents = AttendingPage(collectionViewLayout: UICollectionViewFlowLayout())
-        attendingEvents.navigationItem.title = "Attending"
-        let secondNavigationController = UINavigationController(rootViewController: attendingEvents)
-        secondNavigationController.tabBarItem.title = "Attending"
 
-        let declinedEvents = DeclinedPage(collectionViewLayout: UICollectionViewFlowLayout())
-        declinedEvents.navigationItem.title = "Declined"
-        let thirdNavigationController = UINavigationController(rootViewController: declinedEvents)
-        thirdNavigationController.tabBarItem.title = "Declined"
+        let invitedEvents = HomePage(collectionViewLayout: layout)
+        invitedEvents.navigationItem.title = "Home"
+        let navigationController = UINavigationController(rootViewController: invitedEvents)
+        navigationController.tabBarItem.image = UIImage(named: "home-normal")
         
-        let UnsureEvents = UnsurePage(collectionViewLayout: UICollectionViewFlowLayout())
-        UnsureEvents.navigationItem.title = "Unsure"
-        let fourthNavigationController = UINavigationController(rootViewController: UnsureEvents)
-        fourthNavigationController.tabBarItem.title = "Unsure"
-        
-        let myEvents = MyPage(collectionViewLayout: UICollectionViewLayout())
-        myEvents.navigationItem.title = "Created"
-        let fifthNavigationController = UINavigationController(rootViewController: myEvents)
-        fifthNavigationController.tabBarItem.title = "Created"
+        let userProfile = UserProfile()
+        userProfile.navigationItem.title = "Profile"
+        let navigationController2 = UINavigationController(rootViewController: userProfile)
+        navigationController2.tabBarItem.image = UIImage(named: "profile-1")
         
         self.navigationItem.hidesBackButton = true
-        viewControllers = [navigationController, secondNavigationController, thirdNavigationController,fourthNavigationController, fifthNavigationController]
+        viewControllers = [navigationController, navigationController2]
     }
     
 }

@@ -9,28 +9,24 @@
 import UIKit
 
 private let CELL_FEED = "Cell_FEED"
-private let HEADER_ID = "Header_ID"
+private let HEADER_ID = "HEADER_ID"
 
 extension HomePage: UICollectionViewDelegateFlowLayout {
     
-    //Mark: CollectionView Delegate/DataSource
-    override func numberOfSections(in collectionView: UICollectionView) -> Int {
-
-        return events?.count ?? 0
-    }
-    
+    //Mark: CollectionView Delegate/DataSource    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return events?[section].count ?? 0
+        return eventsDictionary?.count ?? 0 
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_FEED, for: indexPath) as? FeedCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_FEED, for: indexPath) as? HomeCell {
             
-            if let eventDetails = events?[indexPath.section][indexPath.item] {
+            if let eventsArray = eventsDictionary?[indexPath.item] {
                 
-                cell._eventDetails = eventDetails
+                cell.eventsCV.events = eventsArray
+                cell.eventsCV.homePage = self
             }
             
             return cell
@@ -45,21 +41,15 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
                       height: FEED_CELL_HEIGHT)
     }
     
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         
         return 5
     }
     
-    //Mark: HeadeDelegate
+    //Mark: HeaderDelegate
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        if let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HEADER_ID, for: indexPath) as? EventHeader {
-            
-            if let eventHeader = events?[indexPath.section][indexPath.item] {
-                
-                header.eventDetails = eventHeader
-            }
+        if let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HEADER_ID, for: indexPath) as? LiveEvents {
             
             return header
         }
@@ -69,6 +59,13 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        return CGSize(width: view.frame.width, height: 45)
+        return CGSize(width: view.frame.width,
+                      height: 50)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+        
+        return UIEdgeInsets(top: 15,
+                            left: 0, bottom: 0, right: 0)
     }
 }
