@@ -372,7 +372,7 @@ extension Date {
                 
             }
         
-            return "\(month) \(day), \(year) at \(formatterHour) \(am_pm)"
+            return "\(month) \(day), \(year) at \(formatterHour) \(am_pm) 🗓"
         }
         
         return ""

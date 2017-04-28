@@ -56,7 +56,7 @@ class MenuBar: BaseView, UICollectionViewDelegateFlowLayout, UICollectionViewDel
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: frame.width/6, height: frame.height)
+        return CGSize(width: frame.width/4, height: frame.height)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -77,13 +77,13 @@ class MenuBar: BaseView, UICollectionViewDelegateFlowLayout, UICollectionViewDel
         horizontalBarLeftAncherContraint?.isActive = true
         
         horizontalBarView.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/4).isActive = true
+        horizontalBarView.widthAnchor.constraint(equalTo: self.widthAnchor, multiplier: 1/3).isActive = true
         horizontalBarView.heightAnchor.constraint(equalToConstant: 2).isActive = true
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        let x = CGFloat((indexPath as NSIndexPath).item) * frame.width / 7
+        let x = CGFloat((indexPath as NSIndexPath).item) * frame.width / 3
         horizontalBarLeftAncherContraint?.constant = x
         
         //addOrPostVC?.scrollToMenuIndex((indexPath as NSIndexPath).item)
