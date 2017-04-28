@@ -15,10 +15,20 @@ class EventPage: UIViewController {
             
             guard let eventDetails = _eventDetails else {return}
             
-            print(eventDetails.descriptions ?? "")
-            
+            if let imageURL = eventDetails.coverURL {
+                
+                coverImage.getImagesBack(url: imageURL, placeHolder: "emptyImage")
+            }
         }
     }
+    
+    var coverImage:UIImageView = {
+        let image = UIImageView()
+            image.contentMode = .scaleAspectFill
+            image.layer.masksToBounds = true
+        return image
+    }()
+    
     
     let pageNotfication:PageNotifications = {
         let pg = PageNotifications()
@@ -27,11 +37,13 @@ class EventPage: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        self.title = "Event Page"
 
         view.backgroundColor = .white
         navigationController?.navigationBar.isTranslucent = false
         
-        pageNotfication.showNotification("Working On The Layout")
-        
+        view.addConstrainstsWithFormat("H:|[v0]|", views: coverImage)
+        view.addConstrainstsWithFormat("V:|[v0(50)]", views: coverImage)
     }
 }
