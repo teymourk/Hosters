@@ -31,6 +31,10 @@ class EventPage: UIViewController {
         view.backgroundColor = .white
         navigationController?.navigationBar.isTranslucent = false
         
-     
+        pageNotfication.showNotification("Working On The Layout")
+        
     }
 }
+
+
+// git commit -a -m "pathspec did not match any file(s) known to git fix"
