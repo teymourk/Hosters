@@ -38,3 +38,5 @@ class EventPage: UIViewController {
 
 
 // git commit -a -m "pathspec did not match any file(s) known to git fix"
+
+// git push origin master
