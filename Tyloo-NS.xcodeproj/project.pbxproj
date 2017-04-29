@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		0B13D80F1EB06B3B00F07A04 /* LiveEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B13D80E1EB06B3B00F07A04 /* LiveEvents.swift */; };
+		0B24E4D41EB5200E0037D1D5 /* Tyloo_NSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24E4D31EB5200E0037D1D5 /* Tyloo_NSTests.swift */; };
+		0B24E4DC1EB5255B0037D1D5 /* DetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24E4DB1EB5255B0037D1D5 /* DetailsCell.swift */; };
+		0B24E4DE1EB5277E0037D1D5 /* DetailedPageImagesCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24E4DD1EB5277E0037D1D5 /* DetailedPageImagesCell.swift */; };
 		0B2EE8321EA6F53900148E50 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2EE8311EA6F53900148E50 /* RegisterVC.swift */; };
 		0B34FFED1EB11E0F00BE138C /* EventPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B34FFEC1EB11E0F00BE138C /* EventPageCell.swift */; };
 		0B34FFEF1EB11F5A00BE138C /* GuestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B34FFEE1EB11F5A00BE138C /* GuestsCell.swift */; };
@@ -44,8 +47,23 @@
 		ABCBD8F01DD29A6E008D0CAF /* HomeAudit.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCBD8EF1DD29A6E008D0CAF /* HomeAudit.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		0B24E4D61EB5200E0037D1D5 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = ABC77A671D0C916600C46DD0 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = ABC77A6E1D0C916600C46DD0;
+			remoteInfo = "Tyloo-NS";
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		0B13D80E1EB06B3B00F07A04 /* LiveEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveEvents.swift; sourceTree = "<group>"; };
+		0B24E4D11EB5200E0037D1D5 /* Tyloo-NSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tyloo-NSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		0B24E4D31EB5200E0037D1D5 /* Tyloo_NSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tyloo_NSTests.swift; sourceTree = "<group>"; };
+		0B24E4D51EB5200E0037D1D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0B24E4DB1EB5255B0037D1D5 /* DetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsCell.swift; sourceTree = "<group>"; };
+		0B24E4DD1EB5277E0037D1D5 /* DetailedPageImagesCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailedPageImagesCell.swift; sourceTree = "<group>"; };
 		0B2EE8311EA6F53900148E50 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
 		0B34FFEC1EB11E0F00BE138C /* EventPageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPageCell.swift; sourceTree = "<group>"; };
 		0B34FFEE1EB11F5A00BE138C /* GuestsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuestsCell.swift; sourceTree = "<group>"; };
@@ -88,6 +106,13 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		0B24E4CE1EB5200E0037D1D5 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ABC77A6C1D0C916600C46DD0 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -99,6 +124,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0B24E4D21EB5200E0037D1D5 /* Tyloo-NSTests */ = {
+			isa = PBXGroup;
+			children = (
+				0B24E4D31EB5200E0037D1D5 /* Tyloo_NSTests.swift */,
+				0B24E4D51EB5200E0037D1D5 /* Info.plist */,
+			);
+			path = "Tyloo-NSTests";
+			sourceTree = "<group>";
+		};
 		0B3974FA1EA9E5580011ABD7 /* Event_Cells */ = {
 			isa = PBXGroup;
 			children = (
@@ -109,6 +143,8 @@
 				0B34FFEC1EB11E0F00BE138C /* EventPageCell.swift */,
 				0B34FFEE1EB11F5A00BE138C /* GuestsCell.swift */,
 				0B663A611EB2F69400BAC093 /* EventDetailsCell.swift */,
+				0B24E4DB1EB5255B0037D1D5 /* DetailsCell.swift */,
+				0B24E4DD1EB5277E0037D1D5 /* DetailedPageImagesCell.swift */,
 			);
 			name = Event_Cells;
 			sourceTree = "<group>";
@@ -194,6 +230,7 @@
 			isa = PBXGroup;
 			children = (
 				ABC77A711D0C916600C46DD0 /* Tyloo-NS */,
+				0B24E4D21EB5200E0037D1D5 /* Tyloo-NSTests */,
 				ABC77A701D0C916600C46DD0 /* Products */,
 				1B18AACF3E6669CB53EF5096 /* Pods */,
 				D45737E2BB8062EA8CCB1734 /* Frameworks */,
@@ -204,6 +241,7 @@
 			isa = PBXGroup;
 			children = (
 				ABC77A6F1D0C916600C46DD0 /* Tyloo-NS.app */,
+				0B24E4D11EB5200E0037D1D5 /* Tyloo-NSTests.xctest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -236,6 +274,24 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
+		0B24E4D01EB5200E0037D1D5 /* Tyloo-NSTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 0B24E4DA1EB5200E0037D1D5 /* Build configuration list for PBXNativeTarget "Tyloo-NSTests" */;
+			buildPhases = (
+				0B24E4CD1EB5200E0037D1D5 /* Sources */,
+				0B24E4CE1EB5200E0037D1D5 /* Frameworks */,
+				0B24E4CF1EB5200E0037D1D5 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				0B24E4D71EB5200E0037D1D5 /* PBXTargetDependency */,
+			);
+			name = "Tyloo-NSTests";
+			productName = "Tyloo-NSTests";
+			productReference = 0B24E4D11EB5200E0037D1D5 /* Tyloo-NSTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
 		ABC77A6E1D0C916600C46DD0 /* Tyloo-NS */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = ABC77A811D0C916600C46DD0 /* Build configuration list for PBXNativeTarget "Tyloo-NS" */;
@@ -262,10 +318,16 @@
 		ABC77A671D0C916600C46DD0 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				LastSwiftUpdateCheck = 0730;
+				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "Kiarash Teymoury";
 				TargetAttributes = {
+					0B24E4D01EB5200E0037D1D5 = {
+						CreatedOnToolsVersion = 8.2;
+						DevelopmentTeam = LC5873RCDE;
+						ProvisioningStyle = Automatic;
+						TestTargetID = ABC77A6E1D0C916600C46DD0;
+					};
 					ABC77A6E1D0C916600C46DD0 = {
 						CreatedOnToolsVersion = 7.3.1;
 						DevelopmentTeam = LC5873RCDE;
@@ -295,11 +357,19 @@
 			projectRoot = "";
 			targets = (
 				ABC77A6E1D0C916600C46DD0 /* Tyloo-NS */,
+				0B24E4D01EB5200E0037D1D5 /* Tyloo-NSTests */,
 			);
 		};
 /* End PBXProject section */
 
 /* Begin PBXResourcesBuildPhase section */
+		0B24E4CF1EB5200E0037D1D5 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ABC77A6D1D0C916600C46DD0 /* Resources */ = {
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -365,6 +435,14 @@
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
+		0B24E4CD1EB5200E0037D1D5 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				0B24E4D41EB5200E0037D1D5 /* Tyloo_NSTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		ABC77A6B1D0C916600C46DD0 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -383,6 +461,7 @@
 				ABC77A731D0C916600C46DD0 /* AppDelegate.swift in Sources */,
 				AB2EFDB51D0E29FD00B21A18 /* BaseCell.swift in Sources */,
 				AB34B8B91D30B0BD00B2F4E0 /* PageNotifications.swift in Sources */,
+				0B24E4DC1EB5255B0037D1D5 /* DetailsCell.swift in Sources */,
 				AB8376B91D83203A0083B94C /* CompleteFacebookRegister.swift in Sources */,
 				AB344B011DD84852004236E5 /* Reachability.swift in Sources */,
 				ABBFAA041D0FC13000BB4D5C /* FirebaseRef.swift in Sources */,
@@ -392,6 +471,7 @@
 				AB2EFDB31D0E29E000B21A18 /* HomeCell.swift in Sources */,
 				0B8EE9431EB02E1800218394 /* HomeCVCell.swift in Sources */,
 				AB7E87AA1D0CE39E00750B76 /* Extensions.swift in Sources */,
+				0B24E4DE1EB5277E0037D1D5 /* DetailedPageImagesCell.swift in Sources */,
 				ABCBD8F01DD29A6E008D0CAF /* HomeAudit.swift in Sources */,
 				0B34FFED1EB11E0F00BE138C /* EventPageCell.swift in Sources */,
 				0BE43C9C1EB0FF3600062E07 /* EventPage.swift in Sources */,
@@ -401,7 +481,46 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		0B24E4D71EB5200E0037D1D5 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = ABC77A6E1D0C916600C46DD0 /* Tyloo-NS */;
+			targetProxy = 0B24E4D61EB5200E0037D1D5 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
 /* Begin XCBuildConfiguration section */
+		0B24E4D81EB5200E0037D1D5 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = LC5873RCDE;
+				INFOPLIST_FILE = "Tyloo-NSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kia.keyFail.Tyloo-NSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tyloo-NS.app/Tyloo-NS";
+			};
+			name = Debug;
+		};
+		0B24E4D91EB5200E0037D1D5 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				DEVELOPMENT_TEAM = LC5873RCDE;
+				INFOPLIST_FILE = "Tyloo-NSTests/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks @loader_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "com.kia.keyFail.Tyloo-NSTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_VERSION = 3.0;
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Tyloo-NS.app/Tyloo-NS";
+			};
+			name = Release;
+		};
 		ABC77A7F1D0C916600C46DD0 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -535,6 +654,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		0B24E4DA1EB5200E0037D1D5 /* Build configuration list for PBXNativeTarget "Tyloo-NSTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				0B24E4D81EB5200E0037D1D5 /* Debug */,
+				0B24E4D91EB5200E0037D1D5 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		ABC77A6A1D0C916600C46DD0 /* Build configuration list for PBXProject "Tyloo-NS" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (

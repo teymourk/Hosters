@@ -20,15 +20,7 @@ class EventDetailsCell: EventsCell {
         return label
     }()
     
-    var detailView:AboutView = {
-        let dv = AboutView()
-            dv.translatesAutoresizingMaskIntoConstraints = false
-        return dv
-    }()
-    
     override func setupView() {
-        
-        //guard let eventDetails = _eventDetails else {return}
         
         guestCounts.removeFromSuperview()
         
@@ -43,7 +35,7 @@ class EventDetailsCell: EventsCell {
         addConstrainstsWithFormat("H:|[v0]|", views: coverImage)
         
         coverImage.topAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
-        coverImage.heightAnchor.constraint(equalToConstant: FEED_CELL_HEIGHT / 1.5).isActive = true
+        coverImage.heightAnchor.constraint(equalToConstant: FEED_CELL_HEIGHT / 1.7).isActive = true
         
         addSubview(title)
         
@@ -65,31 +57,5 @@ class EventDetailsCell: EventsCell {
         addressLabel.leftAnchor.constraint(equalTo: title.leftAnchor, constant: 20).isActive = true
         addressLabel.topAnchor.constraint(equalTo: location.bottomAnchor, constant:5).isActive = true
         addressLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
-        
-        addSubview(detailView)
-        
-        addConstrainstsWithFormat("H:|[v0]|", views: detailView)
-        addConstrainstsWithFormat("V:[v0(70)]", views: detailView)
-        
-        detailView.topAnchor.constraint(equalTo: addressLabel.bottomAnchor, constant: 20).isActive = true
     }
 }
-
-class AboutView:BaseView {
-    
-    let detailsText:UITextView = {
-        let textView = UITextView()
-            textView.textColor = .lightText
-            textView.font = UIFont(name: "Prompt", size: 12)
-        return textView
-    }()
-    
-    override func setupView() {
-        
-        backgroundColor = .red
-        
-        addSubview(detailsText)
-    }
-}
-
-

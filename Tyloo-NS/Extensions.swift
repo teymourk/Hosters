@@ -394,13 +394,15 @@ extension Date {
             let now = Date()
             let calendar = Calendar.current
             let components = DateComponents(calendar: calendar, year:_year, month: _month, day:_day, hour: _hour)
-            let nextdate = calendar.nextDate(after: now, matching: components, matchingPolicy: .nextTime)!
             
-            let timeLeft = calendar.dateComponents([.month, .day, .hour, .minute, .second], from: now, to: nextdate)
-            
-            if let _ = timeLeft.month, let daysLeft = timeLeft.day, let hoursLeft = timeLeft.hour, let minutesLeft = timeLeft.minute, let secondsLeft = timeLeft.second {
+            if let nextdate = calendar.nextDate(after: now, matching: components, matchingPolicy: .nextTime) {
                 
-                return "\(daysLeft)d:\(hoursLeft)h:\(minutesLeft)m:\(secondsLeft):s"
+                let timeLeft = calendar.dateComponents([.month, .day, .hour, .minute, .second], from: now, to: nextdate)
+                
+                if let _ = timeLeft.month, let daysLeft = timeLeft.day, let hoursLeft = timeLeft.hour, let minutesLeft = timeLeft.minute, let secondsLeft = timeLeft.second {
+                    
+                    return "\(daysLeft)d:\(hoursLeft)h:\(minutesLeft)m:\(secondsLeft):s"
+                }
             }
         }
         
