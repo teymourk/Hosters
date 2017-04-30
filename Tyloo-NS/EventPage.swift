@@ -26,7 +26,6 @@ class EventDetailsPage: UICollectionViewController {
         collectionView?.backgroundColor = .white
         collectionView?.register(EventDetailsCell.self, forCellWithReuseIdentifier: CELL_FEED)
         collectionView?.register(DetailsCell.self, forCellWithReuseIdentifier: CELL_DETAILS)
-        collectionView?.register(DetailedPageImagesCell.self, forCellWithReuseIdentifier: CELL_IMAGES)
     }
 }
 
@@ -35,7 +34,7 @@ extension EventDetailsPage:  UICollectionViewDelegateFlowLayout {
     //Mark: CollectionView Delegate/DataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 3
+        return 2
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
@@ -51,6 +50,7 @@ extension EventDetailsPage:  UICollectionViewDelegateFlowLayout {
                 
                 return cell
             }
+            
         } else if indexPath.item == 1 {
             
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_DETAILS, for: indexPath) as? DetailsCell {
@@ -60,13 +60,6 @@ extension EventDetailsPage:  UICollectionViewDelegateFlowLayout {
                     cell.details = eventDetails
                 }
     
-                return cell
-            }
-            
-        } else if indexPath.item == 2 {
-            
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_IMAGES, for: indexPath) as? DetailedPageImagesCell {
-                
                 return cell
             }
         }
@@ -96,14 +89,8 @@ extension EventDetailsPage:  UICollectionViewDelegateFlowLayout {
             }
         }
         
-        if indexPath.item == 2 {
-            
-            return CGSize(width: view.frame.width,
-                          height: 200)
-        }
-        
         return CGSize(width: view.frame.width,
-                      height: FEED_CELL_HEIGHT)
+                      height: FEED_CELL_HEIGHT - 10)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

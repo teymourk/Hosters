@@ -17,7 +17,9 @@ private let HEADER_ID = "HEADER_ID"
 class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     
     var eventsDictionary:[Int:[Events]]? = [Int:[Events]]()
+    var liveEventArray:[Events]? = [Events]()
     
+
     lazy var locationManager:CLLocationManager? = {
         let manager = CLLocationManager()
             manager.delegate = self
@@ -73,9 +75,9 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     func fetchEvents() {
         
         eventTypeFetch(index: 0, type: "not_replied")
-        eventTypeFetch(index: 1, type: "attending")
-        eventTypeFetch(index: 2, type: "maybe")
-        eventTypeFetch(index: 3, type: "declined")
+        //eventTypeFetch(index: 1, type: "attending")
+        eventTypeFetch(index: 1, type: "maybe")
+        //eventTypeFetch(index: 3, type: "declined")
     }
     
     internal func navigateToEventDetails(eventDetail:Events) {

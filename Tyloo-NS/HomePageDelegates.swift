@@ -50,17 +50,26 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         if let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HEADER_ID, for: indexPath) as? LiveEvents {
-            
+        
             return header
         }
-        
-        return UICollectionReusableView()
+
+        return BaseCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
+        if let liveEvent = liveEventArray {
+         
+            if liveEvent.isEmpty {
+                
+                return CGSize(width: view.frame.width,
+                              height: 50)
+            }
+        }
+        
         return CGSize(width: view.frame.width,
-                      height: 50)
+                      height: FEED_CELL_HEIGHT - 30)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
