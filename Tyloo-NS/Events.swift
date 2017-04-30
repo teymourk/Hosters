@@ -201,7 +201,7 @@ class Events: NSObject {
             if let result = results as? NSDictionary, let dataArray = result["data"] as? NSArray {
                 
                 let formatter = DateFormatter()
-                    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+                formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
                 let olddate = formatter.date(from: "2017-04-29 7:00:00 +0000") //This Will Be Date of launch
                 
                 for arrayObj in dataArray {
@@ -219,6 +219,7 @@ class Events: NSObject {
                 
                 let live = eventsArray.filter({currentTime > $0.start_time! && currentTime < $0.end_time!})
                 liveEvents = live
+                
             }
             
             DispatchQueue.main.async {

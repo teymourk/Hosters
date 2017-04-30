@@ -46,6 +46,7 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         locationManager?.requestWhenInUseAuthorization()
 
         collectionView?.register(HomeCell.self, forCellWithReuseIdentifier: CELL_FEED)
+        collectionView?.register(LiveEvents.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HEADER_ID)
         collectionView?.addSubview(refresher)
         collectionView?.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
@@ -55,34 +56,34 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     }
     
     internal func eventTypeFetch(index:Int, type:String) {
-        
+
         Events.fetchEventsFromFacebook(refresher:refresher, type: type) { (allEvents, live) in
     
             if !allEvents.isEmpty {
                 
+                self.eventsDictionary?[index] = allEvents
+                
                 if !live.isEmpty {
                 
                     self.liveEventArray = live
-                    self.eventsDictionary?[0] = live
+                    
                 }
-                
-                self.eventsDictionary?[index] = allEvents
+        
+                self.collectionView?.reloadData()
                 
             } else {
                 
                 print("NO EVENTS FOUND")
             }
-            
-            self.collectionView?.reloadData()
         }
     }
     
     func fetchEvents() {
         
-        eventTypeFetch(index: 1, type: "not_replied")
-        eventTypeFetch(index: 2, type: "attending")
-        eventTypeFetch(index: 3, type: "maybe")
-        eventTypeFetch(index: 4, type: "declined")
+        eventTypeFetch(index: 0, type: "not_replied")
+        eventTypeFetch(index: 1, type: "attending")
+        eventTypeFetch(index: 2, type: "maybe")
+        eventTypeFetch(index: 3, type: "declined")
     }
     
     internal func navigateToEventDetails(eventDetail:Events) {

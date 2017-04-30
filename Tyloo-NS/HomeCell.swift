@@ -19,8 +19,8 @@ class HomeCell: BaseCell {
     let categoryLabel:UILabel = {
         let label = UILabel()
             label.text = "Categories Of Each Event"
-            label.textColor = .black
-            label.font = UIFont(name: "NotoSans", size: 14)
+            label.textColor = .darkGray
+            label.font = UIFont.boldSystemFont(ofSize: 14)
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -35,7 +35,7 @@ class HomeCell: BaseCell {
     override func setupView() {
         super.setupView()
         
-        backgroundColor = .white
+        backgroundColor = .clear
         
         addSubview(categoryLabel)
         

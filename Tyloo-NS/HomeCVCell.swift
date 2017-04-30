@@ -25,7 +25,7 @@ class HomeCVCell: BaseCell  {
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
             cv.backgroundColor = .white
             cv.register(EventsCell.self, forCellWithReuseIdentifier: CELL_ID)
-            cv.contentInset = UIEdgeInsetsMake(-20, 10, 0, 0)
+            cv.contentInset = UIEdgeInsetsMake(0, 10, 0, 0)
             cv.delegate = self
             cv.dataSource = self
         return cv

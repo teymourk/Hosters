@@ -37,21 +37,44 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if let liveEvents = liveEventArray {
+        return CGSize(width: view.frame.width,
+                      height: FEED_CELL_HEIGHT - 30)
+    }
+    
+    //Mark: HeaderDelegate
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        if let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HEADER_ID, for: indexPath) as? LiveEvents {
             
-            if liveEvents.isEmpty && indexPath.item == 0 {
+            if let liveEvent = liveEventArray {
                 
-                return CGSize(width: view.frame.width,
-                              height: 50)
+                header.events = liveEvent
             }
+            
+            return header
         }
+        
+        return BaseCell()
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        
+            if let liveEvents = liveEventArray {
+        
+                if liveEvents.isEmpty {
+        
+                    return CGSize(width: view.frame.width,
+                                  height: 50)
+                }
+            }
         
         return CGSize(width: view.frame.width,
                       height: FEED_CELL_HEIGHT - 30)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        return 5
+        return UIEdgeInsets(top: 15,
+                            left: 0, bottom: 0, right: 0)
     }
 }

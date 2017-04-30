@@ -8,14 +8,45 @@
 
 import UIKit
 
-class LiveEvents: BaseCell {
+private let CELL_ID = "CELL_FEED"
 
-    /*
-    // Only override draw() if you perform custom drawing.
-    // An empty implementation adversely affects performance during animation.
-    override func draw(_ rect: CGRect) {
-        // Drawing code
+class LiveEvents: HomeCVCell {
+    
+    override var events: [Events]? {
+        
+        didSet {
+            
+            guard let events = events else {return}
+            
+            if events.isEmpty {
+                
+                setupNoLiveLabel()
+                return
+                
+            }
+                
+            self.eventCollectionView.reloadData()
+            self.noLiveLabel.removeFromSuperview()
+        }
     }
-    */
 
+    let noLiveLabel:UILabel = {
+        let label = UILabel()
+            label.text = "There Are No Live Events 🙄"
+            label.font = UIFont(name: "NotoSans", size: 14)
+            label.textAlignment = .center
+            label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    internal func setupNoLiveLabel() {
+        
+        addSubview(noLiveLabel)
+        
+        noLiveLabel.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        noLiveLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        noLiveLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+    }
 }
+
+

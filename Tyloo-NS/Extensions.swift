@@ -19,7 +19,7 @@ extension UIColor {
         
     }
 }
-//Internal extension?
+
 
 // Mark: Constraints Helper
 extension UIView {
@@ -59,50 +59,6 @@ extension UIImageView {
     }
 }
 
-
-//let imageCache = NSCache<AnyObject, AnyObject>()
-//
-//// Mark: ImageFrom Data Helper
-//extension UIImageView {
-//    
-//    //Download Image usig Heneke
-//    func getImagesBack(_ urlString:String, placeHolder:String, loader:UIActivityIndicatorView) {
-//        
-//        loader.startAnimating()
-//        self.image = nil
-//        
-//        if let cachedImage = imageCache.object(forKey: urlString as AnyObject) as? UIImage {
-//            
-//            self.image = cachedImage
-//            return
-//        }
-//        
-//        let imgURL = URL(string: urlString)
-//        
-//        if let imageURL = imgURL {
-//            
-//            URLSession.shared.dataTask(with: imageURL) { (data, response, error) in
-//                
-//                if error != nil {
-//                    print(error)
-//                    return
-//                }
-//                
-//                DispatchQueue.main.async(execute: {
-//                    
-//                    if let downloadedImage = UIImage(data: data!) {
-//                        
-//                        imageCache.setObject(downloadedImage, forKey: urlString as AnyObject)
-//                        self.image = downloadedImage
-//                        loader.stopAnimating()
-//                    }
-//                })
-//                
-//                }.resume()
-//        }
-//    }
-//}
-
 //Cell Animation
 extension UICollectionViewCell {
     
@@ -116,16 +72,6 @@ extension UICollectionViewCell {
             self.alpha = 1
         })
     }
-    
-    func handleFeedCellAnimation() {
-        
-        alpha = 0.2
-        
-        UIView.animate(withDuration: 0.7, animations: {
-            self.alpha = 1
-        })
-    }
-
 }
 
 extension UINavigationController {
@@ -152,76 +98,6 @@ extension UIView {
     }
 }
 
-extension UIImageView {
-    
-    func setRating(rating:Double) {
-        
-        switch rating {
-            
-        case 0:
-            self.image = UIImage(named: "0")
-        case 1:
-            self.image = UIImage(named: "1")
-        case 1.1...1.9:
-            self.image = UIImage(named: "15")
-        case 2:
-            self.image = UIImage(named: "2")
-        case 2.1...2.9:
-            self.image = UIImage(named: "25")
-        case 3:
-            self.image = UIImage(named: "3")
-        case 3.1...3.9:
-            self.image = UIImage(named: "35")
-        case 4:
-            self.image = UIImage(named: "4")
-        case 4.1...4.9:
-            self.image = UIImage(named: "45")
-        case 5:
-            self.image = UIImage(named: "5")
-        default: break
-            
-        }
-    }
-}
-
-//Clear Footer For table
-extension UITableView {
-    
-    func clearFooter() {
-        
-        let view = UIView(frame: CGRect.zero)
-        self.tableFooterView = view
-    }
-}
-
-extension UIButton {
-    
-    func handleFinidinTrackersForUser(_ userKey:String) {
-        
-        FirebaseRef.database.currentUser.child("user/Friends/Tracking").observeSingleEvent(of: .value, with: {
-            snapshot in
-            
-            if let trackingDic = snapshot.value as? [String:AnyObject] {
-                
-                trackingDic.contains(where: {$0.0 == userKey}) ? self.setTitle("Following", for: UIControlState()) : self.setTitle("Follow", for: UIControlState())
-                
-                self.backgroundColor = trackingDic.contains(where: {$0.0 == userKey}) ? orange :  .white
-            }
-        })
-    }
-}
-
-//extension UITabBar {
-//    
-//    override public func sizeThatFits(size: CGSize) -> CGSize {
-//        super.sizeThatFits(size)
-//        var sizeThatFits = super.sizeThatFits(size)
-//        sizeThatFits.height = 35
-//        return sizeThatFits
-//    }
-//}
-
-
 func scaleImageDown(_ image: UIImage, newSize: CGSize) -> UIImage {
     
     UIGraphicsBeginImageContextWithOptions(newSize, false, 0.0)
@@ -232,7 +108,6 @@ func scaleImageDown(_ image: UIImage, newSize: CGSize) -> UIImage {
     
     return newImage
 }
-
 
 // MARK: Gesture Helpers
 func tapGesture(_ target:AnyObject, actions:String, object:AnyObject, numberOfTaps:Int) {
@@ -248,6 +123,7 @@ func swipeGesture(_ target:AnyObject, actions:String, object:AnyObject, directio
     swipeGesture.direction = direction
     object.addGestureRecognizer(swipeGesture)
 }
+
 
 // MARK: Time Helper
 extension Date {
@@ -276,30 +152,6 @@ extension Date {
         return string
     }
 }
-
-//Temp 
-func cameraPicker(_ view:AnyObject, cameraPicker:UIImagePickerController) {
-    
-    if UIImagePickerController.isSourceTypeAvailable(.camera) {
-        
-        cameraPicker.sourceType = .camera
-        cameraPicker.allowsEditing = false
-        
-        view.present(cameraPicker, animated: true, completion: nil)
-    }
-}
-
-func photoLibrary(_ view:AnyObject, photoPicker:UIImagePickerController) {
-    
-    if UIImagePickerController.isSourceTypeAvailable(.photoLibrary) {
-        
-        photoPicker.sourceType = .photoLibrary
-        photoPicker.allowsEditing = false
-        
-        view.present(photoPicker, animated: true, completion: nil)
-    }
-}
-
 
 extension Date {
     
@@ -412,7 +264,7 @@ extension Date {
     func AddEndTime() -> Date {
     
         let minute:TimeInterval = 60.0
-        let hour:TimeInterval = 60.0 * minute * 12
+        let hour:TimeInterval = 60.0 * minute * 24
         
         let date = Date(timeInterval: hour, since: self)
     

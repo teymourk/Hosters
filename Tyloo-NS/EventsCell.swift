@@ -90,7 +90,7 @@ class EventsCell: BaseCell {
         
         if let interestedCount = eventDetails.interested_count, let declinedCount = eventDetails.declined_count, let attendingCount = eventDetails.attending_count {
             
-            guestCounts.text = "✅ Going: \(attendingCount) . 🤔 Interested: \(interestedCount) . ❌ Not Going: \(declinedCount)"
+            guestCounts.text = "✅ Going: \(attendingCount) • 🤔 Interested: \(interestedCount) • ❌ Not Going: \(declinedCount)"
         }
     }
 
@@ -98,19 +98,14 @@ class EventsCell: BaseCell {
 
         layer.masksToBounds = true
         layer.borderWidth = 0.5
+        layer.cornerRadius = 2
         layer.borderColor = darkGray.cgColor
+        setShadow()
+        handleCellAnimation()
         
-        addSubview(headerView)
+        backgroundColor = .white
         
-        headerView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        headerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        headerView.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
-        addSubview(coverImage)
-        
-        coverImage.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        coverImage.topAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
-        coverImage.heightAnchor.constraint(equalToConstant: FEED_CELL_HEIGHT / 2.3).isActive = true
+        setupViewHeader()
         
         addSubview(title)
         
@@ -137,6 +132,21 @@ class EventsCell: BaseCell {
         guestCounts.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         guestCounts.topAnchor.constraint(equalTo: seperator.bottomAnchor, constant: 10).isActive = true
         guestCounts.heightAnchor.constraint(equalToConstant: 15).isActive = true
+    }
+    
+    internal func setupViewHeader() {
+        
+        addSubview(headerView)
+        
+        headerView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        headerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        headerView.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
+        addSubview(coverImage)
+        
+        coverImage.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        coverImage.topAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
+        coverImage.heightAnchor.constraint(equalToConstant: FEED_CELL_HEIGHT / 2.3).isActive = true
     }
 }
 
@@ -182,14 +192,7 @@ class HeaderView:BaseView {
     
     internal func startCountDown() {
         
-        if let eventTime = eventDetails?.end_time {
-            
-            if eventTime.countDown().isEmpty {
-                
-                countDown.text = "Event Has Ended"
-                countDown.textColor = .red
-                return
-            }
+        if let eventTime = eventDetails?.start_time {
             
             countDown.text = eventTime.countDown()
         }

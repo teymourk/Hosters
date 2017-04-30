@@ -13,6 +13,7 @@
 		0B34FFED1EB11E0F00BE138C /* EventPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B34FFEC1EB11E0F00BE138C /* EventPageCell.swift */; };
 		0B34FFEF1EB11F5A00BE138C /* GuestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B34FFEE1EB11F5A00BE138C /* GuestsCell.swift */; };
 		0B3974F91EA9D7760011ABD7 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3974F81EA9D7760011ABD7 /* MenuBar.swift */; };
+		0B4A22FA1EB665FA00C76655 /* LiveEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4A22F91EB665FA00C76655 /* LiveEvents.swift */; };
 		0B663A621EB2F69400BAC093 /* EventDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B663A611EB2F69400BAC093 /* EventDetailsCell.swift */; };
 		0B8EE9431EB02E1800218394 /* HomeCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8EE9421EB02E1800218394 /* HomeCVCell.swift */; };
 		0B8EE9451EB0380E00218394 /* EventsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8EE9441EB0380E00218394 /* EventsCell.swift */; };
@@ -63,6 +64,7 @@
 		0B34FFEC1EB11E0F00BE138C /* EventPageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPageCell.swift; sourceTree = "<group>"; };
 		0B34FFEE1EB11F5A00BE138C /* GuestsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuestsCell.swift; sourceTree = "<group>"; };
 		0B3974F81EA9D7760011ABD7 /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
+		0B4A22F91EB665FA00C76655 /* LiveEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveEvents.swift; sourceTree = "<group>"; };
 		0B663A611EB2F69400BAC093 /* EventDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsCell.swift; sourceTree = "<group>"; };
 		0B8EE9421EB02E1800218394 /* HomeCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCVCell.swift; sourceTree = "<group>"; };
 		0B8EE9441EB0380E00218394 /* EventsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsCell.swift; sourceTree = "<group>"; };
@@ -130,8 +132,10 @@
 		0B3974FA1EA9E5580011ABD7 /* Event_Cells */ = {
 			isa = PBXGroup;
 			children = (
+				AB2EFDB41D0E29FD00B21A18 /* BaseCell.swift */,
 				AB2EFDB21D0E29E000B21A18 /* HomeCell.swift */,
 				0B8EE9421EB02E1800218394 /* HomeCVCell.swift */,
+				0B4A22F91EB665FA00C76655 /* LiveEvents.swift */,
 				0B8EE9441EB0380E00218394 /* EventsCell.swift */,
 				0B34FFEC1EB11E0F00BE138C /* EventPageCell.swift */,
 				0B34FFEE1EB11F5A00BE138C /* GuestsCell.swift */,
@@ -166,7 +170,6 @@
 			isa = PBXGroup;
 			children = (
 				0B3974FA1EA9E5580011ABD7 /* Event_Cells */,
-				AB2EFDB41D0E29FD00B21A18 /* BaseCell.swift */,
 				AB34B8B81D30B0BD00B2F4E0 /* PageNotifications.swift */,
 				0B3974F81EA9D7760011ABD7 /* MenuBar.swift */,
 			);
@@ -457,6 +460,7 @@
 				AB7E87AE1D0CF2F200750B76 /* HomePage.swift in Sources */,
 				0B3974F91EA9D7760011ABD7 /* MenuBar.swift in Sources */,
 				0B8EE9451EB0380E00218394 /* EventsCell.swift in Sources */,
+				0B4A22FA1EB665FA00C76655 /* LiveEvents.swift in Sources */,
 				AB2EFDB31D0E29E000B21A18 /* HomeCell.swift in Sources */,
 				0B8EE9431EB02E1800218394 /* HomeCVCell.swift in Sources */,
 				AB7E87AA1D0CE39E00750B76 /* Extensions.swift in Sources */,
