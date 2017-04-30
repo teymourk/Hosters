@@ -14,32 +14,8 @@ class EventsCell: BaseCell {
             didSet {
                 
                 guard let eventDetails = _eventDetails else {return}
-                    
-                    headerView.eventDetails = eventDetails
                 
-                if let coverURL = eventDetails.coverURL {
-                    
-                    coverImage.getImagesBack(url: coverURL, placeHolder: "emptyImage")
-                }
-                
-                if let eventTitle = eventDetails.name {
-                    
-                    title.text = eventTitle
-                }
-                
-                if let place_name = eventDetails.place_name, let city = eventDetails.city, let state = eventDetails.state {
-                    
-                    location.text = "📍\(place_name) - \(city), \(state)"
-                    
-                } else {
-                    
-                    location.text = "Location Not Available 🤔"
-                }
-                
-                if let interestedCount = eventDetails.interested_count, let declinedCount = eventDetails.declined_count, let attendingCount = eventDetails.attending_count {
-                    
-                    guestCounts.text = "✅ Going: \(attendingCount) . 🤔 Interested: \(interestedCount) . ❌ Not Going: \(declinedCount)"
-                }
+                setupEventDetails(eventDetails: eventDetails)
             }
         }
     
@@ -82,6 +58,42 @@ class EventsCell: BaseCell {
         return label
     }()
     
+    var seperator:UIView = {
+        let seperator = UIView()
+            seperator.backgroundColor = .lightGray
+            seperator.translatesAutoresizingMaskIntoConstraints = false
+        return seperator
+    }()
+    
+    internal func setupEventDetails(eventDetails: Events) {
+        
+        headerView.eventDetails = eventDetails
+        
+        if let coverURL = eventDetails.coverURL {
+            
+            coverImage.getImagesBack(url: coverURL, placeHolder: "emptyImage")
+        }
+        
+        if let eventTitle = eventDetails.name {
+            
+            title.text = eventTitle
+        }
+        
+        if let place_name = eventDetails.place_name, let city = eventDetails.city, let state = eventDetails.state {
+            
+            location.text = "📍\(place_name) - \(city), \(state)"
+            
+        } else {
+            
+            location.text = "Location Not Available 🤔"
+        }
+        
+        if let interestedCount = eventDetails.interested_count, let declinedCount = eventDetails.declined_count, let attendingCount = eventDetails.attending_count {
+            
+            guestCounts.text = "✅ Going: \(attendingCount) . 🤔 Interested: \(interestedCount) . ❌ Not Going: \(declinedCount)"
+        }
+    }
+
     override func setupView() {
 
         layer.masksToBounds = true
@@ -90,13 +102,13 @@ class EventsCell: BaseCell {
         
         addSubview(headerView)
         
-        addConstrainstsWithFormat("H:|[v0]|", views: headerView)
-        addConstrainstsWithFormat("V:|[v0(40)]", views: headerView)
+        headerView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        headerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        headerView.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         addSubview(coverImage)
         
-        addConstrainstsWithFormat("H:|[v0]|", views: coverImage)
-        
+        coverImage.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         coverImage.topAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
         coverImage.heightAnchor.constraint(equalToConstant: FEED_CELL_HEIGHT / 2.3).isActive = true
         
@@ -114,16 +126,19 @@ class EventsCell: BaseCell {
         location.topAnchor.constraint(equalTo: title.bottomAnchor, constant:5).isActive = true
         location.heightAnchor.constraint(equalToConstant: 15).isActive = true
         
+        addSubview(seperator)
+        
+        seperator.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        seperator.topAnchor.constraint(equalTo: location.bottomAnchor, constant: 5).isActive = true
+        seperator.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        
         addSubview(guestCounts)
         
-        guestCounts.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        guestCounts.leftAnchor.constraint(equalTo: title.leftAnchor).isActive = true
-        guestCounts.topAnchor.constraint(equalTo: location.bottomAnchor, constant:5).isActive = true
+        guestCounts.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        guestCounts.topAnchor.constraint(equalTo: seperator.bottomAnchor, constant: 10).isActive = true
         guestCounts.heightAnchor.constraint(equalToConstant: 15).isActive = true
     }
 }
-
-
 
 class HeaderView:BaseView {
     

@@ -40,7 +40,6 @@ extension EventDetailsPage:  UICollectionViewDelegateFlowLayout {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        
         if indexPath.item == 0 {
 
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_FEED, for: indexPath) as? EventDetailsCell {
@@ -55,13 +54,18 @@ extension EventDetailsPage:  UICollectionViewDelegateFlowLayout {
         } else if indexPath.item == 1 {
             
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_DETAILS, for: indexPath) as? DetailsCell {
+                
+                if let eventDetails = _eventDetails?.descriptions {
+                    
+                    cell.details = eventDetails
+                }
     
                 return cell
             }
             
         } else if indexPath.item == 2 {
             
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_DETAILS, for: indexPath) as? DetailedPageImagesCell {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_IMAGES, for: indexPath) as? DetailedPageImagesCell {
                 
                 return cell
             }
@@ -73,14 +77,29 @@ extension EventDetailsPage:  UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         if indexPath.item == 1 {
-            
-            return CGSize(width: view.frame.height,
-                          height: 40)
         
-        } else if indexPath.item == 2 {
+            if let eventDescription = _eventDetails?.descriptions {
+                
+                let size = CGSize(width: view.frame.width, height: 1000)
+                
+                let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 12)]
+                
+                let estimatedFrame = NSString(string: eventDescription).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+                
+                return CGSize(width: view.frame.width,
+                              height: estimatedFrame.height + 20)
+                
+            } else {
+                
+                return CGSize(width: 0,
+                              height: 0)
+            }
+        }
+        
+        if indexPath.item == 2 {
             
-            return CGSize(width: view.frame.height,
-                          height: 100)
+            return CGSize(width: view.frame.width,
+                          height: 200)
         }
         
         return CGSize(width: view.frame.width,
@@ -92,4 +111,3 @@ extension EventDetailsPage:  UICollectionViewDelegateFlowLayout {
         return 5
     }
 }
-

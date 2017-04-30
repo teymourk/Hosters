@@ -23,7 +23,6 @@
 		0BE43C9A1EB0F84200062E07 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE43C991EB0F84200062E07 /* UserProfile.swift */; };
 		0BE43C9C1EB0FF3600062E07 /* EventPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE43C9B1EB0FF3600062E07 /* EventPage.swift */; };
 		0BE43C9E1EB108AE00062E07 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE43C9D1EB108AE00062E07 /* Users.swift */; };
-		0BE43CA01EB113C300062E07 /* EventGuests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE43C9F1EB113C300062E07 /* EventGuests.swift */; };
 		5D12030B1609A0DFE0DF11A2 /* Pods_Tyloo_NS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B50C21B3D80E14391184251D /* Pods_Tyloo_NS.framework */; };
 		AB2EFDB31D0E29E000B21A18 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2EFDB21D0E29E000B21A18 /* HomeCell.swift */; };
 		AB2EFDB51D0E29FD00B21A18 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2EFDB41D0E29FD00B21A18 /* BaseCell.swift */; };
@@ -76,7 +75,6 @@
 		0BE43C991EB0F84200062E07 /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		0BE43C9B1EB0FF3600062E07 /* EventPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPage.swift; sourceTree = "<group>"; };
 		0BE43C9D1EB108AE00062E07 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
-		0BE43C9F1EB113C300062E07 /* EventGuests.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventGuests.swift; sourceTree = "<group>"; };
 		935C9218E9E69F16D26533FE /* Pods-Tyloo-NS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tyloo-NS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tyloo-NS/Pods-Tyloo-NS.debug.xcconfig"; sourceTree = "<group>"; };
 		95BB14EB45E07915A78B0265 /* Pods-Tyloo-NS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tyloo-NS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tyloo-NS/Pods-Tyloo-NS.release.xcconfig"; sourceTree = "<group>"; };
 		AB2EFDB21D0E29E000B21A18 /* HomeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
@@ -166,7 +164,6 @@
 				0BBCCB651EAA9128003A50CB /* HomePageDelegates.swift */,
 				0BE43C9B1EB0FF3600062E07 /* EventPage.swift */,
 				0BE43C991EB0F84200062E07 /* UserProfile.swift */,
-				0BE43C9F1EB113C300062E07 /* EventGuests.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -448,7 +445,6 @@
 			buildActionMask = 2147483647;
 			files = (
 				0BBCCB661EAA9128003A50CB /* HomePageDelegates.swift in Sources */,
-				0BE43CA01EB113C300062E07 /* EventGuests.swift in Sources */,
 				0B34FFEF1EB11F5A00BE138C /* GuestsCell.swift in Sources */,
 				ABC4F2011D494E940001368B /* HomeController.swift in Sources */,
 				0B663A621EB2F69400BAC093 /* EventDetailsCell.swift in Sources */,
@@ -661,6 +657,7 @@
 				0B24E4D91EB5200E0037D1D5 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		ABC77A6A1D0C916600C46DD0 /* Build configuration list for PBXProject "Tyloo-NS" */ = {
 			isa = XCConfigurationList;

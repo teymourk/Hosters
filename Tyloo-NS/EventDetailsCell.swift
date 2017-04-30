@@ -32,8 +32,7 @@ class EventDetailsCell: EventsCell {
         
         addSubview(coverImage)
         
-        addConstrainstsWithFormat("H:|[v0]|", views: coverImage)
-        
+        coverImage.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         coverImage.topAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
         coverImage.heightAnchor.constraint(equalToConstant: FEED_CELL_HEIGHT / 1.7).isActive = true
         
@@ -55,7 +54,13 @@ class EventDetailsCell: EventsCell {
         
         addressLabel.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         addressLabel.leftAnchor.constraint(equalTo: title.leftAnchor, constant: 20).isActive = true
-        addressLabel.topAnchor.constraint(equalTo: location.bottomAnchor, constant:5).isActive = true
+        addressLabel.topAnchor.constraint(equalTo: location.bottomAnchor, constant: 10).isActive = true
         addressLabel.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        
+        addSubview(seperator)
+        
+        addConstrainstsWithFormat("H:|[v0]|", views: seperator)
+        addConstrainstsWithFormat("V:[v0(0.5)]|", views: seperator)
+        
     }
 }

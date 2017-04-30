@@ -10,8 +10,26 @@ import UIKit
 
 class DetailsCell: BaseCell {
 
+    var details:String? {
+        didSet {
+            
+            detailsTextView.text = details
+        }
+    }
+    
+    var detailsTextView:UITextView = {
+        let textView = UITextView()
+            textView.font = UIFont.systemFont(ofSize: 12)
+            textView.isEditable = false
+            textView.isSelectable = false
+        return textView
+    }()
+    
     override func setupView() {
         
-        backgroundColor = .blue
+        addSubview(detailsTextView)
+        
+        addConstrainstsWithFormat("H:|[v0]|", views: detailsTextView)
+        addConstrainstsWithFormat("V:|[v0]|", views: detailsTextView)
     }
 }

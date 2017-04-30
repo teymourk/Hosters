@@ -12,6 +12,7 @@ class HomeCell: BaseCell {
         
     let eventsCV:HomeCVCell = {
         let events = HomeCVCell()
+            events.translatesAutoresizingMaskIntoConstraints = false
         return events
     }()
     
@@ -20,6 +21,7 @@ class HomeCell: BaseCell {
             label.text = "Categories Of Each Event"
             label.textColor = .black
             label.font = UIFont(name: "NotoSans", size: 14)
+            label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -37,28 +39,20 @@ class HomeCell: BaseCell {
         
         addSubview(categoryLabel)
         
-        addConstrainstsWithFormat("H:|-15-[v0]-10-|", views: categoryLabel)
-        addConstrainstsWithFormat("V:|-10-[v0]", views: categoryLabel)
+        categoryLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
+        categoryLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        categoryLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
         
         addSubview(eventsCV)
         
-        addConstrainstsWithFormat("H:|[v0]|", views: eventsCV)
-        
-        eventsCV.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor).isActive = true
+        eventsCV.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        eventsCV.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 10).isActive = true
         eventsCV.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
         addSubview(seperator)
         
-        addConstrainstsWithFormat("H:|[v0]|", views: seperator)
-        addConstrainstsWithFormat("V:[v0(0.5)]|", views: seperator)
-        
+        seperator.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        seperator.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        seperator.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
 }
-
-
-
-
-
-
-
-
