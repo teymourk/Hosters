@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		0B13D80F1EB06B3B00F07A04 /* LiveEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B13D80E1EB06B3B00F07A04 /* LiveEvents.swift */; };
 		0B24E4D41EB5200E0037D1D5 /* Tyloo_NSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24E4D31EB5200E0037D1D5 /* Tyloo_NSTests.swift */; };
 		0B24E4DC1EB5255B0037D1D5 /* DetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24E4DB1EB5255B0037D1D5 /* DetailsCell.swift */; };
 		0B2EE8321EA6F53900148E50 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2EE8311EA6F53900148E50 /* RegisterVC.swift */; };
@@ -56,7 +55,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0B13D80E1EB06B3B00F07A04 /* LiveEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveEvents.swift; sourceTree = "<group>"; };
 		0B24E4D11EB5200E0037D1D5 /* Tyloo-NSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tyloo-NSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B24E4D31EB5200E0037D1D5 /* Tyloo_NSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tyloo_NSTests.swift; sourceTree = "<group>"; };
 		0B24E4D51EB5200E0037D1D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -135,7 +133,6 @@
 				AB2EFDB21D0E29E000B21A18 /* HomeCell.swift */,
 				0B8EE9421EB02E1800218394 /* HomeCVCell.swift */,
 				0B8EE9441EB0380E00218394 /* EventsCell.swift */,
-				0B13D80E1EB06B3B00F07A04 /* LiveEvents.swift */,
 				0B34FFEC1EB11E0F00BE138C /* EventPageCell.swift */,
 				0B34FFEE1EB11F5A00BE138C /* GuestsCell.swift */,
 				0B663A611EB2F69400BAC093 /* EventDetailsCell.swift */,
@@ -448,7 +445,6 @@
 				0BE43C9A1EB0F84200062E07 /* UserProfile.swift in Sources */,
 				AB2EFDB91D0E346100B21A18 /* Constans.swift in Sources */,
 				AB7136161D10C6B000BB1BF2 /* Events.swift in Sources */,
-				0B13D80F1EB06B3B00F07A04 /* LiveEvents.swift in Sources */,
 				0BBCCB681EAA9461003A50CB /* CustomeTabBar.swift in Sources */,
 				0B2EE8321EA6F53900148E50 /* RegisterVC.swift in Sources */,
 				ABC77A731D0C916600C46DD0 /* AppDelegate.swift in Sources */,

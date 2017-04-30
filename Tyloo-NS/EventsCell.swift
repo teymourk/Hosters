@@ -182,7 +182,14 @@ class HeaderView:BaseView {
     
     internal func startCountDown() {
         
-        if let eventTime = eventDetails?.start_time {
+        if let eventTime = eventDetails?.end_time {
+            
+            if eventTime.countDown().isEmpty {
+                
+                countDown.text = "Event Has Ended"
+                countDown.textColor = .red
+                return
+            }
             
             countDown.text = eventTime.countDown()
         }

@@ -22,6 +22,7 @@ class DetailsCell: BaseCell {
             textView.font = UIFont.systemFont(ofSize: 12)
             textView.isEditable = false
             textView.isSelectable = false
+            textView.isScrollEnabled = false
         return textView
     }()
     

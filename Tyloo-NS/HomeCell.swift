@@ -9,7 +9,7 @@
 import UIKit
 
 class HomeCell: BaseCell {
-        
+    
     let eventsCV:HomeCVCell = {
         let events = HomeCVCell()
             events.translatesAutoresizingMaskIntoConstraints = false

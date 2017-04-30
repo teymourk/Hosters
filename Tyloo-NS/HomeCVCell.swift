@@ -10,7 +10,7 @@ import UIKit
 
 private let CELL_ID = "CELL_FEED"
 
-class HomeCVCell: BaseView  {
+class HomeCVCell: BaseCell  {
     
     var events:[Events]? {
         didSet {

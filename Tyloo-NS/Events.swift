@@ -20,6 +20,7 @@ class Events: NSObject {
     private var _coverURL:String?
     private var _ownr_name:String?
     private var _start_time:Date?
+    private var _end_time:Date?
     private var _rsvp_status:String?
     private var _place_name:String?
     private var _latitude:Double?
@@ -54,6 +55,10 @@ class Events: NSObject {
     
     var start_time:Date? {
         return _start_time
+    }
+    
+    var end_time:Date? {
+        return _end_time
     }
     
     var rsvp_status:String? {
@@ -148,6 +153,25 @@ class Events: NSObject {
             }
         }
         
+        if let end_time = dictionary["end_time"] as? String {
+            
+            let dateFormatter = DateFormatter()
+            
+            dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ssZZZ"
+            
+            if let date = dateFormatter.date(from: end_time) {
+                
+                self._end_time = date
+            }
+            
+        } else {
+            
+            //CustomeEnd Time by 10 hrs
+            let end_time = self._start_time?.AddEndTime()
+            self._end_time = end_time
+        }
+        
+        
         if let place = dictionary["place"] as? NSDictionary, let location = place["location"] as? NSDictionary, let place_name = place["name"] as? String, let state = location["state"] as? String, let city = location["city"] as? String {
             
             self._place_name = place_name
@@ -156,12 +180,16 @@ class Events: NSObject {
         }
     }
     
-    class func fetchEventsFromFacebook(refresher:UIRefreshControl, type:String, completion: @escaping ([Events]) -> ()) {
+    class func fetchEventsFromFacebook(refresher:UIRefreshControl, type:String, allEvents: @escaping ([Events], [Events]) -> ()) {
 
         refresher.beginRefreshing()
-        var eventsArray:[Events] = [Events]()
         
-        let parameters = ["fields": "cover, attending_count, can_guests_invite, description, name, id, maybe_count, noreply_count, interested_count, start_time, declined_count, owner, place, rsvp_status"]
+        var eventsArray:[Events] = [Events]()
+        var liveEvents:[Events] = [Events]()
+        
+        let currentTime = Date()
+        
+        let parameters = ["fields": "cover, attending_count, can_guests_invite, description, name, id, maybe_count, noreply_count, interested_count, start_time , end_time, declined_count, owner, place, rsvp_status"]
         
         FBSDKGraphRequest(graphPath: "/me/events/\(type)", parameters: parameters).start { (connection, results, error) in
             
@@ -172,7 +200,9 @@ class Events: NSObject {
             
             if let result = results as? NSDictionary, let dataArray = result["data"] as? NSArray {
                 
-                let currentDate = Date()
+                let formatter = DateFormatter()
+                    formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+                let olddate = formatter.date(from: "2017-04-29 7:00:00 +0000") //This Will Be Date of launch
                 
                 for arrayObj in dataArray {
                     
@@ -180,16 +210,19 @@ class Events: NSObject {
                         
                         let eventsObj = Events(dictionary: dataDic)
                         
-                        if currentDate < eventsObj.start_time! {
+                        if olddate! < eventsObj.start_time! {
                             
                             eventsArray.append(eventsObj)
                         }
                     }
                 }
+                
+                let live = eventsArray.filter({currentTime > $0.start_time! && currentTime < $0.end_time!})
+                liveEvents = live
             }
             
             DispatchQueue.main.async {
-                completion(eventsArray)
+                allEvents(eventsArray, liveEvents)
                 refresher.endRefreshing()
             }
         }

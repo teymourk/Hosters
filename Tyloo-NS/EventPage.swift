@@ -39,29 +39,31 @@ extension EventDetailsPage:  UICollectionViewDelegateFlowLayout {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if indexPath.item == 0 {
-
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_FEED, for: indexPath) as? EventDetailsCell {
-            
-                if let eventDetails = _eventDetails {
-                    
-                    cell._eventDetails = eventDetails
-                }
-                
-                return cell
-            }
-            
-        } else if indexPath.item == 1 {
+        if indexPath.item == 1 {
             
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_DETAILS, for: indexPath) as? DetailsCell {
                 
                 if let eventDetails = _eventDetails?.descriptions {
                     
                     cell.details = eventDetails
+                    
+                } else{
+                    
+                    cell.details = "No Details Available 🙁"
                 }
     
                 return cell
             }
+        }
+        
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_FEED, for: indexPath) as? EventDetailsCell {
+            
+            if let eventDetails = _eventDetails {
+                
+                cell._eventDetails = eventDetails
+            }
+            
+            return cell
         }
         
         return BaseCell()
@@ -84,8 +86,8 @@ extension EventDetailsPage:  UICollectionViewDelegateFlowLayout {
                 
             } else {
                 
-                return CGSize(width: 0,
-                              height: 0)
+                return CGSize(width: view.frame.width,
+                              height: 25)
             }
         }
         

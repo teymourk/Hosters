@@ -37,31 +37,9 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: view.frame.width,
-                      height: FEED_CELL_HEIGHT - 30)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
-        
-        return 5
-    }
-    
-    //Mark: HeaderDelegate
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        if let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HEADER_ID, for: indexPath) as? LiveEvents {
-        
-            return header
-        }
-
-        return BaseCell()
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        
-        if let liveEvent = liveEventArray {
-         
-            if liveEvent.isEmpty {
+        if let liveEvents = liveEventArray {
+            
+            if liveEvents.isEmpty && indexPath.item == 0 {
                 
                 return CGSize(width: view.frame.width,
                               height: 50)
@@ -72,9 +50,8 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
                       height: FEED_CELL_HEIGHT - 30)
     }
     
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         
-        return UIEdgeInsets(top: 15,
-                            left: 0, bottom: 0, right: 0)
+        return 5
     }
 }
