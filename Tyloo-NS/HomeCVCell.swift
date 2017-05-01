@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import SCLAlertView
 
 private let CELL_ID = "CELL_FEED"
 
@@ -84,7 +85,7 @@ extension HomeCVCell: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     }
 }
 
-//Mark:EventCellDelegate
+//Mark: -EventCellDelegate
 extension HomeCVCell: EventCellDelegate {
     
     func handleOnGuest(sender: UIButton) {
@@ -95,7 +96,7 @@ extension HomeCVCell: EventCellDelegate {
             
             if !guest_list_enabled {
                 
-                print("SORRY USER DISABLED GUEST VIEW")
+                SCLAlertView().showInfo("Info", subTitle: "Viewing guest list is disabled by the host")
                 return
             }
                 

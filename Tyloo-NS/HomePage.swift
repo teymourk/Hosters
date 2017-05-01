@@ -52,7 +52,14 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         collectionView?.backgroundColor = UIColor.rgb(231, green: 236, blue: 240)
         
+        let filterDateButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onDatePicker))
+        navigationController?.navigationItem.rightBarButtonItem = filterDateButton
+        
         fetchEvents()
+    }
+    
+    internal func onDatePicker(sender: UIBarButtonItem) {
+        
     }
     
     internal func eventTypeFetch(index:Int, type:String) {
@@ -94,7 +101,12 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     
     internal func handlePushingToGuestPage(_eventId:String) {
         
-        let guestPage = EventGuestsPage(collectionViewLayout: UICollectionViewFlowLayout())
+        let layout = UICollectionViewFlowLayout()
+            layout.scrollDirection = .horizontal
+            layout.minimumLineSpacing = 0
+            layout.minimumInteritemSpacing = 0
+    
+        let guestPage = EventGuestsPage(collectionViewLayout: layout)
             guestPage.event_id = _eventId
         navigationController?.pushViewController(guestPage, animated: true)
     }

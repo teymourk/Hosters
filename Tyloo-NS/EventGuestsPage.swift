@@ -8,57 +8,88 @@
 
 import UIKit
 
-private let CELL_ID = "GUEST_CELL"
+private let CELL_ATTENDING = "GUEST_ATTENDING"
+private let CELL_DECLINED = "GUEST_DECLINED"
+private let CELL_MAYBE = "GUEST_MAYBE"
 
 class EventGuestsPage: UICollectionViewController, UICollectionViewDelegateFlowLayout {
 
     var event_id:String? = String()
-    var users:[Users]? = [Users]()
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.collectionView?.register(GuestsCell.self, forCellWithReuseIdentifier: CELL_ID)
+        self.collectionView?.register(GuestsAttending.self, forCellWithReuseIdentifier: CELL_ATTENDING)
+        self.collectionView?.register(GuestsMaybe.self, forCellWithReuseIdentifier: CELL_MAYBE)
+        self.collectionView?.register(GuestsDeclined.self, forCellWithReuseIdentifier: CELL_DECLINED)
+        self.collectionView?.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
+        self.collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
+        self.collectionView?.showsHorizontalScrollIndicator = false
+        self.collectionView?.isPagingEnabled = true
         self.collectionView?.backgroundColor = .white
         
-        fetchGuestUsers()
+        setupMenuBar()
     }
+    
+    var menuBar:MenuBar = {
+        let mb = MenuBar()
+            mb.menuItems = ["Going","Maybe", "Not Going"]
+        return mb
+    }()
     
     // MARK: UICollectionViewDataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return users?.count ?? 0
+        return 3
     }
 
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as? GuestsCell {
+        if let eventID = event_id {
             
-            if let users = users?[indexPath.item] {
+            if indexPath.item == 1 {
                 
-                cell.users = users
+                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_MAYBE, for: indexPath) as? GuestsMaybe {
+                    
+                    cell.event_id = eventID
+                    
+                    return cell
+                }
+                
+            } else if indexPath.item == 2 {
+                
+                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_DECLINED, for: indexPath) as? GuestsDeclined {
+                    
+                    cell.event_id = eventID
+                    
+                    return cell
+                }
+                
+            } else {
+                
+                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ATTENDING, for: indexPath) as? GuestsAttending {
+                    
+                    cell.event_id = eventID
+                    
+                    return cell
+                }
             }
-    
-            return cell
         }
-    
-        return BaseCell()
+        
+        return UICollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return CGSize(width: view.frame.width,
-                      height: 50)
+                      height: view.frame.height)
     }
     
-    internal func fetchGuestUsers() {
+    internal func setupMenuBar() {
         
-        guard let eventId = event_id else {return}
+        view.addSubview(menuBar)
         
-        Events.fetchGuestlist(eventId: eventId, type: "attending") { (users) in
-            
-            self.users = users
-            self.collectionView?.reloadData()
-        }
+        view.addConstrainstsWithFormat("H:|[v0]|", views: menuBar)
+        view.addConstrainstsWithFormat("V:|[v0(40)]", views: menuBar)
     }
 }

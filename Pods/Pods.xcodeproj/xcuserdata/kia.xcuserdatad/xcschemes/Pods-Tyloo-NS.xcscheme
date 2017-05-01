@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Scheme
-   LastUpgradeVersion = "0820"
+   LastUpgradeVersion = "0700"
    version = "1.3">
    <BuildAction
       parallelizeBuildables = "YES"
@@ -14,7 +14,7 @@
             buildForAnalyzing = "YES">
             <BuildableReference
                BuildableIdentifier = "primary"
-               BlueprintIdentifier = "2A8349A60419B611D001F6FA3813B5D3"
+               BlueprintIdentifier = "0F4FA59CABC2E6981C98C4336C9D7745"
                BuildableName = "Pods_Tyloo_NS.framework"
                BlueprintName = "Pods-Tyloo-NS"
                ReferencedContainer = "container:Pods.xcodeproj">
@@ -45,7 +45,7 @@
       <MacroExpansion>
          <BuildableReference
             BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2A8349A60419B611D001F6FA3813B5D3"
+            BlueprintIdentifier = "0F4FA59CABC2E6981C98C4336C9D7745"
             BuildableName = "Pods_Tyloo_NS.framework"
             BlueprintName = "Pods-Tyloo-NS"
             ReferencedContainer = "container:Pods.xcodeproj">
@@ -60,15 +60,6 @@
       savedToolIdentifier = ""
       useCustomWorkingDirectory = "NO"
       debugDocumentVersioning = "YES">
-      <MacroExpansion>
-         <BuildableReference
-            BuildableIdentifier = "primary"
-            BlueprintIdentifier = "2A8349A60419B611D001F6FA3813B5D3"
-            BuildableName = "Pods_Tyloo_NS.framework"
-            BlueprintName = "Pods-Tyloo-NS"
-            ReferencedContainer = "container:Pods.xcodeproj">
-         </BuildableReference>
-      </MacroExpansion>
    </ProfileAction>
    <AnalyzeAction
       buildConfiguration = "Debug">

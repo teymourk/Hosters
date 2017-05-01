@@ -24,15 +24,6 @@ class CompleteFacebookRegister: UIViewController, UITextFieldDelegate {
         return image
     }()
     
-    let guideLabel:UILabel = {
-        let label = UILabel()
-            label.textColor = .lightGray
-            label.textAlignment = .center
-            label.text = "Tap To Change Photo"
-            label.font = UIFont.systemFont(ofSize: 13)
-        return label
-    }()
-    
     lazy var userFacebookName:UILabel = {
         let label = UILabel()
             label.text = "Whats Your Name?"
@@ -40,18 +31,6 @@ class CompleteFacebookRegister: UIViewController, UITextFieldDelegate {
             label.textAlignment = .center
             label.font = UIFont(name: "PROMPT", size: 15)
         return label
-    }()
-    
-    lazy var usernameTxtFiled:UITextField = {
-        let txtField = UITextField()
-            txtField.borderStyle = .none
-            txtField.placeholder = "Choose a Username"
-            txtField.textColor = .black
-            txtField.textAlignment = .center
-            txtField.delegate = self
-            txtField.font = UIFont(name: "PROMPT", size: 15)
-        return txtField
-        
     }()
     
     lazy var continueBtn:UIButton = {
@@ -127,7 +106,7 @@ class CompleteFacebookRegister: UIViewController, UITextFieldDelegate {
     
     func handleCompleteRegister(_ user: FIRUser?) {
         
-        guard let name = self.userFacebookName.text, let username = self.usernameTxtFiled.text, let userUID = user?.uid, let profileImg = self.profileImage.image else { return }
+        guard let name = self.userFacebookName.text, let userUID = user?.uid, let profileImg = self.profileImage.image else { return }
         
         let progressHUD = MBProgressHUD.showAdded(to: view, animated: true)
         let imageKey = UUID().uuidString
@@ -144,7 +123,7 @@ class CompleteFacebookRegister: UIViewController, UITextFieldDelegate {
                 
                 if let imageURL = metaData?.downloadURL()?.absoluteString {
                 
-                    let userInfoDic = ["username":username, "name":name, "profileImage":imageURL, "likes": 0, "provider":"Facebook"] as [String : Any]
+                    let userInfoDic = ["name":name, "profileImage":imageURL, "provider":"Facebook"] as [String : Any]
                     
                     FirebaseRef.database.createFireBaseUser(userUID, user: userInfoDic as Dictionary<String, AnyObject>)
                     
@@ -191,10 +170,8 @@ class CompleteFacebookRegister: UIViewController, UITextFieldDelegate {
     func setupView() {
         
         view.addSubview(profileImage)
-        view.addSubview(guideLabel)
         view.addSubview(seperator)
         view.addSubview(userFacebookName)
-        view.addSubview(usernameTxtFiled)
         view.addSubview(continueBtn)
         
         perform(#selector(animateProfileImage), with: nil, afterDelay: 0.2)
@@ -207,23 +184,6 @@ class CompleteFacebookRegister: UIViewController, UITextFieldDelegate {
         view.addConstraint(NSLayoutConstraint(item: profileImage, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0))
         
         
-        //GuideLabel Constraints
-        view.addConstrainstsWithFormat("H:[v0]", views: guideLabel)
-        view.addConstrainstsWithFormat("V:[v0]", views: guideLabel)
-        
-        //Top
-        view.addConstraint(NSLayoutConstraint(item: guideLabel, attribute: .top, relatedBy: .equal, toItem: profileImage, attribute: .bottom, multiplier: 1, constant: 10))
-        
-        //CenterX
-        view.addConstraint(NSLayoutConstraint(item: guideLabel, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0))
-        
-        //Seperator 
-        view.addConstrainstsWithFormat("H:|-20-[v0]-20-|", views: seperator)
-        view.addConstrainstsWithFormat("V:[v0(0.5)]", views: seperator)
-        
-        //Top
-        view.addConstraint(NSLayoutConstraint(item: seperator, attribute: .top, relatedBy: .equal, toItem: guideLabel, attribute: .bottom, multiplier: 1, constant: 10))
-        
         //Username Constrains
         view.addConstrainstsWithFormat("H:|[v0]|", views: userFacebookName)
         view.addConstrainstsWithFormat("V:[v0]", views: userFacebookName)
@@ -231,18 +191,12 @@ class CompleteFacebookRegister: UIViewController, UITextFieldDelegate {
         //Top
         view.addConstraint(NSLayoutConstraint(item: userFacebookName, attribute: .top, relatedBy: .equal, toItem: seperator, attribute: .bottom, multiplier: 1, constant: 20))
         
-        //displayName Constrains
-        view.addConstrainstsWithFormat("H:|[v0]|", views: usernameTxtFiled)
-        view.addConstrainstsWithFormat("V:[v0]", views: usernameTxtFiled)
-
-        //Top
-        view.addConstraint(NSLayoutConstraint(item: usernameTxtFiled, attribute: .top, relatedBy: .equal, toItem: userFacebookName, attribute: .bottom, multiplier: 1, constant: 15))
-
+    
         //Continue Constraints
         view.addConstrainstsWithFormat("H:|-100-[v0]-100-|", views: continueBtn)
         view.addConstrainstsWithFormat("V:[v0(50)]", views: continueBtn)
         
         //Top
-        view.addConstraint(NSLayoutConstraint(item: continueBtn, attribute: .top, relatedBy: .equal, toItem: usernameTxtFiled, attribute: .top, multiplier: 1, constant: 100))
+        view.addConstraint(NSLayoutConstraint(item: continueBtn, attribute: .top, relatedBy: .equal, toItem: userFacebookName, attribute: .top, multiplier: 1, constant: 100))
     }
 }
