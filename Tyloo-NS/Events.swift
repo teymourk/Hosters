@@ -27,6 +27,7 @@ class Events: NSObject {
     private var _longtitude:Double?
     private var _state:String?
     private var _city:String?
+    private var _guest_list_enabled:Bool?
     private var _street:String?
     private var _zip:String?
     private var _interested_count:Int?
@@ -105,6 +106,10 @@ class Events: NSObject {
         return _attending_count
     }
     
+    var guest_list_enabled:Bool? {
+        return _guest_list_enabled
+    }
+    
     init(dictionary:NSDictionary) {
         
         
@@ -139,7 +144,6 @@ class Events: NSObject {
             self._declined_count = declinedCount
             self._attending_count = attendingCount
         }
-        
         
         if let start_time = dictionary["start_time"] as? String {
             
@@ -178,6 +182,10 @@ class Events: NSObject {
             self._state = state
             self._city = city
         }
+        
+        if let guest_enabled = dictionary["guest_list_enabled"] as? Bool {
+            self._guest_list_enabled = guest_enabled
+        }
     }
     
     class func fetchEventsFromFacebook(refresher:UIRefreshControl, type:String, allEvents: @escaping ([Events], [Events]) -> ()) {
@@ -189,7 +197,7 @@ class Events: NSObject {
         
         let currentTime = Date()
         
-        let parameters = ["fields": "cover, attending_count, can_guests_invite, description, name, id, maybe_count, noreply_count, interested_count, start_time , end_time, declined_count, owner, place, rsvp_status"]
+        let parameters = ["fields": "cover, attending_count, can_guests_invite, description, name, id, maybe_count, noreply_count, interested_count, start_time , end_time, declined_count, owner, place, rsvp_status, guest_list_enabled"]
         
         FBSDKGraphRequest(graphPath: "/me/events/\(type)", parameters: parameters).start { (connection, results, error) in
             
@@ -229,9 +237,11 @@ class Events: NSObject {
         }
     }
     
-    class func fetchGuestlist(eventId:String, type:String, completion: @escaping (NSDictionary) -> ()) {
+    class func fetchGuestlist(eventId:String, type:String, completion: @escaping ([Users]) -> ()) {
         
         let parameters = ["fields": "name, picture, rsvp_status"]
+        
+        var users:[Users] = [Users]()
         
         FBSDKGraphRequest(graphPath: "/\(eventId)/\(type)", parameters: parameters).start { (connection, results, error) in
             
@@ -246,7 +256,12 @@ class Events: NSObject {
                     
                     if let guestDic = arrayObj as? NSDictionary {
                         
-                        completion(guestDic)
+                        let userObj = Users(dictionary: guestDic)
+                        users.append(userObj)
+                        
+                        DispatchQueue.main.async {
+                            completion(users)
+                        }
                     }
                 }
             }

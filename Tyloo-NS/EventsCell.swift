@@ -97,9 +97,12 @@ class EventsCell: BaseCell {
             location.text = "Location Not Available 🤔"
         }
         
-        if let interestedCount = eventDetails.interested_count, let declinedCount = eventDetails.declined_count, let attendingCount = eventDetails.attending_count {
+        if let interestedCount = eventDetails.interested_count, let declinedCount = eventDetails.declined_count, let attendingCount = eventDetails.attending_count, let guest_list_Enabled = eventDetails.guest_list_enabled {
+            
+            let color = guest_list_Enabled == true ? buttonColor : darkGray
             
             guestCountsButton.setTitle("✅ Going: \(attendingCount) • 🤔 Interested: \(interestedCount) • ❌ Not Going: \(declinedCount)", for: .normal)
+            guestCountsButton.setTitleColor(color, for: .normal)
         }
     }
 

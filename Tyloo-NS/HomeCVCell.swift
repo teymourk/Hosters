@@ -91,10 +91,15 @@ extension HomeCVCell: EventCellDelegate {
         
         let index = IndexPath(item: sender.tag, section: 0)
         
-        if let homePage = homePage, let eventId = events?[index.item].event_id  {
+        if let homePage = homePage, let eventId = events?[index.item].event_id, let guest_list_enabled = events?[index.item].guest_list_enabled  {
             
+            if !guest_list_enabled {
+                
+                print("SORRY USER DISABLED GUEST VIEW")
+                return
+            }
+                
             homePage.handlePushingToGuestPage(_eventId: eventId)
         }
-    
     }
 }

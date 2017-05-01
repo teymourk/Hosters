@@ -48,21 +48,17 @@ class EventGuestsPage: UICollectionViewController, UICollectionViewDelegateFlowL
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
         return CGSize(width: view.frame.width,
-                      height: 60)
+                      height: 50)
     }
     
     internal func fetchGuestUsers() {
         
         guard let eventId = event_id else {return}
         
-        Events.fetchGuestlist(eventId: eventId, type: "attending") { (userDic) in
+        Events.fetchGuestlist(eventId: eventId, type: "attending") { (users) in
             
-            let userObj = Users(dictionary: userDic)
-            
-            DispatchQueue.main.async {
-                self.users?.append(userObj)
-                self.collectionView?.reloadData()
-            }
+            self.users = users
+            self.collectionView?.reloadData()
         }
     }
 }

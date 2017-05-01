@@ -31,7 +31,7 @@ class GuestsCell: BaseCell {
     var profile_image:UIImageView = {
         let image = UIImageView()
             image.layer.masksToBounds = true
-            image.layer.cornerRadius = 25
+            image.layer.cornerRadius = 20
             image.contentMode = .scaleAspectFill
             image.backgroundColor = .red
         return image
@@ -41,6 +41,14 @@ class GuestsCell: BaseCell {
         let label = UILabel()
             label.textColor = .darkGray
             label.font = UIFont.boldSystemFont(ofSize: 12)
+            label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
+    
+    var emojiLabel:UILabel = {
+        let label = UILabel()
+            label.font = UIFont.boldSystemFont(ofSize: 14)
+            label.text = "✅"
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -56,8 +64,8 @@ class GuestsCell: BaseCell {
         
         addSubview(profile_image)
     
-        addConstrainstsWithFormat("H:|-10-[v0(50)]", views: profile_image)
-        addConstrainstsWithFormat("V:[v0(50)]", views: profile_image)
+        addConstrainstsWithFormat("H:|-10-[v0(40)]", views: profile_image)
+        addConstrainstsWithFormat("V:[v0(40)]", views: profile_image)
         
         profile_image.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
         
@@ -65,7 +73,12 @@ class GuestsCell: BaseCell {
         
         profile_name.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         profile_name.leftAnchor.constraint(equalTo: profile_image.rightAnchor, constant: 10).isActive = true
-        profile_name.bottomAnchor.constraint(equalTo: bottomAnchor, constant: -5).isActive = true
+        profile_name.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        
+        addSubview(emojiLabel)
+        
+        emojiLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
+        emojiLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     
         addSubview(seperator)
         
