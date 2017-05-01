@@ -36,7 +36,7 @@ class EventGuestsPage: UICollectionViewController, UICollectionViewDelegateFlowL
             
             if let users = users?[indexPath.item] {
                 
-                print(users.profile_pricture ?? "")
+                cell.users = users
             }
     
             return cell

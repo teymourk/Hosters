@@ -60,6 +60,7 @@ class EventsCell: BaseCell {
             button.setTitleColor(.black, for: .normal)
             button.titleLabel?.font = UIFont(name: "Prompt", size: 12)
             button.addTarget(self, action: #selector(handleOnGuests(sender:)), for: .touchUpInside)
+            button.setTitleColor(buttonColor, for: .normal)
             button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
