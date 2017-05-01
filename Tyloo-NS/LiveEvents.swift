@@ -39,6 +39,13 @@ class LiveEvents: HomeCVCell {
         return label
     }()
     
+    var seperator:UIView = {
+        let seperator = UIView()
+            seperator.backgroundColor = .lightGray
+            seperator.translatesAutoresizingMaskIntoConstraints = false
+        return seperator
+    }()
+    
     internal func setupNoLiveLabel() {
         
         addSubview(noLiveLabel)
@@ -46,6 +53,12 @@ class LiveEvents: HomeCVCell {
         noLiveLabel.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         noLiveLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         noLiveLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        
+        addSubview(seperator)
+        
+        seperator.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        seperator.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        seperator.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
     }
 }
 

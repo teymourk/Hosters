@@ -34,7 +34,6 @@ class Users: NSObject {
     
     init(dictionary:NSDictionary) {
         
-        
         if let id = dictionary["id"] as? String {
             self._id = id
         }
@@ -43,8 +42,9 @@ class Users: NSObject {
             self._profile_name = name
         }
         
-        if let profile_pictureURL = dictionary["name"] as? String {
-            self._profile_picture = profile_pictureURL
+        if let pictureDic = dictionary["picture"] as? NSDictionary, let data = pictureDic["data"] as? NSDictionary, let imageURL = data["url"] as? String {
+            
+            self._profile_picture = imageURL
         }
         
         if let rsvp_status = dictionary["rsvp_status"] as? String {

@@ -8,16 +8,21 @@
 
 import UIKit
 
+protocol EventCellDelegate: class {
+    
+    func handleOnGuest(sender: UIButton)
+}
+
 class EventsCell: BaseCell {
     
-        var _eventDetails:Events? {
-            didSet {
-                
-                guard let eventDetails = _eventDetails else {return}
-                
-                setupEventDetails(eventDetails: eventDetails)
-            }
+    var _eventDetails:Events? {
+        didSet {
+            
+            guard let eventDetails = _eventDetails else {return}
+            
+            setupEventDetails(eventDetails: eventDetails)
         }
+    }
     
     let headerView:HeaderView = {
         let hd = HeaderView()
@@ -50,12 +55,13 @@ class EventsCell: BaseCell {
         return label
     }()
     
-    let guestCounts:UILabel = {
-        let label = UILabel()
-            label.textColor = .black
-            label.font = UIFont(name: "Prompt", size: 12)
-            label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    lazy var guestCountsButton:UIButton = {
+        let button = UIButton()
+            button.setTitleColor(.black, for: .normal)
+            button.titleLabel?.font = UIFont(name: "Prompt", size: 12)
+            button.addTarget(self, action: #selector(handleOnGuests(sender:)), for: .touchUpInside)
+            button.translatesAutoresizingMaskIntoConstraints = false
+        return button
     }()
     
     var seperator:UIView = {
@@ -64,6 +70,8 @@ class EventsCell: BaseCell {
             seperator.translatesAutoresizingMaskIntoConstraints = false
         return seperator
     }()
+    
+    var delegate:EventCellDelegate?
     
     internal func setupEventDetails(eventDetails: Events) {
         
@@ -90,12 +98,12 @@ class EventsCell: BaseCell {
         
         if let interestedCount = eventDetails.interested_count, let declinedCount = eventDetails.declined_count, let attendingCount = eventDetails.attending_count {
             
-            guestCounts.text = "✅ Going: \(attendingCount) • 🤔 Interested: \(interestedCount) • ❌ Not Going: \(declinedCount)"
+            guestCountsButton.setTitle("✅ Going: \(attendingCount) • 🤔 Interested: \(interestedCount) • ❌ Not Going: \(declinedCount)", for: .normal)
         }
     }
 
     override func setupView() {
-
+        
         layer.masksToBounds = true
         layer.borderWidth = 0.5
         layer.cornerRadius = 2
@@ -127,11 +135,11 @@ class EventsCell: BaseCell {
         seperator.topAnchor.constraint(equalTo: location.bottomAnchor, constant: 5).isActive = true
         seperator.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         
-        addSubview(guestCounts)
+        addSubview(guestCountsButton)
         
-        guestCounts.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        guestCounts.topAnchor.constraint(equalTo: seperator.bottomAnchor, constant: 10).isActive = true
-        guestCounts.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        guestCountsButton.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        guestCountsButton.topAnchor.constraint(equalTo: seperator.bottomAnchor, constant: 10).isActive = true
+        guestCountsButton.heightAnchor.constraint(equalToConstant: 15).isActive = true
     }
     
     internal func setupViewHeader() {
@@ -147,6 +155,13 @@ class EventsCell: BaseCell {
         coverImage.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         coverImage.topAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
         coverImage.heightAnchor.constraint(equalToConstant: FEED_CELL_HEIGHT / 2.3).isActive = true
+    }
+    
+    internal func handleOnGuests(sender: UIButton) {
+        
+        if delegate != nil {
+            delegate?.handleOnGuest(sender: sender)
+        }
     }
 }
 

@@ -50,7 +50,7 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         collectionView?.addSubview(refresher)
         collectionView?.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
-        collectionView?.backgroundColor = UIColor(white: 0.9, alpha: 1)
+        collectionView?.backgroundColor = UIColor.rgb(231, green: 236, blue: 240)
         
         fetchEvents()
     }
@@ -66,7 +66,6 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
                 if !live.isEmpty {
                 
                     self.liveEventArray = live
-                    
                 }
         
                 self.collectionView?.reloadData()
@@ -91,6 +90,13 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         let eventPage = EventDetailsPage(collectionViewLayout: UICollectionViewFlowLayout())
             eventPage._eventDetails = eventDetail
         self.navigationController?.pushViewController(eventPage, animated: true)
+    }
+    
+    internal func handlePushingToGuestPage(_eventId:String) {
+        
+        let guestPage = EventGuestsPage(collectionViewLayout: UICollectionViewFlowLayout())
+            guestPage.event_id = _eventId
+        navigationController?.pushViewController(guestPage, animated: true)
     }
     
     func onRefreshPage() {

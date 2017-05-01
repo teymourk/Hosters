@@ -22,7 +22,7 @@ class EventDetailsCell: EventsCell {
     
     override func setupView() {
         
-        guestCounts.removeFromSuperview()
+        guestCountsButton.removeFromSuperview()
         
         addSubview(headerView)
         

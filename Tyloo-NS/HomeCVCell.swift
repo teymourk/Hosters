@@ -32,7 +32,7 @@ class HomeCVCell: BaseCell  {
     }()
     
     var homePage:HomePage?
-
+    
     override func setupView() {
         
         addSubview(eventCollectionView)
@@ -57,6 +57,8 @@ extension HomeCVCell: UICollectionViewDelegate, UICollectionViewDataSource, UICo
             if let eventDetails = events?[indexPath.item] {
             
                 cell._eventDetails = eventDetails
+                cell.guestCountsButton.tag = indexPath.item
+                cell.delegate = self
             }
             
             return cell
@@ -79,5 +81,20 @@ extension HomeCVCell: UICollectionViewDelegate, UICollectionViewDataSource, UICo
         
         return CGSize(width: (frame.width) - (frame.width / 7),
                       height: FEED_CELL_HEIGHT - 90)
+    }
+}
+
+//Mark:EventCellDelegate
+extension HomeCVCell: EventCellDelegate {
+    
+    func handleOnGuest(sender: UIButton) {
+        
+        let index = IndexPath(item: sender.tag, section: 0)
+        
+        if let homePage = homePage, let eventId = events?[index.item].event_id  {
+            
+            homePage.handlePushingToGuestPage(_eventId: eventId)
+        }
+    
     }
 }

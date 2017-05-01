@@ -10,6 +10,24 @@ import UIKit
 
 class GuestsCell: BaseCell {
     
+    var users:Users? {
+        
+        didSet {
+            
+            guard let userInfo = users else {return}
+            
+            if let profileURL = userInfo.profile_pricture {
+            
+                profile_image.getImagesBack(url: profileURL, placeHolder: "Profile")
+            }
+            
+            if let profileName = userInfo.profile_name {
+                
+                profile_name.text = profileName
+            }
+        }
+    }
+    
     var profile_image:UIImageView = {
         let image = UIImageView()
             image.layer.masksToBounds = true
@@ -23,7 +41,6 @@ class GuestsCell: BaseCell {
         let label = UILabel()
             label.textColor = .darkGray
             label.font = UIFont.boldSystemFont(ofSize: 12)
-            label.text = "NIMA SAJAD POUR"
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
