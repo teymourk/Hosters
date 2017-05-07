@@ -94,7 +94,7 @@ class EventsCell: BaseCell {
             
         } else {
             
-            location.text = "Location Not Available 🤔"
+            location.text = "Location Not Available 💩"
         }
         
         if let interestedCount = eventDetails.interested_count, let declinedCount = eventDetails.declined_count, let attendingCount = eventDetails.attending_count, let guest_list_Enabled = eventDetails.guest_list_enabled {

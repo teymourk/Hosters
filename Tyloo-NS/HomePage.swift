@@ -10,6 +10,7 @@ import MBProgressHUD
 import MapKit
 import CoreData
 import FBSDKCoreKit
+import SCLAlertView
 
 private let CELL_FEED = "Cell_FEED"
 private let HEADER_ID = "HEADER_ID"
@@ -52,14 +53,15 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
         collectionView?.backgroundColor = UIColor.rgb(231, green: 236, blue: 240)
         
-        let filterDateButton = UIBarButtonItem(barButtonSystemItem: .add, target: self, action: #selector(onDatePicker))
-        navigationController?.navigationItem.rightBarButtonItem = filterDateButton
+        let filterDateButton = UIBarButtonItem(image: #imageLiteral(resourceName: "filter"), style: .plain, target: self, action: #selector(onDatePicker(sender:)))
+        navigationItem.rightBarButtonItem = filterDateButton
         
         fetchEvents()
     }
     
     internal func onDatePicker(sender: UIBarButtonItem) {
         
+        SCLAlertView().showInfo("Adding Calendar", subTitle: "Be Patient")
     }
     
     internal func eventTypeFetch(index:Int, type:String) {

@@ -33,7 +33,7 @@ class EventGuestsPage: UICollectionViewController, UICollectionViewDelegateFlowL
     
     var menuBar:MenuBar = {
         let mb = MenuBar()
-            mb.menuItems = ["Going","Maybe", "Not Going"]
+            mb.menuItems = ["Going","Maybe","Not Going"]
         return mb
     }()
     

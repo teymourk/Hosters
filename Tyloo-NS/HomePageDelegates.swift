@@ -28,7 +28,7 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
                 cell.eventsCV.events = eventsArray
                 cell.eventsCV.homePage = self
             }
-            
+        
             return cell
         }
         
@@ -44,10 +44,11 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
     //Mark: HeaderDelegate
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
+        
         if let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HEADER_ID, for: indexPath) as? LiveEvents {
             
             if let liveEvent = liveEventArray {
-                
+            
                 header.events = liveEvent
             }
             

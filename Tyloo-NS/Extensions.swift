@@ -264,7 +264,7 @@ extension Date {
     func AddEndTime() -> Date {
     
         let minute:TimeInterval = 60.0
-        let hour:TimeInterval = 60.0 * minute * 48
+        let hour:TimeInterval = 60.0 * minute * 12
         
         let date = Date(timeInterval: hour, since: self)
     
