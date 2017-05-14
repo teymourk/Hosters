@@ -15,8 +15,8 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
     
     //Mark: CollectionView Delegate/DataSource    
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        return eventsDictionary?.count ?? 0 
+                
+        return eventsDictionary?.count ?? 0
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {

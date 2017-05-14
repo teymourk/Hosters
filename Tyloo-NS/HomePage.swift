@@ -56,7 +56,7 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         let filterDateButton = UIBarButtonItem(image: #imageLiteral(resourceName: "filter"), style: .plain, target: self, action: #selector(onDatePicker(sender:)))
         navigationItem.rightBarButtonItem = filterDateButton
         
-        fetchEvents()
+        eventTypeFetch(index: 0, typeIndex: 0)
     }
     
     internal func onDatePicker(sender: UIBarButtonItem) {
@@ -64,34 +64,38 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         SCLAlertView().showInfo("Adding Calendar", subTitle: "Be Patient")
     }
     
-    internal func eventTypeFetch(index:Int, type:String) {
-
-        Events.fetchEventsFromFacebook(refresher:refresher, type: type) { (allEvents, live) in
-    
-            if !allEvents.isEmpty {
+    internal func eventTypeFetch(index: Int, typeIndex:Int) {
+        
+        var indexs:Int = Int()
+        var typeIndexs:Int = Int()
+        let type = ["not_replied", "attending", "maybe"]
+        
+        if typeIndex != type.count {
+            
+            Events.fetchEventsFromFacebook(refresher:refresher, type: type[typeIndex]) { (allEvents, live) in
                 
-                self.eventsDictionary?[index] = allEvents
+                if !allEvents.isEmpty {
+                    
+                    self.eventsDictionary?[index] = allEvents
+                    indexs = index + 1
+                    typeIndexs = typeIndex + 1
+                    self.eventTypeFetch(index:indexs, typeIndex: typeIndexs)
+                    
+                } else{
+                    
+                    typeIndexs = typeIndex + 1
+                    self.eventTypeFetch(index: index, typeIndex: typeIndexs)
+                    
+                }
                 
                 if !live.isEmpty {
-                
+                    
                     self.liveEventArray = live
                 }
-        
-                self.collectionView?.reloadData()
-                
-            } else {
-                
-                print("NO EVENTS FOUND")
             }
         }
-    }
-    
-    func fetchEvents() {
         
-        eventTypeFetch(index: 0, type: "not_replied")
-        eventTypeFetch(index: 1, type: "attending")
-        eventTypeFetch(index: 2, type: "maybe")
-        eventTypeFetch(index: 3, type: "declined")
+        self.collectionView?.reloadData()
     }
     
     internal func navigateToEventDetails(eventDetail:Events) {

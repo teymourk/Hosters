@@ -210,7 +210,7 @@ class Events: NSObject {
                 
                 let formatter = DateFormatter()
                 formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
-                let olddate = formatter.date(from: "2017-04-29 7:00:00 +0000") //This Will Be Date of launch
+                let olddate = formatter.date(from: "2017-05-14 12:00:00 +0000") //This Will Be Date of launch
                 
                 for arrayObj in dataArray {
                     
