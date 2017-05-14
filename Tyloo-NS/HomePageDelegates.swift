@@ -23,11 +23,28 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_FEED, for: indexPath) as? HomeCell {
             
+            let types = type[indexPath.item]
+            
             if let eventsArray = eventsDictionary?[indexPath.item] {
                 
                 cell.eventsCV.events = eventsArray
                 cell.eventsCV.homePage = self
             }
+            
+            switch types {
+            case "not_replied":
+                cell.categoryLabel.text = "Invited  💌"
+                break
+            case "attending":
+                cell.categoryLabel.text = "Attending ✅"
+                break
+            case "maybe":
+                cell.categoryLabel.text = "Interested 🤔"
+                break
+            default: break
+            }
+
+           
         
             return cell
         }

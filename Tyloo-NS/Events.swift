@@ -33,9 +33,14 @@ class Events: NSObject {
     private var _interested_count:Int?
     private var _declined_count:Int?
     private var _attending_count:Int?
+    private var _isLive:Int?
     
     var event_id:String? {
         return _event_id
+    }
+    
+    var isLive:Int? {
+        return _isLive
     }
     
     var name:String? {
@@ -188,12 +193,11 @@ class Events: NSObject {
         }
     }
     
-    class func fetchEventsFromFacebook(refresher:UIRefreshControl, type:String, allEvents: @escaping ([Events], [Events]) -> ()) {
+    class func fetchEventsFromFacebook(date: Date,refresher:UIRefreshControl, type:String, allEvents: @escaping ([Events]) -> ()) {
 
         refresher.beginRefreshing()
         
         var eventsArray:[Events] = [Events]()
-        var liveEvents:[Events] = [Events]()
         
         let currentTime = Date()
         
@@ -208,30 +212,32 @@ class Events: NSObject {
             
             if let result = results as? NSDictionary, let dataArray = result["data"] as? NSArray {
                 
-                let formatter = DateFormatter()
-                formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
-                let olddate = formatter.date(from: "2017-05-14 12:00:00 +0000") //This Will Be Date of launch
-                
                 for arrayObj in dataArray {
                     
                     if let dataDic = arrayObj as? NSDictionary {
                         
                         let eventsObj = Events(dictionary: dataDic)
                         
-                        if olddate! < eventsObj.start_time! {
+                        if date < eventsObj.start_time! {
                             
                             eventsArray.append(eventsObj)
+                            eventsObj._isLive = 1
+                        }
+                        
+                        if currentTime > eventsObj.end_time! {
+                            
+                            eventsObj._isLive = 2
+                            
+                        } else if currentTime > eventsObj.start_time! && currentTime < eventsObj.end_time!{
+                            
+                            eventsObj._isLive = 3
                         }
                     }
                 }
-                
-                let live = eventsArray.filter({currentTime > $0.start_time! && currentTime < $0.end_time!})
-                liveEvents = live
-                
             }
             
             DispatchQueue.main.async {
-                allEvents(eventsArray, liveEvents)
+                allEvents(eventsArray)
                 refresher.endRefreshing()
             }
         }

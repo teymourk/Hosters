@@ -18,9 +18,8 @@ class HomeCell: BaseCell {
     
     let categoryLabel:UILabel = {
         let label = UILabel()
-            label.text = "Categories Of Each Event"
             label.textColor = .darkGray
-            label.font = UIFont.boldSystemFont(ofSize: 14)
+            label.font = UIFont(name: "NotoSans-Italic", size: 15)
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

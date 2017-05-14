@@ -17,7 +17,7 @@ pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
 pod 'AFNetworking', '~> 3.0'
 pod 'CameraManager', '~> 3.0'
-pod 'FSCalendar'
+pod 'EPCalendarPicker', :git => 'https://github.com/ipraba/EPCalendarPicker'
 pod 'HanekeSwift', :git => 'https://github.com/jasonnoahchoi/HanekeSwift', :branch => 'swift3'
 pod 'SwiftyJSON', git: 'https://github.com/BaiduHiDeviOS/SwiftyJSON.git', branch: 'swift3'
 

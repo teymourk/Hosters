@@ -34,7 +34,6 @@ class EventsCell: BaseCell {
         let image = UIImageView()
             image.contentMode = .scaleAspectFill
             image.layer.masksToBounds = true
-            image.image = UIImage(named: "emptyCover")
             image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
@@ -81,6 +80,10 @@ class EventsCell: BaseCell {
         if let coverURL = eventDetails.coverURL {
             
             coverImage.getImagesBack(url: coverURL, placeHolder: "emptyImage")
+            
+        } else {
+            
+            coverImage.image = UIImage(named: "emptyCover")
         }
         
         if let eventTitle = eventDetails.name {
@@ -211,9 +214,25 @@ class HeaderView:BaseView {
     
     internal func startCountDown() {
         
-        if let eventTime = eventDetails?.start_time {
+        if let event = eventDetails, let isLive = event.isLive, let eventTime = event.start_time, let endTime = event.end_time {
             
-            countDown.text = eventTime.countDown()
+            switch isLive {
+            case 1:
+                countDown.text = "Starting: \(eventTime.countDown())"
+                countDown.textColor = .rgb(24, green: 201, blue: 86)
+                break
+            case 2:
+                countDown.text = "Event Ended"
+                countDown.textColor = .rgb(181, green: 24, blue: 34)
+                break
+            case 3:
+                countDown.text = "Ending: \(endTime.countDown())"
+                countDown.textColor = .rgb(181, green: 24, blue: 34)
+                break
+            
+            default: break
+                
+            }
         }
     }
     

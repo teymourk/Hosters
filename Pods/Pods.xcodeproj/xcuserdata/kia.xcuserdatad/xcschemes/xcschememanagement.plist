@@ -19,6 +19,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>EPCalendarPicker.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>FBSDKCoreKit.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -30,11 +35,6 @@
 			<false/>
 		</dict>
 		<key>FBSDKShareKit.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
-		<key>FSCalendar.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -82,16 +82,6 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
-		<key>0F4FA59CABC2E6981C98C4336C9D7745</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>13276365ABBB54B5681AC613E94331A4</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>41FA54D12162DAD51D02FC58A2CD5034</key>
 		<dict>
 			<key>primary</key>
@@ -102,12 +92,32 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>4941A67B072B85D9D5F06F49E4D6AF52</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>4EF7BABA0C2B3B5A67D9F2C687DCBF18</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>64654BA572B99130DE3F3C7F3D8CE904</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>6D5CEDECD3D8DC52EA507E0431BDA8A0</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>9D4518627B1D269CB04D6A263998D786</key>
+		<key>8F9B491F2F6D79EE93B3AAB9C7A649B2</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>91EDCB3A7CD10AAF4E978EBEA633D8D4</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -132,22 +142,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>C5A2DB7A84B7B78E359870D2E1B24AA7</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>CF671F7E57B92905F1CC91D036D6B4A7</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
 		<key>E396A93E4C79B22B7816E9F02F62ECED</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>F6D3C34A414B24DFE44C930D87054F7A</key>
 		<dict>
 			<key>primary</key>
 			<true/>
