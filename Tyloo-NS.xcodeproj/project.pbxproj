@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		02E6DC9A81FA284890F240FC /* Pods_Tyloo_NSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 823468288D5D28355230997B /* Pods_Tyloo_NSTests.framework */; };
 		0B24E4D41EB5200E0037D1D5 /* Tyloo_NSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24E4D31EB5200E0037D1D5 /* Tyloo_NSTests.swift */; };
 		0B24E4DC1EB5255B0037D1D5 /* DetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24E4DB1EB5255B0037D1D5 /* DetailsCell.swift */; };
 		0B2EE8321EA6F53900148E50 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2EE8311EA6F53900148E50 /* RegisterVC.swift */; };
@@ -75,6 +76,8 @@
 		0BE43C991EB0F84200062E07 /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
 		0BE43C9B1EB0FF3600062E07 /* EventPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPage.swift; sourceTree = "<group>"; };
 		0BE43C9D1EB108AE00062E07 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
+		52E0A2F9D6B976265DDB742C /* Pods-Tyloo-NSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tyloo-NSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tyloo-NSTests/Pods-Tyloo-NSTests.release.xcconfig"; sourceTree = "<group>"; };
+		823468288D5D28355230997B /* Pods_Tyloo_NSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tyloo_NSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		935C9218E9E69F16D26533FE /* Pods-Tyloo-NS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tyloo-NS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tyloo-NS/Pods-Tyloo-NS.debug.xcconfig"; sourceTree = "<group>"; };
 		95BB14EB45E07915A78B0265 /* Pods-Tyloo-NS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tyloo-NS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tyloo-NS/Pods-Tyloo-NS.release.xcconfig"; sourceTree = "<group>"; };
 		AB2EFDB21D0E29E000B21A18 /* HomeCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCell.swift; sourceTree = "<group>"; };
@@ -101,6 +104,7 @@
 		ABC77A7E1D0C916600C46DD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		ABCBD8EF1DD29A6E008D0CAF /* HomeAudit.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeAudit.swift; sourceTree = "<group>"; };
 		B50C21B3D80E14391184251D /* Pods_Tyloo_NS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tyloo_NS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		F48DC5AC821C2F363669BC1C /* Pods-Tyloo-NSTests.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tyloo-NSTests.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tyloo-NSTests/Pods-Tyloo-NSTests.debug.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -108,6 +112,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				02E6DC9A81FA284890F240FC /* Pods_Tyloo_NSTests.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,6 +157,8 @@
 			children = (
 				935C9218E9E69F16D26533FE /* Pods-Tyloo-NS.debug.xcconfig */,
 				95BB14EB45E07915A78B0265 /* Pods-Tyloo-NS.release.xcconfig */,
+				F48DC5AC821C2F363669BC1C /* Pods-Tyloo-NSTests.debug.xcconfig */,
+				52E0A2F9D6B976265DDB742C /* Pods-Tyloo-NSTests.release.xcconfig */,
 			);
 			name = Pods;
 			sourceTree = "<group>";
@@ -264,6 +271,7 @@
 			isa = PBXGroup;
 			children = (
 				B50C21B3D80E14391184251D /* Pods_Tyloo_NS.framework */,
+				823468288D5D28355230997B /* Pods_Tyloo_NSTests.framework */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -275,9 +283,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 0B24E4DA1EB5200E0037D1D5 /* Build configuration list for PBXNativeTarget "Tyloo-NSTests" */;
 			buildPhases = (
+				708709B8E9DA10930A361BEA /* [CP] Check Pods Manifest.lock */,
 				0B24E4CD1EB5200E0037D1D5 /* Sources */,
 				0B24E4CE1EB5200E0037D1D5 /* Frameworks */,
 				0B24E4CF1EB5200E0037D1D5 /* Resources */,
+				AB86BE174FCA58DC9DB529D4 /* [CP] Embed Pods Frameworks */,
+				3D7376512C82D37E3BDD77B1 /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -384,6 +395,21 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		3D7376512C82D37E3BDD77B1 /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tyloo-NSTests/Pods-Tyloo-NSTests-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
 		68E0F62581A80A4EA1261E6E /* [CP] Embed Pods Frameworks */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -399,6 +425,21 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tyloo-NS/Pods-Tyloo-NS-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		708709B8E9DA10930A361BEA /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
 		8C5216182BF73F565E1468FB /* [CP] Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -412,6 +453,21 @@
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
 			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		AB86BE174FCA58DC9DB529D4 /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tyloo-NSTests/Pods-Tyloo-NSTests-frameworks.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
 		E28A567395580605845FE578 /* [CP] Copy Pods Resources */ = {
@@ -488,6 +544,7 @@
 /* Begin XCBuildConfiguration section */
 		0B24E4D81EB5200E0037D1D5 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = F48DC5AC821C2F363669BC1C /* Pods-Tyloo-NSTests.debug.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
@@ -504,6 +561,7 @@
 		};
 		0B24E4D91EB5200E0037D1D5 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 52E0A2F9D6B976265DDB742C /* Pods-Tyloo-NSTests.release.xcconfig */;
 			buildSettings = {
 				BUNDLE_LOADER = "$(TEST_HOST)";
 				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
