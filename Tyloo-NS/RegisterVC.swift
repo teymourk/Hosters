@@ -73,7 +73,7 @@ class RegisterVC: UIViewController, UITextFieldDelegate, UIImagePickerController
         
         let facebookLogin = FBSDKLoginManager()
         
-        facebookLogin.logIn(withReadPermissions: ["email"], from: self) { (result, error) in
+        facebookLogin.logIn(withReadPermissions: ["email", "user_events"], from: self) { (result, error) in
             
             if error != nil {
                 

@@ -105,13 +105,6 @@ class picturesCell:BaseCell {
         }
     }
     
-    let seperator:UIView = {
-        let view = UIView()
-        view.backgroundColor = orange
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
-    
     var instructionImage:UIImageView = {
         let image = UIImageView()
         image.contentMode = .scaleAspectFill
@@ -154,7 +147,6 @@ class picturesCell:BaseCell {
     }
     
     override func setupView() {
-        super.setupView()
         
         addSubview(instructionImage)
         addSubview(instructionText)

@@ -70,11 +70,12 @@ extension HomeCVCell: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        guard let homePage = homePage else {return}
-        
-        if let eventObj = events?[indexPath.item] {
-        
-            homePage.navigateToEventDetails(eventDetail: eventObj)
+        if let homePage = homePage{
+            
+            if let eventObj = events?[indexPath.item] {
+                
+                homePage.navigateToEventDetails(eventDetail: eventObj)
+            }
         }
     }
     

@@ -22,7 +22,7 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate, EPCalenda
     var eventsDictionary:[Int:[Events]]? = [Int:[Events]]()
     var liveEventArray:[Events]? = [Events]()
     
-    var type = ["not_replied", "attending", "maybe"]
+    var type = ["not_replied", "attending"]
     
     lazy var locationManager:CLLocationManager? = {
         let manager = CLLocationManager()
@@ -33,7 +33,6 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate, EPCalenda
     
     lazy var refresher:UIRefreshControl = {
         let refresh = UIRefreshControl()
-            refresh.tintColor = .red
             refresh.addTarget(self, action: #selector(onRefreshPage), for: .valueChanged)
         return refresh
     }()
@@ -43,8 +42,20 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate, EPCalenda
         return notification
     }()
     
+    let live:LiveView = {
+        let live = LiveView()
+            live.translatesAutoresizingMaskIntoConstraints = false
+        return live
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        collectionView?.addSubview(live)
+        
+        live.widthAnchor.constraint(equalTo: (collectionView?.widthAnchor)!).isActive = true
+        live.topAnchor.constraint(equalTo: (collectionView?.topAnchor)!, constant: -40).isActive = true
+        live.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         navigationController?.navigationBar.isTranslucent = false
         
@@ -53,12 +64,12 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate, EPCalenda
         collectionView?.addSubview(refresher)
         collectionView?.register(HomeCell.self, forCellWithReuseIdentifier: CELL_FEED)
         collectionView?.register(LiveEvents.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HEADER_ID)
-        collectionView?.contentInset = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
-        collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 10, left: 0, bottom: 0, right: 0)
+        collectionView?.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
+        collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
         collectionView?.backgroundColor = UIColor.rgb(231, green: 236, blue: 240)
         
-        let filterDateButton = UIBarButtonItem(image: #imageLiteral(resourceName: "filter"), style: .plain, target: self, action: #selector(onDatePicker(sender:)))
-        navigationItem.rightBarButtonItem = filterDateButton
+        //let filterDateButton = UIBarButtonItem(image: #imageLiteral(resourceName: "filter"), style: .plain, target: self, action: #selector(onDatePicker(sender:)))
+        //navigationItem.rightBarButtonItem = filterDateButton
         
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
@@ -85,34 +96,46 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate, EPCalenda
         self.collectionView?.reloadData()
     }
     
+    func epCalendarPicker(_: EPCalendarPicker, didCancel error: NSError) {
+        
+        print("CANCELED")
+    }
+    
     internal func eventTypeFetch(date: Date, index: Int, typeIndex:Int) {
         
         var indexs:Int = Int()
         var typeIndexs:Int = Int()
         
         if typeIndex != type.count {
-            
+        
             Events.fetchEventsFromFacebook(date: date, refresher:refresher, type: type[typeIndex]) { (allEvents) in
-                
-                if !allEvents.isEmpty {
-                    
-                    self.eventsDictionary?[index] = allEvents
-                    indexs = index + 1
-                    typeIndexs = typeIndex + 1
-                    self.eventTypeFetch(date: date, index:indexs, typeIndex: typeIndexs)
-                    
-                } else{
-                    
-                    self.type.remove(at: typeIndex)
-                    typeIndexs = typeIndex + 1
-                    self.eventTypeFetch(date: date, index: index, typeIndex: typeIndexs)
-                }
                 
                 let live = allEvents.filter({$0.isLive == 3})
                 
                 if !live.isEmpty {
                     
                     self.liveEventArray = live
+                }
+    
+                let hasntHappend = allEvents.filter({$0.isLive == 1})
+                
+                if !hasntHappend.isEmpty {
+                    
+                    self.eventsDictionary?[index] = hasntHappend
+                    indexs = index + 1
+                    typeIndexs = typeIndex + 1
+                    self.eventTypeFetch(date: date, index:indexs, typeIndex: typeIndexs)
+                    
+                } else{
+                    
+                    typeIndexs = typeIndex + 1
+                    self.eventTypeFetch(date: date, index: index, typeIndex: typeIndexs)
+                }
+                
+                if let indexCount = self.eventsDictionary?.count {
+                    
+                    let attended = allEvents.filter({$0.isLive == 2 && $0.rsvp_status == "attending"})
+                    self.eventsDictionary?[indexCount] = attended
                 }
             }
         }

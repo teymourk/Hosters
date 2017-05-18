@@ -23,29 +23,35 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_FEED, for: indexPath) as? HomeCell {
             
-            let types = type[indexPath.item]
-            
             if let eventsArray = eventsDictionary?[indexPath.item] {
                 
                 cell.eventsCV.events = eventsArray
                 cell.eventsCV.homePage = self
+                
+                for eventOBJ in eventsArray {
+                    
+                    switch eventOBJ.rsvp_status {
+                        
+                    case "not_replied"?:
+                        cell.categoryLabel.text = "Invited  💌"
+                        break
+                    case "attending"?:
+                        cell.categoryLabel.text = "Attending ✅"
+                        break
+                    case "maybe"?:
+                        cell.categoryLabel.text = "Interested 🤔"
+                        break
+                        
+                    default: break
+                    }
+                }
             }
             
-            switch types {
-            case "not_replied":
-                cell.categoryLabel.text = "Invited  💌"
-                break
-            case "attending":
-                cell.categoryLabel.text = "Attending ✅"
-                break
-            case "maybe":
-                cell.categoryLabel.text = "Interested 🤔"
-                break
-            default: break
+            if indexPath.item == (self.eventsDictionary?.count)! - 1 {
+                
+                cell.categoryLabel.text = "Attended 👻"
             }
 
-           
-        
             return cell
         }
         
@@ -67,6 +73,7 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
             if let liveEvent = liveEventArray {
             
                 header.events = liveEvent
+                header.homePage = self
             }
             
             return header
@@ -92,12 +99,12 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
             }
         
         return CGSize(width: view.frame.width,
-                      height: FEED_CELL_HEIGHT - 30)
+                      height: FEED_CELL_HEIGHT - 55)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        return UIEdgeInsets(top: 15,
+        return UIEdgeInsets(top: 10,
                             left: 0, bottom: 0, right: 0)
     }
 }

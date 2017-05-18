@@ -19,20 +19,13 @@ class HomeCell: BaseCell {
     let categoryLabel:UILabel = {
         let label = UILabel()
             label.textColor = .darkGray
-            label.font = UIFont(name: "NotoSans-Italic", size: 15)
+            label.font = UIFont(name: "NotoSans-Italic", size: 16)
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
-    var seperator:UIView = {
-        let seperator = UIView()
-            seperator.backgroundColor = darkGray
-            seperator.translatesAutoresizingMaskIntoConstraints = false
-        return seperator
-    }()
-    
+        
     override func setupView() {
-        super.setupView()
+       super.setupView()
         
         backgroundColor = .clear
         
@@ -47,11 +40,5 @@ class HomeCell: BaseCell {
         eventsCV.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         eventsCV.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 10).isActive = true
         eventsCV.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
-        
-        addSubview(seperator)
-        
-        seperator.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        seperator.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
-        seperator.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
 }

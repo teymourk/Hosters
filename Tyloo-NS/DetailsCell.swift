@@ -10,10 +10,17 @@ import UIKit
 
 class DetailsCell: BaseCell {
 
-    var details:String? {
+    var eventDetails:Events? {
         didSet {
             
-            detailsTextView.text = details
+            if let eventDetails = eventDetails?.descriptions {
+                
+                detailsTextView.text = eventDetails
+                
+            } else {
+                
+                detailsTextView.text = "NO Details Available"
+            }
         }
     }
     
@@ -27,6 +34,8 @@ class DetailsCell: BaseCell {
     }()
     
     override func setupView() {
+        
+        backgroundColor = .yellow
         
         addSubview(detailsTextView)
         

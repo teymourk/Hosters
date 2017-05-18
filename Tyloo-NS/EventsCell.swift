@@ -46,6 +46,7 @@ class EventsCell: BaseCell {
         return label
     }()
     
+
     let location:UILabel = {
         let label = UILabel()
             label.textColor = .black
@@ -62,13 +63,6 @@ class EventsCell: BaseCell {
             button.setTitleColor(buttonColor, for: .normal)
             button.translatesAutoresizingMaskIntoConstraints = false
         return button
-    }()
-    
-    var seperator:UIView = {
-        let seperator = UIView()
-            seperator.backgroundColor = .lightGray
-            seperator.translatesAutoresizingMaskIntoConstraints = false
-        return seperator
     }()
     
     var delegate:EventCellDelegate?
@@ -181,7 +175,7 @@ class HeaderView:BaseView {
             guard let headerDetail = eventDetails, let eventDate = headerDetail.start_time, let eventHost = headerDetail.owner_name else {return}
             
             date.text = eventDate.produceDate()
-            host.text = "Hosted By \(eventHost)"
+            host.text = "By \(eventHost)"
             
             let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startCountDown), userInfo: nil, repeats: true)
             timer.fire()

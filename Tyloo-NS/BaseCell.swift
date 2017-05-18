@@ -10,6 +10,13 @@ import UIKit
 
 class BaseCell: UICollectionViewCell {
     
+    var seperator:UIView = {
+        let seperator = UIView()
+            seperator.backgroundColor = .lightGray
+            seperator.translatesAutoresizingMaskIntoConstraints = false
+        return seperator
+    }()
+    
     override init(frame: CGRect) {
         super.init(frame: frame)
         
@@ -20,7 +27,14 @@ class BaseCell: UICollectionViewCell {
         fatalError("init(coder:) has not been implemented")
     }
     
-    func setupView() {}
+    func setupView() {
+    
+        addSubview(seperator)
+        
+        seperator.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        seperator.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        seperator.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+    }
 }
 
 class BaseTCell: UITableViewCell {

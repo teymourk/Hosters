@@ -11,6 +11,9 @@ import UIKit
 private let CELL_FEED = "Cell_FEED"
 private let CELL_DETAILS = "Cell_Details"
 private let CELL_IMAGES = "CELL_IMAGES"
+private let CELL_OPTIONS = "CELL_OPTIONS"
+private let CELL_STATUS = "CELL_STATUS"
+private let CELL_HOST = "CELL_HOST"
 private let HEADER_ID = "HEADER_ID"
 
 class EventDetailsPage: UICollectionViewController {
@@ -26,6 +29,10 @@ class EventDetailsPage: UICollectionViewController {
         collectionView?.backgroundColor = .white
         collectionView?.register(EventDetailsCell.self, forCellWithReuseIdentifier: CELL_FEED)
         collectionView?.register(DetailsCell.self, forCellWithReuseIdentifier: CELL_DETAILS)
+        collectionView?.register(ImagesCell.self, forCellWithReuseIdentifier: CELL_IMAGES)
+        collectionView?.register(OptionsCell.self, forCellWithReuseIdentifier: CELL_OPTIONS)
+        collectionView?.register(StatusCell.self, forCellWithReuseIdentifier: CELL_STATUS)
+        collectionView?.register(HostCell.self, forCellWithReuseIdentifier: CELL_HOST)
     }
 }
 
@@ -34,45 +41,94 @@ extension EventDetailsPage:  UICollectionViewDelegateFlowLayout {
     //Mark: CollectionView Delegate/DataSource
     override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return 2
+        return 6
     }
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if indexPath.item == 1 {
+        if let eventDetails = _eventDetails {
+            
+            if indexPath.item == 0 {
+                
+                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_IMAGES, for: indexPath) as? ImagesCell {
+                    
+                    cell.eventDetails = eventDetails
+                    
+                    return cell
+                }
+                
+            } else if indexPath.item == 1 {
+        
+                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_FEED, for: indexPath) as? EventDetailsCell {
+                    
+                    cell.eventDetails = eventDetails
+                    
+                    return cell
+                }
+                
+            } else if indexPath.item == 2 {
+                
+                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_OPTIONS, for: indexPath) as? OptionsCell {
+                    
+                    //cell.eventDetails = eventDetails
+                    
+                    return cell
+                }
+                
+            } else if indexPath.item == 3 {
+                
+                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_STATUS, for: indexPath) as? StatusCell {
+                    
+                    cell.eventDetails = eventDetails
+                    
+                    return cell
+                }
+                
+            } else if indexPath.item == 4 {
+                
+                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_HOST, for: indexPath) as? HostCell {
+                    
+                    cell.eventDetails = eventDetails
+                    
+                    return cell
+                }
+            }
             
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_DETAILS, for: indexPath) as? DetailsCell {
                 
-                if let eventDetails = _eventDetails?.descriptions {
-                    
-                    cell.details = eventDetails
-                    
-                } else{
-                    
-                    cell.details = "No Details Available 🙁"
-                }
-    
+                cell.eventDetails = eventDetails
+                
                 return cell
             }
-        }
-        
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_FEED, for: indexPath) as? EventDetailsCell {
-            
-            if let eventDetails = _eventDetails {
-                
-                cell._eventDetails = eventDetails
-            }
-            
-            return cell
         }
         
         return BaseCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        
-        if indexPath.item == 1 {
-        
+    
+        if indexPath.item == 0 {
+            
+            return CGSize(width: view.frame.width,
+                          height: FEED_CELL_HEIGHT / 1.7)
+            
+        } else if indexPath.item == 1  {
+            
+            return CGSize(width: view.frame.width,
+                          height: FEED_CELL_HEIGHT / 6)
+
+        }else if indexPath.item == 2 {
+            
+            return CGSize(width: view.frame.width,
+                          height: FEED_CELL_HEIGHT / 4)
+            
+        } else if indexPath.item == 3 || indexPath.item == 4 {
+            
+            return CGSize(width: view.frame.width,
+                          height: FEED_CELL_HEIGHT / 8)
+            
+        } else {
+            
             if let eventDescription = _eventDetails?.descriptions {
                 
                 let size = CGSize(width: view.frame.width, height: 1000)
@@ -90,9 +146,6 @@ extension EventDetailsPage:  UICollectionViewDelegateFlowLayout {
                               height: 25)
             }
         }
-        
-        return CGSize(width: view.frame.width,
-                      height: FEED_CELL_HEIGHT - 10)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {

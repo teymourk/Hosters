@@ -146,13 +146,6 @@ class GuestsCell: BaseCell {
         return label
     }()
     
-    var seperator:UIView = {
-        let seperator = UIView()
-        seperator.backgroundColor = .lightGray
-        seperator.translatesAutoresizingMaskIntoConstraints = false
-        return seperator
-    }()
-    
     override func setupView() {
         
         addSubview(profile_image)
@@ -172,11 +165,6 @@ class GuestsCell: BaseCell {
         
         emojiLabel.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
         emojiLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        
-        addSubview(seperator)
-        
-        seperator.leftAnchor.constraint(equalTo: profile_name.leftAnchor).isActive = true
-        seperator.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        seperator.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+    
     }
 }
