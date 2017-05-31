@@ -10,10 +10,10 @@ import UIKit
 
 class EventPhotosCell: BaseCell {
     
-    var postedImages:PostImages? {
+    var postedImages:Images? {
         didSet {
             
-            guard let imgURL = postedImages?.imageURL else {return}
+            guard let imgURL = postedImages?.img else {return}
             self._images.getImagesBack(url: imgURL, placeHolder: "emptyImage")
         }
     }
@@ -22,10 +22,8 @@ class EventPhotosCell: BaseCell {
     
     var _images:UIImageView = {
         let img = UIImageView()
-        img.contentMode = .scaleAspectFill
-        img.layer.masksToBounds = true
-        img.layer.borderWidth = 0.5
-        img.layer.borderColor = UIColor.white.cgColor
+            img.contentMode = .scaleAspectFill
+            img.layer.masksToBounds = true
         return img
     }()
     

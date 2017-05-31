@@ -12,17 +12,30 @@ import CoreData
 
 private let CELL_ID = "cellId"
 
+struct Images {
+    
+    let img:String
+}
+
+
 class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout, NSFetchedResultsControllerDelegate {
     
     var cellHeight:CGFloat!
     var timer:Timer?
     
-    var allImages:[PostImages]? {
-        didSet {
-            
-            picturesCollectionView.reloadData()
-        }
+    var allImages:[Images]? {
+        
+        let image1 = Images(img: "https://firebasestorage.googleapis.com/v0/b/tyloo-5bcf5.appspot.com/o/288293611629956%2F6826BA69-91E6-4491-AC77-A96E28D46FEC.png?alt=media&token=ac440d2a-9317-4f68-8bf9-2f0748905696")
+        let image2 = Images(img: "https://firebasestorage.googleapis.com/v0/b/tyloo-5bcf5.appspot.com/o/728991830611993%2FA2EDB055-FD13-4E2D-84E1-C078ADEB9157.png?alt=media&token=015da72c-c16a-4a87-b45c-65e3f4a2ffbb")
+        let image3 = Images(img: "https://firebasestorage.googleapis.com/v0/b/tyloo-5bcf5.appspot.com/o/728991830611993%2F46AE4340-8B23-4DF0-8780-39C60A9E7C18.png?alt=media&token=2f68f3a5-7a73-4729-bba0-28cea99a988c")
+        let image4 = Images(img: "https://i.ytimg.com/vi/ZTWzEShwsJQ/maxresdefault.jpg")
+        
+        let image5 = Images(img: "http://mikeposnerhits.com/wp-content/uploads/2014/06/OSU-DamJam2014-05312014-2.jpg")
+        
+        return [image1,image2,image3,image4,image5]
     }
+    
+    var eventDetailPage:EventDetailsPage?
     
     lazy var picturesCollectionView:UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -99,7 +112,10 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        print("Testing")
+        if let detailPage = eventDetailPage, let imgs = allImages {
+            
+            detailPage.pushToAllImages(images: imgs)
+        }
     }
     
     override func setupView() {

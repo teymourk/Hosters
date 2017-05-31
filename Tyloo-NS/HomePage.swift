@@ -22,13 +22,21 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     var eventsDictionary:[Int:[Events]]? = [Int:[Events]]()
     var liveEventArray:[Events]? = [Events]()
     
-    var type = ["not_replied", "attending"]
+    var type = ["not_replied", "attending", "maybe"]
     
     lazy var locationManager:CLLocationManager? = {
         let manager = CLLocationManager()
             manager.delegate = self
             manager.desiredAccuracy = kCLLocationAccuracyBest
         return manager
+    }()
+    
+    lazy var activityIndicator:UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
+            indicator.center = self.view.center
+            indicator.color = .gray
+            indicator.startAnimating()
+        return indicator
     }()
     
     lazy var refresher:UIRefreshControl = {
@@ -82,7 +90,7 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         
         if typeIndex != type.count {
         
-            Events.fetchEventsFromFacebook(date: date, refresher:refresher, type: type[typeIndex]) { (allEvents) in
+            Events.fetchEventsFromFacebook(date: date, refresher:activityIndicator, type: type[typeIndex]) { (allEvents) in
                 
 
                 let live = allEvents.filter({$0.isLive == 3})
@@ -107,11 +115,11 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
                     self.eventTypeFetch(date: date, index: index, typeIndex: typeIndexs)
                 }
                 
-                if let indexCount = self.eventsDictionary?.count {
-                    
-                    let attended = allEvents.filter({$0.isLive == 2 && $0.rsvp_status == "attending"})
-                    self.eventsDictionary?[indexCount] = attended
-                }
+//                if let indexCount = self.eventsDictionary?.count {
+//                    
+//                    let attended = allEvents.filter({$0.isLive == 2 && $0.rsvp_status == "attending"})
+//                    self.eventsDictionary?[indexCount] = attended
+//                }
             }
         }
         

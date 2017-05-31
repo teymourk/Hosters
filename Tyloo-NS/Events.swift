@@ -193,9 +193,9 @@ class Events: NSObject {
         }
     }
     
-    class func fetchEventsFromFacebook(date: Date,refresher:UIRefreshControl, type:String, allEvents: @escaping ([Events]) -> ()) {
+    class func fetchEventsFromFacebook(date: Date,refresher:UIActivityIndicatorView, type:String, allEvents: @escaping ([Events]) -> ()) {
 
-        refresher.beginRefreshing()
+        refresher.startAnimating()
         
         var eventsArray:[Events] = [Events]()
         
@@ -238,7 +238,7 @@ class Events: NSObject {
             
             DispatchQueue.main.async {
                 allEvents(eventsArray)
-                refresher.endRefreshing()
+                refresher.stopAnimating()
             }
         }
     }

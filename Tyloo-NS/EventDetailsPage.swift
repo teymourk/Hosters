@@ -57,7 +57,7 @@ extension EventDetailsPage:  UICollectionViewDelegateFlowLayout {
                 if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_IMAGES, for: indexPath) as? ImagesCell {
                     
                     cell.eventDetails = eventDetails
-                    
+                    cell.eventPhotosCV.eventDetailPage = self
                     return cell
                 }
                 
@@ -156,6 +156,13 @@ extension EventDetailsPage:  UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         
         return 5
+    }
+    
+    func pushToAllImages(images:[Images]) {
+        
+        let eventPhotos = AllEventPhotos(collectionViewLayout: UICollectionViewFlowLayout())
+            eventPhotos.postedImages = images
+        self.navigationController?.pushViewController(eventPhotos, animated: true)
     }
 }
 
