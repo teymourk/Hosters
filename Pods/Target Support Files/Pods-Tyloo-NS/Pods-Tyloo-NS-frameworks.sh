@@ -86,7 +86,6 @@ strip_invalid_archs() {
 if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/AFNetworking/AFNetworking.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Bolts/Bolts.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/CameraManager/CameraManager.framework"
   install_framework "$BUILT_PRODUCTS_DIR/EPCalendarPicker/EPCalendarPicker.framework"
   install_framework "$BUILT_PRODUCTS_DIR/FBSDKCoreKit/FBSDKCoreKit.framework"
   install_framework "$BUILT_PRODUCTS_DIR/FBSDKLoginKit/FBSDKLoginKit.framework"
@@ -97,12 +96,13 @@ if [[ "$CONFIGURATION" == "Debug" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/MBProgressHUD/MBProgressHUD.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Protobuf/Protobuf.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SCLAlertView/SCLAlertView.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftyCam/SwiftyCam.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON/SwiftyJSON.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/TGCameraViewController/TGCameraViewController.framework"
 fi
 if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/AFNetworking/AFNetworking.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Bolts/Bolts.framework"
-  install_framework "$BUILT_PRODUCTS_DIR/CameraManager/CameraManager.framework"
   install_framework "$BUILT_PRODUCTS_DIR/EPCalendarPicker/EPCalendarPicker.framework"
   install_framework "$BUILT_PRODUCTS_DIR/FBSDKCoreKit/FBSDKCoreKit.framework"
   install_framework "$BUILT_PRODUCTS_DIR/FBSDKLoginKit/FBSDKLoginKit.framework"
@@ -113,5 +113,7 @@ if [[ "$CONFIGURATION" == "Release" ]]; then
   install_framework "$BUILT_PRODUCTS_DIR/MBProgressHUD/MBProgressHUD.framework"
   install_framework "$BUILT_PRODUCTS_DIR/Protobuf/Protobuf.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SCLAlertView/SCLAlertView.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/SwiftyCam/SwiftyCam.framework"
   install_framework "$BUILT_PRODUCTS_DIR/SwiftyJSON/SwiftyJSON.framework"
+  install_framework "$BUILT_PRODUCTS_DIR/TGCameraViewController/TGCameraViewController.framework"
 fi

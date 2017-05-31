@@ -20,7 +20,6 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - CameraManager (3.1.2)
   - EPCalendarPicker (1.0.8)
   - FBSDKCoreKit (4.22.1):
     - Bolts (~> 1.7)
@@ -87,11 +86,12 @@ PODS:
   - MBProgressHUD (1.0.0)
   - Protobuf (3.3.0)
   - SCLAlertView (0.7.0)
+  - SwiftyCam (2.3.0)
   - SwiftyJSON (2.3.2)
+  - TGCameraViewController (2.2.8)
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
-  - CameraManager (~> 3.0)
   - EPCalendarPicker (from `https://github.com/ipraba/EPCalendarPicker`)
   - FBSDKCoreKit
   - FBSDKLoginKit
@@ -104,7 +104,9 @@ DEPENDENCIES:
   - HanekeSwift (from `https://github.com/jasonnoahchoi/HanekeSwift`, branch `swift3`)
   - MBProgressHUD
   - SCLAlertView
+  - SwiftyCam
   - SwiftyJSON (from `https://github.com/BaiduHiDeviOS/SwiftyJSON.git`, branch `swift3`)
+  - TGCameraViewController
 
 EXTERNAL SOURCES:
   EPCalendarPicker:
@@ -130,7 +132,6 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  CameraManager: d55d28939b9b8f3592b8641e344932951752f039
   EPCalendarPicker: 0348fe754a7650582665ecc5ac98f4c0a0db0e91
   FBSDKCoreKit: 9c2daf0162214d6d2e21cf8208a9c6c2a2e42b9c
   FBSDKLoginKit: 00cf28916b9f0169763a3d61985d745b579fe304
@@ -150,8 +151,10 @@ SPEC CHECKSUMS:
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
   Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
+  SwiftyCam: be1f832a32b12810e86e23a87caccadd855226ea
   SwiftyJSON: 6118fb49d7519c4d31a0c1f3d5af936e9047b556
+  TGCameraViewController: 0768b534800e6136e70dd3cc5aafe1310b448480
 
-PODFILE CHECKSUM: cd03f0e4d9ae5b9a098b2940c2b855c475262b41
+PODFILE CHECKSUM: 72167c603b388bffc32c701cbfd80cef97a1d315
 
 COCOAPODS: 1.1.1

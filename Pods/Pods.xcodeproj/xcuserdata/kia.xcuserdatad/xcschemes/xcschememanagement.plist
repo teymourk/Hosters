@@ -14,11 +14,6 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
-		<key>CameraManager.xcscheme</key>
-		<dict>
-			<key>isShown</key>
-			<false/>
-		</dict>
 		<key>EPCalendarPicker.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -79,7 +74,17 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>SwiftyCam.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SwiftyJSON.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
+		<key>TGCameraViewController.xcscheme</key>
 		<dict>
 			<key>isShown</key>
 			<false/>
@@ -88,6 +93,21 @@
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
 		<key>23A73C6A29BBA6C61388D20073E1BC37</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>39C1DCFEFE888E87205AEE547A00535B</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>3AC401C283F3B75642B146973FE138EF</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>41BE6EBCE982ED82D7D1D60CD95AB051</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -102,16 +122,6 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>4941A67B072B85D9D5F06F49E4D6AF52</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>4EF7BABA0C2B3B5A67D9F2C687DCBF18</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
 		<key>64654BA572B99130DE3F3C7F3D8CE904</key>
 		<dict>
 			<key>primary</key>
@@ -122,12 +132,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>8F9B491F2F6D79EE93B3AAB9C7A649B2</key>
+		<key>84B048AB37B0F539BBFAF12310829633</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>91EDCB3A7CD10AAF4E978EBEA633D8D4</key>
+		<key>94350FD833ACB2116F396CE2FB1EE51B</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -162,7 +172,7 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>FFBE657764C9F6D8E01DDE2949BD2E64</key>
+		<key>E6AC9D8639DC263852396E3828E33AD1</key>
 		<dict>
 			<key>primary</key>
 			<true/>

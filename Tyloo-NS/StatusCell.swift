@@ -22,7 +22,8 @@ class StatusCell: BaseCell {
     let date:UILabel = {
         let label = UILabel()
             label.textColor = .black
-            label.font = UIFont(name: "Prompt", size: 15)
+            label.font = UIFont(name: "Prompt", size: 13)
+            label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -31,8 +32,11 @@ class StatusCell: BaseCell {
         
         addSubview(date)
         
-        addConstrainstsWithFormat("H:|-5-[v0]|", views: date)
-        addConstrainstsWithFormat("V:|[v0]|", views: date)
+        date.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
+        date.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
+        date.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        
+        seperator.leftAnchor.constraint(equalTo: date.leftAnchor).isActive = true
     }
     
     internal func startCountDown() {

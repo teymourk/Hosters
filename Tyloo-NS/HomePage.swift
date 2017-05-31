@@ -17,7 +17,7 @@ import EPCalendarPicker
 private let CELL_FEED = "Cell_FEED"
 private let HEADER_ID = "HEADER_ID"
 
-class HomePage: UICollectionViewController, CLLocationManagerDelegate, EPCalendarPickerDelegate {
+class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     
     var eventsDictionary:[Int:[Events]]? = [Int:[Events]]()
     var liveEventArray:[Events]? = [Events]()
@@ -68,37 +68,11 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate, EPCalenda
         collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
         collectionView?.backgroundColor = UIColor.rgb(231, green: 236, blue: 240)
         
-        //let filterDateButton = UIBarButtonItem(image: #imageLiteral(resourceName: "filter"), style: .plain, target: self, action: #selector(onDatePicker(sender:)))
-        //navigationItem.rightBarButtonItem = filterDateButton
-        
         let formatter = DateFormatter()
         formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
         let olddate = formatter.date(from: "2017-01-01 7:00:00 +0000") //This Will Be Date of launch
         
         eventTypeFetch(date: olddate!, index: 0, typeIndex: 0)
-    }
-    
-    internal func onDatePicker(sender: UIBarButtonItem) {
-        
-        let calendarPicker = EPCalendarPicker(startYear: 2015, endYear: 2017, multiSelection: true, selectedDates: nil)
-            calendarPicker.calendarDelegate = self
-            calendarPicker.multiSelectEnabled = false
-        let navigationController = UINavigationController(rootViewController: calendarPicker)
-            navigationController.navigationBar.isTranslucent = false
-        self.present(navigationController, animated: true, completion: nil)
-        
-    }
-    
-    func epCalendarPicker(_: EPCalendarPicker, didSelectDate date: Date) {
-        
-        eventTypeFetch(date: date, index: 0, typeIndex: 0)
-        
-        self.collectionView?.reloadData()
-    }
-    
-    func epCalendarPicker(_: EPCalendarPicker, didCancel error: NSError) {
-        
-        print("CANCELED")
     }
     
     internal func eventTypeFetch(date: Date, index: Int, typeIndex:Int) {
@@ -110,6 +84,7 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate, EPCalenda
         
             Events.fetchEventsFromFacebook(date: date, refresher:refresher, type: type[typeIndex]) { (allEvents) in
                 
+
                 let live = allEvents.filter({$0.isLive == 3})
                 
                 if !live.isEmpty {

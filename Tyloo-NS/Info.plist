@@ -56,7 +56,7 @@
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Tyloo Requires to use your location.</string>
 	<key>NSPhotoLibraryUsageDescription</key>
-	<string>Tyloo only uses your library when you need to</string>
+	<string>Enable Photos access to import photos from your library.</string>
 	<key>UIAppFonts</key>
 	<array>
 		<string>Prompt-ExtraLight.ttf</string>

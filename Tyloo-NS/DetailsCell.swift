@@ -35,11 +35,9 @@ class DetailsCell: BaseCell {
     
     override func setupView() {
         
-        backgroundColor = .yellow
-        
         addSubview(detailsTextView)
         
-        addConstrainstsWithFormat("H:|[v0]|", views: detailsTextView)
+        addConstrainstsWithFormat("H:|-15-[v0]|", views: detailsTextView)
         addConstrainstsWithFormat("V:|[v0]|", views: detailsTextView)
     }
 }

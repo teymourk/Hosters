@@ -61,5 +61,7 @@ class EventDetailsCell: BaseCell {
         addressLabel.topAnchor.constraint(equalTo: title.bottomAnchor, constant: 5).isActive = true
         addressLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         addressLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 15).isActive = true
+        
+        seperator.leftAnchor.constraint(equalTo: addressLabel.leftAnchor).isActive = true
     }
 }

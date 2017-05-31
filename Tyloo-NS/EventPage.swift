@@ -7,6 +7,10 @@
 //
 
 import UIKit
+import TGCameraViewController
+import Firebase
+import MBProgressHUD
+
 
 private let CELL_FEED = "Cell_FEED"
 private let CELL_DETAILS = "Cell_Details"
@@ -70,7 +74,8 @@ extension EventDetailsPage:  UICollectionViewDelegateFlowLayout {
                 
                 if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_OPTIONS, for: indexPath) as? OptionsCell {
                     
-                    //cell.eventDetails = eventDetails
+                    cell.eventDetails = eventDetails
+                    cell.delegate = self
                     
                     return cell
                 }
@@ -115,12 +120,12 @@ extension EventDetailsPage:  UICollectionViewDelegateFlowLayout {
         } else if indexPath.item == 1  {
             
             return CGSize(width: view.frame.width,
-                          height: FEED_CELL_HEIGHT / 6)
+                          height: FEED_CELL_HEIGHT / 7)
 
         }else if indexPath.item == 2 {
             
             return CGSize(width: view.frame.width,
-                          height: FEED_CELL_HEIGHT / 4)
+                          height: FEED_CELL_HEIGHT / 6)
             
         } else if indexPath.item == 3 || indexPath.item == 4 {
             
@@ -151,5 +156,107 @@ extension EventDetailsPage:  UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
         
         return 5
+    }
+}
+
+extension EventDetailsPage: onOptionsDelegate, TGCameraDelegate {
+    
+    func onCamera(sender: UIButton) {
+        
+        TGCameraColor.setTint(darkGray)
+        TGCamera.setOption(kTGCameraOptionHiddenFilterButton, value: true)
+    
+        let currentIamge = sender.currentImage
+        
+        let share = UIImage(named: "sh")
+        let camera = UIImage(named: "c")
+        
+        if currentIamge == share {
+         
+        } else if currentIamge == camera {
+            
+            TGCamera.setOption(kTGCameraOptionHiddenAlbumButton, value: true)
+            
+        } else {
+            
+            TGCamera.setOption(kTGCameraOptionHiddenAlbumButton, value: false)
+            
+            
+        }
+        
+        let navigationController = TGCameraNavigationController.new(with: self)
+        present(navigationController!, animated: true, completion: nil)
+    }
+    
+    // MARK: TGCameraDelegate - Required methods
+    
+    func cameraDidCancel() {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func cameraDidTakePhoto(_ image: UIImage!) {
+        
+        guard let eventKey = _eventDetails?.event_id else {return}
+        
+        uploadImage(image, postKey: eventKey)
+        
+        dismiss(animated: true, completion: nil)
+
+    }
+    
+    func cameraDidSelectAlbumPhoto(_ image: UIImage!) {
+        
+        dismiss(animated: true, completion: nil)
+    }
+    
+    func uploadImage(_ capturedImage:UIImage, postKey:String) {
+        
+        let imageKey = UUID().uuidString
+        let storageRef = FIRStorage.storage().reference().child(postKey).child("\(imageKey).png")
+        let spiningHud = MBProgressHUD.showAdded(to: view, animated: true)
+        spiningHud.label.text = "Uploading..."
+        
+        let timePosted:CFloat = CFloat(Date().timeIntervalSince1970)
+        let ref = FirebaseRef.database.REF_PHOTO.child(postKey).childByAutoId()
+        var picturesDic = Dictionary<String,AnyObject>()
+        
+        if let uploadData = UIImagePNGRepresentation(capturedImage) {
+            
+            let uploadTask = storageRef.put(uploadData, metadata: nil) { (metaData, error) in
+                
+                if error != nil {
+                    print(error ?? "")
+                    return
+                }
+                
+                if let imageURL = metaData?.downloadURL()?.absoluteString {
+                    
+                    picturesDic = ["ImgURL":imageURL as NSString, "poster":FirebaseRef.database.currentUser.key as NSString, "timePosted":timePosted as NSNumber]
+                    
+                    ref.setValue(picturesDic, withCompletionBlock: {
+                        (error, refrence) in
+                        
+                        if error != nil {
+                            
+                            print("ERROR")
+                            //self.pageNotification.showNotification("Error Posting Photo")
+                            spiningHud.hide(animated: true)
+                        }
+                    })
+                }
+            }
+            
+            uploadTask.observe(.progress, handler: {
+                snapshot in
+                
+                if let progressPercentage = snapshot.progress?.fractionCompleted {
+                    
+                    let percentage = Double(progressPercentage * 100)
+                    
+                    spiningHud.label.text = "\(percentage)%"
+                    spiningHud.hide(animated: true)
+                }
+            })
+        }
     }
 }
