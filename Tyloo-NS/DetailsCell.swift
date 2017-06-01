@@ -26,7 +26,7 @@ class DetailsCell: BaseCell {
     
     var detailsTextView:UITextView = {
         let textView = UITextView()
-            textView.font = UIFont.systemFont(ofSize: 12)
+            textView.font = UIFont(name: "NotoSans", size: 12)
             textView.isEditable = false
             textView.isSelectable = false
             textView.isScrollEnabled = false

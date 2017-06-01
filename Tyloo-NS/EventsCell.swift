@@ -41,7 +41,7 @@ class EventsCell: BaseCell {
     let title:UILabel = {
         let label = UILabel()
             label.textColor = .black
-            label.font = UIFont(name: "Prompt", size: 12)
+            label.font = UIFont(name: "NotoSans-Bold", size: 11)
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -49,8 +49,7 @@ class EventsCell: BaseCell {
 
     let location:UILabel = {
         let label = UILabel()
-            label.textColor = .black
-            label.font = UIFont(name: "Prompt", size: 12)
+            label.font = UIFont(name: "NotoSans", size: 12)
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
@@ -58,7 +57,7 @@ class EventsCell: BaseCell {
     lazy var guestCountsButton:UIButton = {
         let button = UIButton()
             button.setTitleColor(.black, for: .normal)
-            button.titleLabel?.font = UIFont(name: "Prompt", size: 12)
+            button.titleLabel?.font = UIFont(name: "NotoSans", size: 12)
             button.addTarget(self, action: #selector(handleOnGuests(sender:)), for: .touchUpInside)
             button.setTitleColor(buttonColor, for: .normal)
             button.translatesAutoresizingMaskIntoConstraints = false
@@ -88,10 +87,12 @@ class EventsCell: BaseCell {
         if let place_name = eventDetails.place_name, let city = eventDetails.city, let state = eventDetails.state {
             
             location.text = "📍\(place_name) - \(city), \(state)"
+            location.textColor = buttonColor
             
         } else {
             
-            location.text = "Location Not Available 💩"
+            location.text = "Location Not Available - Contact The Host"
+            location.textColor = .black
         }
         
         if let interestedCount = eventDetails.interested_count, let declinedCount = eventDetails.declined_count, let attendingCount = eventDetails.attending_count, let guest_list_Enabled = eventDetails.guest_list_enabled {
@@ -105,15 +106,14 @@ class EventsCell: BaseCell {
 
     override func setupView() {
         
+        backgroundColor = .white
+        
         layer.masksToBounds = true
         layer.borderWidth = 0.5
         layer.cornerRadius = 2
         layer.borderColor = darkGray.cgColor
-        setShadow()
         handleCellAnimation()
-        
-        backgroundColor = .white
-        
+        setShadow()
         setupViewHeader()
         
         addSubview(title)
@@ -201,7 +201,7 @@ class HeaderView:BaseView {
     let host:UILabel = {
         let label = UILabel()
             label.textColor = .black
-            label.font = UIFont(name: "Prompt", size: 12)
+            label.font = UIFont(name: "NotoSans", size: 12)
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

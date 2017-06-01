@@ -21,10 +21,12 @@ class EventDetailsCell: BaseCell {
             if let place_name = eventDetails?.place_name, let city = eventDetails?.city, let state = eventDetails?.state {
                 
                 addressLabel.text = "📍\(place_name) - \(city), \(state)"
+                addressLabel.textColor = buttonColor
                 
             } else {
                 
-                addressLabel.text = "Location Not Available 💩"
+                addressLabel.text = "Location Not Available - Contact The Host"
+                addressLabel.textColor = .black
             }
         }
     }
@@ -32,17 +34,14 @@ class EventDetailsCell: BaseCell {
     let title:UILabel = {
         let label = UILabel()
             label.textColor = .black
-            label.font = UIFont(name: "Prompt", size: 12)
+            label.font = UIFont(name: "NotoSans-Bold", size: 13)
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let addressLabel:UILabel = {
         let label = UILabel()
-            label.textColor = .black
-            label.text = "Address Goes Here"
-            label.textColor = buttonColor
-            label.font = UIFont(name: "Prompt", size: 12)
+            label.font = UIFont(name: "NotoSans", size: 12)
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

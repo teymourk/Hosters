@@ -22,7 +22,7 @@ class StatusCell: BaseCell {
     let date:UILabel = {
         let label = UILabel()
             label.textColor = .black
-            label.font = UIFont(name: "Prompt", size: 13)
+            label.font = UIFont(name: "NotoSans", size: 13)
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

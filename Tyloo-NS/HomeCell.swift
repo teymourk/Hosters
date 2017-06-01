@@ -19,13 +19,15 @@ class HomeCell: BaseCell {
     let categoryLabel:UILabel = {
         let label = UILabel()
             label.textColor = .darkGray
-            label.font = UIFont(name: "NotoSans-Italic", size: 16)
+            label.font = UIFont(name: "Prompt", size: 17)
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-        
+    
     override func setupView() {
        super.setupView()
+        
+        setShadow()
         
         backgroundColor = .clear
         

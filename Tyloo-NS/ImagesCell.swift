@@ -42,6 +42,7 @@ class ImagesCell: BaseCell {
         let button = UIButton()
             button.setTitle("View All Photos >", for: .normal)
             button.titleLabel?.font = UIFont(name: "NotoSans", size: 12)
+            button.titleLabel?.textAlignment = .left
             button.setTitleColor(darkGray, for: .normal)
             button.titleLabel?.textAlignment = .right
             button.translatesAutoresizingMaskIntoConstraints = false
@@ -77,8 +78,7 @@ class ImagesCell: BaseCell {
         
         addSubview(button)
         
-        button.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        button.leftAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        button.rightAnchor.constraint(equalTo: rightAnchor, constant: -5).isActive = true
         button.topAnchor.constraint(equalTo: eventPhotosCV.bottomAnchor).isActive = true
     }
 }

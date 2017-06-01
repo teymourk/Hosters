@@ -45,6 +45,7 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
                             cell.categoryLabel.text = "Interested 🤔"
                             break
                         default: break
+                            
                         }
                     }
                 }
