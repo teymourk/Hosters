@@ -77,7 +77,7 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         collectionView?.backgroundColor = UIColor.rgb(231, green: 236, blue: 240)
         
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
         let olddate = formatter.date(from: "2017-01-01 7:00:00 +0000") //This Will Be Date of launch
         
         eventTypeFetch(date: olddate!, index: 0, typeIndex: 0)
@@ -89,10 +89,9 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         var typeIndexs:Int = Int()
         
         if typeIndex != type.count {
-        
+            
             Events.fetchEventsFromFacebook(date: date, refresher:activityIndicator, type: type[typeIndex]) { (allEvents) in
                 
-
                 let live = allEvents.filter({$0.isLive == 3})
                 
                 if !live.isEmpty {
@@ -115,11 +114,17 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
                     self.eventTypeFetch(date: date, index: index, typeIndex: typeIndexs)
                 }
                 
-//                if let indexCount = self.eventsDictionary?.count {
-//                    
-//                    let attended = allEvents.filter({$0.isLive == 2 && $0.rsvp_status == "attending"})
-//                    self.eventsDictionary?[indexCount] = attended
-//                }
+                if let indexCount = self.eventsDictionary?.count {
+                    
+                    let attended = allEvents.filter({$0.isLive == 2 && $0.rsvp_status == "attending"})
+                    
+                    if !attended.isEmpty {
+                        
+                        let index = indexCount + 1
+                        
+                        self.eventsDictionary?[index] = attended
+                    }
+                }
             }
         }
         

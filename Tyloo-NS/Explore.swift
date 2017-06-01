@@ -8,29 +8,6 @@
 
 import UIKit
 
-class Explore: HomePage, UISearchResultsUpdating {
+class Explore: HomePage {
 
-    lazy var searchController:UISearchController = {
-        let sb = UISearchController(searchResultsController: nil)
-            sb.searchResultsUpdater = self
-            sb.dimsBackgroundDuringPresentation = false
-            sb.definesPresentationContext = true
-            sb.hidesNavigationBarDuringPresentation = false
-            sb.searchBar.sizeToFit()
-       return sb
-    }()
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        collectionView?.addSubview(searchController.searchBar)
-    }
-    
-    func updateSearchResults(for searchController: UISearchController) {
-        
-        if let searchText = searchController.searchBar.text {
-            
-            print(searchText)
-        }
-    }
 }

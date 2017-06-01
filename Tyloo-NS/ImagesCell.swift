@@ -41,6 +41,7 @@ class ImagesCell: BaseCell {
     let button:UIButton = {
         let button = UIButton()
             button.setTitle("View All Photos >", for: .normal)
+            button.titleLabel?.font = UIFont(name: "NotoSans", size: 12)
             button.setTitleColor(darkGray, for: .normal)
             button.titleLabel?.textAlignment = .right
             button.translatesAutoresizingMaskIntoConstraints = false
@@ -50,6 +51,23 @@ class ImagesCell: BaseCell {
     
     override func setupView() {
         super.setupView()
+        
+        guard let eventImages = eventPhotosCV.allImages else {return}
+        
+        addSubview(coverImage)
+        
+        addConstrainstsWithFormat("H:|[v0]|", views: coverImage)
+        addConstrainstsWithFormat("V:|[v0]|", views: coverImage)
+        
+        if !eventImages.isEmpty {
+            
+            perform(#selector(animateImages), with: nil, afterDelay: 2)
+        }
+    }
+    
+    internal func animateImages() {
+        
+        coverImage.removeFromSuperview()
         
         addSubview(eventPhotosCV)
         

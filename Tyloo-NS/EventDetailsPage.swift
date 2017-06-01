@@ -122,7 +122,7 @@ extension EventDetailsPage:  UICollectionViewDelegateFlowLayout {
             return CGSize(width: view.frame.width,
                           height: FEED_CELL_HEIGHT / 7)
 
-        }else if indexPath.item == 2 {
+        } else if indexPath.item == 2 {
             
             return CGSize(width: view.frame.width,
                           height: FEED_CELL_HEIGHT / 6)
@@ -180,6 +180,9 @@ extension EventDetailsPage: onOptionsDelegate, TGCameraDelegate {
         
         if currentIamge == share {
          
+            print("HELLO")
+            return
+            
         } else if currentIamge == camera {
             
             TGCamera.setOption(kTGCameraOptionHiddenAlbumButton, value: true)
@@ -187,8 +190,6 @@ extension EventDetailsPage: onOptionsDelegate, TGCameraDelegate {
         } else {
             
             TGCamera.setOption(kTGCameraOptionHiddenAlbumButton, value: false)
-            
-            
         }
         
         let navigationController = TGCameraNavigationController.new(with: self)
@@ -196,7 +197,6 @@ extension EventDetailsPage: onOptionsDelegate, TGCameraDelegate {
     }
     
     // MARK: TGCameraDelegate - Required methods
-    
     func cameraDidCancel() {
         dismiss(animated: true, completion: nil)
     }

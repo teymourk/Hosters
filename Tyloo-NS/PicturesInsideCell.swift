@@ -32,7 +32,11 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
         
         let image5 = Images(img: "http://mikeposnerhits.com/wp-content/uploads/2014/06/OSU-DamJam2014-05312014-2.jpg")
         
-        return [image1,image2,image3,image4,image5]
+        let image6 = Images(img: "https://s.aolcdn.com/dims-shared/dims3/GLOB/crop/2094x1309+0+57/resize/1400x875!/format/jpg/quality/85/http://hss-prod.hss.aol.com/hss/storage/midas/8cf7e00a4df3ebee6ff77100a6ce06c5/203138988/484533465.jpg")
+        
+        let image7 = Images(img: "http://www.billboard.com/files/media/drake-performance-sept-04-billboard-1548.jpg")
+        
+        return [image1,image2,image3,image4,image5,image6,image7]
     }
     
     var eventDetailPage:EventDetailsPage?
@@ -45,7 +49,6 @@ class PicturesInsideCell: BaseView, UICollectionViewDelegate, UICollectionViewDa
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
             cv.layer.masksToBounds = true
             cv.isScrollEnabled = false
-            cv.backgroundColor = .red
             cv.delegate = self
             cv.dataSource = self
         return cv

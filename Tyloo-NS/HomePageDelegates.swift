@@ -21,37 +21,40 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
+    
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_FEED, for: indexPath) as? HomeCell {
             
-            if let eventsArray = eventsDictionary?[indexPath.item] {
+            if let eventDic = eventsDictionary {
                 
-                cell.eventsCV.events = eventsArray
-                cell.eventsCV.homePage = self
-                
-                for eventOBJ in eventsArray {
+                if let eventsArray = eventDic[indexPath.item] {
                     
-                    switch eventOBJ.rsvp_status {
+                    cell.eventsCV.events = eventsArray
+                    cell.eventsCV.homePage = self
+                    
+                    for eventOBJ in eventsArray {
                         
-                    case "not_replied"?:
-                        cell.categoryLabel.text = "Invited  💌"
-                        break
-                    case "attending"?:
-                        cell.categoryLabel.text = "Attending ✅"
-                        break
-                    case "maybe"?:
-                        cell.categoryLabel.text = "Interested 🤔"
-                        break
-                        
-                    default: break
+                        switch eventOBJ.rsvp_status {
+                            
+                        case "not_replied"?:
+                            cell.categoryLabel.text = "Invited  💌"
+                            break
+                        case "attending"?:
+                            cell.categoryLabel.text = "Attending ✅"
+                            break
+                        case "unsure"?:
+                            cell.categoryLabel.text = "Interested 🤔"
+                            break
+                        default: break
+                        }
                     }
                 }
-            }
-            
-            if indexPath.item == (self.eventsDictionary?.count)! - 1 {
                 
-                cell.categoryLabel.text = "Attended 👻"
+                if indexPath.item == eventDic.count - 1 {
+                    
+                    cell.categoryLabel.text = "Attended 👻"
+                }
             }
-
+        
             return cell
         }
         

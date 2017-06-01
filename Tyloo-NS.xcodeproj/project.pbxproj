@@ -158,29 +158,6 @@
 			path = "Tyloo-NSTests";
 			sourceTree = "<group>";
 		};
-		0B3974FA1EA9E5580011ABD7 /* Event_Cells */ = {
-			isa = PBXGroup;
-			children = (
-				AB2EFDB41D0E29FD00B21A18 /* BaseCell.swift */,
-				AB2EFDB21D0E29E000B21A18 /* HomeCell.swift */,
-				0B8EE9421EB02E1800218394 /* HomeCVCell.swift */,
-				0B4A22F91EB665FA00C76655 /* LiveEvents.swift */,
-				0B8EE9441EB0380E00218394 /* EventsCell.swift */,
-				0B34FFEC1EB11E0F00BE138C /* EventPageCell.swift */,
-				0B34FFEE1EB11F5A00BE138C /* GuestsCell.swift */,
-				0B5D8E411ECD4F3200D7C1A2 /* ImagesCell.swift */,
-				0B663A611EB2F69400BAC093 /* EventDetailsCell.swift */,
-				0B5D8E431ECD5EFB00D7C1A2 /* OptionsCell.swift */,
-				0B5D8E451ECD60D800D7C1A2 /* StatusCell.swift */,
-				0B5D8E471ECD64C400D7C1A2 /* HostCell.swift */,
-				0B24E4DB1EB5255B0037D1D5 /* DetailsCell.swift */,
-				0B18B1DF1ED296FE0002A94F /* PicturesInsideCell.swift */,
-				0B57BF691ED37180009359A3 /* EventPhotosCell.swift */,
-				0B8F5C631EDF004800033C72 /* AllEventPhotosCell.swift */,
-			);
-			name = Event_Cells;
-			sourceTree = "<group>";
-		};
 		1B18AACF3E6669CB53EF5096 /* Pods */ = {
 			isa = PBXGroup;
 			children = (
@@ -201,8 +178,8 @@
 				0BE43C9B1EB0FF3600062E07 /* EventDetailsPage.swift */,
 				0B4A22FB1EB699FE00C76655 /* EventGuestsPage.swift */,
 				0BE43C991EB0F84200062E07 /* UserProfile.swift */,
-				0BBE819F1ECA357C007D3644 /* Explore.swift */,
 				0B8F5C611EDE77CC00033C72 /* AllEventPhotos.swift */,
+				0BBE819F1ECA357C007D3644 /* Explore.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -210,7 +187,22 @@
 		AB7E87A71D0CE36200750B76 /* View */ = {
 			isa = PBXGroup;
 			children = (
-				0B3974FA1EA9E5580011ABD7 /* Event_Cells */,
+				AB2EFDB41D0E29FD00B21A18 /* BaseCell.swift */,
+				AB2EFDB21D0E29E000B21A18 /* HomeCell.swift */,
+				0B8EE9421EB02E1800218394 /* HomeCVCell.swift */,
+				0B4A22F91EB665FA00C76655 /* LiveEvents.swift */,
+				0B8EE9441EB0380E00218394 /* EventsCell.swift */,
+				0B34FFEC1EB11E0F00BE138C /* EventPageCell.swift */,
+				0B34FFEE1EB11F5A00BE138C /* GuestsCell.swift */,
+				0B5D8E411ECD4F3200D7C1A2 /* ImagesCell.swift */,
+				0B663A611EB2F69400BAC093 /* EventDetailsCell.swift */,
+				0B5D8E431ECD5EFB00D7C1A2 /* OptionsCell.swift */,
+				0B5D8E451ECD60D800D7C1A2 /* StatusCell.swift */,
+				0B5D8E471ECD64C400D7C1A2 /* HostCell.swift */,
+				0B24E4DB1EB5255B0037D1D5 /* DetailsCell.swift */,
+				0B18B1DF1ED296FE0002A94F /* PicturesInsideCell.swift */,
+				0B57BF691ED37180009359A3 /* EventPhotosCell.swift */,
+				0B8F5C631EDF004800033C72 /* AllEventPhotosCell.swift */,
 				AB34B8B81D30B0BD00B2F4E0 /* PageNotifications.swift */,
 				0B3974F81EA9D7760011ABD7 /* MenuBar.swift */,
 				0BD0DE301ECBFF47009FF2D5 /* LiveView.swift */,
