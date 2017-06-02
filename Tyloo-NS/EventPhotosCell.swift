@@ -18,7 +18,7 @@ class EventPhotosCell: BaseCell {
         }
     }
     
-    var feedAllPhotos:PicturesInsideCell?
+    //var feedAllPhotos:PicturesInsideCell?
     
     var _images:UIImageView = {
         let img = UIImageView()

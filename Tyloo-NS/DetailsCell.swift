@@ -10,19 +10,6 @@ import UIKit
 
 class DetailsCell: BaseCell {
 
-    var eventDetails:Events? {
-        didSet {
-            
-            if let eventDetails = eventDetails?.descriptions {
-                
-                detailsTextView.text = eventDetails
-                
-            } else {
-                
-                detailsTextView.text = "NO Details Available"
-            }
-        }
-    }
     
     var detailsTextView:UITextView = {
         let textView = UITextView()

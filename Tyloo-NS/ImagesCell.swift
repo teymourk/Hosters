@@ -5,11 +5,10 @@
 //  Created by Kiarash Teymoury on 5/17/17.
 //  Copyright © 2017 Kiarash Teymoury. All rights reserved.
 //
-
 import UIKit
 
 class ImagesCell: BaseCell {
-
+    
     var eventDetails:Events? {
         didSet {
             
@@ -26,11 +25,11 @@ class ImagesCell: BaseCell {
     
     let coverImage:UIImageView = {
         let image = UIImageView()
-            image.contentMode = .scaleAspectFill
-            image.layer.masksToBounds = true
+        image.contentMode = .scaleAspectFill
+        image.layer.masksToBounds = true
         return image
     }()
-
+    
     override func setupView() {
         super.setupView()
         

@@ -25,7 +25,7 @@ class EventDetailsHeader: HomeCVCell {
         
         eventCollectionView.register(EventDetailCell.self, forCellWithReuseIdentifier: CELL_ID)
         eventCollectionView.register(ImagesCell.self, forCellWithReuseIdentifier: CELL_IMAGES)
-        
+    
         perform(#selector(handleScrollToDetails), with: nil, afterDelay: 1.5)
     }
     
@@ -54,6 +54,8 @@ extension EventDetailsHeader {
                 
                 if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as? EventDetailCell {
                     
+                    cell._eventDetails = eventDetails
+                    
                     return cell
                 }
             }
@@ -74,14 +76,4 @@ extension EventDetailsHeader {
         return CGSize(width: frame.width,
                       height: frame.height)
     }
-}
-
-
-
-
-
-class EventDetailCell:BaseCell {
-    
-    
-    
 }
