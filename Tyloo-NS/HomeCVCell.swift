@@ -25,8 +25,7 @@ class HomeCVCell: BaseCell  {
             layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
             cv.backgroundColor = .white
-            cv.register(EventsCell.self, forCellWithReuseIdentifier: CELL_ID)
-            cv.contentInset = UIEdgeInsetsMake(0, 10, 0, 0)
+        
             cv.delegate = self
             cv.dataSource = self
         return cv
@@ -36,10 +35,19 @@ class HomeCVCell: BaseCell  {
     
     override func setupView() {
         
+        handleCVOptions()
+        
         addSubview(eventCollectionView)
         
         addConstrainstsWithFormat("H:|[v0]|", views: eventCollectionView)
         addConstrainstsWithFormat("V:|[v0]|", views: eventCollectionView)
+    }
+    
+    internal func handleCVOptions() {
+        
+        eventCollectionView.contentInset = UIEdgeInsetsMake(0, 10, 0, 0)
+        
+        eventCollectionView.register(EventsCell.self, forCellWithReuseIdentifier: CELL_ID)
     }
 }
 

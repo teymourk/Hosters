@@ -133,7 +133,7 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     
     internal func navigateToEventDetails(eventDetail:Events) {
         
-        let eventPage = EventDetailsPage(collectionViewLayout: UICollectionViewFlowLayout())
+        let eventPage = AllEventPhotos(collectionViewLayout: UICollectionViewFlowLayout())
             eventPage._eventDetails = eventDetail
         self.navigationController?.pushViewController(eventPage, animated: true)
     }

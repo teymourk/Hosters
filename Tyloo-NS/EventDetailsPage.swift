@@ -31,7 +31,7 @@ class EventDetailsPage: UICollectionViewController {
 
         navigationController?.navigationBar.isTranslucent = false
         collectionView?.backgroundColor = .white
-        collectionView?.register(EventDetailsCell.self, forCellWithReuseIdentifier: CELL_FEED)
+        collectionView?.register(EventDetailsHeader.self, forCellWithReuseIdentifier: CELL_FEED)
         collectionView?.register(DetailsCell.self, forCellWithReuseIdentifier: CELL_DETAILS)
         collectionView?.register(ImagesCell.self, forCellWithReuseIdentifier: CELL_IMAGES)
         collectionView?.register(OptionsCell.self, forCellWithReuseIdentifier: CELL_OPTIONS)
@@ -57,15 +57,15 @@ extension EventDetailsPage:  UICollectionViewDelegateFlowLayout {
                 if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_IMAGES, for: indexPath) as? ImagesCell {
                     
                     cell.eventDetails = eventDetails
-                    cell.eventPhotosCV.eventDetailPage = self
+                    //cell.eventPhotosCV.eventDetailPage = self
                     return cell
                 }
                 
             } else if indexPath.item == 1 {
         
-                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_FEED, for: indexPath) as? EventDetailsCell {
+                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_FEED, for: indexPath) as? EventDetailsHeader {
                     
-                    cell.eventDetails = eventDetails
+                    cell._eventDetails = eventDetails
                     
                     return cell
                 }

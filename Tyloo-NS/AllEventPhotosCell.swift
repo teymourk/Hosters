@@ -21,6 +21,7 @@ class AllEventPhotosCell:BaseCell {
     
     var postedImage:UIImageView = {
         let image = UIImageView()
+            image.backgroundColor = .cyan
             image.contentMode = .scaleAspectFill
             image.layer.masksToBounds = true
             image.translatesAutoresizingMaskIntoConstraints = false
