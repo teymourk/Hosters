@@ -15,7 +15,27 @@ private let SEGMENT_CELL = "SEGMENT_CELL"
 
 class AllEventPhotos: UICollectionViewController {
     
-    var _eventDetails:Events?
+    var _eventDetails:Events? {
+        didSet {
+            
+            if let isLive = _eventDetails?.isLive {
+
+                //Event Ended, its photo Library
+                if isLive == 1 {
+
+                    setupBarButtonItem(imageName: "sh")
+
+                } else if isLive == 2 {
+
+                    setupBarButtonItem(imageName: "s")
+
+                } else {
+
+                    setupBarButtonItem(imageName: "c")
+                }
+            }
+        }
+    }
     
     var grid:Bool = true
     
@@ -41,6 +61,16 @@ class AllEventPhotos: UICollectionViewController {
         
         view.addConstrainstsWithFormat("H:|[v0]|", views: navBarSeperator)
         view.addConstrainstsWithFormat("V:|[v0(2)]", views: navBarSeperator)
+    }
+    
+    @objc private func onOption(sender: UIBarButtonItem) {
         
+        
+    }
+    
+    private func setupBarButtonItem(imageName: String) {
+    
+        let optionsButton = UIBarButtonItem(image: UIImage(named: imageName), style: .plain, target: self, action: #selector(onOption(sender:)))
+        navigationItem.rightBarButtonItem = optionsButton
     }
 }

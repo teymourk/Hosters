@@ -145,7 +145,7 @@ class EventDetailCell:EventsCell {
         
         addSubview(seperator)
         
-        seperator.widthAnchor.constraint(equalToConstant: frame.width / 1.5).isActive = true
+        seperator.widthAnchor.constraint(equalToConstant: frame.width / 1.2).isActive = true
         seperator.topAnchor.constraint(equalTo: countDown.bottomAnchor, constant: 10).isActive = true
         seperator.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         seperator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true

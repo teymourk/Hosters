@@ -47,7 +47,6 @@ class EventsCell: BaseCell {
         return label
     }()
     
-
     let location:UILabel = {
         let label = UILabel()
             label.font = UIFont(name: "NotoSans", size: 12)
