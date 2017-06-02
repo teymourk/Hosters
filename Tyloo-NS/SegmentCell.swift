@@ -16,9 +16,14 @@ protocol onSegmentDelegate: class {
 class SegmentCell:BaseCell {
     
     lazy var segmentControl:UISegmentedControl = {
-        let segment = UISegmentedControl(items: ["Grid", "List"])
+        
+        let grid = UIImage(named: "grid")?.withRenderingMode(.alwaysOriginal)
+        let list = UIImage(named: "list")?.withRenderingMode(.alwaysOriginal)
+        
+        let segment = UISegmentedControl()
+            segment.insertSegment(with: grid, at: 0, animated: true)
+            segment.insertSegment(with: list, at: 1, animated: true)
             segment.selectedSegmentIndex = 0
-            segment.setTitleTextAttributes([NSForegroundColorAttributeName: buttonColor], for: .normal)
             segment.addTarget(self, action: #selector(onSegment(sender :)), for: .valueChanged)
             segment.tintColor = .clear
             segment.layer.masksToBounds = true

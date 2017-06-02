@@ -145,9 +145,10 @@ class EventDetailCell:EventsCell {
         
         addSubview(seperator)
         
-        seperator.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        seperator.widthAnchor.constraint(equalToConstant: frame.width / 1.5).isActive = true
         seperator.topAnchor.constraint(equalTo: countDown.bottomAnchor, constant: 10).isActive = true
         seperator.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
+        seperator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
         //addSubview(detailsTextView)
         
@@ -157,8 +158,8 @@ class EventDetailCell:EventsCell {
         
         addSubview(moreBtn)
         
-        addConstrainstsWithFormat("H:|[v0]|", views: moreBtn)
-        addConstrainstsWithFormat("V:[v0(40)]-5-|", views: moreBtn)
+        addConstrainstsWithFormat("H:[v0(20)]", views: moreBtn)
+        addConstrainstsWithFormat("V:[v0(20)]-2-|", views: moreBtn)
         
         moreBtn.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
     }

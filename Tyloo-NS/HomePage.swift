@@ -56,6 +56,12 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         return live
     }()
     
+    let navBarSeperator:UIView = {
+        let view = UIView()
+            view.backgroundColor = orange
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -81,6 +87,11 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         let olddate = formatter.date(from: "2017-01-01 7:00:00 +0000") //This Will Be Date of launch
         
         eventTypeFetch(date: olddate!, index: 0, typeIndex: 0)
+        
+        view.addSubview(navBarSeperator)
+        
+        view.addConstrainstsWithFormat("H:|[v0]|", views: navBarSeperator)
+        view.addConstrainstsWithFormat("V:|[v0(2)]", views: navBarSeperator)
     }
     
     internal func eventTypeFetch(date: Date, index: Int, typeIndex:Int) {
@@ -133,7 +144,11 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     
     internal func navigateToEventDetails(eventDetail:Events) {
         
-        let eventPage = AllEventPhotos(collectionViewLayout: UICollectionViewFlowLayout())
+        let layout = UICollectionViewFlowLayout()
+            layout.minimumLineSpacing = 0
+            layout.minimumInteritemSpacing = 0
+        
+        let eventPage = AllEventPhotos(collectionViewLayout: layout)
             eventPage._eventDetails = eventDetail
         self.navigationController?.pushViewController(eventPage, animated: true)
     }

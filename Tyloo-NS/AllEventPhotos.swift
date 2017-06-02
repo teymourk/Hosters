@@ -19,6 +19,12 @@ class AllEventPhotos: UICollectionViewController {
     
     var grid:Bool = true
     
+    let navBarSeperator:UIView = {
+        let view = UIView()
+            view.backgroundColor = orange
+        return view
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -26,10 +32,15 @@ class AllEventPhotos: UICollectionViewController {
         self.navigationController?.navigationBar.isTranslucent = false
         self.collectionView?.register(AllEventPhotosCell.self, forCellWithReuseIdentifier: CELL_ID)
         self.collectionView?.register(GridCell.self, forCellWithReuseIdentifier: GRID_ID)
-        collectionView?.register(EventDetailsHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HEADER_ID)
+        self.collectionView?.register(EventDetailsHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HEADER_ID)
         self.collectionView?.register(SegmentCell.self, forCellWithReuseIdentifier: SEGMENT_CELL)
         self.collectionView?.backgroundColor = .white
         self.collectionView?.backgroundColor = UIColor.rgb(231, green: 236, blue: 240)
+        
+        view.addSubview(navBarSeperator)
+        
+        view.addConstrainstsWithFormat("H:|[v0]|", views: navBarSeperator)
+        view.addConstrainstsWithFormat("V:|[v0(2)]", views: navBarSeperator)
         
     }
 }

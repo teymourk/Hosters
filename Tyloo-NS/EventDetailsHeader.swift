@@ -18,7 +18,6 @@ class EventDetailsHeader: HomeCVCell {
     
     override func handleCVOptions() {
     
-        handleCellAnimation()
         setShadow()
         
         eventCollectionView.isPagingEnabled = true
