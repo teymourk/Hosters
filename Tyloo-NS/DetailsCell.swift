@@ -8,8 +8,8 @@
 
 import UIKit
 
-class DetailsCell: BaseCell {
 
+class DetailsCell: BaseCell {
     
     var detailsTextView:UITextView = {
         let textView = UITextView()

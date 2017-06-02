@@ -11,6 +11,7 @@ import UIKit
 protocol EventCellDelegate: class {
     
     func handleOnGuest(sender: UIButton)
+    func onMoreBtn(sender: UIButton)
 }
 
 class EventsCell: BaseCell {

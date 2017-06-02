@@ -9,8 +9,9 @@
 import UIKit
 
 private let CELL_ID = "CellID"
-private let GRID_ID = "Grid_ID"
+private let GRID_ID = "GRID_ID"
 private let HEADER_ID = "HEADER_ID"
+private let SEGMENT_CELL = "SEGMENT_CELL"
 
 struct Images {
     
@@ -43,27 +44,45 @@ extension AllEventPhotos: UICollectionViewDelegateFlowLayout {
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if !grid {
+        if indexPath.item == 0 {
             
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as? AllEventPhotosCell {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: SEGMENT_CELL, for: indexPath) as? SegmentCell {
                 
-                cell.postImages = postedImages?[indexPath.item]
+                cell.delegate = self
+                
                 return cell
             }
             
         } else {
             
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GRID_ID, for: indexPath) as? GridCell {
+            if !grid {
                 
-                cell.postImages = postedImages?[indexPath.item]
-                return cell
+                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as? AllEventPhotosCell {
+                    
+                    cell.postImages = postedImages?[indexPath.item]
+                    return cell
+                }
+                
+            } else {
+                
+                if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: GRID_ID, for: indexPath) as? GridCell {
+                    
+                    cell.postImages = postedImages?[indexPath.item]
+                    return cell
+                }
             }
         }
-        
+    
         return BaseCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        if indexPath.item == 0 {
+          
+            return CGSize(width: view.frame.width,
+                          height: 40)
+        }
         
         let width:CGFloat = grid == true ? view.frame.width / 3 : view.frame.width
         let height:CGFloat = grid == true ? HEIGHE_IMAGE / 3 : HEIGHE_IMAGE + 20
@@ -73,7 +92,7 @@ extension AllEventPhotos: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
-        return grid == true ? 0 : 15
+        return 1
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
@@ -90,6 +109,7 @@ extension AllEventPhotos: UICollectionViewDelegateFlowLayout {
             if let eventDetilas = _eventDetails {
                 
                 header._eventDetails = eventDetilas
+                
             }
             
             return header
@@ -111,4 +131,14 @@ extension AllEventPhotos: UICollectionViewDelegateFlowLayout {
     }
 }
 
-
+extension AllEventPhotos: onSegmentDelegate {
+    
+    func onSegment(sender: UISegmentedControl) {
+        
+        let segmentIndex = sender.selectedSegmentIndex
+        
+        grid = segmentIndex == 0 ? true : false
+        
+        collectionView?.reloadData()
+    }
+}

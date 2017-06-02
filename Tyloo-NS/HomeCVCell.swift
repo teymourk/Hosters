@@ -97,6 +97,8 @@ extension HomeCVCell: UICollectionViewDelegate, UICollectionViewDataSource, UICo
 //Mark: -EventCellDelegate
 extension HomeCVCell: EventCellDelegate {
     
+    internal func onMoreBtn(sender: UIButton) {}
+
     func handleOnGuest(sender: UIButton) {
         
         let index = IndexPath(item: sender.tag, section: 0)

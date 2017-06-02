@@ -25,8 +25,8 @@ class ImagesCell: BaseCell {
     
     let coverImage:UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleAspectFill
-        image.layer.masksToBounds = true
+            image.contentMode = .scaleAspectFill
+            image.layer.masksToBounds = true
         return image
     }()
     
