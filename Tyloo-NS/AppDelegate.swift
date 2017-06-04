@@ -27,7 +27,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        window?.rootViewController = UINavigationController(rootViewController: HomeController())
+        
+        let layout = UICollectionViewFlowLayout()
+            layout.minimumLineSpacing = 0
+            layout.minimumInteritemSpacing = 0
+            layout.scrollDirection = .horizontal
+        
+        window?.rootViewController = UINavigationController(rootViewController: HomeAudit(collectionViewLayout: layout))
         
         //Tabbar Changes
         UITabBar.appearance().tintColor = orange

@@ -56,13 +56,14 @@ class EventDetailCell:EventsCell {
             textView.isEditable = false
             textView.isSelectable = false
             textView.isScrollEnabled = false
+            textView.textColor = .lightGray
             textView.translatesAutoresizingMaskIntoConstraints = false
         return textView
     }()
     
-    var moreBtn:UIButton = {
+    lazy var moreBtn:UIButton = {
         let btn = UIButton()
-            btn.setImage(UIImage(named: "down"), for: .normal)
+            btn.setImage(UIImage(named: "righArrow"), for: .normal)
             btn.addTarget(self, action: #selector(onMoreBtn(sender :)), for: .touchUpInside)
        return btn
     }()
@@ -100,9 +101,8 @@ class EventDetailCell:EventsCell {
     
     internal func onMoreBtn(sender: UIButton) {
         
-        if delegate != nil {
-            delegate?.onMoreBtn(sender: sender)
-        }
+        
+        
     }
     
     override func handleLayout() {
@@ -150,17 +150,19 @@ class EventDetailCell:EventsCell {
         seperator.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         seperator.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
         
-        //addSubview(detailsTextView)
+        addSubview(detailsTextView)
         
-        //detailsTextView.leftAnchor.constraint(equalTo: host.leftAnchor).isActive = true
-        //detailsTextView.topAnchor.constraint(equalTo: seperator.bottomAnchor, constant: 5).isActive = true
-        //detailsTextView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        detailsTextView.leftAnchor.constraint(equalTo: seperator.leftAnchor).isActive = true
+        detailsTextView.rightAnchor.constraint(equalTo: seperator.rightAnchor).isActive = true
+        detailsTextView.topAnchor.constraint(equalTo: seperator.topAnchor, constant: 5).isActive = true
+        detailsTextView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         
         addSubview(moreBtn)
         
-        addConstrainstsWithFormat("H:[v0(20)]", views: moreBtn)
-        addConstrainstsWithFormat("V:[v0(20)]-2-|", views: moreBtn)
+        addConstrainstsWithFormat("H:[v0(15)]-5-|", views: moreBtn)
+        addConstrainstsWithFormat("V:[v0(15)]-2-|", views: moreBtn)
         
         moreBtn.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        
     }
 }

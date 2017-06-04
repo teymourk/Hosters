@@ -131,7 +131,7 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
                     
                     if !attended.isEmpty {
                         
-                        let index = indexCount + 1
+                        let index = indexCount
                         
                         self.eventsDictionary?[index] = attended
                     }

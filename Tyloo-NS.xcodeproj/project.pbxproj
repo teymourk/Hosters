@@ -53,7 +53,6 @@
 		ABB582851D3059BC0070C387 /* NotoSans-Italic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ABB582811D3059BC0070C387 /* NotoSans-Italic.ttf */; };
 		ABB582861D3059BC0070C387 /* NotoSans-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = ABB582821D3059BC0070C387 /* NotoSans-Regular.ttf */; };
 		ABBFAA041D0FC13000BB4D5C /* FirebaseRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBFAA031D0FC13000BB4D5C /* FirebaseRef.swift */; };
-		ABC4F2011D494E940001368B /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC4F2001D494E940001368B /* HomeController.swift */; };
 		ABC77A731D0C916600C46DD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC77A721D0C916600C46DD0 /* AppDelegate.swift */; };
 		ABC77A7A1D0C916600C46DD0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABC77A791D0C916600C46DD0 /* Assets.xcassets */; };
 		ABCBD8F01DD29A6E008D0CAF /* HomeAudit.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABCBD8EF1DD29A6E008D0CAF /* HomeAudit.swift */; };
@@ -121,7 +120,6 @@
 		ABB582811D3059BC0070C387 /* NotoSans-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Italic.ttf"; sourceTree = "<group>"; };
 		ABB582821D3059BC0070C387 /* NotoSans-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "NotoSans-Regular.ttf"; sourceTree = "<group>"; };
 		ABBFAA031D0FC13000BB4D5C /* FirebaseRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseRef.swift; sourceTree = "<group>"; };
-		ABC4F2001D494E940001368B /* HomeController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
 		ABC77A6F1D0C916600C46DD0 /* Tyloo-NS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tyloo-NS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		ABC77A721D0C916600C46DD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		ABC77A791D0C916600C46DD0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
@@ -226,11 +224,10 @@
 		ABAF8CF31DD501DB00B193A8 /* BasePages */ = {
 			isa = PBXGroup;
 			children = (
-				ABC4F2001D494E940001368B /* HomeController.swift */,
 				ABCBD8EF1DD29A6E008D0CAF /* HomeAudit.swift */,
-				0B2EE8311EA6F53900148E50 /* RegisterVC.swift */,
 				AB8376B81D83203A0083B94C /* CompleteFacebookRegister.swift */,
 				0BBCCB671EAA9461003A50CB /* CustomeTabBar.swift */,
+				0B2EE8311EA6F53900148E50 /* RegisterVC.swift */,
 			);
 			name = BasePages;
 			sourceTree = "<group>";
@@ -533,7 +530,6 @@
 			files = (
 				0BBCCB661EAA9128003A50CB /* HomePageDelegates.swift in Sources */,
 				0B34FFEF1EB11F5A00BE138C /* GuestsCell.swift in Sources */,
-				ABC4F2011D494E940001368B /* HomeController.swift in Sources */,
 				0BBE81A01ECA357C007D3644 /* Explore.swift in Sources */,
 				0B663A621EB2F69400BAC093 /* EventDetailsHeader.swift in Sources */,
 				0BE43C9A1EB0F84200062E07 /* UserProfile.swift in Sources */,

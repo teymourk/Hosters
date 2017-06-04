@@ -7,9 +7,12 @@
 //
 
 import UIKit
+import Firebase
+import MBProgressHUD
+import FBSDKLoginKit
 
 private let CELL_ID = "Cell"
-private let signUpLogInCell = "signUp-LogInCell"
+private let REGISTER_CELL = "REGISTER_CELL"
 
 struct Page {
     
@@ -18,7 +21,7 @@ struct Page {
     let details:String
 }
 
-class HomeAudit: UICollectionView, UICollectionViewDelegate, UICollectionViewDataSource, UICollectionViewDelegateFlowLayout {
+class HomeAudit: UICollectionViewController, UICollectionViewDelegateFlowLayout, RegisterCellDelegate {
     
     let pages:[Page] = {
         
@@ -32,60 +35,119 @@ class HomeAudit: UICollectionView, UICollectionViewDelegate, UICollectionViewDat
     
     lazy var pageController:UIPageControl = {
         let pageControl = UIPageControl()
-        pageControl.pageIndicatorTintColor = .lightGray
-        pageControl.currentPageIndicatorTintColor = orange
-        pageControl.translatesAutoresizingMaskIntoConstraints = false
-        pageControl.numberOfPages = 5
+            pageControl.pageIndicatorTintColor = .lightGray
+            pageControl.currentPageIndicatorTintColor = orange
+            pageControl.translatesAutoresizingMaskIntoConstraints = false
+            pageControl.numberOfPages = self.pages.count + 1
         return pageControl
     }()
     
-    override func didMoveToSuperview() {
+    override func viewDidLoad() {
+        super.viewDidLoad()
         
-        self.backgroundColor = .white
-        self.register(picturesCell.self, forCellWithReuseIdentifier: CELL_ID)
-        self.backgroundColor = .clear
-        self.showsHorizontalScrollIndicator = false
-        self.isPagingEnabled = true
-        self.alwaysBounceVertical = false
-        self.alwaysBounceHorizontal = false
-        self.delegate = self
-        self.dataSource = self
-        
+        self.collectionView?.backgroundColor = .white
+        self.collectionView?.register(picturesCell.self, forCellWithReuseIdentifier: CELL_ID)
+        self.collectionView?.register(RegisterCell.self, forCellWithReuseIdentifier: REGISTER_CELL)
+        self.collectionView?.backgroundColor = .clear
+        self.collectionView?.showsHorizontalScrollIndicator = false
+        self.collectionView?.isPagingEnabled = true
+        self.collectionView?.alwaysBounceVertical = false
+        self.collectionView?.alwaysBounceHorizontal = false
+    
         setupPageController()
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        
+        if UserDefaults.standard.value(forKey: KEY_UID) != nil {
+            
+            let tabarController = CostumeTabBar()
+            self.navigationController?.pushViewController(tabarController, animated: true)
+            self.navigationController?.navigationBar.isHidden = true
+            
+        } else {
+            
+            self.dismiss(animated: false, completion: nil)
+        }
     }
     
     // MARK: UICollectionViewDataSource
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         
-        return pages.count
+        return pages.count + 1
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as! picturesCell
-        
-        let pageDetails = pages[indexPath.item]
-        
-        cell.detail = pageDetails
-        
-        return cell
+        if indexPath.item == 4 {
+            
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: REGISTER_CELL, for: indexPath) as? RegisterCell {
+                
+                cell.delegate = self
+                
+                return cell
+            }
+            
+        } else {
+         
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as? picturesCell {
+            
+                let pageDetails = pages[indexPath.item]
+                
+                cell.detail = pageDetails
+                
+                return cell
+            }
+        }
+
+        return BaseCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return self.frame.size
+        return self.view.frame.size
+    }
+    
+    override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
+        
+        let pageNumber = Int(targetContentOffset.pointee.x / view.frame.width)
+        pageController.currentPage = Int(pageNumber)
     }
     
     func setupPageController() {
         
-        addSubview(pageController)
+        view.addSubview(pageController)
         
         //PageController Constraint
-        pageController.bottomAnchor.constraint(equalTo: self.bottomAnchor).isActive = true
-        pageController.centerXAnchor.constraint(equalTo: self.centerXAnchor).isActive = true
+        pageController.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
+        pageController.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         pageController.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
+    }
+    
+    func onFacebookLogin(sender: UIButton) {
+        
+        let facebookLogin = FBSDKLoginManager()
+
+        facebookLogin.logIn(withReadPermissions: ["email", "user_events"], from: self) { (result, error) in
+
+            if error != nil {
+
+                return
+
+            } else if result?.isCancelled == true {
+                print("Process FOR FACEBOOK was cancelled")
+
+            } else {
+                print("LOGGED IN TO FACEBOOK SUCCESSFULLY")
+                let completeFacebookRegister = CompleteFacebookRegister()
+                let navController = UINavigationController(rootViewController: completeFacebookRegister)
+                self.navigationController?.present(navController, animated: true, completion: nil)
+                
+            }
+        }
     }
 }
 
@@ -171,5 +233,4 @@ class picturesCell:BaseCell {
         seperator.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
         seperator.heightAnchor.constraint(equalToConstant: 2).isActive = true
     }
-    
 }

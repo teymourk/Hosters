@@ -89,17 +89,15 @@ extension AllEventPhotos: UICollectionViewDelegateFlowLayout {
         
         return CGSize(width: width, height: height)
     }
-    
+        
     //Mark: HeaderDelegate
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
         
         if let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HEADER_ID, for: indexPath) as? EventDetailsHeader {
             
             if let eventDetilas = _eventDetails {
                 
                 header._eventDetails = eventDetilas
-                
             }
             
             return header
@@ -108,6 +106,7 @@ extension AllEventPhotos: UICollectionViewDelegateFlowLayout {
         return BaseCell()
     }
     
+
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
         return CGSize(width: view.frame.width,

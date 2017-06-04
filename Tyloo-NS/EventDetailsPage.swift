@@ -136,14 +136,7 @@
 //            
 //            if let eventDescription = _eventDetails?.descriptions {
 //                
-//                let size = CGSize(width: view.frame.width, height: 1000)
 //                
-//                let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 12)]
-//                
-//                let estimatedFrame = NSString(string: eventDescription).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
-//                
-//                return CGSize(width: view.frame.width,
-//                              height: estimatedFrame.height + 20)
 //                
 //            } else {
 //                

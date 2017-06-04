@@ -273,3 +273,17 @@ extension Date {
         return date
     }
 }
+
+extension UITextView {
+    
+    func giveTextViewHeight() -> CGFloat {
+     
+        let size = CGSize(width: frame.width, height: 1000)
+        
+        let attributes = [NSFontAttributeName: UIFont.systemFont(ofSize: 12)]
+        
+        let estimatedFrame = NSString(string: self.text).boundingRect(with: size, options: .usesLineFragmentOrigin, attributes: attributes, context: nil)
+        
+        return estimatedFrame.size.height
+    }
+}
