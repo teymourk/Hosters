@@ -15,9 +15,17 @@ protocol RegisterCellDelegate: class {
 
 class RegisterCell: BaseCell, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
+    let backgroundCover:UIImageView = {
+        let img = UIImageView()
+            img.contentMode = .scaleAspectFill
+            img.translatesAutoresizingMaskIntoConstraints = false
+        return img
+    }()
+    
     let logo:UIImageView = {
         let img = UIImageView()
             img.image = UIImage(named: "TylooLogo")
+
             img.contentMode = .scaleAspectFill
             img.translatesAutoresizingMaskIntoConstraints = false
         return img
@@ -28,11 +36,10 @@ class RegisterCell: BaseCell, UITextFieldDelegate, UIImagePickerControllerDelega
             label.text = "Welcome To Tyloo"
             label.font = UIFont(name: "Prompt", size: 27)
             label.textAlignment = .center
-            label.textColor = darkGray
+            label.textColor = orange
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
     
     lazy var facebookBtn:UIButton = {
         let button = UIButton()
@@ -66,12 +73,25 @@ class RegisterCell: BaseCell, UITextFieldDelegate, UIImagePickerControllerDelega
         
         backgroundColor = .white
         
+        addSubview(backgroundCover)
         addSubview(WelcomeLabel)
         addSubview(logo)
         addSubview(facebookBtn)
         
+        backgroundCover.topAnchor.constraint(equalTo: topAnchor, constant: -40).isActive = true
+        backgroundCover.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        backgroundCover.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        
+        backgroundCover.getImagesBack(url: "https://s-media-cache-ak0.pinimg.com/564x/60/f4/23/60f423b13552e142687132f9a220e81f.jpg", placeHolder: "emptyImage")
+        
+        logo.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        logo.topAnchor.constraint(equalTo: topAnchor, constant: 40).isActive = true
+        
+        WelcomeLabel.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 10).isActive = true
+        WelcomeLabel.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        WelcomeLabel.centerXAnchor.constraint(equalTo: logo.centerXAnchor).isActive = true
+        
         addConstrainstsWithFormat("H:|-10-[v0]-10-|", views: facebookBtn)
         addConstrainstsWithFormat("V:[v0(40)]-100-|", views: facebookBtn)
-        
     }
 }

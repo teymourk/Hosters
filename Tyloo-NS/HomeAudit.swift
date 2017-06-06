@@ -107,7 +107,7 @@ class HomeAudit: UICollectionViewController, UICollectionViewDelegateFlowLayout,
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return self.view.frame.size
+        return view.frame.size
     }
     
     override func scrollViewWillEndDragging(_ scrollView: UIScrollView, withVelocity velocity: CGPoint, targetContentOffset: UnsafeMutablePointer<CGPoint>) {
@@ -169,20 +169,19 @@ class picturesCell:BaseCell {
     
     var instructionImage:UIImageView = {
         let image = UIImageView()
-        image.contentMode = .scaleAspectFill
-        image.backgroundColor = .green
-        image.clipsToBounds = true
-        image.translatesAutoresizingMaskIntoConstraints = false
+            image.contentMode = .scaleAspectFill
+            image.clipsToBounds = true
+            image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
     var instructionText:UITextView = {
         let text = UITextView()
-        text.textColor = .black
-        text.isEditable = false
-        text.isSelectable = false
-        text.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0)
-        text.translatesAutoresizingMaskIntoConstraints = false
+            text.textColor = .black
+            text.isEditable = false
+            text.isSelectable = false
+            text.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0)
+            text.translatesAutoresizingMaskIntoConstraints = false
         return text
     }()
     
@@ -217,7 +216,7 @@ class picturesCell:BaseCell {
         let imageHeight = self.frame.height / 1.35
         
         //ImageConstraints
-        instructionImage.topAnchor.constraint(equalTo: self.topAnchor, constant: -22).isActive = true
+        instructionImage.topAnchor.constraint(equalTo: self.topAnchor, constant:-40).isActive = true
         instructionImage.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
         instructionImage.heightAnchor.constraint(equalToConstant: imageHeight).isActive = true
         
