@@ -18,6 +18,7 @@ class RegisterCell: BaseCell, UITextFieldDelegate, UIImagePickerControllerDelega
     let backgroundCover:UIImageView = {
         let img = UIImageView()
             img.contentMode = .scaleAspectFill
+            img.getImagesBack(url: "https://s-media-cache-ak0.pinimg.com/564x/60/f4/23/60f423b13552e142687132f9a220e81f.jpg", placeHolder: "emptyImage")
             img.translatesAutoresizingMaskIntoConstraints = false
         return img
     }()
@@ -25,7 +26,6 @@ class RegisterCell: BaseCell, UITextFieldDelegate, UIImagePickerControllerDelega
     let logo:UIImageView = {
         let img = UIImageView()
             img.image = UIImage(named: "TylooLogo")
-
             img.contentMode = .scaleAspectFill
             img.translatesAutoresizingMaskIntoConstraints = false
         return img
@@ -48,6 +48,8 @@ class RegisterCell: BaseCell, UITextFieldDelegate, UIImagePickerControllerDelega
             button.titleLabel?.font = UIFont(name: "NotoSans", size: 20)
             button.setTitleColor(.white, for: UIControlState())
             button.setBackgroundImage(UIImage(named: "fb"), for: UIControlState())
+            button.layer.masksToBounds = true
+            button.layer.cornerRadius = 5
             button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -66,8 +68,9 @@ class RegisterCell: BaseCell, UITextFieldDelegate, UIImagePickerControllerDelega
         }
     }
     
-    var registerBtnXAnchor:NSLayoutConstraint?
-    var registeBtnTopAnchar:NSLayoutConstraint?
+    
+    var registeBtnYAnchar:NSLayoutConstraint?
+    var logoYAncher:NSLayoutConstraint?
     
     override func setupView() {
         
@@ -82,16 +85,34 @@ class RegisterCell: BaseCell, UITextFieldDelegate, UIImagePickerControllerDelega
         backgroundCover.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         backgroundCover.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         
-        backgroundCover.getImagesBack(url: "https://s-media-cache-ak0.pinimg.com/564x/60/f4/23/60f423b13552e142687132f9a220e81f.jpg", placeHolder: "emptyImage")
-        
         logo.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        logo.topAnchor.constraint(equalTo: topAnchor, constant: 40).isActive = true
+        logoYAncher = logo.topAnchor.constraint(equalTo: topAnchor, constant: -140)
+        logoYAncher?.isActive = true
         
         WelcomeLabel.topAnchor.constraint(equalTo: logo.bottomAnchor, constant: 10).isActive = true
         WelcomeLabel.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         WelcomeLabel.centerXAnchor.constraint(equalTo: logo.centerXAnchor).isActive = true
         
-        addConstrainstsWithFormat("H:|-10-[v0]-10-|", views: facebookBtn)
-        addConstrainstsWithFormat("V:[v0(40)]-100-|", views: facebookBtn)
+        facebookBtn.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
+        facebookBtn.rightAnchor.constraint(equalTo: rightAnchor, constant: -10).isActive = true
+        facebookBtn.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        registeBtnYAnchar = facebookBtn.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 10)
+        registeBtnYAnchar?.isActive = true
+        
+        perform(#selector(animatePage), with: nil, afterDelay: 1)
+
+    }
+    
+    internal func animatePage() {
+     
+        UIView.animate(withDuration: 2, delay: 0, options: .curveEaseIn, animations: {
+            
+            self.layoutIfNeeded()
+            
+            self.registeBtnYAnchar?.constant = -70
+            self.logoYAncher?.constant = 40
+            
+        }, completion: nil)
+
     }
 }

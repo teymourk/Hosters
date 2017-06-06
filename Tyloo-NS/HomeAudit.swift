@@ -25,12 +25,11 @@ class HomeAudit: UICollectionViewController, UICollectionViewDelegateFlowLayout,
     
     let pages:[Page] = {
         
-        let firstPage = Page(imageName: "http://www.opulentgroups.com/Event-management.png", title: "Check In With Friends", details: "You can checkin to near locations and let your friends know where you are!")
-        let secondPage = Page(imageName: "https://www.thembegroup.com/wp-content/uploads/2016/06/Corporate-Events.jpg", title: "Share your moments", details: "Upload Images before and after the event to share your moments with friends")
-        let thirdPage = Page(imageName: "https://lvs.luxury/wp-content/uploads/2015/05/IMG_1266Porche-event.jpg", title: "SALAMA CHETORYE", details: "man khoobam")
-        let fourthPage = Page(imageName: "http://www.creativeapplications.net/wp-content/uploads/2010/10/Festival_Ferry-Corsten_FlashBack-Paradiso-credits-tillate.com00.jpg", title: "NEMIDOOONAM", details: "SALAM CHETORY PESAR")
-        
-        return [firstPage,secondPage,thirdPage,fourthPage]
+        let firstPage = Page(imageName: "https://s-media-cache-ak0.pinimg.com/736x/2a/6f/d9/2a6fd9fb64f50158734de034e0d21462.jpg", title: "Participate in an Event", details: "You can checkin to near locations and let your friends know where you are!")
+        let secondPage = Page(imageName: "http://www.foodandwine.com/fwx/sites/default/files/partner-TL-phone-photography-tips-fwx.jpg", title: "Share your moments", details: "Upload Images before and after the event to share your moments with friends")
+        let thirdPage = Page(imageName: "https://lvs.luxury/wp-content/uploads/2015/05/IMG_1266Porche-event.jpg", title: "SALAMA CHETORYE", details: "Enjoy these moments")
+
+        return [firstPage,secondPage,thirdPage]
     }()
     
     lazy var pageController:UIPageControl = {
@@ -81,7 +80,7 @@ class HomeAudit: UICollectionViewController, UICollectionViewDelegateFlowLayout,
     
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if indexPath.item == 4 {
+        if indexPath.item == 3 {
             
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: REGISTER_CELL, for: indexPath) as? RegisterCell {
                 
