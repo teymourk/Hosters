@@ -51,9 +51,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         if Reachability.isInternetAvailable() {
             
-            
         }
-        
+
         return true
     }
     

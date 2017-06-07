@@ -59,15 +59,17 @@ class HomeAudit: UICollectionViewController, UICollectionViewDelegateFlowLayout,
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if UserDefaults.standard.value(forKey: KEY_UID) != nil {
-            
-            let tabarController = CostumeTabBar()
-            self.navigationController?.pushViewController(tabarController, animated: true)
-            self.navigationController?.navigationBar.isHidden = true
+        if let userID = FBSDKAccessToken.current().tokenString {
+        
+            if !userID.isEmpty {
+                
+                let tabarController = CostumeTabBar()
+                self.navigationController?.pushViewController(tabarController, animated: true)
+                self.navigationController?.navigationBar.isHidden = true
+            }
             
         } else {
-            
-            self.dismiss(animated: false, completion: nil)
+            return
         }
     }
     
@@ -141,12 +143,17 @@ class HomeAudit: UICollectionViewController, UICollectionViewDelegateFlowLayout,
 
             } else {
                 print("LOGGED IN TO FACEBOOK SUCCESSFULLY")
+                
                 let completeFacebookRegister = CompleteFacebookRegister()
                 let navController = UINavigationController(rootViewController: completeFacebookRegister)
                 self.navigationController?.present(navController, animated: true, completion: nil)
                 
             }
         }
+    }
+    
+    override var prefersStatusBarHidden: Bool {
+        return true
     }
 }
 

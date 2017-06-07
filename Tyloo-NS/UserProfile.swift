@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import FBSDKLoginKit
 
 class UserProfile: UIViewController {
     
@@ -33,6 +34,33 @@ class UserProfile: UIViewController {
 
         view.backgroundColor = .white
         navigationController?.navigationBar.isTranslucent = false
+        
+        let logout = UIBarButtonItem(title: "LogOut", style: .plain, target: self, action: #selector(logout(sender: )))
+        navigationItem.leftBarButtonItem = logout
+        
+        setupView()
+    }
+    
+    @objc private func logout(sender: UIBarButtonItem) {
+        
+        let facebookManager = FBSDKLoginManager()
+        
+        let logoutAlert = UIAlertController(title: "Logout", message: "Are you sure you want to logout?", preferredStyle: .actionSheet)
+        let logout = UIAlertAction(title: "Logout", style: .destructive) { (action) in
+            
+            facebookManager.logOut()
+        }
+        
+        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        
+        logoutAlert.addAction(logout)
+        logoutAlert.addAction(cancel)
+        
+        self.present(logoutAlert, animated: true, completion: nil)
+    }
+
+    func setupView() {
+        
         
         view.addSubview(profileImage)
         

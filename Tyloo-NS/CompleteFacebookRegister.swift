@@ -128,12 +128,10 @@ class CompleteFacebookRegister: UIViewController, UITextFieldDelegate {
                     FirebaseRef.database.createFireBaseUser(userUID, user: userInfoDic as Dictionary<String, AnyObject>)
                     
                     print("Successfully Created The User")
-                    UserDefaults.standard.setValue(userUID, forKey: KEY_UID)
                     
-                    let homePage = HomePage(collectionViewLayout: UICollectionViewFlowLayout())
-                    let navController = UINavigationController(rootViewController: homePage)
-                    self.present(navController, animated: false, completion: nil)
-                    self.navigationController?.setNavigationBarHidden(true, animated: false)
+                    let tabarController = CostumeTabBar()
+                    self.navigationController?.pushViewController(tabarController, animated: true)
+                    self.navigationController?.navigationBar.isHidden = true
                     progressHUD.hide(animated: true)
                 }
             }
