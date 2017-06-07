@@ -59,9 +59,9 @@ class HomeAudit: UICollectionViewController, UICollectionViewDelegateFlowLayout,
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         
-        if let userID = FBSDKAccessToken.current().tokenString {
+        if let userID = FBSDKAccessToken.current() {
         
-            if !userID.isEmpty {
+            if userID != nil {
                 
                 let tabarController = CostumeTabBar()
                 self.navigationController?.pushViewController(tabarController, animated: true)

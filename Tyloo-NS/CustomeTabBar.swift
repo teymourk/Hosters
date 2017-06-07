@@ -36,5 +36,4 @@ class CostumeTabBar: UITabBarController {
         self.navigationItem.hidesBackButton = true
         viewControllers = [navigationController, navigationController3]
     }
-    
 }

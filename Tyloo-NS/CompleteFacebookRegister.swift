@@ -106,11 +106,11 @@ class CompleteFacebookRegister: UIViewController, UITextFieldDelegate {
     
     func handleCompleteRegister(_ user: FIRUser?) {
         
-        guard let name = self.userFacebookName.text, let userUID = user?.uid, let profileImg = self.profileImage.image else { return }
+        guard let name = self.userFacebookName.text, let userID = FBSDKAccessToken.current().userID, let profileImg = self.profileImage.image else { return }
         
         let progressHUD = MBProgressHUD.showAdded(to: view, animated: true)
-        let imageKey = UUID().uuidString
-        let storageRef = FIRStorage.storage().reference().child("profile_images").child("\(imageKey).png")
+        //let imageKey = UUID().uuidString //Create Random String
+        let storageRef = FIRStorage.storage().reference().child("profile_images").child("\(userID).png")
         
         if let uploadData = UIImageJPEGRepresentation(profileImg, 0.1) {
             
@@ -123,9 +123,9 @@ class CompleteFacebookRegister: UIViewController, UITextFieldDelegate {
                 
                 if let imageURL = metaData?.downloadURL()?.absoluteString {
                 
-                    let userInfoDic = ["name":name, "profileImage":imageURL, "provider":"Facebook"] as [String : Any]
+                    let userInfoDic = ["name":name, "profileImage":imageURL]
                     
-                    FirebaseRef.database.createFireBaseUser(userUID, user: userInfoDic as Dictionary<String, AnyObject>)
+                    FirebaseRef.database.createFireBaseUser(userID, user: userInfoDic as Dictionary<String, AnyObject>)
                     
                     print("Successfully Created The User")
                     

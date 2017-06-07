@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import FBSDKLoginKit
 
 let URL_BASE = FIRDatabase.database().reference()
 
@@ -40,10 +41,14 @@ class FirebaseRef {
     var currentUser: FIRDatabaseReference {
         get {
             
-            let uid = UserDefaults.standard.value(forKey: KEY_UID) as! String
-            let user = FirebaseRef.database.REF_USERS.child(uid)
+            if let userID = FBSDKAccessToken.current().userID {
+             
+                let user = FirebaseRef.database.REF_USERS.child(userID)
+                
+                return user
+            }
             
-            return user
+            return FIRDatabaseReference()
         }
     }
     
