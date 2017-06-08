@@ -67,11 +67,12 @@ extension UICollectionViewCell {
         transform = CGAffineTransform(scaleX: 0.4, y: 0.4)
         alpha = 0.5
         
+
         UIView.animate(withDuration: 0.7, delay: 0, options: .curveEaseIn, animations: {
             
             self.transform = CGAffineTransform(scaleX: 1, y: 1)
             self.alpha = 1
-            
+        
         }, completion: nil)
     }
 }

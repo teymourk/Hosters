@@ -65,33 +65,46 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView?.addSubview(live)
-        
-        live.widthAnchor.constraint(equalTo: (collectionView?.widthAnchor)!).isActive = true
-        live.topAnchor.constraint(equalTo: (collectionView?.topAnchor)!, constant: -40).isActive = true
-        live.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
-        navigationController?.navigationBar.isTranslucent = false
-        
-        locationManager?.requestWhenInUseAuthorization()
-
         collectionView?.addSubview(refresher)
         collectionView?.register(HomeCell.self, forCellWithReuseIdentifier: CELL_FEED)
         collectionView?.register(LiveEvents.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HEADER_ID)
-        collectionView?.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
-        collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
         collectionView?.backgroundColor = UIColor.rgb(231, green: 236, blue: 240)
+
+        navigationController?.navigationBar.isTranslucent = false
+        
+        locationManager?.requestWhenInUseAuthorization()
         
         let formatter = DateFormatter()
             formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
         let olddate = formatter.date(from: "2017-01-01 7:00:00 +0000") //This Will Be Date of launch
         
         eventTypeFetch(date: olddate!, index: 0, typeIndex: 0)
+    
+        setupLive()
+        setupNavSeperator()
+    }
+    
+    internal func setupLive() {
+        
+        collectionView?.addSubview(live)
+        
+        live.widthAnchor.constraint(equalTo: (collectionView?.widthAnchor)!).isActive = true
+        live.topAnchor.constraint(equalTo: (collectionView?.topAnchor)!, constant: -40).isActive = true
+        live.heightAnchor.constraint(equalToConstant: 40).isActive = true
+    }
+    
+    internal func setupNavSeperator() {
         
         view.addSubview(navBarSeperator)
         
         view.addConstrainstsWithFormat("H:|[v0]|", views: navBarSeperator)
         view.addConstrainstsWithFormat("V:|[v0(2)]", views: navBarSeperator)
+    }
+    
+    internal func setupCollectionViewLayout() {
+        
+        collectionView?.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
+        collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
     }
     
     internal func eventTypeFetch(date: Date, index: Int, typeIndex:Int) {
@@ -139,7 +152,9 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
             }
         }
         
-        self.collectionView?.reloadData()
+        DispatchQueue.main.async {
+             self.collectionView?.reloadData()
+        }
     }
     
     internal func navigateToEventDetails(eventDetail:Events) {

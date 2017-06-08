@@ -32,6 +32,7 @@ class HomeCVCell: BaseCell  {
     }()
     
     var homePage:HomePage?
+    var userProfile:UserProfile?
     
     override func setupView() {
         

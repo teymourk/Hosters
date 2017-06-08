@@ -9,119 +9,107 @@
 import UIKit
 import FBSDKLoginKit
 
-class UserProfile: UIViewController {
-    
-    let pageNotfication:PageNotifications = {
-        let pg = PageNotifications()
-        return pg
-    }()
-    
-    lazy var profileImage:UIImageView = {
-        let image = UIImageView()
-            image.contentMode = .scaleAspectFill
-            image.layer.masksToBounds = true
-            image.layer.borderWidth = 1
-            image.layer.borderColor = orange.cgColor
-            image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
-    
-    let name:UILabel = {
-        let label = UILabel()
-            label.textColor = .black
-            label.font = UIFont(name: "NotoSans-Bold", size: 15)
-            label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    let navBarSeperator:UIView = {
-        let view = UIView()
-            view.backgroundColor = orange
-        return view
-    }()
-    
-    let seperator:UIView = {
-        let view = UIView()
-            view.backgroundColor = orange
-            view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+private let CELL_FEED = "Cell_FEED"
+private let Header_ID = "Header_ID"
 
+class UserProfile: HomePage {
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .white
-        navigationController?.navigationBar.isTranslucent = false
         
-        let logout = UIBarButtonItem(title: "LogOut", style: .plain, target: self, action: #selector(logout(sender: )))
-        navigationItem.leftBarButtonItem = logout
-        
-        setupView()
-        
-        getUserData()
+        collectionView?.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: Header_ID)
     }
     
-    @objc private func logout(sender: UIBarButtonItem) {
-        
-        let facebookManager = FBSDKLoginManager()
-        
-        let logoutAlert = UIAlertController(title: "Logout", message: "Are you sure you want to logout?", preferredStyle: .actionSheet)
-        let logout = UIAlertAction(title: "Logout", style: .destructive) { (action) in
-            
-            facebookManager.logOut()
-        }
-        
-        let cancel = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-        
-        logoutAlert.addAction(logout)
-        logoutAlert.addAction(cancel)
-        
-        self.present(logoutAlert, animated: true, completion: nil)
-    }
-
-    func setupView() {
-        
-        view.addSubview(profileImage)
-        
-        profileImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        profileImage.widthAnchor.constraint(equalToConstant: 100).isActive = true
-        profileImage.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        profileImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 30).isActive = true
-        
-        profileImage.layer.cornerRadius = 50
-        
-        view.addSubview(name)
-  
-        name.centerXAnchor.constraint(equalTo: profileImage.centerXAnchor).isActive = true
-        name.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 10).isActive = true
-        
-        view.addSubview(seperator)
-        
-        seperator.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
-        seperator.topAnchor.constraint(equalTo: name.bottomAnchor, constant: 40).isActive = true
-        seperator.heightAnchor.constraint(equalToConstant: 1).isActive = true
-        
-        view.addSubview(navBarSeperator)
-        
-        view.addConstrainstsWithFormat("H:|[v0]|", views: navBarSeperator)
-        view.addConstrainstsWithFormat("V:|[v0(2)]", views: navBarSeperator)
-    }
+    override func setupLive() {}
+    override func setupCollectionViewLayout() {}
     
-    private func getUserData() {
+    internal func fetchUserEvents(cell:HomeCell) {
         
-        FirebaseRef.database.currentUser.observe(.value, with: { (snapshot) in
+        var myEventArray:[Events] = [Events]()
+        
+        if let eventDic = self.eventsDictionary, let userID = FBSDKAccessToken.current().userID {
             
-            if let userDic = snapshot.value as? [String:AnyObject] {
+            for(_, value) in eventDic {
                 
-                if let userObj = userDic["user"] as? NSDictionary, let name = userObj["name"] as? String, let profile_Image = userObj["profileImage"] as? String {
-                
-                    DispatchQueue.main.async {
+                for i in value {
+                    
+                    if i.owner_id == userID {
                         
-                        self.profileImage.getImagesBack(url: profile_Image, placeHolder: "Profile")
-                        self.name.text = name
+                        DispatchQueue.main.async {
+                            
+                            myEventArray.append(i)
+                            myEventArray.sort(by: { (event1, event2) -> Bool in
+                                
+                                if let event1Time = event1.start_time, let event2Time = event2.start_time {
+                                    
+                                    return event1Time > event2Time
+                                }
+                                
+                                return Bool()
+                            })
+                            
+                            cell.eventsCV.events = myEventArray
+                        }
                     }
                 }
             }
-        })
+        }
+    }
+}
+
+
+extension UserProfile {
+    
+    override func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
+     
+        return 1
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
+    
+        if indexPath.item == 0 {
+            
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_FEED, for: indexPath) as? HomeCell {
+                
+                cell.categoryLabel.text = "My Events 👀"
+                cell.eventsCV.userProfile = self
+                
+                fetchUserEvents(cell: cell)
+                
+                return cell
+            }
+        }
+        
+        return BaseCell()
+    }
+    
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        
+        if indexPath.item == 0 {
+            
+            return CGSize(width: view.frame.width,
+                          height: FEED_CELL_HEIGHT)
+        }
+    
+        return CGSize(width: view.frame.width,
+                      height: 40)
+    }
+    
+    //Mark: - HeaderDelegate
+    
+    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+    
+        if let profileHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header_ID, for: indexPath) as? ProfileHeader {
+            
+            return profileHeader
+        }
+        
+        return BaseCell()
+    }
+
+    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        
+        return CGSize(width: view.frame.width,
+                      height: FEED_CELL_HEIGHT * 0.45)
     }
 }

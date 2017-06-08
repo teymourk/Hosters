@@ -19,6 +19,7 @@ class Events: NSObject {
     private var _description:String?
     private var _coverURL:String?
     private var _ownr_name:String?
+    private var _owner_id:String?
     private var _start_time:Date?
     private var _end_time:Date?
     private var _rsvp_status:String?
@@ -37,6 +38,10 @@ class Events: NSObject {
     
     var event_id:String? {
         return _event_id
+    }
+    
+    var owner_id:String? {
+        return _owner_id
     }
     
     var isLive:Int? {
@@ -134,8 +139,10 @@ class Events: NSObject {
             self._coverURL = coverSource
         }
         
-        if let ownerDic = dictionary["owner"] as? NSDictionary, let owner_name = ownerDic["name"] as? String {
+        if let ownerDic = dictionary["owner"] as? NSDictionary, let owner_name = ownerDic["name"] as? String, let owner_id = ownerDic["id"] as? String {
             self._ownr_name = owner_name
+            self._owner_id = owner_id
+
         }
         
         if let rsvp_status = dictionary["rsvp_status"] as? String {

@@ -28,7 +28,7 @@ class CostumeTabBar: UITabBarController {
 //        let navigationController2 = UINavigationController(rootViewController: explore)
 //            navigationController2.tabBarItem.image = UIImage(named: "search-normal")
         
-        let userProfile = UserProfile()
+        let userProfile = UserProfile(collectionViewLayout: UICollectionViewFlowLayout())
             userProfile.navigationItem.title = "Profile"
         let navigationController3 = UINavigationController(rootViewController: userProfile)
             navigationController3.tabBarItem.image = UIImage(named: "profile-1")
