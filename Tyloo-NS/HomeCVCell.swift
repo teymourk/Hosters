@@ -25,14 +25,12 @@ class HomeCVCell: BaseCell  {
             layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
             cv.backgroundColor = .white
-        
             cv.delegate = self
             cv.dataSource = self
         return cv
     }()
     
     var homePage:HomePage?
-    var userProfile:UserProfile?
     
     override func setupView() {
         

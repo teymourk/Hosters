@@ -72,7 +72,7 @@ extension UserProfile {
             if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_FEED, for: indexPath) as? HomeCell {
                 
                 cell.categoryLabel.text = "My Events 👀"
-                cell.eventsCV.userProfile = self
+                cell.eventsCV.homePage = self
                 
                 fetchUserEvents(cell: cell)
                 

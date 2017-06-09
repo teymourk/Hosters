@@ -82,6 +82,7 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     
         setupLive()
         setupNavSeperator()
+        setupCollectionViewLayout()
     }
     
     internal func setupLive() {

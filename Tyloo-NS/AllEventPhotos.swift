@@ -63,14 +63,10 @@ class AllEventPhotos: UICollectionViewController {
         view.addConstrainstsWithFormat("V:|[v0(2)]", views: navBarSeperator)
     }
     
-    @objc private func onOption(sender: UIBarButtonItem) {
-        
-        
-    }
-    
-    private func setupBarButtonItem(imageName: String) {
+    func setupBarButtonItem(imageName: String) {
     
         let optionsButton = UIBarButtonItem(image: UIImage(named: imageName), style: .plain, target: self, action: #selector(onOption(sender:)))
         navigationItem.rightBarButtonItem = optionsButton
     }
 }
+
