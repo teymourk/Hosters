@@ -99,13 +99,13 @@ class RegisterCell: BaseCell, UITextFieldDelegate, UIImagePickerControllerDelega
         registeBtnYAnchar = facebookBtn.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 10)
         registeBtnYAnchar?.isActive = true
         
-        perform(#selector(animatePage), with: nil, afterDelay: 1)
+        animatePage()
 
     }
     
     internal func animatePage() {
      
-        UIView.animate(withDuration: 2, delay: 0, options: .curveEaseIn, animations: {
+        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             
             self.layoutIfNeeded()
             

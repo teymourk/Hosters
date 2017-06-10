@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class ImagesCell: BaseCell {
+class EventDetailsCell: BaseCell {
     
     var eventDetails:Events? {
         didSet {
@@ -32,6 +32,8 @@ class ImagesCell: BaseCell {
     
     override func setupView() {
         super.setupView()
+        
+        backgroundColor = .blue
         
         addSubview(coverImage)
         

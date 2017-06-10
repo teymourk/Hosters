@@ -15,29 +15,19 @@ private let SEGMENT_CELL = "SEGMENT_CELL"
 
 class AllEventPhotos: UICollectionViewController {
     
+    var empty:Bool = false
+    
     var _eventDetails:Events? {
         didSet {
             
-            if let isLive = _eventDetails?.isLive {
-
-                //Event Ended, its photo Library
-                if isLive == 1 {
-
-                    setupBarButtonItem(imageName: "sh")
-
-                } else if isLive == 2 {
-
-                    setupBarButtonItem(imageName: "s")
-
-                } else {
-
-                    setupBarButtonItem(imageName: "c")
-                }
-            }
+            guard let eventDetails = _eventDetails else {return}
+            
+            setupNavBarView(details: eventDetails)
+            
+            let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startCountDown), userInfo: nil, repeats: true)
+            timer.fire()
         }
     }
-    
-    var grid:Bool = true
     
     let navBarSeperator:UIView = {
         let view = UIView()
@@ -45,15 +35,19 @@ class AllEventPhotos: UICollectionViewController {
         return view
     }()
     
+    let uploadProgressView:UploadProgressView = {
+        let up = UploadProgressView()
+        return up
+    }()
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
         self.title = "Event"
         self.navigationController?.navigationBar.isTranslucent = false
-        self.collectionView?.register(AllEventPhotosCell.self, forCellWithReuseIdentifier: CELL_ID)
-        self.collectionView?.register(GridCell.self, forCellWithReuseIdentifier: GRID_ID)
+        
         self.collectionView?.register(EventDetailsHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HEADER_ID)
-        self.collectionView?.register(SegmentCell.self, forCellWithReuseIdentifier: SEGMENT_CELL)
+        self.collectionView?.register(EventDetailsCell.self, forCellWithReuseIdentifier: CELL_ID)
         self.collectionView?.backgroundColor = .white
         self.collectionView?.backgroundColor = UIColor.rgb(231, green: 236, blue: 240)
         
@@ -63,10 +57,53 @@ class AllEventPhotos: UICollectionViewController {
         view.addConstrainstsWithFormat("V:|[v0(2)]", views: navBarSeperator)
     }
     
-    func setupBarButtonItem(imageName: String) {
+    let countDown:UILabel = {
+        let label = UILabel()
+            label.font = UIFont(name: "Prompt", size: 12)
+            label.textAlignment = .center
+            label.translatesAutoresizingMaskIntoConstraints = false
+        return label
+    }()
     
-        let optionsButton = UIBarButtonItem(image: UIImage(named: imageName), style: .plain, target: self, action: #selector(onOption(sender:)))
-        navigationItem.rightBarButtonItem = optionsButton
+    
+    func setupNavBarView(details:Events?) {
+        
+        let view = UIView()
+            view.frame = CGRect(x: 0, y: 0, width: 200, height: 40)
+            view.backgroundColor = .clear
+        
+        view.addSubview(countDown)
+        
+        view.addConstrainstsWithFormat("H:|[v0]|", views: countDown)
+        view.addConstrainstsWithFormat("V:[v0]-2-|", views: countDown)
+        
+        startCountDown()
+        
+        self.navigationItem.titleView = view
+    }
+    
+    func startCountDown() {
+        
+        if let event = _eventDetails, let isLive = event.isLive, let eventTime = event.start_time, let endTime = event.end_time {
+            
+            switch isLive {
+            case 1:
+                countDown.text = "Starting: \(eventTime.countDown())"
+                countDown.textColor = .rgb(24, green: 201, blue: 86)
+                break
+            case 2:
+                countDown.text = "Event Ended"
+                countDown.textColor = .rgb(181, green: 24, blue: 34)
+                break
+            case 3:
+                countDown.text = "Ending: \(endTime.countDown())"
+                countDown.textColor = .rgb(181, green: 24, blue: 34)
+                break
+                
+            default: break
+                
+            }
+        }
     }
 }
 
