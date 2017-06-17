@@ -25,9 +25,7 @@ class HomeCell: BaseCell {
     }()
     
     override func setupView() {
-       super.setupView()
-        
-        setShadow()
+        super.setupView()
         
         backgroundColor = .clear
         

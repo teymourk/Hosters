@@ -16,7 +16,9 @@ private let SEGMENT_CELL = "SEGMENT_CELL"
 class AllEventPhotos: UICollectionViewController {
     
     var empty:Bool = false
+    var cellImages:[UIImage] = [UIImage]()
     
+
     var _eventDetails:Events? {
         didSet {
             
@@ -48,6 +50,7 @@ class AllEventPhotos: UICollectionViewController {
         
         self.collectionView?.register(EventDetailsHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HEADER_ID)
         self.collectionView?.register(EventDetailsCell.self, forCellWithReuseIdentifier: CELL_ID)
+        self.collectionView?.register(EventDetailsCell.self, forCellWithReuseIdentifier: CELL_ID)
         self.collectionView?.backgroundColor = .white
         self.collectionView?.backgroundColor = UIColor.rgb(231, green: 236, blue: 240)
         
@@ -55,6 +58,13 @@ class AllEventPhotos: UICollectionViewController {
         
         view.addConstrainstsWithFormat("H:|[v0]|", views: navBarSeperator)
         view.addConstrainstsWithFormat("V:|[v0(2)]", views: navBarSeperator)
+        
+        let i = UIImage(named:"location")
+        let o = UIImage(named:"calendar")
+        let p = UIImage(named:"host")
+        let l = UIImage(named:"attension")
+        
+        cellImages = [i!, o!, p!, l!]
     }
     
     let countDown:UILabel = {
@@ -72,17 +82,29 @@ class AllEventPhotos: UICollectionViewController {
             view.frame = CGRect(x: 0, y: 0, width: 200, height: 40)
             view.backgroundColor = .clear
         
+        let titileLabel = UILabel()
+            titileLabel.font = UIFont(name: "Prompt", size: 15)
+            titileLabel.textColor = .white
+            titileLabel.textAlignment = .center
+            titileLabel.text = "Event"
+        
         view.addSubview(countDown)
         
         view.addConstrainstsWithFormat("H:|[v0]|", views: countDown)
         view.addConstrainstsWithFormat("V:[v0]-2-|", views: countDown)
+
+        view.addSubview(titileLabel)
+        
+        view.addConstrainstsWithFormat("H:|[v0]|", views: titileLabel)
+        view.addConstrainstsWithFormat("V:|-2-[v0]", views: titileLabel)
         
         startCountDown()
+
         
         self.navigationItem.titleView = view
     }
     
-    func startCountDown() {
+    @objc fileprivate func startCountDown() {
         
         if let event = _eventDetails, let isLive = event.isLive, let eventTime = event.start_time, let endTime = event.end_time {
             
@@ -92,7 +114,7 @@ class AllEventPhotos: UICollectionViewController {
                 countDown.textColor = .rgb(24, green: 201, blue: 86)
                 break
             case 2:
-                countDown.text = "Event Ended"
+                countDown.text = "Ended"
                 countDown.textColor = .rgb(181, green: 24, blue: 34)
                 break
             case 3:

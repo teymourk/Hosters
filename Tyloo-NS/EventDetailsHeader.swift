@@ -49,6 +49,8 @@ class EventDetailsHeader: BaseCell {
     let optionsView:UIView = {
         let view = UIView()
             view.backgroundColor = .white
+            view.layer.borderWidth = 0.5
+            view.layer.borderColor = darkGray.cgColor
             view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
@@ -95,6 +97,7 @@ extension EventDetailsHeader: UICollectionViewDelegate, UICollectionViewDataSour
             let image = postedImages?[indexPath.item]
             
             cell.coverImage.getImagesBack(url: (image?.img)!, placeHolder: "emptyImage")
+            cell.setupJustImageLayer()
             
             return cell
         }

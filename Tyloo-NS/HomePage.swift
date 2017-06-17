@@ -34,8 +34,7 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     lazy var activityIndicator:UIActivityIndicatorView = {
         let indicator = UIActivityIndicatorView(activityIndicatorStyle: .white)
             indicator.center = self.view.center
-            indicator.color = .gray
-            indicator.startAnimating()
+            indicator.color = .white
         return indicator
     }()
     
@@ -145,7 +144,7 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
                     
                     if !attended.isEmpty {
                         
-                        let index = indexCount
+                        let index = indexCount + 1
                         
                         self.eventsDictionary?[index] = attended
                     }
@@ -153,9 +152,7 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
             }
         }
         
-        DispatchQueue.main.async {
-             self.collectionView?.reloadData()
-        }
+        self.collectionView?.reloadData()
     }
     
     internal func navigateToEventDetails(eventDetail:Events) {
@@ -191,5 +188,5 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         }
         
         refresher.endRefreshing()
-    }    
+    }
 }
