@@ -83,7 +83,7 @@ class EventsCell: BaseCell {
             title.text = eventTitle
         }
         
-        if let place_name = eventDetails.place_name, let city = eventDetails.city, let state = eventDetails.state {
+        if let place_name = eventDetails.location?.place_name, let city = eventDetails.location?.city, let state = eventDetails.location?.state {
             
             location.text = "📍\(place_name) - \(city), \(state)"
             location.textColor = buttonColor
@@ -94,13 +94,16 @@ class EventsCell: BaseCell {
             location.textColor = .black
         }
         
-        if let interestedCount = eventDetails.interested_count, let declinedCount = eventDetails.declined_count, let attendingCount = eventDetails.attending_count, let guest_list_Enabled = eventDetails.guest_list_enabled {
+        let interestedCount = eventDetails.interested_count
+        let declinedCount = eventDetails.declined_count
+        let attendingCount = eventDetails.attending_count
+        let guest_list_Enabled = eventDetails.guest_list_enabled
             
-            let color = guest_list_Enabled == true ? buttonColor : darkGray
+        let color = guest_list_Enabled == true ? buttonColor : darkGray
             
-            guestCountsButton.setTitle("✅ Going: \(attendingCount) • 🤔 Interested: \(interestedCount) • ❌ Not Going: \(declinedCount)", for: .normal)
-            guestCountsButton.setTitleColor(color, for: .normal)
-        }
+        guestCountsButton.setTitle("✅ Going: \(attendingCount) • 🤔 Interested: \(interestedCount) • ❌ Not Going: \(declinedCount)", for: .normal)
+        guestCountsButton.setTitleColor(color, for: .normal)
+        
     }
 
     override func setupView() {

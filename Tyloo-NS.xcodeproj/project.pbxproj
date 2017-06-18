@@ -8,20 +8,18 @@
 
 /* Begin PBXBuildFile section */
 		02E6DC9A81FA284890F240FC /* Pods_Tyloo_NSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 823468288D5D28355230997B /* Pods_Tyloo_NSTests.framework */; };
-		0B0856A11ED2986400EF83B6 /* PostImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0856A01ED2986400EF83B6 /* PostImages.swift */; };
 		0B0D74241EEA6C860043B8BA /* UploadProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0D74231EEA6C860043B8BA /* UploadProgressView.swift */; };
 		0B18B1E01ED296FE0002A94F /* PicturesInsideCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B18B1DF1ED296FE0002A94F /* PicturesInsideCell.swift */; };
 		0B24E4D41EB5200E0037D1D5 /* Tyloo_NSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24E4D31EB5200E0037D1D5 /* Tyloo_NSTests.swift */; };
 		0B24E4DC1EB5255B0037D1D5 /* DetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24E4DB1EB5255B0037D1D5 /* DetailsCell.swift */; };
 		0B2691CE1EF5F4C40025CFCE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2691CD1EF5F4C40025CFCE /* CoreDataStack.swift */; };
+		0B2691D11EF5F5E30025CFCE /* TylooModels.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0B2691CF1EF5F5E30025CFCE /* TylooModels.xcdatamodeld */; };
 		0B2EE8321EA6F53900148E50 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2EE8311EA6F53900148E50 /* RegisterVC.swift */; };
-		0B34FFED1EB11E0F00BE138C /* EventPageCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B34FFEC1EB11E0F00BE138C /* EventPageCell.swift */; };
-		0B34FFEF1EB11F5A00BE138C /* GuestsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B34FFEE1EB11F5A00BE138C /* GuestsCell.swift */; };
 		0B3974F91EA9D7760011ABD7 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B3974F81EA9D7760011ABD7 /* MenuBar.swift */; };
 		0B4A22FA1EB665FA00C76655 /* LiveEvents.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4A22F91EB665FA00C76655 /* LiveEvents.swift */; };
-		0B4A22FC1EB699FE00C76655 /* EventGuestsPage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B4A22FB1EB699FE00C76655 /* EventGuestsPage.swift */; };
 		0B57BF6A1ED37180009359A3 /* EventPhotosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B57BF691ED37180009359A3 /* EventPhotosCell.swift */; };
 		0B6249ED1EE10D3700C31A62 /* EventDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6249EC1EE10D3700C31A62 /* EventDetailsCell.swift */; };
+		0B70BA411EF6196500CA6AC7 /* Events+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B70BA401EF6196500CA6AC7 /* Events+CoreDataClass.swift */; };
 		0B7B6DD61EE0EDC600763477 /* AllEventPhotosDelgates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B6DD51EE0EDC600763477 /* AllEventPhotosDelgates.swift */; };
 		0B7B6DD81EE0F19100763477 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B6DD71EE0F19100763477 /* HeaderView.swift */; };
 		0B8EE9431EB02E1800218394 /* HomeCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8EE9421EB02E1800218394 /* HomeCVCell.swift */; };
@@ -35,7 +33,6 @@
 		0BBE81A01ECA357C007D3644 /* Explore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBE819F1ECA357C007D3644 /* Explore.swift */; };
 		0BD0DE311ECBFF47009FF2D5 /* LiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD0DE301ECBFF47009FF2D5 /* LiveView.swift */; };
 		0BE43C9A1EB0F84200062E07 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE43C991EB0F84200062E07 /* UserProfile.swift */; };
-		0BE43C9E1EB108AE00062E07 /* Users.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE43C9D1EB108AE00062E07 /* Users.swift */; };
 		5D12030B1609A0DFE0DF11A2 /* Pods_Tyloo_NS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B50C21B3D80E14391184251D /* Pods_Tyloo_NS.framework */; };
 		AB2EFDB31D0E29E000B21A18 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2EFDB21D0E29E000B21A18 /* HomeCell.swift */; };
 		AB2EFDB51D0E29FD00B21A18 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2EFDB41D0E29FD00B21A18 /* BaseCell.swift */; };
@@ -43,7 +40,6 @@
 		AB32C23A1D31ED9900F65F2F /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = AB32C2391D31ED9900F65F2F /* GoogleService-Info.plist */; };
 		AB344B011DD84852004236E5 /* Reachability.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB344B001DD84852004236E5 /* Reachability.swift */; };
 		AB34B8B91D30B0BD00B2F4E0 /* PageNotifications.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB34B8B81D30B0BD00B2F4E0 /* PageNotifications.swift */; };
-		AB7136161D10C6B000BB1BF2 /* Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7136151D10C6B000BB1BF2 /* Events.swift */; };
 		AB752B591D3C3B970001ED05 /* Prompt-ExtraLight.ttf in Resources */ = {isa = PBXBuildFile; fileRef = AB752B581D3C3B970001ED05 /* Prompt-ExtraLight.ttf */; };
 		AB7E87AA1D0CE39E00750B76 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7E87A91D0CE39E00750B76 /* Extensions.swift */; };
 		AB7E87AE1D0CF2F200750B76 /* HomePage.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7E87AD1D0CF2F200750B76 /* HomePage.swift */; };
@@ -69,7 +65,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		0B0856A01ED2986400EF83B6 /* PostImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImages.swift; sourceTree = "<group>"; };
 		0B0D74231EEA6C860043B8BA /* UploadProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadProgressView.swift; sourceTree = "<group>"; };
 		0B18B1DF1ED296FE0002A94F /* PicturesInsideCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PicturesInsideCell.swift; sourceTree = "<group>"; };
 		0B24E4D11EB5200E0037D1D5 /* Tyloo-NSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tyloo-NSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -77,14 +72,13 @@
 		0B24E4D51EB5200E0037D1D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		0B24E4DB1EB5255B0037D1D5 /* DetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsCell.swift; sourceTree = "<group>"; };
 		0B2691CD1EF5F4C40025CFCE /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
+		0B2691D01EF5F5E30025CFCE /* TylooModels.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = TylooModels.xcdatamodel; sourceTree = "<group>"; };
 		0B2EE8311EA6F53900148E50 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
-		0B34FFEC1EB11E0F00BE138C /* EventPageCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPageCell.swift; sourceTree = "<group>"; };
-		0B34FFEE1EB11F5A00BE138C /* GuestsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GuestsCell.swift; sourceTree = "<group>"; };
 		0B3974F81EA9D7760011ABD7 /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
 		0B4A22F91EB665FA00C76655 /* LiveEvents.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveEvents.swift; sourceTree = "<group>"; };
-		0B4A22FB1EB699FE00C76655 /* EventGuestsPage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventGuestsPage.swift; sourceTree = "<group>"; };
 		0B57BF691ED37180009359A3 /* EventPhotosCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventPhotosCell.swift; sourceTree = "<group>"; };
 		0B6249EC1EE10D3700C31A62 /* EventDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsCell.swift; sourceTree = "<group>"; };
+		0B70BA401EF6196500CA6AC7 /* Events+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Events+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0B7B6DD51EE0EDC600763477 /* AllEventPhotosDelgates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllEventPhotosDelgates.swift; sourceTree = "<group>"; };
 		0B7B6DD71EE0F19100763477 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		0B8EE9421EB02E1800218394 /* HomeCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCVCell.swift; sourceTree = "<group>"; };
@@ -98,7 +92,6 @@
 		0BBE819F1ECA357C007D3644 /* Explore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Explore.swift; sourceTree = "<group>"; };
 		0BD0DE301ECBFF47009FF2D5 /* LiveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveView.swift; sourceTree = "<group>"; };
 		0BE43C991EB0F84200062E07 /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
-		0BE43C9D1EB108AE00062E07 /* Users.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Users.swift; sourceTree = "<group>"; };
 		52E0A2F9D6B976265DDB742C /* Pods-Tyloo-NSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tyloo-NSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tyloo-NSTests/Pods-Tyloo-NSTests.release.xcconfig"; sourceTree = "<group>"; };
 		823468288D5D28355230997B /* Pods_Tyloo_NSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tyloo_NSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		935C9218E9E69F16D26533FE /* Pods-Tyloo-NS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tyloo-NS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tyloo-NS/Pods-Tyloo-NS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -109,7 +102,6 @@
 		AB32C2391D31ED9900F65F2F /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		AB344B001DD84852004236E5 /* Reachability.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Reachability.swift; sourceTree = "<group>"; };
 		AB34B8B81D30B0BD00B2F4E0 /* PageNotifications.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PageNotifications.swift; sourceTree = "<group>"; };
-		AB7136151D10C6B000BB1BF2 /* Events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Events.swift; sourceTree = "<group>"; };
 		AB752B581D3C3B970001ED05 /* Prompt-ExtraLight.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Prompt-ExtraLight.ttf"; sourceTree = "<group>"; };
 		AB7E87A91D0CE39E00750B76 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
 		AB7E87AD1D0CF2F200750B76 /* HomePage.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePage.swift; sourceTree = "<group>"; };
@@ -175,7 +167,6 @@
 				ABAF8CF31DD501DB00B193A8 /* BasePages */,
 				AB7E87AD1D0CF2F200750B76 /* HomePage.swift */,
 				0BBCCB651EAA9128003A50CB /* HomePageDelegates.swift */,
-				0B4A22FB1EB699FE00C76655 /* EventGuestsPage.swift */,
 				0BE43C991EB0F84200062E07 /* UserProfile.swift */,
 				0B8F5C611EDE77CC00033C72 /* AllEventPhotos.swift */,
 				0B7B6DD51EE0EDC600763477 /* AllEventPhotosDelgates.swift */,
@@ -192,8 +183,6 @@
 				0B8EE9421EB02E1800218394 /* HomeCVCell.swift */,
 				0B4A22F91EB665FA00C76655 /* LiveEvents.swift */,
 				0B8EE9441EB0380E00218394 /* EventsCell.swift */,
-				0B34FFEC1EB11E0F00BE138C /* EventPageCell.swift */,
-				0B34FFEE1EB11F5A00BE138C /* GuestsCell.swift */,
 				0B24E4DB1EB5255B0037D1D5 /* DetailsCell.swift */,
 				0B18B1DF1ED296FE0002A94F /* PicturesInsideCell.swift */,
 				0B57BF691ED37180009359A3 /* EventPhotosCell.swift */,
@@ -246,11 +235,10 @@
 		ABBFA9FC1D0F959B00BB4D5C /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				0B70BA401EF6196500CA6AC7 /* Events+CoreDataClass.swift */,
 				ABBFAA031D0FC13000BB4D5C /* FirebaseRef.swift */,
-				AB7136151D10C6B000BB1BF2 /* Events.swift */,
-				0BE43C9D1EB108AE00062E07 /* Users.swift */,
-				0B0856A01ED2986400EF83B6 /* PostImages.swift */,
 				0B2691CD1EF5F4C40025CFCE /* CoreDataStack.swift */,
+				0B2691CF1EF5F5E30025CFCE /* TylooModels.xcdatamodeld */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -352,7 +340,7 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0820;
-				LastUpgradeCheck = 0820;
+				LastUpgradeCheck = 0830;
 				ORGANIZATIONNAME = "Kiarash Teymoury";
 				TargetAttributes = {
 					0B24E4D01EB5200E0037D1D5 = {
@@ -530,22 +518,21 @@
 			files = (
 				0BBCCB661EAA9128003A50CB /* HomePageDelegates.swift in Sources */,
 				0B2691CE1EF5F4C40025CFCE /* CoreDataStack.swift in Sources */,
-				0B34FFEF1EB11F5A00BE138C /* GuestsCell.swift in Sources */,
 				0BBE81A01ECA357C007D3644 /* Explore.swift in Sources */,
 				0BE43C9A1EB0F84200062E07 /* UserProfile.swift in Sources */,
 				0BD0DE311ECBFF47009FF2D5 /* LiveView.swift in Sources */,
 				0B57BF6A1ED37180009359A3 /* EventPhotosCell.swift in Sources */,
+				0B70BA411EF6196500CA6AC7 /* Events+CoreDataClass.swift in Sources */,
 				0BB336A91EEBCFC300099BA4 /* EventDetailsHeader.swift in Sources */,
 				AB2EFDB91D0E346100B21A18 /* Constans.swift in Sources */,
 				0B0D74241EEA6C860043B8BA /* UploadProgressView.swift in Sources */,
 				0B9A45241EE910E900CF8E19 /* ProfileHeader.swift in Sources */,
-				AB7136161D10C6B000BB1BF2 /* Events.swift in Sources */,
+				0B2691D11EF5F5E30025CFCE /* TylooModels.xcdatamodeld in Sources */,
 				0BBCCB681EAA9461003A50CB /* CustomeTabBar.swift in Sources */,
 				0B2EE8321EA6F53900148E50 /* RegisterVC.swift in Sources */,
 				ABC77A731D0C916600C46DD0 /* AppDelegate.swift in Sources */,
 				AB2EFDB51D0E29FD00B21A18 /* BaseCell.swift in Sources */,
 				AB34B8B91D30B0BD00B2F4E0 /* PageNotifications.swift in Sources */,
-				0B0856A11ED2986400EF83B6 /* PostImages.swift in Sources */,
 				0B8F5C641EDF004800033C72 /* AllEventPhotosCell.swift in Sources */,
 				0B24E4DC1EB5255B0037D1D5 /* DetailsCell.swift in Sources */,
 				AB8376B91D83203A0083B94C /* CompleteFacebookRegister.swift in Sources */,
@@ -564,9 +551,6 @@
 				0B7B6DD81EE0F19100763477 /* HeaderView.swift in Sources */,
 				AB7E87AA1D0CE39E00750B76 /* Extensions.swift in Sources */,
 				ABCBD8F01DD29A6E008D0CAF /* HomeAudit.swift in Sources */,
-				0B34FFED1EB11E0F00BE138C /* EventPageCell.swift in Sources */,
-				0BE43C9E1EB108AE00062E07 /* Users.swift in Sources */,
-				0B4A22FC1EB699FE00C76655 /* EventGuestsPage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -779,6 +763,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		0B2691CF1EF5F5E30025CFCE /* TylooModels.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				0B2691D01EF5F5E30025CFCE /* TylooModels.xcdatamodel */,
+			);
+			currentVersion = 0B2691D01EF5F5E30025CFCE /* TylooModels.xcdatamodel */;
+			path = TylooModels.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = ABC77A671D0C916600C46DD0 /* Project object */;
 }

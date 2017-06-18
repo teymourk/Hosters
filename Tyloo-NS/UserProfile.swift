@@ -22,39 +22,6 @@ class UserProfile: HomePage {
     
     override func setupLive() {}
     override func setupCollectionViewLayout() {}
-    
-    internal func fetchUserEvents(cell:HomeCell) {
-        
-        var myEventArray:[Events] = [Events]()
-        
-        if let eventDic = self.eventsDictionary, let userID = FBSDKAccessToken.current().userID {
-            
-            for(_, value) in eventDic {
-                
-                for i in value {
-                    
-                    if i.owner_id == userID {
-                        
-                        DispatchQueue.main.async {
-                            
-                            myEventArray.append(i)
-                            myEventArray.sort(by: { (event1, event2) -> Bool in
-                                
-                                if let event1Time = event1.start_time, let event2Time = event2.start_time {
-                                    
-                                    return event1Time > event2Time
-                                }
-                                
-                                return Bool()
-                            })
-                            
-                            cell.eventsCV.events = myEventArray
-                        }
-                    }
-                }
-            }
-        }
-    }
 }
 
 
@@ -73,8 +40,6 @@ extension UserProfile {
                 
                 cell.categoryLabel.text = "My Events 👀"
                 cell.eventsCV.homePage = self
-                
-                fetchUserEvents(cell: cell)
                 
                 return cell
             }

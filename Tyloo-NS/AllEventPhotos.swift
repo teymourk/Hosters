@@ -106,26 +106,7 @@ class AllEventPhotos: UICollectionViewController {
     
     @objc fileprivate func startCountDown() {
         
-        if let event = _eventDetails, let isLive = event.isLive, let eventTime = event.start_time, let endTime = event.end_time {
-            
-            switch isLive {
-            case 1:
-                countDown.text = "Starting: \(eventTime.countDown())"
-                countDown.textColor = .rgb(24, green: 201, blue: 86)
-                break
-            case 2:
-                countDown.text = "Ended"
-                countDown.textColor = .rgb(181, green: 24, blue: 34)
-                break
-            case 3:
-                countDown.text = "Ending: \(endTime.countDown())"
-                countDown.textColor = .rgb(181, green: 24, blue: 34)
-                break
-                
-            default: break
-                
-            }
-        }
+
     }
 }
 

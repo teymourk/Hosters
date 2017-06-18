@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
+    <entity name="Attending" representedClassName="Attending" parentEntity="Events" syncable="YES" codeGenerationType="class"/>
+    <entity name="Events" representedClassName="Events" syncable="YES" codeGenerationType="category">
+        <attribute name="attending_count" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="coverURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="declined_count" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="details" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="end_time" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <attribute name="event_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="guest_list_enabled" optional="YES" attributeType="Boolean" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="interested_count" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="isLive" optional="YES" attributeType="Integer 16" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="rsvp_status" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="start_time" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="events" inverseEntity="Location" syncable="YES"/>
+        <relationship name="postImages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PostImages" inverseName="events" inverseEntity="PostImages" syncable="YES"/>
+    </entity>
+    <entity name="Invited" representedClassName="Invited" parentEntity="Events" syncable="YES" codeGenerationType="class"/>
+    <entity name="Live" representedClassName="Live" parentEntity="Events" syncable="YES" codeGenerationType="class"/>
+    <entity name="Location" representedClassName="Location" syncable="YES" codeGenerationType="class">
+        <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="longtitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
+        <attribute name="place_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="street" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="zip" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="events" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Events" inverseName="location" inverseEntity="Events" syncable="YES"/>
+    </entity>
+    <entity name="Maybe" representedClassName="Maybe" parentEntity="Events" syncable="YES" codeGenerationType="class"/>
+    <entity name="PostImages" representedClassName="PostImages" syncable="YES" codeGenerationType="class">
+        <attribute name="imageKey" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="poster" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="timePosted" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
+        <relationship name="events" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Events" inverseName="postImages" inverseEntity="Events" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Events" positionX="-1676" positionY="-0" width="128" height="255"/>
+        <element name="Location" positionX="-1388" positionY="207" width="128" height="165"/>
+        <element name="PostImages" positionX="-1935" positionY="243" width="128" height="120"/>
+        <element name="Invited" positionX="-1890" positionY="-9" width="128" height="45"/>
+        <element name="Attending" positionX="-1944" positionY="45" width="128" height="45"/>
+        <element name="Maybe" positionX="-1989" positionY="101" width="128" height="43"/>
+        <element name="Live" positionX="-1829" positionY="-63" width="128" height="43"/>
+    </elements>
+</model>

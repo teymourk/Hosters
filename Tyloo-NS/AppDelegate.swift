@@ -28,6 +28,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
+        //let formatter = DateFormatter()
+        // formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        //let olddate = formatter.date(from: "2017-01-01 7:00:00 +0000") //This Will Be Date of launch
+        
         let layout = UICollectionViewFlowLayout()
             layout.minimumLineSpacing = 0
             layout.minimumInteritemSpacing = 0
@@ -49,10 +53,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         application.statusBarStyle = .lightContent
         
+        //deleteRecords()
+        loadDataFromFacebook(date: Date())
+        
         if Reachability.isInternetAvailable() {
             
         }
-
+        
         return true
     }
     
@@ -89,6 +96,73 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
         
         CoreDataStack.coreData.saveContext()
+    }
+    
+    fileprivate func checkDataExistince() {
+        
+        let request: NSFetchRequest<Events> = Events.fetchRequest()
+        
+        do {
+            
+            let eventCount = try context.count(for: request)
+            
+            if eventCount == 0 {
+                
+                loadDataFromFacebook(date: Date())
+            }
+            
+        } catch {
+            fatalError("Error In Counting # Of Events")
+        }
+    }
+    
+    fileprivate func loadDataFromFacebook(date:Date) {
+        
+        let parameters = ["fields": "cover, attending_count, can_guests_invite, description, name, id, maybe_count, noreply_count, interested_count, start_time , end_time, declined_count, owner, place, rsvp_status, guest_list_enabled"]
+        
+        var types = ["not_replied", "attending", "maybe"]
+        
+        for i in 0..<types.count {
+            
+            let type = types[i]
+            
+            FBSDKGraphRequest(graphPath: "/me/events/\(type)", parameters: parameters).start { (connection, results, error) in
+                
+                if error != nil {
+                    print(error ?? "")
+                    return
+                }
+                
+                if let result = results as? NSDictionary, let dataArray = result["data"] as? NSArray {
+                    
+                    for arrayObj in dataArray {
+                        
+                        if let eventsDic = arrayObj as? NSDictionary {
+                            
+                            _ = Events.handleInitzialingEventsData(dictionary: eventsDic)
+                            
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    func deleteRecords() {
+        
+        let eventsRequest:NSFetchRequest<Events> = Events.fetchRequest()
+        
+        var deleteRequest:NSBatchDeleteRequest
+        var deleteResults:NSPersistentStoreResult
+        
+        do {
+            
+            deleteRequest = NSBatchDeleteRequest(fetchRequest: eventsRequest as! NSFetchRequest<NSFetchRequestResult>)
+            deleteResults = try context.execute(deleteRequest)
+            
+        } catch {
+            fatalError("Failed To Remove Existing Record")
+        }
     }
 }
 

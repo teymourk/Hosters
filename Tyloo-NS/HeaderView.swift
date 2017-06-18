@@ -14,10 +14,10 @@ class HeaderView:BaseView {
         
         didSet {
             
-            guard let headerDetail = eventDetails, let eventDate = headerDetail.start_time, let eventHost = headerDetail.owner_name else {return}
+            guard let headerDetail = eventDetails, let eventDate = headerDetail.start_time as Date? else {return}
             
             date.text = eventDate.produceDate()
-            host.text = "By \(eventHost)"
+            //host.text = "By \(eventHost)"
             
             let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startCountDown), userInfo: nil, repeats: true)
             timer.fire()
@@ -50,7 +50,9 @@ class HeaderView:BaseView {
     
     internal func startCountDown() {
         
-        if let event = eventDetails, let isLive = event.isLive, let eventTime = event.start_time, let endTime = event.end_time {
+        if let event = eventDetails,let eventTime = event.start_time as Date?, let endTime = event.end_time as Date? {
+            
+            let isLive = event.isLive
             
             switch isLive {
             case 1:

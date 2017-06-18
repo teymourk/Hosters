@@ -22,8 +22,6 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     var eventsDictionary:[Int:[Events]]? = [Int:[Events]]()
     var liveEventArray:[Events]? = [Events]()
     
-    var type = ["not_replied", "attending", "maybe"]
-    
     lazy var locationManager:CLLocationManager? = {
         let manager = CLLocationManager()
             manager.delegate = self
@@ -73,15 +71,11 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         
         locationManager?.requestWhenInUseAuthorization()
         
-        let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
-        let olddate = formatter.date(from: "2017-01-01 7:00:00 +0000") //This Will Be Date of launch
-        
-        eventTypeFetch(date: olddate!, index: 0, typeIndex: 0)
-    
         setupLive()
         setupNavSeperator()
         setupCollectionViewLayout()
+        
+        eventTypeFetch(index: 0, typeIndex: 0)
     }
     
     internal func setupLive() {
@@ -107,54 +101,6 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
     }
     
-    internal func eventTypeFetch(date: Date, index: Int, typeIndex:Int) {
-        
-        var indexs:Int = Int()
-        var typeIndexs:Int = Int()
-        
-        if typeIndex != type.count {
-            
-            Events.fetchEventsFromFacebook(date: date, refresher:activityIndicator, type: type[typeIndex]) { (allEvents) in
-                
-                let live = allEvents.filter({$0.isLive == 3})
-                
-                if !live.isEmpty {
-                    
-                    self.liveEventArray = live
-                }
-    
-                let hasntHappend = allEvents.filter({$0.isLive == 1})
-                
-                if !hasntHappend.isEmpty {
-                    
-                    self.eventsDictionary?[index] = hasntHappend
-                    indexs = index + 1
-                    typeIndexs = typeIndex + 1
-                    self.eventTypeFetch(date: date, index:indexs, typeIndex: typeIndexs)
-                    
-                } else{
-                    
-                    typeIndexs = typeIndex + 1
-                    self.eventTypeFetch(date: date, index: index, typeIndex: typeIndexs)
-                }
-                
-                if let indexCount = self.eventsDictionary?.count {
-                    
-                    let attended = allEvents.filter({$0.isLive == 2 && $0.rsvp_status == "attending"})
-                    
-                    if !attended.isEmpty {
-                        
-                        let index = indexCount + 1
-                        
-                        self.eventsDictionary?[index] = attended
-                    }
-                }
-            }
-        }
-        
-        self.collectionView?.reloadData()
-    }
-    
     internal func navigateToEventDetails(eventDetail:Events) {
         
         let layout = UICollectionViewFlowLayout()
@@ -172,10 +118,6 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
             layout.scrollDirection = .horizontal
             layout.minimumLineSpacing = 0
             layout.minimumInteritemSpacing = 0
-    
-        let guestPage = EventGuestsPage(collectionViewLayout: layout)
-            guestPage.event_id = _eventId
-        navigationController?.pushViewController(guestPage, animated: true)
     }
     
     func onRefreshPage() {
@@ -188,5 +130,31 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         }
         
         refresher.endRefreshing()
+    }
+    
+    private func eventTypeFetch(index: Int, typeIndex:Int) {
+        
+        var indexs:Int = Int()
+        var typeIndexs:Int = Int()
+        
+        var types = ["Invited","Attending", "Maybe"]
+
+        if typeIndex != types.count {
+            
+            let event = Events.clearCoreData(entity: types[typeIndex])
+            
+            if !event.isEmpty {
+                
+                self.eventsDictionary?[index] = event
+                indexs = index + 1
+                typeIndexs = typeIndex + 1
+                self.eventTypeFetch(index:indexs, typeIndex: typeIndexs)
+                
+            } else{
+                
+                typeIndexs = typeIndex + 1
+                self.eventTypeFetch(index: index, typeIndex: typeIndexs)
+            }
+        }
     }
 }

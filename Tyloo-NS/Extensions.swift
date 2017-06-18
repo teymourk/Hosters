@@ -263,15 +263,18 @@ extension Date {
         
         return ""
     }
+}
+
+extension NSDate {
     
     func AddEndTime() -> Date {
-    
+        
         let minute:TimeInterval = 60.0
         let hour:TimeInterval = 60.0 * minute * 12
         
-        let date = Date(timeInterval: hour, since: self)
-    
-        return date
+        let date = Date(timeInterval: hour, since: self as Date)
+        
+        return date as Date
     }
 }
 
