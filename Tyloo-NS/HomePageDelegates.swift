@@ -49,11 +49,6 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
                         }
                     }
                 }
-                
-                if indexPath.item == eventDic.count - 1 {
-                    
-                    cell.categoryLabel.text = "Attended 👻"
-                }
             }
         
             return cell

@@ -140,7 +140,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         if let eventsDic = arrayObj as? NSDictionary {
                             
                             _ = Events.handleInitzialingEventsData(dictionary: eventsDic)
-                            
                         }
                     }
                 }

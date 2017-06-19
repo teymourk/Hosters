@@ -12,7 +12,7 @@ import CoreData
 @objc(Events)
 public class Events: NSManagedObject {
     
-    class func handleInitzialingEventsData(dictionary: NSDictionary) -> Events {
+    class func handleInitzialingEventsData(dictionary: NSDictionary) {
         
         var events:Events?
         
@@ -21,15 +21,12 @@ public class Events: NSManagedObject {
             switch rsvp_status {
             case "unsure":
                 events = Maybe(context: context)
-                events?.rsvp_status = rsvp_status
                 break
             case "attending":
                 events = Attending(context: context)
-                events?.rsvp_status = rsvp_status
                 break
             case "not_replied":
                 events = Invited(context: context)
-                events?.rsvp_status = rsvp_status
                 break
             default: break
     
@@ -39,7 +36,7 @@ public class Events: NSManagedObject {
         if let id = dictionary["id"] as? String {events?.event_id = id}
         
         if let name = dictionary["name"] as? String {events?.name = name}
-
+        
         if let description = dictionary["description"] as? String {events?.details = description}
         
         if let coverDic = dictionary["cover"] as? NSDictionary, let coverSource = coverDic["source"] as? String {events?.coverURL = coverSource}
@@ -55,39 +52,33 @@ public class Events: NSManagedObject {
             events?.attending_count = attendingCount
         }
         
-        if let start_time = dictionary["start_time"] as? String {
-            
-            let dateFormatter = DateFormatter()
-            
+        let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ssZZZ"
-            
-            if let date = dateFormatter.date(from: start_time) as NSDate? {
-                
-                events?.start_time = date
-            }
-        }
         
-        if let end_time = dictionary["end_time"] as? String {
-            
-            let dateFormatter = DateFormatter()
-            
-            dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ssZZZ"
-            
-            if let date = dateFormatter.date(from: end_time) as NSDate? {
-                
-                events?.end_time = date
-            }
-            
-        } else {
+        guard let start_time = dictionary["start_time"] as? String, let Startdate = dateFormatter.date(from: start_time) as NSDate? else {return}
+        
+            events?.start_time = Startdate
+
+        guard let end_time = dictionary["end_time"] as? String, let endDate = dateFormatter.date(from: end_time) as NSDate? else {
             
             //CustomeEnd Time by 10 hrs
             let end_time = events?.start_time?.AddEndTime()
-            events?.end_time = end_time as NSDate?
+            
+            return (events?.end_time = end_time as NSDate?)!
         }
         
-        CoreDataStack.coreData.saveContext()
+        events?.end_time = endDate
         
-        return events!
+        //Event Hasnt Happened
+        if Date() < Startdate as Date {events?.isLive = 1}
+        
+        //Event Ended
+        if Date() > endDate as Date {events?.isLive = 2}
+        
+        //Event is Live
+        else if Date() > Startdate as Date && Date() < endDate as Date {events?.isLive = 3}
+        
+        CoreDataStack.coreData.saveContext()
     }
     
     class func clearCoreData(entity:String) -> [Events] {
@@ -95,7 +86,9 @@ public class Events: NSManagedObject {
         do {
             
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
-                fetchRequest.predicate = NSPredicate(format: "start_time > %@", Date() as CVarArg)
+            let timePredicate = NSPredicate(format: "start_time > %@", Date() as CVarArg)
+            let isLivePredicate = NSPredicate(format: "isLive == %d", 1)
+                fetchRequest.predicate = NSCompoundPredicate(andPredicateWithSubpredicates: [timePredicate, isLivePredicate])
             
             let objects = try(context.fetch(fetchRequest)) as? [Events]
                 
