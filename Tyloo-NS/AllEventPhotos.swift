@@ -17,8 +17,8 @@ class AllEventPhotos: UICollectionViewController {
     
     var empty:Bool = false
     var cellImages:[UIImage] = [UIImage]()
+    var timer:Timer?
     
-
     var _eventDetails:Events? {
         didSet {
             
@@ -26,8 +26,8 @@ class AllEventPhotos: UICollectionViewController {
             
             setupNavBarView(details: eventDetails)
             
-            let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startCountDown), userInfo: nil, repeats: true)
-            timer.fire()
+            timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startCountDown), userInfo: nil, repeats: true)
+            timer?.fire()
         }
     }
     
@@ -67,6 +67,13 @@ class AllEventPhotos: UICollectionViewController {
         cellImages = [i!, o!, p!, l!]
     }
     
+    
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        
+        timer?.invalidate()
+    }
+    
     let countDown:UILabel = {
         let label = UILabel()
             label.font = UIFont(name: "Prompt", size: 12)
@@ -100,13 +107,42 @@ class AllEventPhotos: UICollectionViewController {
         
         startCountDown()
 
-        
         self.navigationItem.titleView = view
+    }
+    
+    
+    internal func loadImages() -> [PostImages] {
+        
+        if let event = _eventDetails {
+            
+            return PostImages.fetchEventImages(event: event)
+        }
+        
+        return []
     }
     
     @objc fileprivate func startCountDown() {
         
-
+        if let event = _eventDetails,let startTime = event.start_time as Date?, let endTime = event.end_time as Date? {
+            
+            print(event.name ?? "")
+            
+            if Date() < startTime {
+                
+                countDown.text = "Starting: \(startTime.countDown())"
+                countDown.textColor = .rgb(24, green: 201, blue: 86)
+                
+            } else if Date() > endTime {
+                
+                countDown.text = "Event Ended"
+                countDown.textColor = .rgb(181, green: 24, blue: 34)
+                
+            } else if Date() > startTime && Date() < endTime {
+                
+                countDown.text = "Ending: \(endTime.countDown())"
+                countDown.textColor = .rgb(181, green: 24, blue: 34)
+            }
+        }
     }
 }
 

@@ -28,9 +28,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
-        //let formatter = DateFormatter()
-        // formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
-        //let olddate = formatter.date(from: "2017-01-01 7:00:00 +0000") //This Will Be Date of launch
+        //deleteRecords()
+        loadDataFromFacebook()
         
         let layout = UICollectionViewFlowLayout()
             layout.minimumLineSpacing = 0
@@ -52,9 +51,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         UINavigationBar.appearance().setBackgroundImage(UIImage(), for: .default)
         
         application.statusBarStyle = .lightContent
-        
-        //deleteRecords()
-        loadDataFromFacebook(date: Date())
         
         if Reachability.isInternetAvailable() {
             
@@ -107,8 +103,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             let eventCount = try context.count(for: request)
             
             if eventCount == 0 {
-                
-                loadDataFromFacebook(date: Date())
+                loadDataFromFacebook()
             }
             
         } catch {
@@ -116,7 +111,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    fileprivate func loadDataFromFacebook(date:Date) {
+    fileprivate func loadDataFromFacebook() {
         
         let parameters = ["fields": "cover, attending_count, can_guests_invite, description, name, id, maybe_count, noreply_count, interested_count, start_time , end_time, declined_count, owner, place, rsvp_status, guest_list_enabled"]
         
@@ -139,8 +134,36 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         
                         if let eventsDic = arrayObj as? NSDictionary {
                             
-                            _ = Events.handleInitzialingEventsData(dictionary: eventsDic)
+                            let eventsObj = Events(dictionary: eventsDic, insertIntoManagedObjectContext: context)
+                                                        
+                            //guard let event_id = eventsObj.event_id else {return}
+                            
+                            FirebaseRef.database.REF_PHOTO.child("161954997675468").observeSingleEvent(of: .value, with: {
+                                snapshot in
+                                
+                                if let snapData = snapshot.value as? [String:AnyObject] {
+                                    
+                                    for(key, imageObj) in snapData  {
+                                        
+                                        if let imageObjDic = imageObj as? NSDictionary {
+                                            
+                                            let imgObj = PostImages(imageKey: key, dictionary: imageObjDic, insertIntoManagedObjectContext: context)
+                                            
+                                            eventsObj.addToPostImages(imgObj)
+                                    
+                                        }
+                                    }
+                                }
+                            })
                         }
+                    }
+                    
+                    do  {
+                        
+                        try context.save()
+                        
+                    } catch {
+                        fatalError("Error Saving Data")
                     }
                 }
             }
@@ -150,6 +173,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func deleteRecords() {
         
         let eventsRequest:NSFetchRequest<Events> = Events.fetchRequest()
+        let imagesRequest:NSFetchRequest<PostImages> = PostImages.fetchRequest()
         
         var deleteRequest:NSBatchDeleteRequest
         var deleteResults:NSPersistentStoreResult
@@ -157,6 +181,9 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         do {
             
             deleteRequest = NSBatchDeleteRequest(fetchRequest: eventsRequest as! NSFetchRequest<NSFetchRequestResult>)
+            deleteResults = try context.execute(deleteRequest)
+            
+            deleteRequest = NSBatchDeleteRequest(fetchRequest: imagesRequest as! NSFetchRequest<NSFetchRequestResult>)
             deleteResults = try context.execute(deleteRequest)
             
         } catch {

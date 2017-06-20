@@ -25,8 +25,8 @@
 		0B8EE9431EB02E1800218394 /* HomeCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8EE9421EB02E1800218394 /* HomeCVCell.swift */; };
 		0B8EE9451EB0380E00218394 /* EventsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8EE9441EB0380E00218394 /* EventsCell.swift */; };
 		0B8F5C621EDE77CC00033C72 /* AllEventPhotos.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8F5C611EDE77CC00033C72 /* AllEventPhotos.swift */; };
-		0B8F5C641EDF004800033C72 /* AllEventPhotosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8F5C631EDF004800033C72 /* AllEventPhotosCell.swift */; };
 		0B9A45241EE910E900CF8E19 /* ProfileHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B9A45231EE910E900CF8E19 /* ProfileHeader.swift */; };
+		0BAAE6FE1EF77FCA0075A318 /* PostImages+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BAAE6FD1EF77FCA0075A318 /* PostImages+CoreDataClass.swift */; };
 		0BB336A91EEBCFC300099BA4 /* EventDetailsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB336A81EEBCFC300099BA4 /* EventDetailsHeader.swift */; };
 		0BBCCB661EAA9128003A50CB /* HomePageDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCCB651EAA9128003A50CB /* HomePageDelegates.swift */; };
 		0BBCCB681EAA9461003A50CB /* CustomeTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCCB671EAA9461003A50CB /* CustomeTabBar.swift */; };
@@ -84,8 +84,8 @@
 		0B8EE9421EB02E1800218394 /* HomeCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCVCell.swift; sourceTree = "<group>"; };
 		0B8EE9441EB0380E00218394 /* EventsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventsCell.swift; sourceTree = "<group>"; };
 		0B8F5C611EDE77CC00033C72 /* AllEventPhotos.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllEventPhotos.swift; sourceTree = "<group>"; };
-		0B8F5C631EDF004800033C72 /* AllEventPhotosCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllEventPhotosCell.swift; sourceTree = "<group>"; };
 		0B9A45231EE910E900CF8E19 /* ProfileHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileHeader.swift; sourceTree = "<group>"; };
+		0BAAE6FD1EF77FCA0075A318 /* PostImages+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PostImages+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0BB336A81EEBCFC300099BA4 /* EventDetailsHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsHeader.swift; sourceTree = "<group>"; };
 		0BBCCB651EAA9128003A50CB /* HomePageDelegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageDelegates.swift; sourceTree = "<group>"; };
 		0BBCCB671EAA9461003A50CB /* CustomeTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomeTabBar.swift; sourceTree = "<group>"; };
@@ -186,7 +186,6 @@
 				0B24E4DB1EB5255B0037D1D5 /* DetailsCell.swift */,
 				0B18B1DF1ED296FE0002A94F /* PicturesInsideCell.swift */,
 				0B57BF691ED37180009359A3 /* EventPhotosCell.swift */,
-				0B8F5C631EDF004800033C72 /* AllEventPhotosCell.swift */,
 				AB34B8B81D30B0BD00B2F4E0 /* PageNotifications.swift */,
 				0B0D74231EEA6C860043B8BA /* UploadProgressView.swift */,
 				0B3974F81EA9D7760011ABD7 /* MenuBar.swift */,
@@ -236,6 +235,7 @@
 			isa = PBXGroup;
 			children = (
 				0B70BA401EF6196500CA6AC7 /* Events+CoreDataClass.swift */,
+				0BAAE6FD1EF77FCA0075A318 /* PostImages+CoreDataClass.swift */,
 				ABBFAA031D0FC13000BB4D5C /* FirebaseRef.swift */,
 				0B2691CD1EF5F4C40025CFCE /* CoreDataStack.swift */,
 				0B2691CF1EF5F5E30025CFCE /* TylooModels.xcdatamodeld */,
@@ -533,7 +533,6 @@
 				ABC77A731D0C916600C46DD0 /* AppDelegate.swift in Sources */,
 				AB2EFDB51D0E29FD00B21A18 /* BaseCell.swift in Sources */,
 				AB34B8B91D30B0BD00B2F4E0 /* PageNotifications.swift in Sources */,
-				0B8F5C641EDF004800033C72 /* AllEventPhotosCell.swift in Sources */,
 				0B24E4DC1EB5255B0037D1D5 /* DetailsCell.swift in Sources */,
 				AB8376B91D83203A0083B94C /* CompleteFacebookRegister.swift in Sources */,
 				AB344B011DD84852004236E5 /* Reachability.swift in Sources */,
@@ -549,6 +548,7 @@
 				0B18B1E01ED296FE0002A94F /* PicturesInsideCell.swift in Sources */,
 				0B8EE9431EB02E1800218394 /* HomeCVCell.swift in Sources */,
 				0B7B6DD81EE0F19100763477 /* HeaderView.swift in Sources */,
+				0BAAE6FE1EF77FCA0075A318 /* PostImages+CoreDataClass.swift in Sources */,
 				AB7E87AA1D0CE39E00750B76 /* Extensions.swift in Sources */,
 				ABCBD8F01DD29A6E008D0CAF /* HomeAudit.swift in Sources */,
 			);

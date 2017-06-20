@@ -27,8 +27,6 @@ extension AllEventPhotos: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) ->
         UICollectionViewCell {
         
-
-            
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as? EventDetailsCell {
             
             if indexPath.item == 0 {
@@ -66,6 +64,8 @@ extension AllEventPhotos: UICollectionViewDelegateFlowLayout {
         
         if let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HEADER_ID, for: indexPath) as? EventDetailsHeader {
             
+            header.postedImages = loadImages()
+            
             return header
         }
         
@@ -80,6 +80,7 @@ extension AllEventPhotos: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
         if empty {
+            
             return CGSize(width: 0,
                           height: 0)
         }

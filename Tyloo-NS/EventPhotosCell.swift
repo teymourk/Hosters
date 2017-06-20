@@ -10,10 +10,10 @@ import UIKit
 
 class EventPhotosCell: BaseCell {
     
-    var postedImages:Images? {
+    var postedImages:PostImages? {
         didSet {
             
-            guard let imgURL = postedImages?.img else {return}
+            guard let imgURL = postedImages?.imageURL else {return}
             self._images.getImagesBack(url: imgURL, placeHolder: "emptyImage")
         }
     }

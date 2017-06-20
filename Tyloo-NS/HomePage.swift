@@ -75,6 +75,10 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         setupNavSeperator()
         setupCollectionViewLayout()
         
+        //let formatter = DateFormatter()
+        //formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        //let olddate = formatter.date(from: "2017-01-01 7:00:00 +0000") //This Will Be Date of launch
+        
         eventTypeFetch(index: 0, typeIndex: 0)
     }
     
@@ -134,14 +138,21 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     
     private func eventTypeFetch(index: Int, typeIndex:Int) {
         
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        let olddate = formatter.date(from: "2017-01-01 7:00:00 +0000") //This Will Be Date of launch
+        
         var indexs:Int = Int()
         var typeIndexs:Int = Int()
         
-        var types = ["Invited","Attending", "Maybe"]
+        let hasntHappenedPred = NSPredicate(format: "start_time > %@", Date() as CVarArg)
+        let endedPred = NSPredicate(format: "start_time < %@ AND rsvp_status = %@", olddate! as CVarArg, "attending")
+        
+        var types = ["Invited","Attending", "Maybe", "Events"]
 
         if typeIndex != types.count {
-            
-            let event = Events.clearCoreData(entity: types[typeIndex])
+        
+            let event = Events.FetchData(predicate: hasntHappenedPred, entity: types[typeIndex])
             
             if !event.isEmpty {
                 
@@ -154,6 +165,21 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
                 
                 typeIndexs = typeIndex + 1
                 self.eventTypeFetch(index: index, typeIndex: typeIndexs)
+            }
+            
+            let lastIndex = (self.eventsDictionary?.count)! - 1
+            
+            if typeIndex == lastIndex {
+                
+                let event = Events.FetchData(predicate: endedPred, entity: types[types.count - 1])
+                
+                if !event.isEmpty{
+                    
+                    self.eventsDictionary?[typeIndex] = event
+                    
+                } else {
+                    return
+                }
             }
         }
     }

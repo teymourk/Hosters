@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="12141" systemVersion="16F73" minimumToolsVersion="Automatic" sourceLanguage="Swift" userDefinedModelVersionIdentifier="">
     <entity name="Attending" representedClassName="Attending" parentEntity="Events" syncable="YES" codeGenerationType="class"/>
-    <entity name="Ended" representedClassName="Ended" parentEntity="Events" syncable="YES" codeGenerationType="class"/>
     <entity name="Events" representedClassName="Events" syncable="YES" codeGenerationType="category">
         <attribute name="attending_count" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="coverURL" optional="YES" attributeType="String" syncable="YES"/>
@@ -30,7 +29,7 @@
         <relationship name="events" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Events" inverseName="location" inverseEntity="Events" syncable="YES"/>
     </entity>
     <entity name="Maybe" representedClassName="Maybe" parentEntity="Events" syncable="YES" codeGenerationType="class"/>
-    <entity name="PostImages" representedClassName="PostImages" syncable="YES" codeGenerationType="class">
+    <entity name="PostImages" representedClassName="PostImages" syncable="YES" codeGenerationType="category">
         <attribute name="imageKey" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="poster" optional="YES" attributeType="String" syncable="YES"/>
@@ -41,7 +40,6 @@
         <element name="Attending" positionX="-1944" positionY="45" width="128" height="45"/>
         <element name="Events" positionX="-1676" positionY="-0" width="128" height="255"/>
         <element name="Invited" positionX="-1890" positionY="-9" width="128" height="45"/>
-        <element name="Ended" positionX="-1829" positionY="-63" width="128" height="45"/>
         <element name="Location" positionX="-1388" positionY="207" width="128" height="165"/>
         <element name="Maybe" positionX="-1989" positionY="101" width="128" height="45"/>
         <element name="PostImages" positionX="-1935" positionY="243" width="128" height="120"/>
