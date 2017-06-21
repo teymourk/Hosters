@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>CameraManager.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>EPCalendarPicker.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -92,22 +97,12 @@
 	</dict>
 	<key>SuppressBuildableAutocreation</key>
 	<dict>
+		<key>177BBE00DDEFFA3CBA721E2EFD821360</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>23A73C6A29BBA6C61388D20073E1BC37</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>39C1DCFEFE888E87205AEE547A00535B</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>3AC401C283F3B75642B146973FE138EF</key>
-		<dict>
-			<key>primary</key>
-			<true/>
-		</dict>
-		<key>41BE6EBCE982ED82D7D1D60CD95AB051</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -122,7 +117,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
+		<key>6082016B25F61CC36BE9E936073A2616</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
 		<key>64654BA572B99130DE3F3C7F3D8CE904</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>6B81166C296C5730B149C62940A47997</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -132,12 +137,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>84B048AB37B0F539BBFAF12310829633</key>
+		<key>79467B098EAFE2AF47CBF6F3DB414CA9</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>94350FD833ACB2116F396CE2FB1EE51B</key>
+		<key>81AABD850AD046F95678446C14796F07</key>
 		<dict>
 			<key>primary</key>
 			<true/>
@@ -172,7 +177,12 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>E6AC9D8639DC263852396E3828E33AD1</key>
+		<key>EF0A9958741666B14315DB0F0151B8A5</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>FFBE657764C9F6D8E01DDE2949BD2E64</key>
 		<dict>
 			<key>primary</key>
 			<true/>

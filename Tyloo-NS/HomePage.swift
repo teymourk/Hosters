@@ -116,19 +116,13 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     }
     
     private func eventTypeFetch(index: Int, typeIndex:Int) {
-        
-        let formatter = DateFormatter()
-            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
-        guard let olddate = formatter.date(from: "2017-01-01 7:00:00 +0000") as CVarArg? else {return}//This Will Be Date of launch
-    
-        let date = Date() as CVarArg
-        
+
         var indexs:Int = Int()
         var typeIndexs:Int = Int()
         
-        let hasntHappenedPred = NSPredicate(format: "start_time > %@", date)
-        let endedPred = NSPredicate(format: "start_time < %@ AND rsvp_status = %@", olddate, "attending")
-        let livePred = NSPredicate(format: "start_time < %@ AND end_time > %@", date, date)
+        let hasntHappenedPred = NSPredicate(format: "isLive = %d", 1)
+        let endedPred = NSPredicate(format: "isLive = %d AND rsvp_status = %@", 2, "attending")
+        let livePred = NSPredicate(format: "isLive = %d", 3)
         
         var entityNames = ["Events", "Invited","Attending", "Maybe", "Events"]
         

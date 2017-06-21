@@ -20,6 +20,7 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
+  - CameraManager (3.1.4)
   - EPCalendarPicker (1.0.8)
   - FBSDKCoreKit (4.22.1):
     - Bolts (~> 1.7)
@@ -92,6 +93,7 @@ PODS:
 
 DEPENDENCIES:
   - AFNetworking (~> 3.0)
+  - CameraManager (~> 3.0)
   - EPCalendarPicker (from `https://github.com/ipraba/EPCalendarPicker`)
   - FBSDKCoreKit
   - FBSDKLoginKit
@@ -132,6 +134,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
+  CameraManager: 837ff54004e37b83533abf0543daf143fae851e4
   EPCalendarPicker: 0348fe754a7650582665ecc5ac98f4c0a0db0e91
   FBSDKCoreKit: 9c2daf0162214d6d2e21cf8208a9c6c2a2e42b9c
   FBSDKLoginKit: 00cf28916b9f0169763a3d61985d745b579fe304
@@ -155,6 +158,6 @@ SPEC CHECKSUMS:
   SwiftyJSON: 6118fb49d7519c4d31a0c1f3d5af936e9047b556
   TGCameraViewController: 0768b534800e6136e70dd3cc5aafe1310b448480
 
-PODFILE CHECKSUM: 28eee07d2490faf85bd5389ee0aaecfcd345f93a
+PODFILE CHECKSUM: cceed9db1174eed2910e7ae736f269569b2cfbef
 
 COCOAPODS: 1.1.1

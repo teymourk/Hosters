@@ -16,6 +16,8 @@ class CostumeTabBar: UITabBarController {
         self.tabBar.barStyle = .default
         self.tabBar.isTranslucent = false
         
+        setupTopBorderLayer()
+        
         let layout = UICollectionViewFlowLayout()
 
         let invitedEvents = HomePage(collectionViewLayout: layout)
@@ -35,5 +37,17 @@ class CostumeTabBar: UITabBarController {
         
         self.navigationItem.hidesBackButton = true
         viewControllers = [navigationController, navigationController3]
+    }
+    
+    fileprivate func setupTopBorderLayer() {
+        
+        let topBorder = CALayer()
+        topBorder.frame = CGRect(x: 0, y: 0, width: 1000, height: 2)
+        topBorder.backgroundColor = orange.cgColor
+        
+        tabBar.layer.addSublayer(topBorder)
+        tabBar.clipsToBounds = true
+        tabBar.isTranslucent = false
+        tabBar.barStyle = .black
     }
 }

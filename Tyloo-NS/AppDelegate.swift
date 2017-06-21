@@ -137,7 +137,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             
                             let users = Users(dictionary: eventsDic, insertIntoManagedObjectContext: context)
                             
-                            guard let event_id = eventsObj.event_id else {return}
+                            guard let event_id = eventsObj.event_id, let startTime = eventsObj.start_time as Date?, let endTime = eventsObj.end_time as Date? else {return}
+                            
+                            //Set event isLive Status
+                            self.handleSettingEventLiveStatus(event: eventsObj, startTime: startTime, endTime: endTime)
                             
                             FirebaseRef.database.REF_PHOTO.child(event_id).observeSingleEvent(of: .value, with: {
                                 snapshot in
@@ -166,7 +169,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    func deleteRecords() {
+    fileprivate func deleteRecords() {
         
         let eventsRequest:NSFetchRequest<Events> = Events.fetchRequest()
         let imagesRequest:NSFetchRequest<PostImages> = PostImages.fetchRequest()
@@ -184,6 +187,22 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             
         } catch {
             fatalError("Failed To Remove Existing Record")
+        }
+    }
+    
+    fileprivate func handleSettingEventLiveStatus(event:Events,startTime:Date, endTime:Date) {
+        
+        if Date() < startTime {
+            event.isLive = 1
+        }
+        
+        if Date() > endTime {
+            
+            event.isLive = 2
+            
+        } else if Date() > startTime && Date() < endTime {
+            
+            event.isLive = 3
         }
     }
 }

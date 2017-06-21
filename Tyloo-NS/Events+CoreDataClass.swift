@@ -25,7 +25,6 @@ public class Events: NSManagedObject {
                 break
             case "attending":
                 entityName = "Attending"
-                
                 break
             case "not_replied":
                 entityName = "Invited"
@@ -76,14 +75,14 @@ public class Events: NSManagedObject {
             if let endDate = dateFormatter.date(from: end_time) as NSDate? {
                 
                 self.end_time = endDate
-                
-            } else {
-                
-                //CustomeEnd Time by 10 hrs
-                let end_time = self.start_time?.AddEndTime()
-                
-                self.end_time = end_time as NSDate?
             }
+            
+        } else {
+            
+            //CustomeEnd Time by 10 hrs
+            let end_time = self.start_time?.AddEndTime()
+            
+            self.end_time = end_time as NSDate?
         }
     }
     
@@ -93,6 +92,9 @@ public class Events: NSManagedObject {
             
             let fetchRequest = NSFetchRequest<NSFetchRequestResult>(entityName: entity)
                 fetchRequest.predicate = predicate
+    
+            let sortByTime = NSSortDescriptor(key: "end_time", ascending: false)
+                fetchRequest.sortDescriptors = [sortByTime]
             
             guard let objects = try(context.fetch(fetchRequest)) as? [Events] else {return []}
                 

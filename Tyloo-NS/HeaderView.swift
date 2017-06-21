@@ -50,22 +50,24 @@ class HeaderView:BaseView {
     
     internal func startCountDown() {
         
-        if let event = eventDetails,let startTime = event.start_time as Date?, let endTime = event.end_time as Date? {
+        if let event = eventDetails, let isLive = event.isLive as Int16?, let startTime = event.start_time as Date?, let endTime = event.end_time as Date? {
             
-            if Date() < startTime {
-                
+            switch isLive {
+            case 1:
                 countDown.text = "Starting: \(startTime.countDown())"
                 countDown.textColor = .rgb(24, green: 201, blue: 86)
-                
-            } else if Date() > endTime {
-                
+                break
+            case 2:
                 countDown.text = "Event Ended"
                 countDown.textColor = .rgb(181, green: 24, blue: 34)
-                
-            } else if Date() > startTime && Date() < endTime {
-                
+                break
+            case 3:
                 countDown.text = "Ending: \(endTime.countDown())"
                 countDown.textColor = .rgb(181, green: 24, blue: 34)
+                break
+                
+            default: break
+                
             }
         }
     }

@@ -29,6 +29,9 @@ public class PostImages: NSManagedObject {
         let imagesRequest:NSFetchRequest<PostImages> = PostImages.fetchRequest()
             imagesRequest.predicate = NSPredicate(format: "events.event_id = %@", event.event_id!)
         
+        let sortByTime = NSSortDescriptor(key: "timePosted", ascending: false)
+            imagesRequest.sortDescriptors = [sortByTime]
+        
         do {
             
             let images = try context.fetch(imagesRequest)

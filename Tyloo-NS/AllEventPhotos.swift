@@ -145,7 +145,10 @@ class AllEventPhotos: UICollectionViewController, OptionsViewDelegate {
     
     func onOptions(_ sender: UIButton) {
         
+        guard let eventDetails = _eventDetails else {return}
+        
         let cameraViewController = CameraViewController()
+            cameraViewController.liveEventDetails = eventDetails
         navigationController?.present(cameraViewController, animated: true, completion: nil)
     }
 }
