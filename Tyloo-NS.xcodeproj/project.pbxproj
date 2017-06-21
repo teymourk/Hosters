@@ -32,6 +32,7 @@
 		0BB8C9B31EF9C8170007F74D /* BaseCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB8C9B21EF9C8170007F74D /* BaseCollectionViewCell.swift */; };
 		0BB8C9B51EF9EB400007F74D /* Users+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB8C9B41EF9EB400007F74D /* Users+CoreDataClass.swift */; };
 		0BB8C9B71EFA04CE0007F74D /* OptionsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB8C9B61EFA04CE0007F74D /* OptionsView.swift */; };
+		0BB8C9B91EFA08C90007F74D /* CameraViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BB8C9B81EFA08C90007F74D /* CameraViewController.swift */; };
 		0BBCCB661EAA9128003A50CB /* HomePageDelegates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCCB651EAA9128003A50CB /* HomePageDelegates.swift */; };
 		0BBCCB681EAA9461003A50CB /* CustomeTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBCCB671EAA9461003A50CB /* CustomeTabBar.swift */; };
 		0BBE81A01ECA357C007D3644 /* Explore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBE819F1ECA357C007D3644 /* Explore.swift */; };
@@ -95,6 +96,7 @@
 		0BB8C9B21EF9C8170007F74D /* BaseCollectionViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCollectionViewCell.swift; sourceTree = "<group>"; };
 		0BB8C9B41EF9EB400007F74D /* Users+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Users+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0BB8C9B61EFA04CE0007F74D /* OptionsView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = OptionsView.swift; sourceTree = "<group>"; };
+		0BB8C9B81EFA08C90007F74D /* CameraViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraViewController.swift; sourceTree = "<group>"; };
 		0BBCCB651EAA9128003A50CB /* HomePageDelegates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomePageDelegates.swift; sourceTree = "<group>"; };
 		0BBCCB671EAA9461003A50CB /* CustomeTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomeTabBar.swift; sourceTree = "<group>"; };
 		0BBE819F1ECA357C007D3644 /* Explore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Explore.swift; sourceTree = "<group>"; };
@@ -179,6 +181,7 @@
 				0B8F5C611EDE77CC00033C72 /* AllEventPhotos.swift */,
 				0B7B6DD51EE0EDC600763477 /* AllEventPhotosDelgates.swift */,
 				0BBE819F1ECA357C007D3644 /* Explore.swift */,
+				0BB8C9B81EFA08C90007F74D /* CameraViewController.swift */,
 			);
 			name = Controller;
 			sourceTree = "<group>";
@@ -549,6 +552,7 @@
 				0B24E4DC1EB5255B0037D1D5 /* DetailsCell.swift in Sources */,
 				AB8376B91D83203A0083B94C /* CompleteFacebookRegister.swift in Sources */,
 				0BB8C9B51EF9EB400007F74D /* Users+CoreDataClass.swift in Sources */,
+				0BB8C9B91EFA08C90007F74D /* CameraViewController.swift in Sources */,
 				0BB8C9B71EFA04CE0007F74D /* OptionsView.swift in Sources */,
 				0BB8C9B31EF9C8170007F74D /* BaseCollectionViewCell.swift in Sources */,
 				AB344B011DD84852004236E5 /* Reachability.swift in Sources */,

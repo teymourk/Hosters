@@ -53,6 +53,8 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Tyloo Will Use Your Camra When Posting For Events</string>
+    <key>NSMicrophoneUsageDescription</key>
+    <string>To Record Audio With Video</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>TYLOO NEEDS TO ACCESS YOUR LOCATION</string>
 	<key>NSLocationWhenInUseUsageDescription</key>

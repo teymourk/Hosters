@@ -8,14 +8,22 @@
 
 import UIKit
 
+protocol OptionsViewDelegate: class {
+    
+    func onOptions(_ sender: UIButton)
+}
+
 class OptionsView: BaseView {
     
     let optionsBtn:UIButton = {
         let btn = UIButton()
             btn.setImage(UIImage(named: "c"), for: .normal)
+            btn.addTarget(self, action: #selector(onOptions(_:)), for: .touchUpInside)
             btn.translatesAutoresizingMaskIntoConstraints = false
         return btn
     }()
+    
+    var delegate:OptionsViewDelegate?
     
     override func setupView() {
     
@@ -27,6 +35,14 @@ class OptionsView: BaseView {
         backgroundColor = .white
         layer.borderWidth = 0.5
         layer.borderColor = darkGray.cgColor
+    }
+    
+    @objc
+    private func onOptions(_ sender: UIButton) {
+        
+        if delegate != nil {
+            delegate?.onOptions(sender)
+        }
     }
 }
 

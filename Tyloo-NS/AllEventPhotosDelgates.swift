@@ -59,7 +59,7 @@ extension AllEventPhotos: UICollectionViewDelegateFlowLayout {
         if let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HEADER_ID, for: indexPath) as? EventDetailsHeader {
             
             header.postedImages = loadImages()
-            
+            header.optionsView.delegate = self
             return header
         }
         

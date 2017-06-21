@@ -13,7 +13,7 @@ private let GRID_ID = "GRID_ID"
 private let HEADER_ID = "HEADER_ID"
 private let SEGMENT_CELL = "SEGMENT_CELL"
 
-class AllEventPhotos: UICollectionViewController {
+class AllEventPhotos: UICollectionViewController, OptionsViewDelegate {
     
     var empty:Bool = false
     var cellImages:[UIImage] = [UIImage]()
@@ -142,5 +142,13 @@ class AllEventPhotos: UICollectionViewController {
             }
         }
     }
+    
+    func onOptions(_ sender: UIButton) {
+        
+        let cameraViewController = CameraViewController()
+        navigationController?.present(cameraViewController, animated: true, completion: nil)
+    }
 }
+
+
 
