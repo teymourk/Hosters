@@ -9,7 +9,7 @@
 import UIKit
 
 
-class DetailsCell: BaseCell {
+class DetailsCell: BaseCollectionViewCell {
     
     var detailsTextView:UITextView = {
         let textView = UITextView()

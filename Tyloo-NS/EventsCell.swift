@@ -13,14 +13,17 @@ protocol EventCellDelegate: class {
     func handleOnGuest(sender: UIButton)
 }
 
-class EventsCell: BaseCell {
+class EventsCell: BaseCollectionViewCell {
     
     var _eventDetails:Events? {
         didSet {
             
-            guard let eventDetails = _eventDetails else {return}
-            
-            setupEventDetails(eventDetails: eventDetails)
+            DispatchQueue.main.async {
+                
+                guard let eventDetails = self._eventDetails else {return}
+                
+                self.setupEventDetails(eventDetails: eventDetails)
+            }
         }
     }
     

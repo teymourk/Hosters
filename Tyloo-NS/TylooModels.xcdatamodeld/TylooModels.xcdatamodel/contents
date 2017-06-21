@@ -12,10 +12,13 @@
         <attribute name="interested_count" optional="YES" attributeType="Integer 16" defaultValueString="0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="isLive" optional="YES" attributeType="Integer 16" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="owner_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="owner_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rsvp_status" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="start_time" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="events" inverseEntity="Location" syncable="YES"/>
         <relationship name="postImages" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="PostImages" inverseName="events" inverseEntity="PostImages" syncable="YES"/>
+        <relationship name="users" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Users" inverseName="events" inverseEntity="Users" syncable="YES"/>
     </entity>
     <entity name="Invited" representedClassName="Invited" parentEntity="Events" syncable="YES" codeGenerationType="class"/>
     <entity name="Location" representedClassName="Location" syncable="YES" codeGenerationType="class">
@@ -35,13 +38,22 @@
         <attribute name="poster" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="timePosted" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="events" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Events" inverseName="postImages" inverseEntity="Events" syncable="YES"/>
+        <relationship name="users" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Users" inverseName="postImages" inverseEntity="Users" syncable="YES"/>
+    </entity>
+    <entity name="Users" representedClassName="Users" syncable="YES" codeGenerationType="category">
+        <attribute name="owner_id" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="owner_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="owner_profileURL" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="events" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Events" inverseName="users" inverseEntity="Events" syncable="YES"/>
+        <relationship name="postImages" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="PostImages" inverseName="users" inverseEntity="PostImages" syncable="YES"/>
     </entity>
     <elements>
         <element name="Attending" positionX="-1944" positionY="45" width="128" height="45"/>
-        <element name="Events" positionX="-1676" positionY="-0" width="128" height="255"/>
+        <element name="Events" positionX="-1676" positionY="-0" width="128" height="298"/>
         <element name="Invited" positionX="-1890" positionY="-9" width="128" height="45"/>
-        <element name="Location" positionX="-1388" positionY="207" width="128" height="165"/>
+        <element name="Location" positionX="-1998" positionY="198" width="128" height="165"/>
         <element name="Maybe" positionX="-1989" positionY="101" width="128" height="45"/>
-        <element name="PostImages" positionX="-1935" positionY="243" width="128" height="120"/>
+        <element name="PostImages" positionX="-1433" positionY="-43" width="128" height="133"/>
+        <element name="Users" positionX="-1442" positionY="207" width="128" height="118"/>
     </elements>
 </model>

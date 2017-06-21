@@ -19,9 +19,6 @@ class UserProfile: HomePage {
         
         collectionView?.register(ProfileHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: Header_ID)
     }
-    
-    override func setupLive() {}
-    override func setupCollectionViewLayout() {}
 }
 
 
@@ -45,7 +42,7 @@ extension UserProfile {
             }
         }
         
-        return BaseCell()
+        return BaseCollectionViewCell()
     }
     
     override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -58,23 +55,5 @@ extension UserProfile {
     
         return CGSize(width: view.frame.width,
                       height: 40)
-    }
-    
-    //Mark: - HeaderDelegate
-    
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-    
-        if let profileHeader = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: Header_ID, for: indexPath) as? ProfileHeader {
-            
-            return profileHeader
-        }
-        
-        return BaseCell()
-    }
-
-    override func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        
-        return CGSize(width: view.frame.width,
-                      height: FEED_CELL_HEIGHT * 0.45)
     }
 }

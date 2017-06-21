@@ -53,13 +53,17 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
                 if indexPath.item == eventDic.count - 1 {
                     
                     cell.categoryLabel.text = "Attended 👻"
+                    
+                } else if indexPath.item == 0 {
+                    
+                    cell.categoryLabel.text = "Live 📍"
                 }
             }
         
             return cell
         }
         
-        return BaseCell()
+        return BaseCollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
@@ -68,47 +72,8 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
                       height: FEED_CELL_HEIGHT)
     }
     
-    //Mark: HeaderDelegate
-    override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-        
-        
-        if let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HEADER_ID, for: indexPath) as? LiveEvents {
-            
-            if let liveEvent = liveEventArray {
-            
-                header.events = liveEvent
-                header.homePage = self
-            }
-            
-            return header
-        }
-        
-        return BaseCell()
-    }
-    
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
-        return 2
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        
-            if let liveEvents = liveEventArray {
-        
-                if liveEvents.isEmpty {
-        
-                    return CGSize(width: view.frame.width,
-                                  height: 50)
-                }
-            }
-        
-        return CGSize(width: view.frame.width,
-                      height: FEED_CELL_HEIGHT - 55)
-    }
-    
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
-        
-        return UIEdgeInsets(top: 10,
-                            left: 0, bottom: 0, right: 0)
+        return 5
     }
 }

@@ -112,7 +112,7 @@ class MenuBar: BaseView, UICollectionViewDelegateFlowLayout, UICollectionViewDel
     }
 }
 
-class MenuBarCell: BaseCell {
+class MenuBarCell: BaseCollectionViewCell {
     
     var menuLabel:UILabel = {
         let label = UILabel()

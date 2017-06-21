@@ -28,8 +28,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
-        //deleteRecords()
-        loadDataFromFacebook()
+         //deleteRecords()
         
         let layout = UICollectionViewFlowLayout()
             layout.minimumLineSpacing = 0
@@ -94,7 +93,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         CoreDataStack.coreData.saveContext()
     }
     
-    fileprivate func checkDataExistince() {
+    internal func checkDataExistince() {
         
         let request: NSFetchRequest<Events> = Events.fetchRequest()
         
@@ -111,7 +110,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         }
     }
     
-    fileprivate func loadDataFromFacebook() {
+    internal func loadDataFromFacebook() {
         
         let parameters = ["fields": "cover, attending_count, can_guests_invite, description, name, id, maybe_count, noreply_count, interested_count, start_time , end_time, declined_count, owner, place, rsvp_status, guest_list_enabled"]
         
@@ -135,10 +134,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         if let eventsDic = arrayObj as? NSDictionary {
                             
                             let eventsObj = Events(dictionary: eventsDic, insertIntoManagedObjectContext: context)
-                                                        
-                            //guard let event_id = eventsObj.event_id else {return}
                             
-                            FirebaseRef.database.REF_PHOTO.child("161954997675468").observeSingleEvent(of: .value, with: {
+                            let users = Users(dictionary: eventsDic, insertIntoManagedObjectContext: context)
+                            
+                            guard let event_id = eventsObj.event_id else {return}
+                            
+                            FirebaseRef.database.REF_PHOTO.child(event_id).observeSingleEvent(of: .value, with: {
                                 snapshot in
                                 
                                 if let snapData = snapshot.value as? [String:AnyObject] {
@@ -150,7 +151,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                                             let imgObj = PostImages(imageKey: key, dictionary: imageObjDic, insertIntoManagedObjectContext: context)
                                             
                                             eventsObj.addToPostImages(imgObj)
-                                    
+                                            eventsObj.addToUsers(users)
+                            
                                         }
                                     }
                                 }
@@ -158,13 +160,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                         }
                     }
                     
-                    do  {
-                        
-                        try context.save()
-                        
-                    } catch {
-                        fatalError("Error Saving Data")
-                    }
+                    CoreDataStack.coreData.saveContext()
                 }
             }
         }

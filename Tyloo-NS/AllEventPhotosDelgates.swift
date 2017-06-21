@@ -45,18 +45,12 @@ extension AllEventPhotos: UICollectionViewDelegateFlowLayout {
             return cell
         }
         
-        return BaseCell()
+        return BaseCollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        if indexPath.item == 0 {
-          
-            return CGSize(width: view.frame.width,
-                          height: FEED_CELL_HEIGHT / 1.5)
-        }
-        
-        return CGSize(width: view.frame.height, height: 40)
+        return indexPath.item == 0 ? CGSize(width: view.frame.width, height: FEED_CELL_HEIGHT / 1.5) : CGSize(width: view.frame.height, height: 40)
     }
         
     //Mark: HeaderDelegate
@@ -69,7 +63,7 @@ extension AllEventPhotos: UICollectionViewDelegateFlowLayout {
             return header
         }
         
-        return BaseCell()
+        return BaseCollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
@@ -79,24 +73,15 @@ extension AllEventPhotos: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
-        if empty {
-            
-            return CGSize(width: 0,
-                          height: 0)
-        }
+        //return !loadImages().isEmpty ? CGSize(width: view.frame.width, height: FEED_CELL_HEIGHT * 0.25) : CGSize(width: 0, height: 0)
         
-        return CGSize(width: view.frame.width,
-                      height: FEED_CELL_HEIGHT * 0.25)
+        return CGSize(width: view.frame.width, height: FEED_CELL_HEIGHT * 0.25)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         
-        if empty {
+        //return !loadImages().isEmpty ? UIEdgeInsets(top: 15, left: 0, bottom: 0, right: 0) : UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
         
-            return UIEdgeInsets(top: 0, left: 0, bottom: 0, right: 0)
-        }
-        
-        return UIEdgeInsets(top: 15,
-                            left: 0, bottom: 0, right: 0)
+        return UIEdgeInsets(top: 15, left: 0, bottom: 0, right: 0)
     }
 }

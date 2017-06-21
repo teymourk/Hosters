@@ -8,7 +8,7 @@
 
 import UIKit
 
-class ProfileHeader: BaseCell {
+class ProfileHeader:BaseCollectionViewCell {
 
     let pageNotfication:PageNotifications = {
         let pg = PageNotifications()

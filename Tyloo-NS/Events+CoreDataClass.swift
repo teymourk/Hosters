@@ -57,6 +57,12 @@ public class Events: NSManagedObject {
             self.declined_count = declinedCount
             self.attending_count = attendingCount
         }
+        
+        if let ownerDic = dictionary["owner"] as? NSDictionary, let owner_name = ownerDic["name"] as? String, let owner_id = ownerDic["id"] as? String {
+            
+            self.owner_name = owner_name
+            self.owner_id = owner_id
+        }
     
         let dateFormatter = DateFormatter()
             dateFormatter.dateFormat = "YYYY-MM-dd'T'HH:mm:ssZZZ"

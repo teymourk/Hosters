@@ -7,7 +7,7 @@
 //
 import UIKit
 
-class EventDetailsCell: BaseCell {
+class EventDetailsCell: BaseCollectionViewCell {
     
     var _eventDetails:Events? {
         didSet {

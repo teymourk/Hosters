@@ -125,8 +125,6 @@ class AllEventPhotos: UICollectionViewController {
         
         if let event = _eventDetails,let startTime = event.start_time as Date?, let endTime = event.end_time as Date? {
             
-            print(event.name ?? "")
-            
             if Date() < startTime {
                 
                 countDown.text = "Starting: \(startTime.countDown())"

@@ -13,7 +13,6 @@ import FBSDKCoreKit
 import SCLAlertView
 import EPCalendarPicker
 
-
 private let CELL_FEED = "Cell_FEED"
 private let HEADER_ID = "HEADER_ID"
 
@@ -47,12 +46,6 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         return notification
     }()
     
-    let live:LiveView = {
-        let live = LiveView()
-            live.translatesAutoresizingMaskIntoConstraints = false
-        return live
-    }()
-    
     let navBarSeperator:UIView = {
         let view = UIView()
             view.backgroundColor = orange
@@ -62,35 +55,20 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        collectionView?.addSubview(refresher)
-        collectionView?.register(HomeCell.self, forCellWithReuseIdentifier: CELL_FEED)
-        collectionView?.register(LiveEvents.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HEADER_ID)
-        collectionView?.backgroundColor = UIColor.rgb(231, green: 236, blue: 240)
-
         navigationController?.navigationBar.isTranslucent = false
         
         locationManager?.requestWhenInUseAuthorization()
         
-        setupLive()
+        setupCollectionView()
         setupNavSeperator()
-        setupCollectionViewLayout()
-        
-        //let formatter = DateFormatter()
-        //formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
-        //let olddate = formatter.date(from: "2017-01-01 7:00:00 +0000") //This Will Be Date of launch
         
         eventTypeFetch(index: 0, typeIndex: 0)
-    }
-    
-    internal func setupLive() {
         
-        collectionView?.addSubview(live)
+        guard let AppDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
         
-        live.widthAnchor.constraint(equalTo: (collectionView?.widthAnchor)!).isActive = true
-        live.topAnchor.constraint(equalTo: (collectionView?.topAnchor)!, constant: -40).isActive = true
-        live.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        AppDelegate.loadDataFromFacebook()
     }
-    
+
     internal func setupNavSeperator() {
         
         view.addSubview(navBarSeperator)
@@ -99,12 +77,13 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         view.addConstrainstsWithFormat("V:|[v0(2)]", views: navBarSeperator)
     }
     
-    internal func setupCollectionViewLayout() {
+    fileprivate func setupCollectionView() {
         
-        collectionView?.contentInset = UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
-        collectionView?.scrollIndicatorInsets = UIEdgeInsets(top: 40, left: 0, bottom: 0, right: 0)
+        collectionView?.addSubview(refresher)
+        collectionView?.register(HomeCell.self, forCellWithReuseIdentifier: CELL_FEED)
+        collectionView?.backgroundColor = UIColor.rgb(231, green: 236, blue: 240)
     }
-    
+        
     internal func navigateToEventDetails(eventDetail:Events) {
         
         let layout = UICollectionViewFlowLayout()
@@ -139,20 +118,23 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     private func eventTypeFetch(index: Int, typeIndex:Int) {
         
         let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
-        let olddate = formatter.date(from: "2017-01-01 7:00:00 +0000") //This Will Be Date of launch
+            formatter.dateFormat = "yyyy-MM-dd HH:mm:ss Z"
+        guard let olddate = formatter.date(from: "2017-01-01 7:00:00 +0000") as CVarArg? else {return}//This Will Be Date of launch
+    
+        let date = Date() as CVarArg
         
         var indexs:Int = Int()
         var typeIndexs:Int = Int()
         
-        let hasntHappenedPred = NSPredicate(format: "start_time > %@", Date() as CVarArg)
-        let endedPred = NSPredicate(format: "start_time < %@ AND rsvp_status = %@", olddate! as CVarArg, "attending")
+        let hasntHappenedPred = NSPredicate(format: "start_time > %@", date)
+        let endedPred = NSPredicate(format: "start_time < %@ AND rsvp_status = %@", olddate, "attending")
+        let livePred = NSPredicate(format: "start_time < %@ AND end_time > %@", date, date)
         
-        var types = ["Invited","Attending", "Maybe", "Events"]
-
-        if typeIndex != types.count {
+        var entityNames = ["Events", "Invited","Attending", "Maybe", "Events"]
         
-            let event = Events.FetchData(predicate: hasntHappenedPred, entity: types[typeIndex])
+        if typeIndex != entityNames.count {
+        
+            let event = Events.FetchData(predicate: hasntHappenedPred, entity: entityNames[typeIndex])
             
             if !event.isEmpty {
                 
@@ -171,11 +153,23 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
             
             if typeIndex == lastIndex {
                 
-                let event = Events.FetchData(predicate: endedPred, entity: types[types.count - 1])
+                let endedEvents = Events.FetchData(predicate: endedPred, entity: entityNames[entityNames.count - 1])
                 
-                if !event.isEmpty{
+                if !endedEvents.isEmpty{
                     
-                    self.eventsDictionary?[typeIndex] = event
+                    self.eventsDictionary?[typeIndex] = endedEvents
+                    
+                } else {
+                    return
+                }
+                
+            } else if typeIndex == 0 {
+                
+                let liveEvents = Events.FetchData(predicate: livePred, entity: entityNames[entityNames.count - 1])
+                
+                if !liveEvents.isEmpty {
+                    
+                    self.eventsDictionary?[typeIndex] = liveEvents
                     
                 } else {
                     return

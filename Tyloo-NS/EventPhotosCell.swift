@@ -8,7 +8,7 @@
 
 import UIKit
 
-class EventPhotosCell: BaseCell {
+class EventPhotosCell: BaseCollectionViewCell {
     
     var postedImages:PostImages? {
         didSet {

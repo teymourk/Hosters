@@ -11,7 +11,7 @@ import SCLAlertView
 
 private let CELL_ID = "CELL_FEED"
 
-class HomeCVCell: BaseCell  {
+class HomeCVCell: BaseCollectionViewCell  {
     
     var events:[Events]? {
         didSet {
@@ -72,7 +72,7 @@ extension HomeCVCell: UICollectionViewDelegate, UICollectionViewDataSource, UICo
             return cell
         }
         
-        return BaseCell()
+        return BaseCollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

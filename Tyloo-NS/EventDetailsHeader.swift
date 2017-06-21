@@ -8,7 +8,9 @@
 
 import UIKit
 
-class EventDetailsHeader: BaseCell {
+class EventDetailsHeader: BaseCollectionViewCell {
+    
+    let Cell_ID = "Cell_ID"
     
     lazy var collectionView:UICollectionView = {
         
@@ -17,34 +19,39 @@ class EventDetailsHeader: BaseCell {
         
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
             cv.backgroundColor = .white
-            cv.register(EventDetailsCell.self, forCellWithReuseIdentifier: "i")
+            cv.register(EventDetailsCell.self, forCellWithReuseIdentifier: self.Cell_ID)
             cv.layer.borderWidth = 0.5
             cv.layer.borderColor = darkGray.cgColor
             cv.delegate = self
             cv.dataSource = self
+            cv.translatesAutoresizingMaskIntoConstraints = false
         return cv
     }()
     
     var postedImages:[PostImages]? {
         didSet {
-            collectionView.reloadData()
+            
+            guard let imagesCount = postedImages?.count else {return}
+            
+            if imagesCount == 0 {
+                handleNoImagesView()
+                return
+            }
+            
+            handleWithImagesView()
         }
     }
     
-    let optionsView:UIView = {
-        let view = UIView()
-            view.backgroundColor = .white
-            view.layer.borderWidth = 0.5
-            view.layer.borderColor = darkGray.cgColor
+    let optionsView:OptionsView = {
+        let view = OptionsView()
             view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
-    let optionsBtn:UIButton = {
-        let btn = UIButton()
-            btn.setImage(UIImage(named: "c"), for: .normal)
-            btn.translatesAutoresizingMaskIntoConstraints = false
-        return btn
+    var noImagesView:NoImagesView = {
+        let view = NoImagesView()
+            view.translatesAutoresizingMaskIntoConstraints = false
+       return view
     }()
     
     override func setupView() {
@@ -53,18 +60,28 @@ class EventDetailsHeader: BaseCell {
         
         optionsView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
         optionsView.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        optionsView.heightAnchor.constraint(equalTo: self.heightAnchor).isActive = true
-        optionsView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        optionsView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+    }
+    
+    fileprivate func handleNoImagesView() {
         
-        optionsView.addSubview(optionsBtn)
+        addSubview(noImagesView)
         
-        optionsView.addConstrainstsWithFormat("H:|[v0]|", views: optionsBtn)
-        optionsView.addConstrainstsWithFormat("V:|[v0]|", views: optionsBtn)
-        
+        noImagesView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        noImagesView.rightAnchor.constraint(equalTo: optionsView.leftAnchor).isActive = true
+        noImagesView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+        noImagesView.topAnchor.constraint(equalTo: optionsView.topAnchor).isActive = true
+    }
+    
+    fileprivate func handleWithImagesView() {
+    
         addSubview(collectionView)
-        
-        addConstrainstsWithFormat("H:|[v0]-80-|", views: collectionView)
-        addConstrainstsWithFormat("V:|[v0]|", views: collectionView)
+
+        collectionView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
+        collectionView.rightAnchor.constraint(equalTo: optionsView.leftAnchor).isActive = true
+        collectionView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+        collectionView.topAnchor.constraint(equalTo: optionsView.topAnchor).isActive = true
+    
     }
 }
 
@@ -77,18 +94,18 @@ extension EventDetailsHeader: UICollectionViewDelegate, UICollectionViewDataSour
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "i", for: indexPath) as? EventDetailsCell {
+        if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cell_ID, for: indexPath) as? EventDetailsCell {
             
-            if let image = postedImages?[indexPath.item] {
+            if let image = postedImages?[indexPath.item], let imgURL = image.imageURL {
                 
-                cell.coverImage.getImagesBack(url: image.imageURL!, placeHolder: "emptyImage")
+                cell.coverImage.getImagesBack(url: imgURL, placeHolder: "emptyImage")
                 cell.setupJustImageLayer()
             }
             
             return cell
         }
         
-        return BaseCell()
+        return BaseCollectionViewCell()
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

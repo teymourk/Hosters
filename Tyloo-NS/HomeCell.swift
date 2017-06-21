@@ -8,7 +8,7 @@
 
 import UIKit
 
-class HomeCell: BaseCell {
+class HomeCell: BaseCollectionViewCell {
     
     let eventsCV:HomeCVCell = {
         let events = HomeCVCell()
@@ -19,7 +19,7 @@ class HomeCell: BaseCell {
     let categoryLabel:UILabel = {
         let label = UILabel()
             label.textColor = .darkGray
-            label.font = UIFont(name: "Prompt", size: 17)
+            label.font = UIFont(name: "NotoSans-Italic", size: 17)
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()

@@ -13,7 +13,7 @@ protocol RegisterCellDelegate: class {
     func onFacebookLogin(sender: UIButton)
 }
 
-class RegisterCell: BaseCell, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class RegisterCell: BaseCollectionViewCell, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let backgroundCover:UIImageView = {
         let img = UIImageView()
