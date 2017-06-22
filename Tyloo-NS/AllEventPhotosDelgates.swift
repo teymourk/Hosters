@@ -56,10 +56,11 @@ extension AllEventPhotos: UICollectionViewDelegateFlowLayout {
     //Mark: HeaderDelegate
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
-        if let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HEADER_ID, for: indexPath) as? EventDetailsHeader {
+        if let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HEADER_ID, for: indexPath) as? EventDetailsHeader, let eventDetail = _eventDetails {
             
             header.postedImages = loadImages()
             header.optionsView.delegate = self
+            header.optionsView.eventDetails = eventDetail
             return header
         }
         

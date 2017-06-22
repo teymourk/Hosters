@@ -77,10 +77,23 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         view.addConstrainstsWithFormat("V:|[v0(2)]", views: navBarSeperator)
     }
     
+    override func scrollViewDidScroll(_ scrollView: UIScrollView) {
+        
+        let scrollyOffset = scrollView.contentOffset.y
+        let searchHeight = CGFloat(0 + self.navBarSeperator.frame.height)
+    
+        scrollView.contentInset.top = scrollyOffset <= -2 ? searchHeight : -85
+        scrollView.scrollIndicatorInsets.top = scrollyOffset <= -2 ? searchHeight : -85
+    }
+    
     fileprivate func setupCollectionView() {
+        
+        collectionView?.contentInset.top = -85
+        collectionView?.scrollIndicatorInsets.top = -85
         
         collectionView?.addSubview(refresher)
         collectionView?.register(HomeCell.self, forCellWithReuseIdentifier: CELL_FEED)
+        collectionView?.register(SearchHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HEADER_ID)
         collectionView?.backgroundColor = UIColor.rgb(231, green: 236, blue: 240)
     }
         

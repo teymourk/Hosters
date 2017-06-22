@@ -17,8 +17,6 @@ import FBSDKLoginKit
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-    var Home:HomePage?
-    
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         
@@ -162,8 +160,14 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
                             })
                         }
                     }
-                    
-                    CoreDataStack.coreData.saveContext()
+
+                    do {
+                        try context.save()
+                        print("Data Successfully Saved")
+                        
+                    } catch {
+                        fatalError("Error Saving Data To Core Data")
+                    }
                 }
             }
         }

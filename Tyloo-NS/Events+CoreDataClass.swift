@@ -97,7 +97,7 @@ public class Events: NSManagedObject {
                 fetchRequest.sortDescriptors = [sortByTime]
             
             guard let objects = try(context.fetch(fetchRequest)) as? [Events] else {return []}
-                
+            
             return objects
             
         } catch {

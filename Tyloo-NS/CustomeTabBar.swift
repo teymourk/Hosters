@@ -19,16 +19,16 @@ class CostumeTabBar: UITabBarController {
         setupTopBorderLayer()
         
         let layout = UICollectionViewFlowLayout()
-
+    
         let invitedEvents = HomePage(collectionViewLayout: layout)
             invitedEvents.navigationItem.title = "Home"
         let navigationController = UINavigationController(rootViewController: invitedEvents)
             navigationController.tabBarItem.image = UIImage(named: "home-normal")
         
-//        let explore = Explore(collectionViewLayout: layout)
-//            explore.navigationItem.title = "Explore"
-//        let navigationController2 = UINavigationController(rootViewController: explore)
-//            navigationController2.tabBarItem.image = UIImage(named: "search-normal")
+        let explore = Explore(collectionViewLayout: layout)
+            explore.navigationItem.title = "Explore"
+        let navigationController2 = UINavigationController(rootViewController: explore)
+            navigationController2.tabBarItem.image = UIImage(named: "search-normal")
         
         let userProfile = UserProfile(collectionViewLayout: UICollectionViewFlowLayout())
             userProfile.navigationItem.title = "Profile"
@@ -36,7 +36,10 @@ class CostumeTabBar: UITabBarController {
             navigationController3.tabBarItem.image = UIImage(named: "profile-1")
         
         self.navigationItem.hidesBackButton = true
-        viewControllers = [navigationController, navigationController3]
+        
+        viewControllers = [navigationController,
+                           navigationController2,
+                           navigationController3]
     }
     
     fileprivate func setupTopBorderLayer() {

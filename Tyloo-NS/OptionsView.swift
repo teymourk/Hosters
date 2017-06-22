@@ -15,9 +15,25 @@ protocol OptionsViewDelegate: class {
 
 class OptionsView: BaseView {
     
+    weak var eventDetails:Events? {
+        didSet {
+        
+            guard let isLive = eventDetails?.isLive else {return}
+            
+            switch isLive {
+            case 2:
+                optionsBtn.setImage(UIImage(named: "uploadO"), for: .normal)
+                break
+            case 3:
+                optionsBtn.setImage(UIImage(named: "cameraL"), for: .normal)
+                break
+            default: break
+            }
+        }
+    }
+    
     let optionsBtn:UIButton = {
         let btn = UIButton()
-            btn.setImage(UIImage(named: "c"), for: .normal)
             btn.addTarget(self, action: #selector(onOptions(_:)), for: .touchUpInside)
             btn.translatesAutoresizingMaskIntoConstraints = false
         return btn

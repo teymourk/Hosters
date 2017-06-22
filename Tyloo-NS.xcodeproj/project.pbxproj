@@ -38,6 +38,7 @@
 		0BBE81A01ECA357C007D3644 /* Explore.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BBE819F1ECA357C007D3644 /* Explore.swift */; };
 		0BD0DE311ECBFF47009FF2D5 /* LiveView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BD0DE301ECBFF47009FF2D5 /* LiveView.swift */; };
 		0BE43C9A1EB0F84200062E07 /* UserProfile.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BE43C991EB0F84200062E07 /* UserProfile.swift */; };
+		0BEDFC311EFB4B8B002AF85A /* SearchHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0BEDFC301EFB4B8B002AF85A /* SearchHeader.swift */; };
 		5D12030B1609A0DFE0DF11A2 /* Pods_Tyloo_NS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B50C21B3D80E14391184251D /* Pods_Tyloo_NS.framework */; };
 		AB2EFDB31D0E29E000B21A18 /* HomeCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2EFDB21D0E29E000B21A18 /* HomeCell.swift */; };
 		AB2EFDB51D0E29FD00B21A18 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2EFDB41D0E29FD00B21A18 /* BaseCell.swift */; };
@@ -102,6 +103,7 @@
 		0BBE819F1ECA357C007D3644 /* Explore.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Explore.swift; sourceTree = "<group>"; };
 		0BD0DE301ECBFF47009FF2D5 /* LiveView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LiveView.swift; sourceTree = "<group>"; };
 		0BE43C991EB0F84200062E07 /* UserProfile.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserProfile.swift; sourceTree = "<group>"; };
+		0BEDFC301EFB4B8B002AF85A /* SearchHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchHeader.swift; sourceTree = "<group>"; };
 		52E0A2F9D6B976265DDB742C /* Pods-Tyloo-NSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tyloo-NSTests.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tyloo-NSTests/Pods-Tyloo-NSTests.release.xcconfig"; sourceTree = "<group>"; };
 		823468288D5D28355230997B /* Pods_Tyloo_NSTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tyloo_NSTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		935C9218E9E69F16D26533FE /* Pods-Tyloo-NS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tyloo-NS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tyloo-NS/Pods-Tyloo-NS.debug.xcconfig"; sourceTree = "<group>"; };
@@ -208,6 +210,7 @@
 				0B9A45231EE910E900CF8E19 /* ProfileHeader.swift */,
 				0BB336A81EEBCFC300099BA4 /* EventDetailsHeader.swift */,
 				0BB8C9B61EFA04CE0007F74D /* OptionsView.swift */,
+				0BEDFC301EFB4B8B002AF85A /* SearchHeader.swift */,
 			);
 			name = View;
 			sourceTree = "<group>";
@@ -541,6 +544,7 @@
 				0B70BA411EF6196500CA6AC7 /* Events+CoreDataClass.swift in Sources */,
 				0BB336A91EEBCFC300099BA4 /* EventDetailsHeader.swift in Sources */,
 				AB2EFDB91D0E346100B21A18 /* Constans.swift in Sources */,
+				0BEDFC311EFB4B8B002AF85A /* SearchHeader.swift in Sources */,
 				0B0D74241EEA6C860043B8BA /* UploadProgressView.swift in Sources */,
 				0B9A45241EE910E900CF8E19 /* ProfileHeader.swift in Sources */,
 				0B2691D11EF5F5E30025CFCE /* TylooModels.xcdatamodeld in Sources */,
