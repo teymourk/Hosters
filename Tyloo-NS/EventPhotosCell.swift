@@ -18,8 +18,6 @@ class EventPhotosCell: BaseCollectionViewCell {
         }
     }
     
-    //var feedAllPhotos:PicturesInsideCell?
-    
     var _images:UIImageView = {
         let img = UIImageView()
             img.contentMode = .scaleAspectFill
@@ -32,7 +30,6 @@ class EventPhotosCell: BaseCollectionViewCell {
         
         addSubview(_images)
         
-        //AllImages Constrains
         addConstrainstsWithFormat("H:|[v0]|", views: _images)
         addConstrainstsWithFormat("V:|[v0]|", views: _images)
     }

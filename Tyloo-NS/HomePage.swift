@@ -13,13 +13,19 @@ import FBSDKCoreKit
 import SCLAlertView
 import EPCalendarPicker
 
-enum EventsStatus: String {
+enum Events_Entities_Types: String {
     
+    //Entities For Events
     case Events = "Events"
     case Live = "Live"
     case Invited = "Invited"
     case Attending = "Attending"
     case Maybe = "Maybe"
+    
+    //Types For API
+    case not_replied = "not_replied"
+    case attending = "attending"
+    case maybe = "maybe"
 }
 
 class HomePage: UICollectionViewController, CLLocationManagerDelegate {
@@ -137,7 +143,7 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         print("SALAAM")
     }
     
-    var entityNames:[EventsStatus] = [.Events, .Invited, .Attending, .Maybe, .Events]
+    var entityNames:[Events_Entities_Types] = [.Events, .Invited, .Attending, .Maybe, .Events]
     
     internal func eventTypeFetch(index: Int, typeIndex:Int) {
         

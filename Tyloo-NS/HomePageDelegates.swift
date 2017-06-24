@@ -23,44 +23,44 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
             
             if let eventDic = eventsDictionary {
                 
-                if let eventsArray = eventDic[indexPath.item] {
-                    
-                    cell.eventsCV.events = eventsArray
-                    cell.eventsCV.homePage = self
-                    
-                    for eventOBJ in eventsArray {
-                        
-                        switch eventOBJ.rsvp_status {
-                            
-                        case "not_replied"?:
-                            cell.categoryLabel.text = "Invited  💌"
-                            break
-                        case "attending"?:
-                            cell.categoryLabel.text = "Attending ✅"
-                            break
-                        case "unsure"?:
-                            cell.categoryLabel.text = "Interested 🤔"
-                            break
-                        default: break
-                            
-                        }
-                    }
-                }
-                
-                if indexPath.item == eventDic.count - 1 {
-                    
-                    cell.categoryLabel.text = "Attended 👻"
-                    
-                } else if indexPath.item == 0 {
-                    
-                    cell.categoryLabel.text = "Live 📍"
-                }
+                setCellLabels(cell: cell, eventDic:eventDic, indexPath: indexPath)
             }
         
             return cell
         }
         
         return BaseCollectionViewCell()
+    }
+    
+    private func setCellLabels(cell:HomeCell, eventDic:[Int:[Events]], indexPath:IndexPath) {
+        
+        if let eventsArray = eventDic[indexPath.item] {
+            
+            cell.eventsCV.events = eventsArray
+            cell.eventsCV.homePage = self
+            
+            for eventOBJ in eventsArray {
+                
+                switch eventOBJ.rsvp_status {
+                    
+                case "not_replied"?:
+                    cell.categoryLabel.text = "Invited  💌"
+                    break
+                case "attending"?:
+                    cell.categoryLabel.text = "Attending ✅"
+                    break
+                case "unsure"?:
+                    cell.categoryLabel.text = "Interested 🤔"
+                    break
+                default: break
+                    
+                }
+            }
+        }
+        
+        let eventDicCount = eventDic.count - 1
+        
+        cell.categoryLabel.text = indexPath.item == eventDicCount ? "Attended 👻" : "Live 📍"
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

@@ -50,7 +50,6 @@ class AllEventPhotos: UICollectionViewController, OptionsViewDelegate {
         
         self.collectionView?.register(EventDetailsHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HEADER_ID)
         self.collectionView?.register(EventDetailsCell.self, forCellWithReuseIdentifier: CELL_ID)
-        self.collectionView?.register(EventDetailsCell.self, forCellWithReuseIdentifier: CELL_ID)
         self.collectionView?.backgroundColor = .white
         self.collectionView?.backgroundColor = UIColor.rgb(231, green: 236, blue: 240)
         
@@ -81,7 +80,6 @@ class AllEventPhotos: UICollectionViewController, OptionsViewDelegate {
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
-    
     
     func setupNavBarView(details:Events?) {
         

@@ -44,9 +44,9 @@ class OptionsCollectionView: BaseView {
 
     override func setupView() {
         
-        optionCollectionView.register(SearchOptionsCell.self, forCellWithReuseIdentifier: Cell_ID)
-        
         backgroundColor = .clear
+        
+        optionCollectionView.register(SearchOptionsCell.self, forCellWithReuseIdentifier: Cell_ID)
         
         addSubview(optionCollectionView)
         
@@ -55,6 +55,8 @@ class OptionsCollectionView: BaseView {
     }
 }
 
+
+//Mark - Delegate Constructors
 extension OptionsCollectionView: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -80,38 +82,5 @@ extension OptionsCollectionView: UICollectionViewDelegateFlowLayout, UICollectio
         
         return CGSize(width: 50,
                       height: 50)
-    }
-}
-
-class SearchOptionsCell: BaseCollectionViewCell {
-
-    var searchLabel:UILabel = {
-        let label = UILabel()
-            label.font = UIFont(name: "Prompt", size: 12)
-            label.textColor = .white
-            label.translatesAutoresizingMaskIntoConstraints = false
-        return label
-    }()
-    
-    override func setupView() {
-
-        layer.masksToBounds = true
-        layer.borderWidth = 0.5
-        layer.cornerRadius = 25
-        backgroundColor = randomColor()
-        
-        addSubview(searchLabel)
-        
-        searchLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        searchLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-    }
-    
-    fileprivate func randomColor() -> UIColor {
-        
-        let red = CGFloat(drand48())
-        let green = CGFloat(drand48())
-        let blue = CGFloat(drand48())
-        
-        return UIColor(red: red, green: green, blue: blue, alpha: 1)
     }
 }

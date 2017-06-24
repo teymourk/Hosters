@@ -21,13 +21,13 @@ class Facebook_MyEvents: NSObject {
         
         let parameters = ["fields": "cover, attending_count, can_guests_invite, description, name, id, maybe_count, noreply_count, interested_count, start_time , end_time, declined_count, owner, place, rsvp_status, guest_list_enabled"]
         
-        var types = ["not_replied", "attending", "maybe"]
+        var types:[Events_Entities_Types] = [.not_replied, .attending, .maybe]
         
         for i in 0..<types.count {
             
             let type = types[i]
             
-            FBSDKGraphRequest(graphPath: "/me/events/\(type)", parameters: parameters).start { (connection, results, error) in
+            FBSDKGraphRequest(graphPath: "/me/events/\(type.rawValue)", parameters: parameters).start { (connection, results, error) in
                 
                 if error != nil {
                     print(error ?? "")
@@ -35,9 +35,9 @@ class Facebook_MyEvents: NSObject {
                 }
                 
                 if let result = results as? NSDictionary, let dataArray = result["data"] as? NSArray {
-                    
+            
                     for arrayObj in dataArray {
-                        
+                    
                         if let eventsDic = arrayObj as? NSDictionary {
                             
                             let eventsObj = Events(dictionary: eventsDic, insertIntoManagedObjectContext: context)

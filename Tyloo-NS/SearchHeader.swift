@@ -55,5 +55,7 @@ class SearchHeader: BaseCollectionViewCell, UISearchBarDelegate {
             
             return
         }
+        
+        //Do Soemthing With Text
     }
 }

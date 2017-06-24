@@ -45,7 +45,6 @@ class HomeCVCell: BaseCollectionViewCell  {
     internal func handleCVOptions() {
         
         eventCollectionView.contentInset = UIEdgeInsetsMake(0, 10, 0, 0)
-        
         eventCollectionView.register(EventsCell.self, forCellWithReuseIdentifier: CELL_ID)
     }
 }
@@ -93,7 +92,7 @@ extension HomeCVCell: UICollectionViewDelegate, UICollectionViewDataSource, UICo
     }
 }
 
-//Mark: -EventCellDelegate
+//Mark: - EventCellDelegate
 extension HomeCVCell: EventCellDelegate {
     
     internal func onMoreBtn(sender: UIButton) {}

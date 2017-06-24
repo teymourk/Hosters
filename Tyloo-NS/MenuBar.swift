@@ -18,6 +18,16 @@ class MenuBar: BaseView, UICollectionViewDelegateFlowLayout, UICollectionViewDel
         }
     }
     
+    init(items:[String]) {
+        super.init(frame: .zero)
+        
+        self.menuItems = items
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     var homePage:HomePage?
     
     lazy var menuCollectionView:UICollectionView = {
