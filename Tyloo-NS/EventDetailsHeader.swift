@@ -48,6 +48,13 @@ class EventDetailsHeader: BaseCollectionViewCell {
         return view
     }()
     
+    let shareOptionCV:OptionsCollectionView = {
+        let optionsCV = OptionsCollectionView(options: ["Facebook", "Contacts", "Instgram", "Twitter"])
+            optionsCV.translatesAutoresizingMaskIntoConstraints = false
+        return optionsCV
+    }()
+    
+    
     var noImagesView:NoImagesView = {
         let view = NoImagesView()
             view.translatesAutoresizingMaskIntoConstraints = false
@@ -55,6 +62,7 @@ class EventDetailsHeader: BaseCollectionViewCell {
     }()
     
     override func setupView() {
+        super.setupView()
         
         addSubview(optionsView)
         
@@ -63,7 +71,20 @@ class EventDetailsHeader: BaseCollectionViewCell {
         optionsView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
     }
     
-    fileprivate func handleNoImagesView() {
+    internal func setupShareOptions() {
+        
+        optionsView.removeFromSuperview()
+        
+        backgroundColor = .white
+        
+        addSubview(shareOptionCV)
+        
+        shareOptionCV.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        shareOptionCV.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        shareOptionCV.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
+    }
+    
+    internal func handleNoImagesView() {
         
         addSubview(noImagesView)
         
@@ -73,7 +94,7 @@ class EventDetailsHeader: BaseCollectionViewCell {
         noImagesView.topAnchor.constraint(equalTo: optionsView.topAnchor).isActive = true
     }
     
-    fileprivate func handleWithImagesView() {
+    internal func handleWithImagesView() {
     
         addSubview(collectionView)
 

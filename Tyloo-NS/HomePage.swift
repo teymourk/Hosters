@@ -145,6 +145,7 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     
     var entityNames:[Events_Entities_Types] = [.Events, .Invited, .Attending, .Maybe, .Events]
     
+    //Recursiviey Adding Events
     internal func eventTypeFetch(index: Int, typeIndex:Int) {
         
         let hasntHappenedPred = NSPredicate(format: "isLive = %d", 1)

@@ -49,6 +49,7 @@ class CoreDataStack {
         }
     }
     
+    // MARK: - Delete Existing CoreData Record To Avoid Duplication
     internal func deleteRecords() {
         
         let eventsRequest:NSFetchRequest<Events> = Events.fetchRequest()

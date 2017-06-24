@@ -119,7 +119,8 @@ class AllEventPhotos: UICollectionViewController, OptionsViewDelegate {
         return []
     }
     
-    @objc fileprivate func startCountDown() {
+    @objc
+    fileprivate func startCountDown() {
         
         if let event = _eventDetails,let startTime = event.start_time as Date?, let endTime = event.end_time as Date? {
             

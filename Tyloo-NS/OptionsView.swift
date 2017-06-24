@@ -63,9 +63,9 @@ class OptionsView: BaseView {
 }
 
 class NoImagesView: BaseView {
-    
+
     override func setupView() {
         
-        backgroundColor = .cyan
+        backgroundColor = .white
     }
 }

@@ -23,7 +23,7 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
             
             if let eventDic = eventsDictionary {
                 
-                setCellLabels(cell: cell, eventDic:eventDic, indexPath: indexPath)
+                setCellLabels(Cell: cell, EventDic:eventDic, indexPath: indexPath)
             }
         
             return cell
@@ -32,25 +32,25 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
         return BaseCollectionViewCell()
     }
     
-    private func setCellLabels(cell:HomeCell, eventDic:[Int:[Events]], indexPath:IndexPath) {
+    private func setCellLabels(Cell:HomeCell, EventDic:[Int:[Events]], indexPath:IndexPath) {
         
-        if let eventsArray = eventDic[indexPath.item] {
+        if let eventsArray = EventDic[indexPath.item] {
             
-            cell.eventsCV.events = eventsArray
-            cell.eventsCV.homePage = self
+            Cell.eventsCV.events = eventsArray
+            Cell.eventsCV.homePage = self
             
             for eventOBJ in eventsArray {
                 
                 switch eventOBJ.rsvp_status {
                     
                 case "not_replied"?:
-                    cell.categoryLabel.text = "Invited  💌"
+                    Cell.categoryLabel.text = "Invited  💌"
                     break
                 case "attending"?:
-                    cell.categoryLabel.text = "Attending ✅"
+                    Cell.categoryLabel.text = "Attending ✅"
                     break
                 case "unsure"?:
-                    cell.categoryLabel.text = "Interested 🤔"
+                    Cell.categoryLabel.text = "Interested 🤔"
                     break
                 default: break
                     
@@ -58,9 +58,14 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
             }
         }
         
-        let eventDicCount = eventDic.count - 1
-        
-        cell.categoryLabel.text = indexPath.item == eventDicCount ? "Attended 👻" : "Live 📍"
+        if indexPath.item == EventDic.count - 1 {
+            
+            Cell.categoryLabel.text = "Attended 👻"
+            
+        } else if indexPath.item == 0 {
+            
+            Cell.categoryLabel.text = "Live 📍"
+        }
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {

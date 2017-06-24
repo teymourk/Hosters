@@ -84,14 +84,17 @@ class Facebook_MyEvents: NSObject {
     
     fileprivate func handleSettingEventLiveStatus(event:Events,startTime:Date, endTime:Date) {
         
+        //Event Hasnt Happend
         if Date() < startTime {
             event.isLive = 1
         }
         
+        //Event Endded
         if Date() > endTime {
             
             event.isLive = 2
             
+        //Event Is Live
         } else if Date() > startTime && Date() < endTime {
             
             event.isLive = 3

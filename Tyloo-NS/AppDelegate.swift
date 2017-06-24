@@ -26,7 +26,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
         
-//        CoreDataStack.coreData.deleteRecords()
+        //CoreDataStack.coreData.deleteRecords()
         
         let layout = UICollectionViewFlowLayout()
             layout.minimumLineSpacing = 0
