@@ -8,9 +8,6 @@
 
 import UIKit
 
-private let CELL_FEED = "Cell_FEED"
-private let HEADER_ID = "HEADER_ID"
-
 extension HomePage: UICollectionViewDelegateFlowLayout {
     
     //Mark: CollectionView Delegate/DataSource    
@@ -81,7 +78,7 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
         
         return CGSize(width: view.frame.width,
-                      height: 85)
+                      height: -1 * (heightConst))
     }
     
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {

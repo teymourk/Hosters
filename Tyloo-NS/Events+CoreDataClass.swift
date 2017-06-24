@@ -9,6 +9,8 @@
 import Foundation
 import CoreData
 
+
+
 @objc(Events)
 public class Events: NSManagedObject {
     
@@ -21,7 +23,6 @@ public class Events: NSManagedObject {
             switch rsvp_status {
             case "unsure":
                 entityName = "Maybe"
-
                 break
             case "attending":
                 entityName = "Attending"

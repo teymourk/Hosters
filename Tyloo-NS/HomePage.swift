@@ -13,10 +13,21 @@ import FBSDKCoreKit
 import SCLAlertView
 import EPCalendarPicker
 
-private let CELL_FEED = "Cell_FEED"
-private let HEADER_ID = "HEADER_ID"
+enum EventsStatus: String {
+    
+    case Events = "Events"
+    case Live = "Live"
+    case Invited = "Invited"
+    case Attending = "Attending"
+    case Maybe = "Maybe"
+}
 
 class HomePage: UICollectionViewController, CLLocationManagerDelegate {
+
+    let CELL_FEED = "Cell_FEED"
+    let HEADER_ID = "HEADER_ID"
+    
+    let heightConst:CGFloat = -110
     
     var eventsDictionary:[Int:[Events]]? = [Int:[Events]]()
     var liveEventArray:[Events]? = [Events]()
@@ -49,6 +60,7 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     let navBarSeperator:UIView = {
         let view = UIView()
             view.backgroundColor = orange
+            view.translatesAutoresizingMaskIntoConstraints = false
         return view
     }()
     
@@ -64,17 +76,16 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         
         eventTypeFetch(index: 0, typeIndex: 0)
         
-        guard let AppDelegate = UIApplication.shared.delegate as? AppDelegate else {return}
-        
-        AppDelegate.loadDataFromFacebook()
+        Facebook_MyEvents.facebookFetch.loadDataFromFacebook()
     }
 
     internal func setupNavSeperator() {
         
         view.addSubview(navBarSeperator)
         
-        view.addConstrainstsWithFormat("H:|[v0]|", views: navBarSeperator)
-        view.addConstrainstsWithFormat("V:|[v0(2)]", views: navBarSeperator)
+        navBarSeperator.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        navBarSeperator.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        navBarSeperator.heightAnchor.constraint(equalToConstant: 2).isActive = true
     }
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
@@ -82,14 +93,14 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         let scrollyOffset = scrollView.contentOffset.y
         let searchHeight = CGFloat(0 + self.navBarSeperator.frame.height)
     
-        scrollView.contentInset.top = scrollyOffset <= -2 ? searchHeight : -85
-        scrollView.scrollIndicatorInsets.top = scrollyOffset <= -2 ? searchHeight : -85
+        scrollView.contentInset.top = scrollyOffset <= -2 ? searchHeight : heightConst
+        scrollView.scrollIndicatorInsets.top = scrollyOffset <= -2 ? searchHeight : heightConst
     }
     
     fileprivate func setupCollectionView() {
         
-        collectionView?.contentInset.top = -85
-        collectionView?.scrollIndicatorInsets.top = -85
+        collectionView?.contentInset.top = heightConst
+        collectionView?.scrollIndicatorInsets.top = heightConst
         
         collectionView?.addSubview(refresher)
         collectionView?.register(HomeCell.self, forCellWithReuseIdentifier: CELL_FEED)
@@ -116,70 +127,57 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
             layout.minimumInteritemSpacing = 0
     }
     
-    func onRefreshPage() {
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
-        if Reachability.isInternetAvailable() {
-            
-        } else {
-            
-            pageNotification.showNotification("Not Connected To The Internet 😭")
-        }
-        
-        refresher.endRefreshing()
+        view.resignFirstResponder()
     }
     
-    private func eventTypeFetch(index: Int, typeIndex:Int) {
-
-        var indexs:Int = Int()
-        var typeIndexs:Int = Int()
+    func onRefreshPage() {
+        
+        print("SALAAM")
+    }
+    
+    var entityNames:[EventsStatus] = [.Events, .Invited, .Attending, .Maybe, .Events]
+    
+    internal func eventTypeFetch(index: Int, typeIndex:Int) {
         
         let hasntHappenedPred = NSPredicate(format: "isLive = %d", 1)
         let endedPred = NSPredicate(format: "isLive = %d AND rsvp_status = %@", 2, "attending")
         let livePred = NSPredicate(format: "isLive = %d", 3)
         
-        var entityNames = ["Events", "Invited","Attending", "Maybe", "Events"]
-        
         if typeIndex != entityNames.count {
         
-            let event = Events.FetchData(predicate: hasntHappenedPred, entity: entityNames[typeIndex])
+            let event = Events.FetchData(predicate: hasntHappenedPred, entity: entityNames[typeIndex].rawValue)
             
             if !event.isEmpty {
                 
                 self.eventsDictionary?[index] = event
-                indexs = index + 1
-                typeIndexs = typeIndex + 1
-                self.eventTypeFetch(index:indexs, typeIndex: typeIndexs)
+                self.eventTypeFetch(index: index + 1, typeIndex: typeIndex + 1)
                 
             } else{
                 
-                typeIndexs = typeIndex + 1
-                self.eventTypeFetch(index: index, typeIndex: typeIndexs)
+                self.eventTypeFetch(index: index, typeIndex: typeIndex + 1)
             }
             
             let lastIndex = (self.eventsDictionary?.count)! - 1
+            let entityNameCount = entityNames.count - 1
             
-            if typeIndex == lastIndex {
+            if typeIndex == 0 {
                 
-                let endedEvents = Events.FetchData(predicate: endedPred, entity: entityNames[entityNames.count - 1])
-                
-                if !endedEvents.isEmpty{
-                    
-                    self.eventsDictionary?[typeIndex] = endedEvents
-                    
-                } else {
-                    return
-                }
-                
-            } else if typeIndex == 0 {
-                
-                let liveEvents = Events.FetchData(predicate: livePred, entity: entityNames[entityNames.count - 1])
+                let liveEvents = Events.FetchData(predicate: livePred, entity: entityNames[entityNameCount].rawValue)
                 
                 if !liveEvents.isEmpty {
                     
                     self.eventsDictionary?[typeIndex] = liveEvents
+                }
+                
+            } else if typeIndex == lastIndex {
+                
+                let endedEvents = Events.FetchData(predicate: endedPred, entity: entityNames[entityNameCount].rawValue)
+                
+                if !endedEvents.isEmpty{
                     
-                } else {
-                    return
+                    self.eventsDictionary?[typeIndex] = endedEvents
                 }
             }
         }

@@ -36,7 +36,7 @@ class CoreDataStack {
     
     // MARK: - Core Data Saving support
     
-    func saveContext () {
+    internal func saveContext () {
         let context = persistentContainer.viewContext
         if context.hasChanges {
             do {
@@ -46,6 +46,27 @@ class CoreDataStack {
                 let nserror = error as NSError
                 fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
             }
+        }
+    }
+    
+    internal func deleteRecords() {
+        
+        let eventsRequest:NSFetchRequest<Events> = Events.fetchRequest()
+        let imagesRequest:NSFetchRequest<PostImages> = PostImages.fetchRequest()
+        
+        var deleteRequest:NSBatchDeleteRequest
+        var deleteResults:NSPersistentStoreResult
+        
+        do {
+            
+            deleteRequest = NSBatchDeleteRequest(fetchRequest: eventsRequest as! NSFetchRequest<NSFetchRequestResult>)
+            deleteResults = try context.execute(deleteRequest)
+            
+            deleteRequest = NSBatchDeleteRequest(fetchRequest: imagesRequest as! NSFetchRequest<NSFetchRequestResult>)
+            deleteResults = try context.execute(deleteRequest)
+            
+        } catch {
+            fatalError("Failed To Remove Existing Record")
         }
     }
 }

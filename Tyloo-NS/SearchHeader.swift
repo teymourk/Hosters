@@ -12,18 +12,24 @@ class SearchHeader: BaseCollectionViewCell, UISearchBarDelegate {
     
     lazy var searBar:UISearchBar = {
         let bar = UISearchBar()
-            bar.backgroundColor = .white
-            bar.tintColor = .white
-            bar.scopeButtonTitles = ["#", "Name", "Host"]
-            bar.selectedScopeButtonIndex = 0
-            bar.showsScopeBar = true
+            bar.backgroundColor = .clear
+            bar.tintColor = darkGray
             bar.returnKeyType = UIReturnKeyType.done
             bar.delegate = self
+            bar.translatesAutoresizingMaskIntoConstraints = false
         return bar
     }()
-
+    
+    var optionCollectionView:OptionsCollectionView = {
+        let collectioView = OptionsCollectionView(options: ["#", "Name", "Host", "Event"])
+            collectioView.translatesAutoresizingMaskIntoConstraints = false
+        return collectioView
+    }()
+    
     override func setupView() {
         super.setupView()
+        
+        backgroundColor = .clear
         
         setupSearchBarLayout()
     }
@@ -32,8 +38,15 @@ class SearchHeader: BaseCollectionViewCell, UISearchBarDelegate {
     
         addSubview(searBar)
         
-        addConstrainstsWithFormat("H:|[v0]|", views: searBar)
-        addConstrainstsWithFormat("V:|[v0]|", views: searBar)
+        searBar.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        searBar.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        searBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
+
+        addSubview(optionCollectionView)
+        
+        optionCollectionView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        optionCollectionView.topAnchor.constraint(equalTo: searBar.bottomAnchor, constant: 5).isActive = true
+        optionCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
     }
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
@@ -43,32 +56,4 @@ class SearchHeader: BaseCollectionViewCell, UISearchBarDelegate {
             return
         }
     }
-    
-    func searchBar(_ searchBar: UISearchBar, selectedScopeButtonIndexDidChange selectedScope: Int) {
-        
-        switch selectedScope {
-        case 0:
-            searchBar.placeholder = "Search by Event #"
-            searchBar.text = "#"
-            break
-        case 1:
-            searchBar.placeholder = "Searh by Event Name"
-            searchBar.text = ""
-            break
-        case 2:
-            searchBar.placeholder = "Search by Host"
-            searchBar.text = ""
-            break
-        default: break
-            
-        }
-    }
-    
-    func searchBarShouldEndEditing(_ searchBar: UISearchBar) -> Bool {
-        
-        resignFirstResponder()
-        return true
-    }
-    
-    
 }

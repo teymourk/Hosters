@@ -9,5 +9,10 @@
 import UIKit
 
 class Explore: HomePage {
+    
+    let Cell_ID = "Cell_ID"
 
+    override func viewDidLoad() {
+        super.viewDidLoad()
+    }
 }
