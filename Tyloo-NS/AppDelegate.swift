@@ -23,10 +23,10 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
+        CoreDataStack.coreData.deleteRecords()
+        
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()
-        
-        //CoreDataStack.coreData.deleteRecords()
         
         let layout = UICollectionViewFlowLayout()
             layout.minimumLineSpacing = 0

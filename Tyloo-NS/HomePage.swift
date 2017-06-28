@@ -11,7 +11,6 @@ import MapKit
 import CoreData
 import FBSDKCoreKit
 import SCLAlertView
-import EPCalendarPicker
 
 enum Events_Entities_Types: String {
     
@@ -56,11 +55,6 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         let refresh = UIRefreshControl()
             refresh.addTarget(self, action: #selector(onRefreshPage), for: .valueChanged)
         return refresh
-    }()
-    
-    let pageNotification:PageNotifications = {
-        let notification = PageNotifications()
-        return notification
     }()
     
     let navBarSeperator:UIView = {

@@ -54,6 +54,7 @@ class CoreDataStack {
         
         let eventsRequest:NSFetchRequest<Events> = Events.fetchRequest()
         let imagesRequest:NSFetchRequest<PostImages> = PostImages.fetchRequest()
+        let locationRequest:NSFetchRequest<Location> = Location.fetchRequest()
         
         var deleteRequest:NSBatchDeleteRequest
         var deleteResults:NSPersistentStoreResult
@@ -64,6 +65,9 @@ class CoreDataStack {
             deleteResults = try context.execute(deleteRequest)
             
             deleteRequest = NSBatchDeleteRequest(fetchRequest: imagesRequest as! NSFetchRequest<NSFetchRequestResult>)
+            deleteResults = try context.execute(deleteRequest)
+            
+            deleteRequest = NSBatchDeleteRequest(fetchRequest: locationRequest as! NSFetchRequest<NSFetchRequestResult>)
             deleteResults = try context.execute(deleteRequest)
             
         } catch {

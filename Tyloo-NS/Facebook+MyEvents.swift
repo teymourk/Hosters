@@ -24,10 +24,12 @@ class Facebook_MyEvents: NSObject {
         var types:[Events_Entities_Types] = [.not_replied, .attending, .maybe]
         
         for i in 0..<types.count {
-            
+        
             let type = types[i]
             
-            FBSDKGraphRequest(graphPath: "/me/events/\(type.rawValue)", parameters: parameters).start { (connection, results, error) in
+            let graphPath  = "/me/events/\(type.rawValue)"
+            
+            FBSDKGraphRequest(graphPath: graphPath, parameters: parameters).start { (connection, results, error) in
                 
                 if error != nil {
                     print(error ?? "")

@@ -76,6 +76,7 @@ extension AllEventPhotos: UICollectionViewDelegateFlowLayout {
                 }
                 
                 header.optionsView.delegate = self
+                header.allEventPhotos = self
                 header.optionsView.eventDetails = eventDetail
             }
             

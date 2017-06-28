@@ -18,6 +18,8 @@ class OptionsCollectionView: BaseView {
         }
     }
     
+    var searchHeader:SearchHeader?
+    
     init(options:[String]) {
         super.init(frame: .zero)
         
@@ -82,5 +84,12 @@ extension OptionsCollectionView: UICollectionViewDelegateFlowLayout, UICollectio
         
         return CGSize(width: 50,
                       height: 50)
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let searchHeader = searchHeader else {return}
+        
+        searchHeader.selectedIndex = indexPath
     }
 }

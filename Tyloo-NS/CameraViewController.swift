@@ -50,7 +50,10 @@ class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDele
         pinchToZoom = true
         tapToFocus = true
         
+        
+        
         allowBackgroundAudio = false
+        shouldUseDeviceOrientation = false
         swipeToZoom = false
         flashEnabled = true
         
@@ -145,12 +148,13 @@ class CameraViewController: SwiftyCamViewController, SwiftyCamViewControllerDele
     
     func swiftyCam(_ swiftyCam: SwiftyCamViewController, didTake photo: UIImage) {
         
-        guard let eventId = liveEventDetails?.event_id else {return}
+        guard let eventId = liveEventDetails?.event_id, let photoCG = photo.cgImage else {return}
+
+        let image = UIImage(cgImage: photoCG, scale: 1, orientation: .upMirrored)
+
+        campturedImage.image = image
         
-        campturedImage.image = photo
-        
-        uploadImage(photo, postKey: eventId)
-    
+        uploadImage(image, postKey: eventId)
     }
     
     private func setupCameraLayout() {

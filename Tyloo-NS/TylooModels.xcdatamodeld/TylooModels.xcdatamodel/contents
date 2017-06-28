@@ -21,11 +21,12 @@
         <relationship name="users" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Users" inverseName="events" inverseEntity="Users" syncable="YES"/>
     </entity>
     <entity name="Invited" representedClassName="Invited" parentEntity="Events" syncable="YES" codeGenerationType="class"/>
-    <entity name="Location" representedClassName="Location" syncable="YES" codeGenerationType="class">
+    <entity name="Location" representedClassName="Location" syncable="YES" codeGenerationType="category">
         <attribute name="city" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="latitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="longtitude" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES" syncable="YES"/>
         <attribute name="place_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="placeID" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="state" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="street" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="zip" optional="YES" attributeType="String" syncable="YES"/>
@@ -51,7 +52,7 @@
         <element name="Attending" positionX="-1944" positionY="45" width="128" height="45"/>
         <element name="Events" positionX="-1676" positionY="-0" width="128" height="298"/>
         <element name="Invited" positionX="-1890" positionY="-9" width="128" height="45"/>
-        <element name="Location" positionX="-1998" positionY="198" width="128" height="165"/>
+        <element name="Location" positionX="-1998" positionY="198" width="128" height="180"/>
         <element name="Maybe" positionX="-1989" positionY="101" width="128" height="45"/>
         <element name="PostImages" positionX="-1433" positionY="-43" width="128" height="133"/>
         <element name="Users" positionX="-1442" positionY="207" width="128" height="118"/>

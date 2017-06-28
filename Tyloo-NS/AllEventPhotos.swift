@@ -122,6 +122,8 @@ class AllEventPhotos: UICollectionViewController, OptionsViewDelegate {
     @objc
     fileprivate func startCountDown() {
         
+        print("SALAM")
+        
         if let event = _eventDetails,let startTime = event.start_time as Date?, let endTime = event.end_time as Date? {
             
             if Date() < startTime {
@@ -149,6 +151,21 @@ class AllEventPhotos: UICollectionViewController, OptionsViewDelegate {
         let cameraViewController = CameraViewController()
             cameraViewController.liveEventDetails = eventDetails
         navigationController?.present(cameraViewController, animated: true, completion: nil)
+    }
+    
+    internal func pushToAllImages(eventImages:[PostImages], selectedIndex:IndexPath) {
+        
+        let layout = UICollectionViewFlowLayout()
+            layout.scrollDirection = .horizontal
+            layout.minimumLineSpacing = 0
+            layout.minimumInteritemSpacing = 0
+        
+        let controller = EventImagesCollectionView(collectionViewLayout: layout)
+            controller.postedImages = eventImages
+        self.present(controller, animated: false) { 
+        
+            controller.collectionView?.selectItem(at: selectedIndex, animated: false, scrollPosition: .centeredHorizontally)
+        }
     }
 }
 

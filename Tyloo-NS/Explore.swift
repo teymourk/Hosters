@@ -14,5 +14,7 @@ class Explore: HomePage {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        Facebook_NearEvents.facebookNearPlaces.findNearPalces()
     }
 }

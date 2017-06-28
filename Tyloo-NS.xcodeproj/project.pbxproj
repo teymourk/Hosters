@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		02E6DC9A81FA284890F240FC /* Pods_Tyloo_NSTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 823468288D5D28355230997B /* Pods_Tyloo_NSTests.framework */; };
 		0B0D74241EEA6C860043B8BA /* UploadProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B0D74231EEA6C860043B8BA /* UploadProgressView.swift */; };
+		0B1EBFAC1F03245900FCE227 /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1EBFAB1F03245900FCE227 /* Location+CoreDataClass.swift */; };
 		0B24E4D41EB5200E0037D1D5 /* Tyloo_NSTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24E4D31EB5200E0037D1D5 /* Tyloo_NSTests.swift */; };
 		0B24E4DC1EB5255B0037D1D5 /* DetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24E4DB1EB5255B0037D1D5 /* DetailsCell.swift */; };
 		0B2691CE1EF5F4C40025CFCE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2691CD1EF5F4C40025CFCE /* CoreDataStack.swift */; };
@@ -19,6 +20,7 @@
 		0B62406B1EFDFA3E005610AC /* SearchOptionsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B62406A1EFDFA3E005610AC /* SearchOptionsCell.swift */; };
 		0B6249ED1EE10D3700C31A62 /* EventDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B6249EC1EE10D3700C31A62 /* EventDetailsCell.swift */; };
 		0B70BA411EF6196500CA6AC7 /* Events+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B70BA401EF6196500CA6AC7 /* Events+CoreDataClass.swift */; };
+		0B72A16C1EFEEEB3007A90CC /* EventImagesCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B72A16B1EFEEEB3007A90CC /* EventImagesCollectionView.swift */; };
 		0B7B6DD61EE0EDC600763477 /* AllEventPhotosDelgates.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B6DD51EE0EDC600763477 /* AllEventPhotosDelgates.swift */; };
 		0B7B6DD81EE0F19100763477 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B7B6DD71EE0F19100763477 /* HeaderView.swift */; };
 		0B8EE9431EB02E1800218394 /* HomeCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B8EE9421EB02E1800218394 /* HomeCVCell.swift */; };
@@ -72,6 +74,7 @@
 
 /* Begin PBXFileReference section */
 		0B0D74231EEA6C860043B8BA /* UploadProgressView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UploadProgressView.swift; sourceTree = "<group>"; };
+		0B1EBFAB1F03245900FCE227 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0B24E4D11EB5200E0037D1D5 /* Tyloo-NSTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Tyloo-NSTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0B24E4D31EB5200E0037D1D5 /* Tyloo_NSTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tyloo_NSTests.swift; sourceTree = "<group>"; };
 		0B24E4D51EB5200E0037D1D5 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -84,6 +87,7 @@
 		0B62406A1EFDFA3E005610AC /* SearchOptionsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchOptionsCell.swift; sourceTree = "<group>"; };
 		0B6249EC1EE10D3700C31A62 /* EventDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventDetailsCell.swift; sourceTree = "<group>"; };
 		0B70BA401EF6196500CA6AC7 /* Events+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Events+CoreDataClass.swift"; sourceTree = "<group>"; };
+		0B72A16B1EFEEEB3007A90CC /* EventImagesCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EventImagesCollectionView.swift; sourceTree = "<group>"; };
 		0B7B6DD51EE0EDC600763477 /* AllEventPhotosDelgates.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllEventPhotosDelgates.swift; sourceTree = "<group>"; };
 		0B7B6DD71EE0F19100763477 /* HeaderView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		0B8EE9421EB02E1800218394 /* HomeCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = HomeCVCell.swift; sourceTree = "<group>"; };
@@ -181,6 +185,7 @@
 				0BBCCB651EAA9128003A50CB /* HomePageDelegates.swift */,
 				0B8F5C611EDE77CC00033C72 /* AllEventPhotos.swift */,
 				0B7B6DD51EE0EDC600763477 /* AllEventPhotosDelgates.swift */,
+				0B72A16B1EFEEEB3007A90CC /* EventImagesCollectionView.swift */,
 				0BBE819F1ECA357C007D3644 /* Explore.swift */,
 				0BE43C991EB0F84200062E07 /* UserProfile.swift */,
 				0BB8C9B81EFA08C90007F74D /* CameraViewController.swift */,
@@ -251,10 +256,11 @@
 			children = (
 				0B2691CD1EF5F4C40025CFCE /* CoreDataStack.swift */,
 				0B70BA401EF6196500CA6AC7 /* Events+CoreDataClass.swift */,
-				0B8F78EA1EFC4FB100C05812 /* Facebook+MyEvents.swift */,
-				0B8F78EC1EFC56BC00C05812 /* Facebook+NearEvents.swift */,
 				0BAAE6FD1EF77FCA0075A318 /* PostImages+CoreDataClass.swift */,
 				0BB8C9B41EF9EB400007F74D /* Users+CoreDataClass.swift */,
+				0B1EBFAB1F03245900FCE227 /* Location+CoreDataClass.swift */,
+				0B8F78EA1EFC4FB100C05812 /* Facebook+MyEvents.swift */,
+				0B8F78EC1EFC56BC00C05812 /* Facebook+NearEvents.swift */,
 				ABBFAA031D0FC13000BB4D5C /* FirebaseRef.swift */,
 				0B2691CF1EF5F5E30025CFCE /* TylooModels.xcdatamodeld */,
 			);
@@ -555,6 +561,7 @@
 				AB2EFDB51D0E29FD00B21A18 /* BaseCells.swift in Sources */,
 				AB34B8B91D30B0BD00B2F4E0 /* PageNotifications.swift in Sources */,
 				0B24E4DC1EB5255B0037D1D5 /* DetailsCell.swift in Sources */,
+				0B72A16C1EFEEEB3007A90CC /* EventImagesCollectionView.swift in Sources */,
 				AB8376B91D83203A0083B94C /* CompleteFacebookRegister.swift in Sources */,
 				0BB8C9B51EF9EB400007F74D /* Users+CoreDataClass.swift in Sources */,
 				0BB8C9B91EFA08C90007F74D /* CameraViewController.swift in Sources */,
@@ -568,6 +575,7 @@
 				0B6249ED1EE10D3700C31A62 /* EventDetailsCell.swift in Sources */,
 				0B3974F91EA9D7760011ABD7 /* MenuBar.swift in Sources */,
 				0B8EE9451EB0380E00218394 /* EventsCell.swift in Sources */,
+				0B1EBFAC1F03245900FCE227 /* Location+CoreDataClass.swift in Sources */,
 				AB2EFDB31D0E29E000B21A18 /* HomeCell.swift in Sources */,
 				0B8EE9431EB02E1800218394 /* HomeCVCell.swift in Sources */,
 				0B8F78EB1EFC4FB100C05812 /* Facebook+MyEvents.swift in Sources */,

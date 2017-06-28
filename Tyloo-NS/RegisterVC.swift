@@ -104,15 +104,11 @@ class RegisterCell: BaseCollectionViewCell, UITextFieldDelegate, UIImagePickerCo
     }
     
     internal func animatePage() {
-     
-        UIView.animate(withDuration: 1, delay: 0, usingSpringWithDamping: 1, initialSpringVelocity: 1, options: .curveEaseOut, animations: {
             
-            self.layoutIfNeeded()
+        self.layoutIfNeeded()
             
-            self.registeBtnYAnchar?.constant = -70
-            self.logoYAncher?.constant = 40
-            
-        }, completion: nil)
-
+        self.registeBtnYAnchar?.constant = -70
+        self.logoYAncher?.constant = 40
+        
     }
 }

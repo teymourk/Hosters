@@ -61,6 +61,8 @@ class EventDetailsHeader: BaseCollectionViewCell {
        return view
     }()
     
+    weak var allEventPhotos:AllEventPhotos?
+    
     override func setupView() {
         super.setupView()
         
@@ -134,4 +136,11 @@ extension EventDetailsHeader: UICollectionViewDelegate, UICollectionViewDataSour
         return CGSize(width: 80, height: 80)
     }
 
+    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        guard let allEventPhotosVC = allEventPhotos, let eventImages = postedImages else {return}
+        
+        allEventPhotosVC.pushToAllImages(eventImages: eventImages, selectedIndex: indexPath)
+        
+    }
 }
