@@ -33,6 +33,7 @@
         <relationship name="events" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Events" inverseName="location" inverseEntity="Events" syncable="YES"/>
     </entity>
     <entity name="Maybe" representedClassName="Maybe" parentEntity="Events" syncable="YES" codeGenerationType="class"/>
+    <entity name="NearEvents" representedClassName="NearEvents" parentEntity="Events" syncable="YES" codeGenerationType="class"/>
     <entity name="PostImages" representedClassName="PostImages" syncable="YES" codeGenerationType="category">
         <attribute name="imageKey" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="imageURL" optional="YES" attributeType="String" syncable="YES"/>
@@ -56,5 +57,6 @@
         <element name="Maybe" positionX="-1989" positionY="101" width="128" height="45"/>
         <element name="PostImages" positionX="-1433" positionY="-43" width="128" height="133"/>
         <element name="Users" positionX="-1442" positionY="207" width="128" height="118"/>
+        <element name="NearEvents" positionX="-1791" positionY="108" width="128" height="45"/>
     </elements>
 </model>

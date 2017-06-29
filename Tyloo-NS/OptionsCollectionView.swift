@@ -34,7 +34,7 @@ class OptionsCollectionView: BaseView {
         
         let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .horizontal
-        
+    
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
             cv.backgroundColor = .clear
             cv.contentInset.left = 10
@@ -90,6 +90,6 @@ extension OptionsCollectionView: UICollectionViewDelegateFlowLayout, UICollectio
         
         guard let searchHeader = searchHeader else {return}
         
-        searchHeader.selectedIndex = indexPath
+        
     }
 }

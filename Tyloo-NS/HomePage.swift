@@ -20,6 +20,7 @@ enum Events_Entities_Types: String {
     case Invited = "Invited"
     case Attending = "Attending"
     case Maybe = "Maybe"
+    case NearEvents = "NearEvents"
     
     //Types For API
     case not_replied = "not_replied"
@@ -31,8 +32,6 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
 
     let CELL_FEED = "Cell_FEED"
     let HEADER_ID = "HEADER_ID"
-    
-    let heightConst:CGFloat = -110
     
     var eventsDictionary:[Int:[Events]]? = [Int:[Events]]()
     var liveEventArray:[Events]? = [Events]()
@@ -74,9 +73,7 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         setupCollectionView()
         setupNavSeperator()
         
-        eventTypeFetch(index: 0, typeIndex: 0)
-        
-        Facebook_MyEvents.facebookFetch.loadDataFromFacebook()
+        eventTypeFetch(index: 0, typeIndex: 0, entities: entityNames)
     }
 
     internal func setupNavSeperator() {
@@ -90,17 +87,14 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-        let scrollyOffset = scrollView.contentOffset.y
-        let searchHeight = CGFloat(0 + self.navBarSeperator.frame.height)
-    
-        scrollView.contentInset.top = scrollyOffset <= -2 ? searchHeight : heightConst
-        scrollView.scrollIndicatorInsets.top = scrollyOffset <= -2 ? searchHeight : heightConst
+//        let scrollyOffset = scrollView.contentOffset.y
+//        let searchHeight = CGFloat(0 + self.navBarSeperator.frame.height)
+//    
+//        scrollView.contentInset.top = scrollyOffset <= -2 ? searchHeight : heightConst
+//        scrollView.scrollIndicatorInsets.top = scrollyOffset <= -2 ? searchHeight : heightConst
     }
     
-    fileprivate func setupCollectionView() {
-        
-        collectionView?.contentInset.top = heightConst
-        collectionView?.scrollIndicatorInsets.top = heightConst
+    internal func setupCollectionView() {
         
         collectionView?.addSubview(refresher)
         collectionView?.register(HomeCell.self, forCellWithReuseIdentifier: CELL_FEED)
@@ -140,7 +134,7 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     var entityNames:[Events_Entities_Types] = [.Events, .Invited, .Attending, .Maybe, .Events]
     
     //Recursiviey Adding Events
-    internal func eventTypeFetch(index: Int, typeIndex:Int) {
+    internal func eventTypeFetch(index: Int, typeIndex:Int, entities:[Events_Entities_Types]) {
         
         let hasntHappenedPred = NSPredicate(format: "isLive = %d", 1)
         let endedPred = NSPredicate(format: "isLive = %d AND rsvp_status = %@", 2, "attending")
@@ -153,11 +147,11 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
             if !event.isEmpty {
                 
                 self.eventsDictionary?[index] = event
-                self.eventTypeFetch(index: index + 1, typeIndex: typeIndex + 1)
+                self.eventTypeFetch(index: index + 1, typeIndex: typeIndex + 1, entities: entityNames)
                 
             } else{
                 
-                self.eventTypeFetch(index: index, typeIndex: typeIndex + 1)
+                self.eventTypeFetch(index: index, typeIndex: typeIndex + 1, entities: entityNames)
             }
             
             let lastIndex = (self.eventsDictionary?.count)! - 1

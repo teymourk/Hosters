@@ -17,9 +17,9 @@ class Facebook_MyEvents: NSObject {
 
     static let facebookFetch = Facebook_MyEvents()
     
-    internal func loadDataFromFacebook() {
+    internal func loadDataFromFacebook(nearOrmeFor event:String) {
         
-        let parameters = ["fields": "cover, attending_count, can_guests_invite, description, name, id, maybe_count, noreply_count, interested_count, start_time , end_time, declined_count, owner, place, rsvp_status, guest_list_enabled"]
+        let parameters = ["fields": "cover, attending_count, can_guests_invite, description, name, id, maybe_count, noreply_count, interested_count, start_time , end_time, declined_count, owner, place, rsvp_status, guest_list_enabled", "limit": "10"]
         
         var types:[Events_Entities_Types] = [.not_replied, .attending, .maybe]
         
@@ -27,8 +27,9 @@ class Facebook_MyEvents: NSObject {
         
             let type = types[i]
             
-            let graphPath  = "/me/events/\(type.rawValue)"
+            let graphPath  = "/\(event)/events/\(type.rawValue)"
             
+        
             FBSDKGraphRequest(graphPath: graphPath, parameters: parameters).start { (connection, results, error) in
                 
                 if error != nil {
@@ -64,21 +65,14 @@ class Facebook_MyEvents: NSObject {
                                             
                                             eventsObj.addToPostImages(imgObj)
                                             eventsObj.addToUsers(users)
-                                            
                                         }
                                     }
                                 }
                             })
                         }
                     }
-                    
-                    do {
-                        try context.save()
-                        print("Data Successfully Saved")
                         
-                    } catch {
-                        fatalError("Error Saving Data To Core Data")
-                    }
+                    CoreDataStack.coreData.saveContext()
                 }
             }
         }

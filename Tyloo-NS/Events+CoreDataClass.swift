@@ -31,11 +31,15 @@ public class Events: NSManagedObject {
             default: break
                 
             }
+            
+        } else {
+            
+            entityName = "NearEvents"
         }
         
         let entity = NSEntityDescription.entity(forEntityName: entityName, in: context)
         
-        self.init(entity: entity!, insertInto: context)
+        self.init(entity: entity! , insertInto: context)
         
         if let id = dictionary["id"] as? String {self.event_id = id}
         

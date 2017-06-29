@@ -23,7 +23,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         FIRApp.configure()
         FBSDKApplicationDelegate.sharedInstance().application(application, didFinishLaunchingWithOptions: launchOptions)
         
-        CoreDataStack.coreData.deleteRecords()
+        //CoreDataStack.coreData.deleteRecords()
+        Facebook_MyEvents.facebookFetch.loadDataFromFacebook(nearOrmeFor: "me")
         
         window = UIWindow(frame: UIScreen.main.bounds)
         window?.makeKeyAndVisible()

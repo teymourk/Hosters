@@ -13,20 +13,26 @@ class Facebook_NearEvents: NSObject {
 
     static let facebookNearPlaces = Facebook_NearEvents()
     
-    internal func findNearPalces() {
+    typealias locationsCompleteion = (_ homes: [Location]) -> ()
+    
+    internal func findNearPalces(comepletionHandler: @escaping locationsCompleteion) {
+        
+        var locations = [Location]()
         
         guard let accessToken = FBSDKAccessToken.current().tokenString else {return}
         let website = "https://graph.facebook.com/v2.9"
         let longtitude = -122.8008315
         let latitude = 45.4488967
         let distance = 1000
-        let limit = 100
+        let limit = 25
         
-        let filePath = "\(website)/search?type=place&value=1&center=\(latitude),\(longtitude)&distance=\(distance)&limit=\(limit)&access_token=\(accessToken)"
+        let filePath = "\(website)/search?type=place&value=1&center=\(latitude),\(longtitude)&distance=\(distance)&limit=\(limit)&fields=location,name&access_token=\(accessToken)"
     
         guard let URL = URL(string: filePath) else {return}
         var request = URLRequest(url: URL)
             request.httpMethod = "GET"
+        
+        print(filePath)
         
         UIApplication.shared.isNetworkActivityIndicatorVisible = true
         URLSession.shared.dataTask(with: request) { (results, response, error) in
@@ -42,17 +48,20 @@ class Facebook_NearEvents: NSObject {
                     
                     for json in jsonArray {
                         
-                        if let locationData = json as? [String:AnyObject] {
+                        if let locationData = json as? NSDictionary {
                             
                             //Get Near Location Place IDs
                             guard let placesID = locationData["id"] as? String else { return }
                             
-                            //self.getPlacesinfo(placeID:placesID)
+                            let locationObj = Location(placeID: placesID, locationInfo: locationData, insertInto:context)
                             
+                            DispatchQueue.main.async {
+                                
+                                locations.append(locationObj)
+                                comepletionHandler(locations)
+                            }
                         }
                     }
-                    
-                    CoreDataStack.coreData.saveContext()
                 }
 
             } catch {

@@ -8,47 +8,12 @@
 
 import UIKit
 
-class SearchHeader: BaseCollectionViewCell, UISearchBarDelegate {
-    
-    var selectedIndex:IndexPath? {
-        didSet {
-            
-            switch selectedIndex?.item {
-            case 0?:
-                searchBar.placeholder = "Search By #"
-                break
-            case 1?:
-                searchBar.placeholder = "Search By Name"
-                break
-            case 2?:
-                searchBar.placeholder = "Search By Host"
-                break
-            case 3?:
-                searchBar.placeholder = "Search By Event"
-                break
-            case 4?:
-                searchBar.placeholder = "Search By Location"
-                break
-            default: break
-            }
-            
-        }
-    }
-    
-    lazy var searchBar:UISearchBar = {
-        let bar = UISearchBar()
-            bar.backgroundColor = .clear
-            bar.tintColor = darkGray
-            bar.returnKeyType = UIReturnKeyType.done
-            bar.delegate = self
-            bar.translatesAutoresizingMaskIntoConstraints = false
-        return bar
-    }()
+class SearchHeader: BaseCollectionViewCell  {
     
     lazy var optionCollectionView:OptionsCollectionView = {
         let collectioView = OptionsCollectionView(options: ["#", "Name", "Host", "Event", "Location"])
-            collectioView.translatesAutoresizingMaskIntoConstraints = false
             collectioView.searchHeader = self
+            collectioView.translatesAutoresizingMaskIntoConstraints = false
         return collectioView
     }()
     
@@ -62,18 +27,53 @@ class SearchHeader: BaseCollectionViewCell, UISearchBarDelegate {
     
     fileprivate func setupSearchBarLayout() {
     
-        addSubview(searchBar)
-        
-        searchBar.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        searchBar.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        searchBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
-
         addSubview(optionCollectionView)
         
-        optionCollectionView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        optionCollectionView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 5).isActive = true
+        optionCollectionView.topAnchor.constraint(equalTo: topAnchor).isActive = true
         optionCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        optionCollectionView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
     }
+}
+
+class searchResultController: UITableViewController {
+
+    let Cell_ID = "Cell_ID"
+    
+    var selectedIndex:IndexPath?
+    
+    lazy var searchBar:UISearchBar = {
+        let bar = UISearchBar()
+        bar.backgroundColor = .clear
+        bar.tintColor = darkGray
+        bar.returnKeyType = UIReturnKeyType.done
+        bar.delegate = self
+        bar.translatesAutoresizingMaskIntoConstraints = false
+        return bar
+    }()
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        tableView.register(UITableViewCell.self, forCellReuseIdentifier: Cell_ID)
+
+    }
+    
+    override func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+    
+        return 5
+    }
+    
+    override func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+     
+        let cell = tableView.dequeueReusableCell(withIdentifier: Cell_ID, for: indexPath)
+        
+        cell.backgroundColor = .red
+        
+        return cell
+    }
+}
+
+extension searchResultController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         
