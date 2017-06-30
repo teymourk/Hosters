@@ -1,0 +1,6 @@
+framework module Pods_Tyloo {
+  umbrella header "Pods-Tyloo-umbrella.h"
+
+  export *
+  module * { export * }
+}
