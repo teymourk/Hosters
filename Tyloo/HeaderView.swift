@@ -10,7 +10,7 @@ import UIKit
 
 class HeaderView:BaseView {
     
-    var eventDetails:Events? {
+    weak var eventDetails:Events? {
         
         didSet {
             

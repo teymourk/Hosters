@@ -37,6 +37,9 @@ class SearchOptionsCell: BaseCollectionViewCell {
         let green = CGFloat(drand48())
         let blue = CGFloat(drand48())
         
-        return UIColor(red: red, green: green, blue: blue, alpha: 1)
+        return UIColor(red: red,
+                       green: green,
+                       blue: blue,
+                       alpha: 1)
     }
 }

@@ -10,7 +10,7 @@ import UIKit
 
 class EventPhotosCell: BaseCollectionViewCell {
     
-    var postedImages:PostImages? {
+    weak var postedImages:PostImages? {
         didSet {
             
             guard let imgURL = postedImages?.imageURL else {return}

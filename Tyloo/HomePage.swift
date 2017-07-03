@@ -135,6 +135,7 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     func onRefreshPage() {
         
         print("SALAAM")
+        refresher.endRefreshing()
     }
     
     var entityNames:[Events_Entities_Types] = [.Events, .Invited, .Attending, .Maybe, .Events]

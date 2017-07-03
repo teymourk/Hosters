@@ -15,7 +15,7 @@ protocol EventCellDelegate: class {
 
 class EventsCell: BaseCollectionViewCell {
     
-    var _eventDetails:Events? {
+    weak var _eventDetails:Events? {
         didSet {
             
             DispatchQueue.main.async {

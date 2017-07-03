@@ -46,8 +46,8 @@ class BaseCollectionViewCell: UICollectionViewCell {
     
     var seperator:UIView = {
         let seperator = UIView()
-        seperator.backgroundColor = .lightGray
-        seperator.translatesAutoresizingMaskIntoConstraints = false
+            seperator.backgroundColor = .lightGray
+            seperator.translatesAutoresizingMaskIntoConstraints = false
         return seperator
     }()
     

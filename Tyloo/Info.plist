@@ -2,8 +2,6 @@
 <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
 <plist version="1.0">
 <dict>
-	<key>UIViewControllerBasedStatusBarAppearance</key>
-	<false/>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>
 	<key>CFBundleExecutable</key>
@@ -53,12 +51,12 @@
 	</dict>
 	<key>NSCameraUsageDescription</key>
 	<string>Tyloo Will Use Your Camra When Posting For Events</string>
-    <key>NSMicrophoneUsageDescription</key>
-    <string>To Record Audio With Video</string>
 	<key>NSLocationAlwaysUsageDescription</key>
 	<string>TYLOO NEEDS TO ACCESS YOUR LOCATION</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Tyloo Requires to use your location.</string>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>To Record Audio With Video</string>
 	<key>NSPhotoLibraryUsageDescription</key>
 	<string>Enable Photos access to import photos from your library.</string>
 	<key>UIAppFonts</key>
@@ -91,5 +89,7 @@
 		<string>UIInterfaceOrientationLandscapeLeft</string>
 		<string>UIInterfaceOrientationLandscapeRight</string>
 	</array>
+	<key>UIViewControllerBasedStatusBarAppearance</key>
+	<false/>
 </dict>
 </plist>

@@ -17,7 +17,7 @@ class SearchHeader: BaseCollectionViewCell  {
         return collectioView
     }()
     
-    var homePage:HomePage?
+    weak var homePage:HomePage?
     
     override func setupView() {
         super.setupView()

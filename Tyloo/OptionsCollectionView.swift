@@ -18,7 +18,7 @@ class OptionsCollectionView: BaseView {
         }
     }
     
-    var searchHeader:SearchHeader?
+    weak var searchHeader:SearchHeader?
     
     init(options:[String]) {
         super.init(frame: .zero)

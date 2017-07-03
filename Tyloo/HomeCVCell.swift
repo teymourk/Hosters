@@ -20,7 +20,7 @@ class HomeCVCell: BaseCollectionViewCell  {
         }
     }
 
-    lazy var eventCollectionView:UICollectionView = {
+    lazy var eventCollectionView:UICollectionView? = {
         let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)
@@ -30,7 +30,7 @@ class HomeCVCell: BaseCollectionViewCell  {
         return cv
     }()
     
-    var homePage:HomePage?
+    weak var homePage:HomePage?
     
     override func setupView() {
         

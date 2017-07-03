@@ -9,7 +9,7 @@ import UIKit
 
 class EventDetailsCell: BaseCollectionViewCell {
     
-    var _eventDetails:Events? {
+    weak var _eventDetails:Events? {
         didSet {
             
             guard let eventDetails = _eventDetails else {return}
