@@ -35,7 +35,7 @@ class EventImagesCollectionView: UICollectionViewController {
     @objc
     private func onSwipeDown(swipe: UIPanGestureRecognizer) {
         
-        print("Swipe Down")
+        
     }
 }
 

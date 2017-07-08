@@ -25,10 +25,10 @@ class CostumeTabBar: UITabBarController {
         let navigationController = UINavigationController(rootViewController: invitedEvents)
             navigationController.tabBarItem.image = UIImage(named: "home-normal")
         
-        let explore = Explore(collectionViewLayout: layout)
-            explore.navigationItem.title = "Explore"
-        let navigationController2 = UINavigationController(rootViewController: explore)
-            navigationController2.tabBarItem.image = UIImage(named: "search-normal")
+//        let explore = Explore(collectionViewLayout: layout)
+//            explore.navigationItem.title = "Explore"
+//        let navigationController2 = UINavigationController(rootViewController: explore)
+//            navigationController2.tabBarItem.image = UIImage(named: "search-normal")
         
         let userProfile = UserProfile(collectionViewLayout: UICollectionViewFlowLayout())
             userProfile.navigationItem.title = "Profile"
@@ -38,7 +38,6 @@ class CostumeTabBar: UITabBarController {
         self.navigationItem.hidesBackButton = true
         
         viewControllers = [navigationController,
-                           navigationController2,
                            navigationController3]
     }
     

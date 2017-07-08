@@ -38,6 +38,7 @@ class Facebook_NearEvents: NSObject {
         URLSession.shared.dataTask(with: request) { (results, response, error) in
             
             if error != nil {
+                
                 fatalError("Error Getting Locations")
             }
             

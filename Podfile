@@ -16,7 +16,6 @@ pod 'FBSDKCoreKit'
 pod 'FBSDKLoginKit'
 pod 'FBSDKShareKit'
 pod 'AFNetworking', '~> 3.0'
-pod 'SwiftyCam'
 pod 'CameraManager', '~> 3.0'
 pod 'HanekeSwift', :git => 'https://github.com/jasonnoahchoi/HanekeSwift', :branch => 'swift3'
 

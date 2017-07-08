@@ -20,7 +20,7 @@ PODS:
   - Bolts/AppLinks (1.8.4):
     - Bolts/Tasks
   - Bolts/Tasks (1.8.4)
-  - CameraManager (3.1.4)
+  - CameraManager (3.2.0)
   - FBSDKCoreKit (4.24.0):
     - Bolts (~> 1.7)
   - FBSDKLoginKit (4.24.0):
@@ -113,7 +113,7 @@ CHECKOUT OPTIONS:
 SPEC CHECKSUMS:
   AFNetworking: 5e0e199f73d8626b11e79750991f5d173d1f8b67
   Bolts: 8a7995239dbe724f9cba2248b766d48b7ebdd322
-  CameraManager: 837ff54004e37b83533abf0543daf143fae851e4
+  CameraManager: 2207f57b8da175a8e4d26d405d68201ad54189a6
   FBSDKCoreKit: f8c9eb0dd34a9cd277c7b60da4b32226d142502d
   FBSDKLoginKit: 1214c6d5a1c4995b694d8db8a9ba6910c6028acf
   FBSDKShareKit: a2ed9d7781a4eda9ac20d7404305e795b10251ac
@@ -133,6 +133,6 @@ SPEC CHECKSUMS:
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SwiftyCam: cb83b9a8e181f70fb741d30cea724c6b045a4549
 
-PODFILE CHECKSUM: 4c61698260d3fc063188d2bc9b68c45ff5529e67
+PODFILE CHECKSUM: b248e2839dc209cd2025ba181dd8deab36a8f0c2
 
 COCOAPODS: 1.1.1

@@ -20,7 +20,7 @@ class HomeCVCell: BaseCollectionViewCell  {
         }
     }
 
-    lazy var eventCollectionView:UICollectionView? = {
+    lazy var eventCollectionView:UICollectionView = {
         let layout = UICollectionViewFlowLayout()
             layout.scrollDirection = .horizontal
         let cv = UICollectionView(frame: .zero, collectionViewLayout: layout)

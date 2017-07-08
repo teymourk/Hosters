@@ -19,7 +19,7 @@ If you want Swift 3.0 syntax use:
 ```ruby
 use_frameworks!
 
-pod 'CameraManager', '~> 3.1'
+pod 'CameraManager', '~> 3.2'
 ```
 
 If you want Swift 2.0 syntax use:
@@ -49,7 +49,7 @@ import PackageDescription
 
 let package = Package(
     dependencies: [
-        .Package(url: "https://github.com/imaginary-cloud/CameraManager", majorVersion: 3, minor: 1)
+        .Package(url: "https://github.com/imaginary-cloud/CameraManager", majorVersion: 3, minor: 2)
     ]
 )
 ```
@@ -63,7 +63,7 @@ Add the following line to your Cartfile:
 If you want Swift 3.0 syntax use:
 
 ```
-github "imaginary-cloud/CameraManager" >= 3.1
+github "imaginary-cloud/CameraManager" >= 3.2
 ```
 
 If you want Swift 2.0 syntax use:
@@ -131,6 +131,11 @@ You can change the flash mode (it will also set corresponding flash mode):
 cameraManager.flashMode = .Off
 cameraManager.flashMode = .On
 cameraManager.flashMode = .Auto
+```
+
+To enable location services for storing in Camera Roll. Default is false:
+```
+cameraManager.shouldUseLocationServices = true
 ```
 
 To check if the device supports flash call:
