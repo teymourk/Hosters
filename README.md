@@ -5,12 +5,12 @@ Users are able to be part of an event and post pictures before and after to shar
 
 #Version 1 
 
-Users Are Able to create Events as shown in the images above.
+Users Are Able to create Events as shown in the images Below.
 
-![app screenshots](https://github.com/teymourk/Tyloo/blob/master/Audiblie.png)
-![app screenshots](https://github.com/teymourk/Tyloo/blob/master/HoemScreens.png)
+![app screenshots](https://github.com/teymourk/Tyloo/blob/master/Tyloo/Audiblie.png)
+![app screenshots](https://github.com/teymourk/Tyloo/blob/master/Tyloo/HoemScreens.png)
 
 #Version 2 (Under Development)
 
-Uses Facebook graph Api to pull all of users events from facebook Including 
+Uses Facebook graph Api to pull all of users events Including 
 (Live Events, Invited, Maybe, Attended)
