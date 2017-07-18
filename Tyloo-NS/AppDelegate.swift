@@ -7,15 +7,40 @@
 //
 
 import UIKit
+import Cloudinary
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
-
+    
     func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
-        // Override point for customization after application launch.
+        
+        //Cloudinary
+        CLCloudinary().config().setValue("dhzbgbaw7", forKey: "cloud_name")
+        CLCloudinary().config().setValue("319939918633478", forKey: "api_key")
+        CLCloudinary().config().setValue("POeeSeH5PnEDUeGrVt7zWf_B6dU", forKey: "api_secret")
+        
+        window = UIWindow(frame: UIScreen.mainScreen().bounds)
+        window?.makeKeyAndVisible()
+        window?.rootViewController = UINavigationController(rootViewController: HomeController())
+        
+        //Tabbar Changes
+        UITabBar.appearance().tintColor = goldColor
+        UITabBar.appearance().barTintColor = darkGray
+        
+        //NavigationBar Changes
+        _ = UIColor.rgb(58, green: 151, blue: 255) //Light Blue
+        UINavigationBar.appearance().barTintColor =  darkGray
+        UINavigationBar.appearance().titleTextAttributes = [NSForegroundColorAttributeName: UIColor.whiteColor()]
+        
+        //UINavigationShadow
+        UINavigationBar.appearance().shadowImage = UIImage()
+        UINavigationBar.appearance().setBackgroundImage(UIImage(), forBarMetrics: .Default)
+    
+        //StatusBarStyle
+        application.statusBarStyle = .LightContent
+        
         return true
     }
 
@@ -40,7 +65,5 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     func applicationWillTerminate(application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
     }
-
-
 }
 
