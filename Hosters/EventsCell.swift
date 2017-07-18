@@ -89,7 +89,8 @@ class EventsCell: BaseCollectionViewCell {
         layer.masksToBounds = true
         layer.borderWidth = 1
         layer.cornerRadius = 1
-        layer.borderColor = UIColor.lightGray.cgColor
+        layer.borderColor = UIColor.darkText.cgColor
+        
         handleCellAnimation()
         setShadow()
         setupViewHeader()

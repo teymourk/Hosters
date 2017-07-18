@@ -10,36 +10,28 @@ import UIKit
 
 class SearchOptionsCell: BaseCollectionViewCell {
     
-    var searchLabel:UILabel = {
-        let label = UILabel()
-            label.font = UIFont(name: "Prompt", size: 12)
-            label.textColor = .white
-            label.translatesAutoresizingMaskIntoConstraints = false
-        return label
+    var searchImage:UIImageView = {
+        let image = UIImageView()
+            image.contentMode = .scaleAspectFit
+            image.layer.cornerRadius = 15
+            image.translatesAutoresizingMaskIntoConstraints = false
+        return image
     }()
     
     override func setupView() {
     
-        backgroundColor = randomColor()
+        backgroundColor = .clear
         
         handleCellAnimation()
+        setupImageLayout()
         setShadow()
-        
-        addSubview(searchLabel)
-        
-        searchLabel.centerXAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        searchLabel.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
     }
     
-    fileprivate func randomColor() -> UIColor {
+    fileprivate func setupImageLayout() {
         
-        let red = CGFloat(drand48())
-        let green = CGFloat(drand48())
-        let blue = CGFloat(drand48())
+        addSubview(searchImage)
         
-        return UIColor(red: red,
-                       green: green,
-                       blue: blue,
-                       alpha: 1)
+        searchImage.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        searchImage.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
     }
 }

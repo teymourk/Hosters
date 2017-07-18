@@ -14,6 +14,7 @@
         <attribute name="name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="owner_id" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="owner_name" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="place_name" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="rsvp_status" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="start_time" optional="YES" attributeType="Date" usesScalarValueType="NO" syncable="YES"/>
         <relationship name="location" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Location" inverseName="events" inverseEntity="Location" syncable="YES"/>
@@ -51,12 +52,12 @@
     </entity>
     <elements>
         <element name="Attending" positionX="-1944" positionY="45" width="128" height="45"/>
-        <element name="Events" positionX="-1676" positionY="-0" width="128" height="298"/>
+        <element name="Events" positionX="-1676" positionY="-0" width="128" height="315"/>
         <element name="Invited" positionX="-1890" positionY="-9" width="128" height="45"/>
         <element name="Location" positionX="-1998" positionY="198" width="128" height="180"/>
         <element name="Maybe" positionX="-1989" positionY="101" width="128" height="45"/>
+        <element name="NearEvents" positionX="-1791" positionY="108" width="128" height="45"/>
         <element name="PostImages" positionX="-1433" positionY="-43" width="128" height="133"/>
         <element name="Users" positionX="-1442" positionY="207" width="128" height="118"/>
-        <element name="NearEvents" positionX="-1791" positionY="108" width="128" height="45"/>
     </elements>
 </model>

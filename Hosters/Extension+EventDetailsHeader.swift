@@ -34,6 +34,8 @@ extension EventDetailsHeader {
     
     internal func handleNoImagesView() {
         
+        setupOptionsView()
+        
         addSubview(noImagesView)
         
         noImagesView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true

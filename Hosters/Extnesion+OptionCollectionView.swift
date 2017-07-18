@@ -21,9 +21,9 @@ extension OptionsCollectionView: UICollectionViewDelegateFlowLayout, UICollectio
         
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: Cell_ID, for: indexPath) as? SearchOptionsCell {
             
-            let searchLabel = searchOptions?[indexPath.item]
+            let searchImage = searchOptions?[indexPath.item] ?? ""
             
-            cell.searchLabel.text = searchLabel
+            cell.searchImage.image = UIImage(named: searchImage)
             
             return cell
         }
@@ -33,8 +33,8 @@ extension OptionsCollectionView: UICollectionViewDelegateFlowLayout, UICollectio
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         
-        return CGSize(width: 50,
-                      height: 50)
+        return CGSize(width: 45,
+                      height: 45)
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {

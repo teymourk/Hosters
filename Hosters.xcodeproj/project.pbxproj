@@ -361,6 +361,7 @@
 				TargetAttributes = {
 					ABC77A6E1D0C916600C46DD0 = {
 						CreatedOnToolsVersion = 7.3.1;
+						DevelopmentTeam = 96TCJ3NGND;
 						LastSwiftMigration = 0800;
 						SystemCapabilities = {
 							com.apple.BackgroundModes = {
@@ -620,9 +621,9 @@
 				CODE_SIGN_ENTITLEMENTS = Hosters/Hosters.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 96TCJ3NGND;
 				INFOPLIST_FILE = Hosters/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Q-Aproject.Hosters";
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -642,9 +643,9 @@
 				CODE_SIGN_ENTITLEMENTS = Hosters/Hosters.entitlements;
 				CODE_SIGN_IDENTITY = "iPhone Developer";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 96TCJ3NGND;
 				INFOPLIST_FILE = Hosters/Info.plist;
-				IPHONEOS_DEPLOYMENT_TARGET = 10.3;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = "Q-Aproject.Hosters";
 				PRODUCT_NAME = "$(TARGET_NAME)";

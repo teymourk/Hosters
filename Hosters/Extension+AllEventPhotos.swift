@@ -95,7 +95,7 @@ extension AllEventPhotos: UICollectionViewDelegateFlowLayout {
         
         //return !loadImages().isEmpty ? CGSize(width: view.frame.width, height: FEED_CELL_HEIGHT * 0.25) : CGSize(width: 0, height: 0)
         
-        return CGSize(width: view.frame.width, height: FEED_CELL_HEIGHT * 0.25)
+        return CGSize(width: view.frame.width, height: FEED_CELL_HEIGHT * 0.20)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {

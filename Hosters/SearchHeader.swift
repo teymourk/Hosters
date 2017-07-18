@@ -8,10 +8,21 @@
 
 import UIKit
 
-class SearchHeader: BaseCollectionViewCell  {
+class SearchHeader: BaseCollectionViewCell, UISearchBarDelegate {
+    
+    lazy var searBar:UISearchBar = {
+        let bar = UISearchBar()
+            bar.backgroundColor = darkGray
+            bar.tintColor = darkGray
+            bar.returnKeyType = UIReturnKeyType.done
+            bar.placeholder = "Search By"
+            bar.delegate = self
+            bar.translatesAutoresizingMaskIntoConstraints = false
+        return bar
+    }()
     
     lazy var optionCollectionView:OptionsCollectionView = {
-        let collectioView = OptionsCollectionView(options: ["#", "Name", "Host", "Event", "Location"])
+        let collectioView = OptionsCollectionView(options: ["hashtag", "Hoster", "LC"])
             collectioView.searchHeader = self
             collectioView.translatesAutoresizingMaskIntoConstraints = false
         return collectioView
@@ -28,12 +39,25 @@ class SearchHeader: BaseCollectionViewCell  {
     }
     
     fileprivate func setupSearchBarLayout() {
-    
+        
+        addSubview(searBar)
+        
+        searBar.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+        searBar.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        searBar.heightAnchor.constraint(equalToConstant: 40).isActive = true
+        
         addSubview(optionCollectionView)
         
-        optionCollectionView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        optionCollectionView.topAnchor.constraint(equalTo: searBar.bottomAnchor).isActive = true
         optionCollectionView.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
         optionCollectionView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
+    }
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        
+        guard !searchText.isEmpty else { return }
+        
+        print(searchText)
     }
 }
 

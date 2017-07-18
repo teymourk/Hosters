@@ -33,6 +33,8 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     let CELL_FEED = "Cell_FEED"
     let HEADER_ID = "HEADER_ID"
     
+    let constantHeight:CGFloat = -110
+    
     var eventsDictionary:[Int:[Events]]? = [Int:[Events]]()
     var liveEventArray:[Events]? = [Events]()
     
@@ -75,7 +77,7 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         
         eventTypeFetch(index: 0, typeIndex: 0, entities: entityNames)
     }
-
+    
     internal func setupNavSeperator() {
         
         view.addSubview(navBarSeperator)
@@ -87,19 +89,22 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     
     override func scrollViewDidScroll(_ scrollView: UIScrollView) {
         
-//        let scrollyOffset = scrollView.contentOffset.y
-//        let searchHeight = CGFloat(0 + self.navBarSeperator.frame.height)
-//    
-//        scrollView.contentInset.top = scrollyOffset <= -2 ? searchHeight : heightConst
-//        scrollView.scrollIndicatorInsets.top = scrollyOffset <= -2 ? searchHeight : heightConst
+        let scrollyOffset = scrollView.contentOffset.y
+        let searchHeight = CGFloat(0 + self.navBarSeperator.frame.height)
+    
+        scrollView.contentInset.top = scrollyOffset <= -2 ? searchHeight : constantHeight
+        scrollView.scrollIndicatorInsets.top = scrollyOffset <= -2 ? searchHeight : constantHeight
     }
     
     internal func setupCollectionView() {
         
+        collectionView?.contentInset.top = constantHeight
+        collectionView?.scrollIndicatorInsets.top = constantHeight
+        
         collectionView?.addSubview(refresher)
         collectionView?.register(HomeCell.self, forCellWithReuseIdentifier: CELL_FEED)
         collectionView?.register(SearchHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HEADER_ID)
-        collectionView?.backgroundColor = UIColor.rgb(231, green: 236, blue: 240) //Gray Cololr
+        collectionView?.backgroundColor = UIColor.rgb(231, green: 236, blue: 240)
     }
         
     internal func navigateToEventDetails(eventDetail:Events) {
@@ -147,16 +152,12 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         let livePred = NSPredicate(format: "isLive = %d", 3)
         
         if typeIndex != entityNames.count {
-        
             let event = Events.FetchData(predicate: hasntHappenedPred, entity: entityNames[typeIndex].rawValue)
             
             if !event.isEmpty {
-                
                 self.eventsDictionary?[index] = event
                 self.eventTypeFetch(index: index + 1, typeIndex: typeIndex + 1, entities: entityNames)
-                
             } else{
-                
                 self.eventTypeFetch(index: index, typeIndex: typeIndex + 1, entities: entityNames)
             }
             
@@ -164,20 +165,15 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
             let entityNameCount = entityNames.count - 1
             
             if typeIndex == 0 {
-                
                 let liveEvents = Events.FetchData(predicate: livePred, entity: entityNames[entityNameCount].rawValue)
-                
                 if !liveEvents.isEmpty {
-                    
                     self.eventsDictionary?[typeIndex] = liveEvents
                 }
                 
             } else if typeIndex == lastIndex {
-                
                 let endedEvents = Events.FetchData(predicate: endedPred, entity: entityNames[entityNameCount].rawValue)
                 
                 if !endedEvents.isEmpty{
-                    
                     self.eventsDictionary?[typeIndex] = endedEvents
                 }
             }

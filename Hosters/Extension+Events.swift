@@ -17,13 +17,13 @@ extension Events {
     
     func getEventDetailsFrom(_ event: Events) -> (coverURL:String, title:String, hosts:String, details:String, location:String, guestList:String, guestListEnabled:Bool) {
         
-        let coverURL = event.coverURL ?? " "
+        let coverURL = event.coverURL ?? "emptyCover"
         let eventTitle = event.name ?? "No event Title"
         let eventHost = event.owner_name ?? "No Event Hosts ? (Doesnt Make Sence But Ok)"
     
         let eventDetails = event.details ?? "No Details For Event"
         
-        let eventLocation = getEventLocationFrom(event)
+        let eventLocation = getPlaceName(event)
         let eventGuestList = getEventGuesListFrom(event)
         
         let isGuesListEnabled = event.guest_list_enabled
@@ -31,13 +31,11 @@ extension Events {
         return (coverURL, eventTitle, eventHost, eventDetails, eventLocation, eventGuestList, isGuesListEnabled)
     }
     
-    fileprivate func getEventLocationFrom(_ event:Events) -> String {
+    fileprivate func getPlaceName(_ event:Events) -> String {
     
-        let placeName = event.location?.place_name
-        let placeCity = event.location?.city
-        let placeState = event.location?.state
+        let place_name = "📍\(event.place_name ?? "Place Name Not Available")"
         
-        return ("📍\(placeName ?? "") - \(placeCity ?? ""), \(placeState ?? "")")
+        return place_name
     }
     
     fileprivate func getEventGuesListFrom(_ event:Events) -> String {

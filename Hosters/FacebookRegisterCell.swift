@@ -25,7 +25,7 @@ class FacebookRegisterCell: BaseCollectionViewCell, UITextFieldDelegate, UIImage
     
     let logo:UIImageView = {
         let img = UIImageView()
-            img.image = UIImage(named: "TylooLogo")
+            img.image = UIImage(named: "Hosters")
             img.contentMode = .scaleAspectFill
             img.translatesAutoresizingMaskIntoConstraints = false
         return img
@@ -33,7 +33,7 @@ class FacebookRegisterCell: BaseCollectionViewCell, UITextFieldDelegate, UIImage
     
     lazy var WelcomeLabel:UILabel = {
         let label = UILabel()
-            label.text = "Welcome To Tyloo"
+            label.text = "Welcome To Hosters"
             label.font = UIFont(name: "Prompt", size: 27)
             label.textAlignment = .center
             label.textColor = orange

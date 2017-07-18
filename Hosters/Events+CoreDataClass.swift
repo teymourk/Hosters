@@ -12,6 +12,8 @@ import CoreData
 @objc(Events)
 public class Events: NSManagedObject {
     
+    ///NEEEEED MASSIVE REFACTORING
+    
     convenience init(dictionary: NSDictionary, insertIntoManagedObjectContext context: NSManagedObjectContext) {
         
         var entityName = String()
@@ -54,6 +56,13 @@ public class Events: NSManagedObject {
             self.interested_count = interestedCount
             self.declined_count = declinedCount
             self.attending_count = attendingCount
+        }
+        
+        if let place = dictionary["place"] as? NSDictionary  {
+            
+            let place_name = place.value(forKey: "name") as? String
+            
+            self.place_name = place_name
         }
         
         if let ownerDic = dictionary["owner"] as? NSDictionary, let owner_name = ownerDic["name"] as? String, let owner_id = ownerDic["id"] as? String {

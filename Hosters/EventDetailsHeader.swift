@@ -54,7 +54,6 @@ class EventDetailsHeader: BaseCollectionViewCell {
         return optionsCV
     }()
     
-    
     var noImagesView:NoImagesView = {
         let view = NoImagesView()
             view.translatesAutoresizingMaskIntoConstraints = false
