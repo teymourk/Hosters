@@ -27,19 +27,19 @@ PODS:
     - FBSDKCoreKit
   - FBSDKShareKit (4.24.0):
     - FBSDKCoreKit
-  - Firebase/Auth (4.0.3):
+  - Firebase/Auth (4.0.4):
     - Firebase/Core
     - FirebaseAuth (= 4.0.0)
-  - Firebase/Core (4.0.3):
+  - Firebase/Core (4.0.4):
     - FirebaseAnalytics (= 4.0.2)
-    - FirebaseCore (= 4.0.3)
-  - Firebase/Database (4.0.3):
+    - FirebaseCore (= 4.0.4)
+  - Firebase/Database (4.0.4):
     - Firebase/Core
     - FirebaseDatabase (= 4.0.0)
-  - Firebase/Messaging (4.0.3):
+  - Firebase/Messaging (4.0.4):
     - Firebase/Core
     - FirebaseMessaging (= 2.0.0)
-  - Firebase/Storage (4.0.3):
+  - Firebase/Storage (4.0.4):
     - Firebase/Core
     - FirebaseStorage (= 2.0.0)
   - FirebaseAnalytics (4.0.2):
@@ -50,8 +50,9 @@ PODS:
     - FirebaseAnalytics (~> 4.0)
     - GoogleToolboxForMac/NSDictionary+URLArguments (~> 2.1)
     - GTMSessionFetcher/Core (~> 1.1)
-  - FirebaseCore (4.0.3):
+  - FirebaseCore (4.0.4):
     - GoogleToolboxForMac/NSData+zlib (~> 2.1)
+    - nanopb (~> 0.3)
   - FirebaseDatabase (4.0.0):
     - FirebaseAnalytics (~> 4.0)
   - FirebaseInstanceID (2.0.0):
@@ -78,9 +79,14 @@ PODS:
     - GoogleToolboxForMac/Defines (= 2.1.1)
     - GoogleToolboxForMac/NSString+URLArguments (= 2.1.1)
   - GoogleToolboxForMac/NSString+URLArguments (2.1.1)
-  - GTMSessionFetcher/Core (1.1.10)
+  - GTMSessionFetcher/Core (1.1.11)
   - HanekeSwift (0.10.1)
   - MBProgressHUD (1.0.0)
+  - nanopb (0.3.8):
+    - nanopb/decode (= 0.3.8)
+    - nanopb/encode (= 0.3.8)
+  - nanopb/decode (0.3.8)
+  - nanopb/encode (0.3.8)
   - Protobuf (3.3.0)
   - SCLAlertView (0.7.0)
   - SwiftyCam (2.4.0)
@@ -117,22 +123,23 @@ SPEC CHECKSUMS:
   FBSDKCoreKit: f8c9eb0dd34a9cd277c7b60da4b32226d142502d
   FBSDKLoginKit: 1214c6d5a1c4995b694d8db8a9ba6910c6028acf
   FBSDKShareKit: a2ed9d7781a4eda9ac20d7404305e795b10251ac
-  Firebase: 9e33fdfbca37cab635c693883caa90a4475b842b
+  Firebase: 1492bf04e1b73a7353b4fb2cf5a20bac9692f341
   FirebaseAnalytics: ad41720e3e67fc63fbe3d2948d3e26932a8de311
   FirebaseAuth: ebb6abcbabae00fc47446d690c19ce68d8484fde
-  FirebaseCore: c709067051de07bdaffdc4e735cd7299a23c463a
+  FirebaseCore: cfc042628ef9f20debe09c0eb683135fcd404cb4
   FirebaseDatabase: d829b3a8c3e2ac7a16773c5df226966b0805dfc2
   FirebaseInstanceID: 9fbf536668f4d3f0880e7438456dabd1376e294b
   FirebaseMessaging: 227406c05b0dc9290702d2e9f18ab5528f0c2cf2
   FirebaseStorage: 8110a1ed2034c8fbfd83890d2acc9cdbbd99afec
   GoogleToolboxForMac: 8e329f1b599f2512c6b10676d45736bcc2cbbeb0
-  GTMSessionFetcher: 30d874b96d0d76028f61fbd122801e3f030d47db
+  GTMSessionFetcher: 5ad62e8200fa00ed011fe5e08d27fef72c5b1429
   HanekeSwift: 4113367892828e7700d24a384027de6ebc79aad1
   MBProgressHUD: 4890f671c94e8a0f3cf959aa731e9de2f036d71a
+  nanopb: 22bc080fa3955e2116b6ff3ee6c2cb3c15ab97cb
   Protobuf: d582fecf68201eac3d79ed61369ef45734394b9c
   SCLAlertView: 8a14ffc40590c619e183eed2298b854385f30be1
   SwiftyCam: cb83b9a8e181f70fb741d30cea724c6b045a4549
 
-PODFILE CHECKSUM: b248e2839dc209cd2025ba181dd8deab36a8f0c2
+PODFILE CHECKSUM: 4986994495684596e6b00c91e4dc87a2a3039542
 
 COCOAPODS: 1.1.1
