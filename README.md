@@ -1,5 +1,5 @@
 
-# Hoseters
+# Hosters
 
 ## Uses Facebook graph Api to pull all of users events Including: 
 
@@ -21,6 +21,5 @@
 
 # Events App Screen Shown Below.
 
-![app screenshots](https://github.com/teymourk/Tyloo/blob/master/Tyloo-NS/Audiblie.png)
-![app screenshots](https://github.com/teymourk/Tyloo/blob/master/Tyloo-NS/HoemScreens.png)
->>>>>>> e42fce0710493dcee2b24e8c599bb47dc618da36
+![app screenshots](https://github.com/teymourk/Hosters/blob/master/AppScreen.jpg)
+
