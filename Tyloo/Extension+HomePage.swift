@@ -23,7 +23,7 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
             
             if let eventDic = eventsDictionary {
                 
-                setCellLabels(Cell: cell, EventDic:eventDic, indexPath: indexPath)
+                setCellLabels(cell: cell, EventDic:eventDic, indexPath: indexPath)
             }
         
             return cell
@@ -32,25 +32,25 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
         return BaseCollectionViewCell()
     }
     
-    private func setCellLabels(Cell:HomeCell, EventDic:[Int:[Events]], indexPath:IndexPath) {
+    private func setCellLabels(cell:HomeCell, EventDic:[Int:[Events]], indexPath:IndexPath) {
         
         if let eventsArray = EventDic[indexPath.item] {
             
-            Cell.eventsCV.events = eventsArray
-            Cell.eventsCV.homePage = self
+            cell._userEventsCollectionView.events = eventsArray
+            cell._userEventsCollectionView.homePage = self
     
             for eventOBJ in eventsArray {
                 
                 switch eventOBJ.rsvp_status {
                     
                 case "not_replied"?:
-                    Cell.categoryLabel.text = "Invited  💌"
+                    cell._categoryLabel.text = "Invited  💌"
                     break
                 case "attending"?:
-                    Cell.categoryLabel.text = "Attending ✅"
+                    cell._categoryLabel.text = "Attending ✅"
                     break
                 case "unsure"?:
-                    Cell.categoryLabel.text = "Interested 🤔"
+                    cell._categoryLabel.text = "Interested 🤔"
                     break
                 default: break
                     
@@ -60,11 +60,11 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
         
         if indexPath.item == EventDic.count - 1 {
             
-            Cell.categoryLabel.text = "Attended 👻"
+            cell._categoryLabel.text = "Attended 👻"
             
         } else if indexPath.item == 0 {
             
-            Cell.categoryLabel.text = "Live 📍"
+            cell._categoryLabel.text = "Live 📍"
         }
     }
     

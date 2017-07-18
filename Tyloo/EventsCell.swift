@@ -17,12 +17,8 @@ class EventsCell: BaseCollectionViewCell {
     
     weak var _eventDetails:Events? {
         didSet {
-            
             DispatchQueue.main.async {
-                
-                guard let eventDetails = self._eventDetails else {return}
-                
-                self.setupEventDetails(eventDetails: eventDetails)
+                self.updateUI()
             }
         }
     }
@@ -68,45 +64,20 @@ class EventsCell: BaseCollectionViewCell {
     
     var delegate:EventCellDelegate?
     
-    internal func setupEventDetails(eventDetails: Events) {
+    internal func updateUI() {
         
-        headerView.eventDetails = eventDetails
+        guard let eventDetails = _eventDetails else { return }
         
-        if let coverURL = eventDetails.coverURL {
-            
-            coverImage.getImagesBack(url: coverURL, placeHolder: "emptyImage")
-            
-        } else {
-            
-            coverImage.image = UIImage(named: "emptyCover")
-        }
+        let event = eventDetails.getEventDetailsFrom(eventDetails)
+         
+        coverImage.getImagesBack(url: event.coverURL, placeHolder: "emptyCover")
+        title.text = event.title
+        location.text = event.location
         
-        if let eventTitle = eventDetails.name {
-            
-            title.text = eventTitle
-        }
-        
-        if let place_name = eventDetails.location?.place_name, let city = eventDetails.location?.city, let state = eventDetails.location?.state {
-            
-            location.text = "📍\(place_name) - \(city), \(state)"
-            location.textColor = buttonColor
-            
-        } else {
-            
-            location.text = "Location Not Available - Contact The Host"
-            location.textColor = .black
-        }
-        
-        let interestedCount = eventDetails.interested_count
-        let declinedCount = eventDetails.declined_count
-        let attendingCount = eventDetails.attending_count
-        let guest_list_Enabled = eventDetails.guest_list_enabled
-            
-        let color = guest_list_Enabled == true ? buttonColor : darkGray
-            
-        guestCountsButton.setTitle("✅ Going: \(attendingCount) • 🤔 Interested: \(interestedCount) • ❌ Not Going: \(declinedCount)", for: .normal)
+        let color = event.guestListEnabled == true ? buttonColor : darkGray
+
         guestCountsButton.setTitleColor(color, for: .normal)
-        
+        guestCountsButton.setTitle(event.guestList, for: .normal)
     }
 
     override func setupView() {

@@ -43,14 +43,14 @@ extension EventsCell {
         
         addSubview(headerView)
         
-        headerView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         headerView.topAnchor.constraint(equalTo: topAnchor).isActive = true
+        headerView.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         headerView.heightAnchor.constraint(equalToConstant: 40).isActive = true
         
         addSubview(coverImage)
         
-        coverImage.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         coverImage.topAnchor.constraint(equalTo: headerView.bottomAnchor).isActive = true
+        coverImage.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
         coverImage.heightAnchor.constraint(equalToConstant: FEED_CELL_HEIGHT / 2.3).isActive = true
     }
 }

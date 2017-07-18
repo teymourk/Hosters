@@ -10,7 +10,7 @@ import UIKit
 
 class HeaderView:BaseView {
     
-    weak var eventDetails:Events? {
+    weak var _eventDetails:Events? {
         didSet {
             DispatchQueue.main.async {
                 self.updateUI()
@@ -18,7 +18,7 @@ class HeaderView:BaseView {
         }
     }
     
-    let date:UILabel = {
+    let _eventDate:UILabel = {
         let label = UILabel()
             label.textColor = .black
             label.font = UIFont(name: "Prompt", size: 12)
@@ -26,7 +26,7 @@ class HeaderView:BaseView {
         return label
     }()
     
-    let countDown:UILabel = {
+    let _countDown:UILabel = {
         let label = UILabel()
             label.textColor = .black
             label.font = UIFont(name: "Prompt", size: 12)
@@ -34,7 +34,7 @@ class HeaderView:BaseView {
         return label
     }()
     
-    let host:UILabel = {
+    let _eventHost:UILabel = {
         let label = UILabel()
             label.textColor = .black
             label.font = UIFont(name: "NotoSans", size: 12)
@@ -44,20 +44,25 @@ class HeaderView:BaseView {
     
     internal func startCountDown() {
         
-        if let event = eventDetails, let isLive = event.isLive as Int16?, let startTime = event.start_time as Date?, let endTime = event.end_time as Date? {
+        if  let event = _eventDetails,
+            let isLive = event.isLive as Int16?,
+            let startTime = event.start_time as Date?,
+            let endTime = event.end_time as Date?
+        
+        {
             
             switch isLive {
             case 1:
-                countDown.text = "Starting: \(startTime.countDown())"
-                countDown.textColor = .rgb(24, green: 201, blue: 86)
+                _countDown.text = "Starting: \(startTime.countDown())"
+                _countDown.textColor = .rgb(24, green: 201, blue: 86)
                 break
             case 2:
-                countDown.text = "Event Ended"
-                countDown.textColor = .rgb(181, green: 24, blue: 34)
+                _countDown.text = "Event Ended"
+                _countDown.textColor = .rgb(181, green: 24, blue: 34)
                 break
             case 3:
-                countDown.text = "Ending: \(endTime.countDown())"
-                countDown.textColor = .rgb(181, green: 24, blue: 34)
+                _countDown.text = "Ending: \(endTime.countDown())"
+                _countDown.textColor = .rgb(181, green: 24, blue: 34)
                 break
                 
             default: break
@@ -68,36 +73,42 @@ class HeaderView:BaseView {
     
     fileprivate func updateUI() {
     
-        guard let headerDetail = eventDetails, let eventDate = headerDetail.start_time as Date?, let hostName = headerDetail.owner_name else {return}
+        guard   let headerDetail = _eventDetails,
+                let eventDate = headerDetail.start_time as Date?,
+                let hostName = headerDetail.owner_name else { return }
         
-        let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startCountDown), userInfo: nil, repeats: true)
-        timer.fire()
+        let timer = Timer.scheduledTimer(timeInterval: 1.0,
+                                         target: self,
+                                         selector: #selector(startCountDown),
+                                         userInfo: nil,
+                                         repeats: true)
+            timer.fire()
         
-        date.text = eventDate.produceDate()
-        host.text = "By \(hostName)"
+        _eventDate.text = eventDate.produceDate()
+        _eventHost.text = "By \(hostName)"
     }
     
     override func setupView() {
         
         backgroundColor = .white
         
-        addSubview(host)
+        addSubview(_eventHost)
         
-        host.leftAnchor.constraint(equalTo: leftAnchor, constant: 4).isActive = true
-        host.rightAnchor.constraint(equalTo: centerXAnchor).isActive = true
-        host.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
-        host.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        _eventHost.leftAnchor.constraint(equalTo: leftAnchor, constant: 4).isActive = true
+        _eventHost.rightAnchor.constraint(equalTo: centerXAnchor).isActive = true
+        _eventHost.centerYAnchor.constraint(equalTo: centerYAnchor).isActive = true
+        _eventHost.heightAnchor.constraint(equalToConstant: 15).isActive = true
         
-        addSubview(date)
+        addSubview(_eventDate)
         
-        date.rightAnchor.constraint(equalTo: rightAnchor, constant: -4).isActive = true
-        date.topAnchor.constraint(equalTo: topAnchor, constant:3).isActive = true
-        date.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        _eventDate.rightAnchor.constraint(equalTo: rightAnchor, constant: -4).isActive = true
+        _eventDate.topAnchor.constraint(equalTo: topAnchor, constant:3).isActive = true
+        _eventDate.heightAnchor.constraint(equalToConstant: 15).isActive = true
         
-        addSubview(countDown)
+        addSubview(_countDown)
         
-        countDown.rightAnchor.constraint(equalTo: date.rightAnchor).isActive = true
-        countDown.topAnchor.constraint(equalTo: date.bottomAnchor, constant:5).isActive = true
-        countDown.heightAnchor.constraint(equalToConstant: 15).isActive = true
+        _countDown.rightAnchor.constraint(equalTo: _eventDate.rightAnchor).isActive = true
+        _countDown.topAnchor.constraint(equalTo: _eventDate.bottomAnchor, constant:5).isActive = true
+        _countDown.heightAnchor.constraint(equalToConstant: 15).isActive = true
     }
 }

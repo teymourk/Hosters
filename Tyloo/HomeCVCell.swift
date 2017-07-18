@@ -15,7 +15,6 @@ class HomeCVCell: BaseCollectionViewCell  {
     
     var events:[Events]? {
         didSet {
-            
             eventCollectionView.reloadData()
         }
     }

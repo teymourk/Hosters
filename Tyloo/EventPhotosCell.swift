@@ -12,7 +12,6 @@ class EventPhotosCell: BaseCollectionViewCell {
     
     weak var postedImages:PostImages? {
         didSet {
-            
             DispatchQueue.main.async {
                 self.updateUI()
             }
@@ -28,6 +27,11 @@ class EventPhotosCell: BaseCollectionViewCell {
     
     override func setupView() {
         super.setupView()
+        
+        setupImageLayout()
+    }
+    
+    internal func setupImageLayout() {
         
         addSubview(_images)
         

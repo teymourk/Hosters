@@ -10,13 +10,13 @@ import UIKit
 
 class HomeCell: BaseCollectionViewCell {
     
-    let eventsCV:HomeCVCell = {
+    let _userEventsCollectionView:HomeCVCell = {
         let events = HomeCVCell()
             events.translatesAutoresizingMaskIntoConstraints = false
         return events
     }()
     
-    let categoryLabel:UILabel = {
+    let _categoryLabel:UILabel = {
         let label = UILabel()
             label.textColor = .darkGray
             label.font = UIFont.boldSystemFont(ofSize: 16)

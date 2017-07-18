@@ -14,6 +14,9 @@
 		0B1D9FEE1F1DAC0B001941A4 /* Extension+EventDetailsHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1D9FED1F1DAC0B001941A4 /* Extension+EventDetailsHeader.swift */; };
 		0B1D9FF01F1DADAC001941A4 /* Extension+HomeCVCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1D9FEF1F1DADAC001941A4 /* Extension+HomeCVCell.swift */; };
 		0B1D9FF21F1DC2C1001941A4 /* Extension+Events.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1D9FF11F1DC2C1001941A4 /* Extension+Events.swift */; };
+		0B1D9FF41F1DC8F2001941A4 /* Extension+EventDetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1D9FF31F1DC8F2001941A4 /* Extension+EventDetailsCell.swift */; };
+		0B1D9FF61F1DC951001941A4 /* Extension+EventDetailHeader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1D9FF51F1DC951001941A4 /* Extension+EventDetailHeader.swift */; };
+		0B1D9FF81F1DC9A6001941A4 /* Extnesion+OptionCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1D9FF71F1DC9A6001941A4 /* Extnesion+OptionCollectionView.swift */; };
 		0B1EBFAC1F03245900FCE227 /* Location+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B1EBFAB1F03245900FCE227 /* Location+CoreDataClass.swift */; };
 		0B24E4DC1EB5255B0037D1D5 /* DetailsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B24E4DB1EB5255B0037D1D5 /* DetailsCell.swift */; };
 		0B2691CE1EF5F4C40025CFCE /* CoreDataStack.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0B2691CD1EF5F4C40025CFCE /* CoreDataStack.swift */; };
@@ -75,6 +78,9 @@
 		0B1D9FED1F1DAC0B001941A4 /* Extension+EventDetailsHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+EventDetailsHeader.swift"; sourceTree = "<group>"; };
 		0B1D9FEF1F1DADAC001941A4 /* Extension+HomeCVCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+HomeCVCell.swift"; sourceTree = "<group>"; };
 		0B1D9FF11F1DC2C1001941A4 /* Extension+Events.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+Events.swift"; sourceTree = "<group>"; };
+		0B1D9FF31F1DC8F2001941A4 /* Extension+EventDetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+EventDetailsCell.swift"; sourceTree = "<group>"; };
+		0B1D9FF51F1DC951001941A4 /* Extension+EventDetailHeader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extension+EventDetailHeader.swift"; sourceTree = "<group>"; };
+		0B1D9FF71F1DC9A6001941A4 /* Extnesion+OptionCollectionView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Extnesion+OptionCollectionView.swift"; sourceTree = "<group>"; };
 		0B1EBFAB1F03245900FCE227 /* Location+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Location+CoreDataClass.swift"; sourceTree = "<group>"; };
 		0B24E4DB1EB5255B0037D1D5 /* DetailsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailsCell.swift; sourceTree = "<group>"; };
 		0B2691CD1EF5F4C40025CFCE /* CoreDataStack.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoreDataStack.swift; sourceTree = "<group>"; };
@@ -166,8 +172,8 @@
 			children = (
 				0B1D9FE61F1D9722001941A4 /* Extension+HomeCell.swift */,
 				0B1D9FE81F1DA97B001941A4 /* Extension+EventCell.swift */,
+				0B1D9FF31F1DC8F2001941A4 /* Extension+EventDetailsCell.swift */,
 				0B1D9FED1F1DAC0B001941A4 /* Extension+EventDetailsHeader.swift */,
-				0B1D9FF11F1DC2C1001941A4 /* Extension+Events.swift */,
 			);
 			name = "Extension+UI+Constraints";
 			sourceTree = "<group>";
@@ -178,6 +184,9 @@
 				0BBCCB651EAA9128003A50CB /* Extension+HomePage.swift */,
 				0B1D9FEF1F1DADAC001941A4 /* Extension+HomeCVCell.swift */,
 				0B7B6DD51EE0EDC600763477 /* Extension+AllEventPhotos.swift */,
+				0B1D9FF51F1DC951001941A4 /* Extension+EventDetailHeader.swift */,
+				0B1D9FF71F1DC9A6001941A4 /* Extnesion+OptionCollectionView.swift */,
+				0B1D9FF11F1DC2C1001941A4 /* Extension+Events.swift */,
 			);
 			name = "Extension+Delegate";
 			sourceTree = "<group>";
@@ -220,10 +229,10 @@
 				AB2EFDB21D0E29E000B21A18 /* HomeCell.swift */,
 				0B8EE9421EB02E1800218394 /* HomeCVCell.swift */,
 				0B8EE9441EB0380E00218394 /* EventsCell.swift */,
+				0BD0DE301ECBFF47009FF2D5 /* LiveView.swift */,
 				0B7B6DD71EE0F19100763477 /* HeaderView.swift */,
 				0B24E4DB1EB5255B0037D1D5 /* DetailsCell.swift */,
 				0B57BF691ED37180009359A3 /* EventPhotosCell.swift */,
-				0BD0DE301ECBFF47009FF2D5 /* LiveView.swift */,
 				0B6249EC1EE10D3700C31A62 /* EventDetailsCell.swift */,
 				0BB336A81EEBCFC300099BA4 /* EventDetailsHeader.swift */,
 				0BB8C9B61EFA04CE0007F74D /* OptionsView.swift */,
@@ -465,6 +474,7 @@
 			files = (
 				0BBCCB661EAA9128003A50CB /* Extension+HomePage.swift in Sources */,
 				0B2691CE1EF5F4C40025CFCE /* CoreDataStack.swift in Sources */,
+				0B1D9FF81F1DC9A6001941A4 /* Extnesion+OptionCollectionView.swift in Sources */,
 				0BE43C9A1EB0F84200062E07 /* UserProfile.swift in Sources */,
 				0BD0DE311ECBFF47009FF2D5 /* LiveView.swift in Sources */,
 				0B62406B1EFDFA3E005610AC /* SearchOptionsCell.swift in Sources */,
@@ -485,6 +495,7 @@
 				AB2EFDB51D0E29FD00B21A18 /* BaseCells.swift in Sources */,
 				0B9081B01F12B245006A557A /* ScrollPage.swift in Sources */,
 				0B1D9FE71F1D9722001941A4 /* Extension+HomeCell.swift in Sources */,
+				0B1D9FF41F1DC8F2001941A4 /* Extension+EventDetailsCell.swift in Sources */,
 				0B24E4DC1EB5255B0037D1D5 /* DetailsCell.swift in Sources */,
 				0B72A16C1EFEEEB3007A90CC /* EventImagesCollectionView.swift in Sources */,
 				AB8376B91D83203A0083B94C /* CompleteFacebookRegister.swift in Sources */,
@@ -500,6 +511,7 @@
 				0B8F5C621EDE77CC00033C72 /* AllEventPhotos.swift in Sources */,
 				0B6249ED1EE10D3700C31A62 /* EventDetailsCell.swift in Sources */,
 				0B8EE9451EB0380E00218394 /* EventsCell.swift in Sources */,
+				0B1D9FF61F1DC951001941A4 /* Extension+EventDetailHeader.swift in Sources */,
 				0B1EBFAC1F03245900FCE227 /* Location+CoreDataClass.swift in Sources */,
 				0B1D9FE41F1D5350001941A4 /* HomeAuditCell.swift in Sources */,
 				AB2EFDB31D0E29E000B21A18 /* HomeCell.swift in Sources */,

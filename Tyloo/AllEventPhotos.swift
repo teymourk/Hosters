@@ -15,41 +15,26 @@ private let SEGMENT_CELL = "SEGMENT_CELL"
 
 class AllEventPhotos: UICollectionViewController, OptionsViewDelegate {
     
-    var empty:Bool = false
-    var timer:Timer?
-    
-    
+    lazy var empty:Bool = false
+    weak var timer:Timer?
     
     lazy var cellImages:[UIImage] = {
         
-        let i = UIImage(named:"location")
-        let o = UIImage(named:"calendar")
-        let p = UIImage(named:"host")
-        let l = UIImage(named:"attension")
+        let location = UIImage(named:"location")
+        let date = UIImage(named:"calendar")
+        let host = UIImage(named:"host")
+        let details = UIImage(named:"attension")
         
-        return [i!, o!, p!, l!]
+        return [location!, date!, host!, details!]
     }()
     
     lazy var evenDetails:[String] = {
        
-        let details = self._eventDetails
+        guard let eventDetails = self._eventDetails else { return [] }
         
-        var location: String
+        let event = eventDetails.getEventDetailsFrom(eventDetails)
         
-        if let place_name = details?.location?.place_name, let city = details?.location?.city, let state = details?.location?.state {
-            
-            location = "📍\(place_name) - \(city), \(state)"
-        
-        } else {
-            
-            location = "Location Not Available - Contact The Host"
-        }
-        
-        let host = details?.owner_name
-        let detail = details?.details
-        
-        
-        return [location, "DATE", host!, detail!]
+        return [event.location, "DATE", event.hosts, event.details]
     }()
     
     var _eventDetails:Events? {
