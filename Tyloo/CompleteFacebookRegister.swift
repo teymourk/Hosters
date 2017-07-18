@@ -11,43 +11,41 @@ import FBSDKLoginKit
 import Firebase
 import MBProgressHUD
 
-class CompleteFacebookRegister: UIViewController, UITextFieldDelegate {
+class CompleteFacebookRegister: UIViewController {
     
     let profileImage:UIImageView = {
         let image = UIImageView()
             image.image = UIImage(named: "Profile")
             image.layer.masksToBounds = true
-            image.layer.cornerRadius = 50
             image.layer.borderWidth = 1
-            image.alpha = 0
-            image.contentMode = .scaleToFill
+            image.layer.cornerRadius = 5
+            image.contentMode = .scaleAspectFill
+            image.translatesAutoresizingMaskIntoConstraints = false
         return image
     }()
     
     lazy var userFacebookName:UILabel = {
         let label = UILabel()
-            label.text = "Whats Your Name?"
             label.textColor = .black
             label.textAlignment = .center
             label.font = UIFont(name: "PROMPT", size: 15)
+            label.translatesAutoresizingMaskIntoConstraints = false
         return label
-    }()
-    
-    lazy var continueBtn:UIButton = {
-        let button = UIButton()
-            button.setTitle("Continue", for: UIControlState())
-            button.addTarget(self, action: #selector(onContinue(_ :)), for: .touchUpInside)
-            button.titleLabel?.font = UIFont.systemFont(ofSize: 17)
-            button.backgroundColor = .gray
-            button.layer.masksToBounds = true
-            button.layer.cornerRadius = 5
-        return button
     }()
     
     var seperator:UIView = {
         let view = UIView()
             view.backgroundColor = darkGray
+            view.translatesAutoresizingMaskIntoConstraints = false
         return view
+    }()
+    
+    let permissionPages:ScrollPage = {
+        let pages = ScrollPage()
+            pages.isPagingEnabled = true
+            pages.showsHorizontalScrollIndicator = false
+            pages.translatesAutoresizingMaskIntoConstraints = false
+        return pages
     }()
     
     override func viewDidLoad() {
@@ -154,47 +152,30 @@ class CompleteFacebookRegister: UIViewController, UITextFieldDelegate {
         })
     }
     
-    func animateProfileImage() {
-        
-        profileImage.transform = CGAffineTransform(scaleX: 2.5, y: 2.5)
-        
-        UIView.animate(withDuration: 1, animations: {
-            
-            self.profileImage.transform = CGAffineTransform(scaleX: 1, y: 1)
-            self.profileImage.alpha = 1
-        })
-    }
-
-    func setupView() {
+    fileprivate func setupView() {
         
         view.addSubview(profileImage)
-        view.addSubview(seperator)
+        
+        profileImage.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        profileImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 40).isActive = true
+        
         view.addSubview(userFacebookName)
-        view.addSubview(continueBtn)
         
-        perform(#selector(animateProfileImage), with: nil, afterDelay: 0.2)
+        userFacebookName.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        userFacebookName.topAnchor.constraint(equalTo: profileImage.bottomAnchor, constant: 20).isActive = true
         
-        //ProfileImage Constraints
-        view.addConstrainstsWithFormat("H:[v0(100)]", views: profileImage)
-        view.addConstrainstsWithFormat("V:|-30-[v0(100)]", views: profileImage)
-        
-        //CenterX
-        view.addConstraint(NSLayoutConstraint(item: profileImage, attribute: .centerX, relatedBy: .equal, toItem: view, attribute: .centerX, multiplier: 1, constant: 0))
-        
-        
-        //Username Constrains
-        view.addConstrainstsWithFormat("H:|[v0]|", views: userFacebookName)
-        view.addConstrainstsWithFormat("V:[v0]", views: userFacebookName)
+        view.addSubview(seperator)
 
-        //Top
-        view.addConstraint(NSLayoutConstraint(item: userFacebookName, attribute: .top, relatedBy: .equal, toItem: seperator, attribute: .bottom, multiplier: 1, constant: 20))
+        seperator.centerYAnchor.constraint(equalTo: view.centerYAnchor, constant: -40).isActive = true
+        seperator.widthAnchor.constraint(equalTo: view.widthAnchor).isActive = true
+        seperator.heightAnchor.constraint(equalToConstant: 0.5).isActive = true
         
-    
-        //Continue Constraints
-        view.addConstrainstsWithFormat("H:|-100-[v0]-100-|", views: continueBtn)
-        view.addConstrainstsWithFormat("V:[v0(50)]", views: continueBtn)
+        view.addSubview(permissionPages)
         
-        //Top
-        view.addConstraint(NSLayoutConstraint(item: continueBtn, attribute: .top, relatedBy: .equal, toItem: userFacebookName, attribute: .top, multiplier: 1, constant: 100))
+        permissionPages.widthAnchor.constraint(equalToConstant: view.frame.width * 3).isActive = true
+        permissionPages.topAnchor.constraint(equalTo: seperator.bottomAnchor).isActive = true
+        permissionPages.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        permissionPages.contentSize = CGSize(width: view.bounds.width * 3, height: 200)
     }
 }

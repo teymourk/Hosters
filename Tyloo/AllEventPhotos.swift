@@ -16,8 +16,41 @@ private let SEGMENT_CELL = "SEGMENT_CELL"
 class AllEventPhotos: UICollectionViewController, OptionsViewDelegate {
     
     var empty:Bool = false
-    var cellImages:[UIImage] = [UIImage]()
     var timer:Timer?
+    
+    
+    
+    lazy var cellImages:[UIImage] = {
+        
+        let i = UIImage(named:"location")
+        let o = UIImage(named:"calendar")
+        let p = UIImage(named:"host")
+        let l = UIImage(named:"attension")
+        
+        return [i!, o!, p!, l!]
+    }()
+    
+    lazy var evenDetails:[String] = {
+       
+        let details = self._eventDetails
+        
+        var location: String
+        
+        if let place_name = details?.location?.place_name, let city = details?.location?.city, let state = details?.location?.state {
+            
+            location = "📍\(place_name) - \(city), \(state)"
+        
+        } else {
+            
+            location = "Location Not Available - Contact The Host"
+        }
+        
+        let host = details?.owner_name
+        let detail = details?.details
+        
+        
+        return [location, "DATE", host!, detail!]
+    }()
     
     var _eventDetails:Events? {
         didSet {
@@ -57,15 +90,7 @@ class AllEventPhotos: UICollectionViewController, OptionsViewDelegate {
         
         view.addConstrainstsWithFormat("H:|[v0]|", views: navBarSeperator)
         view.addConstrainstsWithFormat("V:|[v0(2)]", views: navBarSeperator)
-        
-        let i = UIImage(named:"location")
-        let o = UIImage(named:"calendar")
-        let p = UIImage(named:"host")
-        let l = UIImage(named:"attension")
-        
-        cellImages = [i!, o!, p!, l!]
     }
-    
     
     override func viewDidDisappear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -112,7 +137,6 @@ class AllEventPhotos: UICollectionViewController, OptionsViewDelegate {
     internal func loadImages() -> [PostImages] {
         
         if let event = _eventDetails {
-            
             return PostImages.fetchEventImages(event: event)
         }
         
@@ -121,8 +145,6 @@ class AllEventPhotos: UICollectionViewController, OptionsViewDelegate {
     
     @objc
     fileprivate func startCountDown() {
-        
-        print("SALAM")
         
         if let event = _eventDetails,let startTime = event.start_time as Date?, let endTime = event.end_time as Date? {
             

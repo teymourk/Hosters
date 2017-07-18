@@ -21,7 +21,7 @@ struct Page {
     let details:String
 }
 
-class HomeAudit: UICollectionViewController, UICollectionViewDelegateFlowLayout, RegisterCellDelegate {
+class HomeAudit: UICollectionViewController, UICollectionViewDelegateFlowLayout, FacebookRegisterCellDelegate {
     
     let pages:[Page] = {
         
@@ -45,8 +45,8 @@ class HomeAudit: UICollectionViewController, UICollectionViewDelegateFlowLayout,
         super.viewDidLoad()
         
         self.collectionView?.backgroundColor = .white
-        self.collectionView?.register(picturesCell.self, forCellWithReuseIdentifier: CELL_ID)
-        self.collectionView?.register(RegisterCell.self, forCellWithReuseIdentifier: REGISTER_CELL)
+        self.collectionView?.register(HomeAuditCell.self, forCellWithReuseIdentifier: CELL_ID)
+        self.collectionView?.register(FacebookRegisterCell.self, forCellWithReuseIdentifier: REGISTER_CELL)
         self.collectionView?.backgroundColor = .clear
         self.collectionView?.showsHorizontalScrollIndicator = false
         self.collectionView?.isPagingEnabled = true
@@ -84,7 +84,7 @@ class HomeAudit: UICollectionViewController, UICollectionViewDelegateFlowLayout,
         
         if indexPath.item == 3 {
             
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: REGISTER_CELL, for: indexPath) as? RegisterCell {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: REGISTER_CELL, for: indexPath) as? FacebookRegisterCell {
                 
                 cell.delegate = self
                 
@@ -93,7 +93,7 @@ class HomeAudit: UICollectionViewController, UICollectionViewDelegateFlowLayout,
             
         } else {
          
-            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as? picturesCell {
+            if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as? HomeAuditCell {
             
                 let pageDetails = pages[indexPath.item]
                 
@@ -125,7 +125,6 @@ class HomeAudit: UICollectionViewController, UICollectionViewDelegateFlowLayout,
         pageController.bottomAnchor.constraint(equalTo: self.view.bottomAnchor).isActive = true
         pageController.centerXAnchor.constraint(equalTo: self.view.centerXAnchor).isActive = true
         pageController.heightAnchor.constraint(equalToConstant: 40).isActive = true
-        
     }
     
     func onFacebookLogin(sender: UIButton) {
@@ -154,88 +153,5 @@ class HomeAudit: UICollectionViewController, UICollectionViewDelegateFlowLayout,
     
     override var prefersStatusBarHidden: Bool {
         return true
-    }
-}
-
-class picturesCell:BaseCollectionViewCell {
-    
-    var detail: Page? {
-        
-        didSet {
-            
-            guard let page = detail else {return}
-            
-            let imgURL = page.imageName
-            instructionImage.getImagesBack(url: imgURL, placeHolder: "emptyImage")
-            
-            makeTextAttribute(page: page)
-            
-        }
-    }
-    
-    var instructionImage:UIImageView = {
-        let image = UIImageView()
-            image.contentMode = .scaleAspectFill
-            image.clipsToBounds = true
-            image.translatesAutoresizingMaskIntoConstraints = false
-        return image
-    }()
-    
-    var instructionText:UITextView = {
-        let text = UITextView()
-            text.textColor = .black
-            text.isEditable = false
-            text.isSelectable = false
-            text.contentInset = UIEdgeInsets(top: 24, left: 0, bottom: 0, right: 0)
-            text.translatesAutoresizingMaskIntoConstraints = false
-        return text
-    }()
-    
-    fileprivate func makeTextAttribute(page:Page) {
-        
-        let color = UIColor(white: 0.2, alpha: 1)
-        
-        let attributeText = NSMutableAttributedString(string: page.title, attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 18, weight: UIFontWeightMedium), NSForegroundColorAttributeName: color])
-        
-        let detailAttribute = NSAttributedString(string: "\n\n\(page.details)", attributes: [NSFontAttributeName: UIFont.systemFont(ofSize: 14), NSForegroundColorAttributeName: color])
-        
-        attributeText.append(detailAttribute)
-        
-        let textlength = attributeText.string.characters.count
-        
-        let paragraph = NSMutableParagraphStyle()
-        paragraph.alignment = .center
-        
-        let range = NSRange(location: 0, length: textlength)
-        
-        attributeText.addAttribute(NSParagraphStyleAttributeName, value: paragraph, range: range)
-        
-        instructionText.attributedText = attributeText
-    }
-    
-    override func setupView() {
-        
-        addSubview(instructionImage)
-        addSubview(instructionText)
-        addSubview(seperator)
-        
-        let imageHeight = self.frame.height / 1.35
-        
-        //ImageConstraints
-        instructionImage.topAnchor.constraint(equalTo: self.topAnchor, constant:-40).isActive = true
-        instructionImage.widthAnchor.constraint(equalTo: self.widthAnchor).isActive = true
-        instructionImage.heightAnchor.constraint(equalToConstant: imageHeight).isActive = true
-        
-        //TextConstraints
-        instructionText.topAnchor.constraint(equalTo: instructionImage.bottomAnchor).isActive = true
-        instructionText.bottomAnchor.constraint(equalTo: self.bottomAnchor, constant: -30).isActive = true
-        instructionText.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        instructionText.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        
-        //SeperatorConstraints
-        seperator.bottomAnchor.constraint(equalTo: instructionImage.bottomAnchor).isActive = true
-        seperator.leftAnchor.constraint(equalTo: self.leftAnchor).isActive = true
-        seperator.rightAnchor.constraint(equalTo: self.rightAnchor).isActive = true
-        seperator.heightAnchor.constraint(equalToConstant: 2).isActive = true
     }
 }

@@ -59,6 +59,7 @@ class OptionsCollectionView: BaseView {
 
 
 //Mark - Delegate Constructors
+
 extension OptionsCollectionView: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate, UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {

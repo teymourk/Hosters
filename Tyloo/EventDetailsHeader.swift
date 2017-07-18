@@ -65,46 +65,6 @@ class EventDetailsHeader: BaseCollectionViewCell {
     
     override func setupView() {
         super.setupView()
-        
-        addSubview(optionsView)
-        
-        optionsView.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        optionsView.widthAnchor.constraint(equalToConstant: 80).isActive = true
-        optionsView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
-    }
-    
-    internal func setupShareOptions() {
-        
-        optionsView.removeFromSuperview()
-        
-        backgroundColor = .white
-        
-        addSubview(shareOptionCV)
-        
-        shareOptionCV.topAnchor.constraint(equalTo: topAnchor).isActive = true
-        shareOptionCV.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        shareOptionCV.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
-    }
-    
-    internal func handleNoImagesView() {
-        
-        addSubview(noImagesView)
-        
-        noImagesView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        noImagesView.rightAnchor.constraint(equalTo: optionsView.leftAnchor).isActive = true
-        noImagesView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
-        noImagesView.topAnchor.constraint(equalTo: optionsView.topAnchor).isActive = true
-    }
-    
-    internal func handleWithImagesView() {
-    
-        addSubview(collectionView)
-
-        collectionView.leftAnchor.constraint(equalTo: leftAnchor).isActive = true
-        collectionView.rightAnchor.constraint(equalTo: optionsView.leftAnchor).isActive = true
-        collectionView.heightAnchor.constraint(equalTo: heightAnchor).isActive = true
-        collectionView.topAnchor.constraint(equalTo: optionsView.topAnchor).isActive = true
-    
     }
 }
 
@@ -122,7 +82,7 @@ extension EventDetailsHeader: UICollectionViewDelegate, UICollectionViewDataSour
             if let image = postedImages?[indexPath.item], let imgURL = image.imageURL {
                 
                 cell.coverImage.getImagesBack(url: imgURL, placeHolder: "emptyImage")
-                cell.setupJustImageLayer()
+                cell.setupDetailsLayer()
             }
             
             return cell

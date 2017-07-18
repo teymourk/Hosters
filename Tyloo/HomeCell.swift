@@ -19,26 +19,14 @@ class HomeCell: BaseCollectionViewCell {
     let categoryLabel:UILabel = {
         let label = UILabel()
             label.textColor = .darkGray
-            label.font = UIFont(name: "NotoSans-Italic", size: 17)
+            label.font = UIFont.boldSystemFont(ofSize: 16)
             label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     override func setupView() {
-        super.setupView()
+        backgroundColor = .white
         
-        backgroundColor = .clear
-        
-        addSubview(categoryLabel)
-        
-        categoryLabel.leftAnchor.constraint(equalTo: leftAnchor, constant: 10).isActive = true
-        categoryLabel.rightAnchor.constraint(equalTo: rightAnchor).isActive = true
-        categoryLabel.topAnchor.constraint(equalTo: topAnchor, constant: 10).isActive = true
-        
-        addSubview(eventsCV)
-        
-        eventsCV.widthAnchor.constraint(equalTo: widthAnchor).isActive = true
-        eventsCV.topAnchor.constraint(equalTo: categoryLabel.bottomAnchor, constant: 10).isActive = true
-        eventsCV.bottomAnchor.constraint(equalTo: bottomAnchor).isActive = true
+        setupConstraints()
     }
 }

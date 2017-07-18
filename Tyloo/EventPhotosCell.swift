@@ -13,8 +13,9 @@ class EventPhotosCell: BaseCollectionViewCell {
     weak var postedImages:PostImages? {
         didSet {
             
-            guard let imgURL = postedImages?.imageURL else {return}
-            self._images.getImagesBack(url: imgURL, placeHolder: "emptyImage")
+            DispatchQueue.main.async {
+                self.updateUI()
+            }
         }
     }
     
@@ -38,5 +39,12 @@ class EventPhotosCell: BaseCollectionViewCell {
         super.prepareForReuse()
         
         _images.image = nil
+    }
+    
+    fileprivate func updateUI() {
+    
+        guard let imgURL = postedImages?.imageURL else {return}
+        
+        self._images.getImagesBack(url: imgURL, placeHolder: "emptyImage")
     }
 }

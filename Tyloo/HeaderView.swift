@@ -11,40 +11,34 @@ import UIKit
 class HeaderView:BaseView {
     
     weak var eventDetails:Events? {
-        
         didSet {
-            
-            guard let headerDetail = eventDetails, let eventDate = headerDetail.start_time as Date?, let hostName = headerDetail.owner_name else {return}
-            
-            let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startCountDown), userInfo: nil, repeats: true)
-            timer.fire()
-            
-            date.text = eventDate.produceDate()
-            host.text = "By \(hostName)"
+            DispatchQueue.main.async {
+                self.updateUI()
+            }
         }
     }
     
     let date:UILabel = {
         let label = UILabel()
-        label.textColor = .black
-        label.font = UIFont(name: "Prompt", size: 12)
-        label.translatesAutoresizingMaskIntoConstraints = false
+            label.textColor = .black
+            label.font = UIFont(name: "Prompt", size: 12)
+            label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let countDown:UILabel = {
         let label = UILabel()
-        label.textColor = .black
-        label.font = UIFont(name: "Prompt", size: 12)
-        label.translatesAutoresizingMaskIntoConstraints = false
+            label.textColor = .black
+            label.font = UIFont(name: "Prompt", size: 12)
+            label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
     let host:UILabel = {
         let label = UILabel()
-        label.textColor = .black
-        label.font = UIFont(name: "NotoSans", size: 12)
-        label.translatesAutoresizingMaskIntoConstraints = false
+            label.textColor = .black
+            label.font = UIFont(name: "NotoSans", size: 12)
+            label.translatesAutoresizingMaskIntoConstraints = false
         return label
     }()
     
@@ -70,6 +64,17 @@ class HeaderView:BaseView {
                 
             }
         }
+    }
+    
+    fileprivate func updateUI() {
+    
+        guard let headerDetail = eventDetails, let eventDate = headerDetail.start_time as Date?, let hostName = headerDetail.owner_name else {return}
+        
+        let timer = Timer.scheduledTimer(timeInterval: 1.0, target: self, selector: #selector(startCountDown), userInfo: nil, repeats: true)
+        timer.fire()
+        
+        date.text = eventDate.produceDate()
+        host.text = "By \(hostName)"
     }
     
     override func setupView() {

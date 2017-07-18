@@ -14,13 +14,8 @@ class EventDetailsCell: BaseCollectionViewCell {
             
             guard let eventDetails = _eventDetails else {return}
             
-            if let URL = eventDetails.coverURL {
-                
-                coverImage.getImagesBack(url: URL, placeHolder: "emptyImage")
-                
-            } else {
-                
-                coverImage.image = UIImage(named: "emptyCover")
+            DispatchQueue.main.async {
+                self.UpdateUI(For: eventDetails)
             }
         }
     }
@@ -48,7 +43,19 @@ class EventDetailsCell: BaseCollectionViewCell {
         backgroundColor = .white
     }
     
-    internal func setupJustImageLayer() {
+    fileprivate func UpdateUI(For details: Events) {
+    
+        if let URL = details.coverURL {
+            
+            coverImage.getImagesBack(url: URL, placeHolder: "emptyImage")
+            
+        } else {
+            
+            coverImage.image = UIImage(named: "emptyCover")
+        }
+    }
+    
+    internal func setupCoverImage() {
         
         addSubview(coverImage)
         

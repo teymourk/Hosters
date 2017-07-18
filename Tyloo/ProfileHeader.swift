@@ -9,11 +9,6 @@
 import UIKit
 
 class ProfileHeader:BaseCollectionViewCell {
-
-    let pageNotfication:PageNotifications = {
-        let pg = PageNotifications()
-        return pg
-    }()
     
     lazy var profileImage:UIImageView = {
         let image = UIImageView()

@@ -29,16 +29,17 @@ extension AllEventPhotos: UICollectionViewDelegateFlowLayout {
         if let cell = collectionView.dequeueReusableCell(withReuseIdentifier: CELL_ID, for: indexPath) as? EventDetailsCell {
             
             if indexPath.item == 0 {
-                
                 cell._eventDetails = _eventDetails
-                cell.setupJustImageLayer()
+                cell.setupCoverImage()
                 
             } else {
                                 
                 let image = cellImages[indexPath.item - 1]
+                let details = evenDetails[indexPath.item - 1]
                 
-                cell.setupDetailsLayer()
                 cell.coverImage.image = image
+                cell.details.text = details
+                cell.setupDetailsLayer()
             }
             
             return cell

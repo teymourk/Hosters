@@ -8,12 +8,12 @@
 
 import UIKit
 
-protocol RegisterCellDelegate: class {
+protocol FacebookRegisterCellDelegate: class {
     
     func onFacebookLogin(sender: UIButton)
 }
 
-class RegisterCell: BaseCollectionViewCell, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
+class FacebookRegisterCell: BaseCollectionViewCell, UITextFieldDelegate, UIImagePickerControllerDelegate, UINavigationControllerDelegate {
     
     let backgroundCover:UIImageView = {
         let img = UIImageView()
@@ -54,12 +54,7 @@ class RegisterCell: BaseCollectionViewCell, UITextFieldDelegate, UIImagePickerCo
         return button
     }()
     
-    var delegate:RegisterCellDelegate?
-
-    var pageNotification:PageNotifications = {
-        let pn = PageNotifications()
-        return pn
-    }()
+    var delegate:FacebookRegisterCellDelegate?
     
     func onFaceBookSignUp(_ sender: UIButton) {
         
@@ -67,7 +62,6 @@ class RegisterCell: BaseCollectionViewCell, UITextFieldDelegate, UIImagePickerCo
             delegate?.onFacebookLogin(sender: sender)
         }
     }
-    
     
     var registeBtnYAnchar:NSLayoutConstraint?
     var logoYAncher:NSLayoutConstraint?
@@ -99,16 +93,17 @@ class RegisterCell: BaseCollectionViewCell, UITextFieldDelegate, UIImagePickerCo
         registeBtnYAnchar = facebookBtn.bottomAnchor.constraint(equalTo: bottomAnchor, constant: 10)
         registeBtnYAnchar?.isActive = true
         
-        animatePage()
-
+        perform(#selector(animatePage), with: nil, afterDelay: 1)
     }
     
     internal func animatePage() {
-            
-        self.layoutIfNeeded()
-            
+    
         self.registeBtnYAnchar?.constant = -70
         self.logoYAncher?.constant = 40
         
+        UIView.animate(withDuration: 0.7, delay: 0.5, options: .curveLinear, animations: {
+            self.layoutIfNeeded()
+            
+        }, completion: nil)
     }
 }

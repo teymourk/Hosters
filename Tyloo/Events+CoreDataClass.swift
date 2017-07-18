@@ -31,10 +31,6 @@ public class Events: NSManagedObject {
             default: break
                 
             }
-            
-        } else {
-            
-            entityName = "NearEvents"
         }
         
         let entity = NSEntityDescription.entity(forEntityName: entityName, in: context)

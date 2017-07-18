@@ -38,7 +38,7 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
             
             Cell.eventsCV.events = eventsArray
             Cell.eventsCV.homePage = self
-            
+    
             for eventOBJ in eventsArray {
                 
                 switch eventOBJ.rsvp_status {
@@ -76,8 +76,13 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
         
-        return 5
+        return 10
     }
+}
+
+//Marker - HeaderDegelage 
+
+extension HomePage {
     
     //Mark - HeaderDelegate
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
@@ -89,7 +94,7 @@ extension HomePage: UICollectionViewDelegateFlowLayout {
     override func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
         
         if let header = collectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: HEADER_ID, for: indexPath) as? SearchHeader {
-        
+            
             header.homePage = self
             
             return header

@@ -24,7 +24,6 @@ public class Location: NSManagedObject {
         self.place_name = name
         
         guard let locationData = locationInfo["location"] as? NSDictionary else {return}
-        
         guard let street = locationData["street"] as? String else { return }
         guard let city = locationData["city"] as? String else { return }
         guard let state = locationData["state"] as? String else { return }

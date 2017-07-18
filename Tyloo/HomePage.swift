@@ -99,7 +99,7 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
         collectionView?.addSubview(refresher)
         collectionView?.register(HomeCell.self, forCellWithReuseIdentifier: CELL_FEED)
         collectionView?.register(SearchHeader.self, forSupplementaryViewOfKind: UICollectionElementKindSectionHeader, withReuseIdentifier: HEADER_ID)
-        collectionView?.backgroundColor = UIColor.rgb(231, green: 236, blue: 240)
+        collectionView?.backgroundColor = UIColor.rgb(231, green: 236, blue: 240) //Gray Cololr
     }
         
     internal func navigateToEventDetails(eventDetail:Events) {
@@ -134,7 +134,6 @@ class HomePage: UICollectionViewController, CLLocationManagerDelegate {
     
     func onRefreshPage() {
         
-        print("SALAAM")
         refresher.endRefreshing()
     }
     
