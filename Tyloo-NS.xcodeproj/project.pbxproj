@@ -1,0 +1,575 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		5D12030B1609A0DFE0DF11A2 /* Pods_Tyloo_NS.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = B50C21B3D80E14391184251D /* Pods_Tyloo_NS.framework */; };
+		AB043AA51D0F128D00B20823 /* CreatePostVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB043AA41D0F128D00B20823 /* CreatePostVC.swift */; };
+		AB043AA71D0F185C00B20823 /* CameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB043AA61D0F185C00B20823 /* CameraVC.swift */; };
+		AB2094451D21AF44007B70C5 /* AccessCamera_PhotoLibraryVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2094441D21AF44007B70C5 /* AccessCamera_PhotoLibraryVC.swift */; };
+		AB2EFDB31D0E29E000B21A18 /* FeedCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2EFDB21D0E29E000B21A18 /* FeedCell.swift */; };
+		AB2EFDB51D0E29FD00B21A18 /* BaseCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2EFDB41D0E29FD00B21A18 /* BaseCell.swift */; };
+		AB2EFDB71D0E319000B21A18 /* MenuBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2EFDB61D0E319000B21A18 /* MenuBar.swift */; };
+		AB2EFDB91D0E346100B21A18 /* Constans.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2EFDB81D0E346100B21A18 /* Constans.swift */; };
+		AB2EFDBF1D0E414300B21A18 /* ProfileInfo.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2EFDBE1D0E414300B21A18 /* ProfileInfo.swift */; };
+		AB2EFDC11D0E82A400B21A18 /* SearchUsersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2EFDC01D0E82A400B21A18 /* SearchUsersVC.swift */; };
+		AB2EFDC31D0E8F4400B21A18 /* AddVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2EFDC21D0E8F4400B21A18 /* AddVC.swift */; };
+		AB2FDCF71D10F2AF00686B8A /* UserCells.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB2FDCF61D10F2AF00686B8A /* UserCells.swift */; };
+		AB325F1A1D14BFD700E2DDC4 /* ActivityAbouCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB325F191D14BFD700E2DDC4 /* ActivityAbouCell.swift */; };
+		AB3B70891D1E166500A10D63 /* AllPicturesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3B70881D1E166500A10D63 /* AllPicturesVC.swift */; };
+		AB3B708B1D1F52C900A10D63 /* CoverPicturesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3B708A1D1F52C900A10D63 /* CoverPicturesVC.swift */; };
+		AB3B708D1D1F5BAD00A10D63 /* PhotosVCAllPictures.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB3B708C1D1F5BAD00A10D63 /* PhotosVCAllPictures.swift */; };
+		AB4B423C1D271D9200739122 /* GoogleTableVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4B423B1D271D9200739122 /* GoogleTableVC.swift */; };
+		AB4DA5751D26004C00CA500A /* SettingsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4DA5741D26004C00CA500A /* SettingsVC.swift */; };
+		AB4F61EC1D1863F900387829 /* AddImageCameraVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB4F61EB1D1863F900387829 /* AddImageCameraVC.swift */; };
+		AB5EC4E51D164B21006159F6 /* peopleWith.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5EC4E41D164B21006159F6 /* peopleWith.swift */; };
+		AB5EC4E71D1651AA006159F6 /* PeopleWithCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB5EC4E61D1651AA006159F6 /* PeopleWithCell.swift */; };
+		AB7136101D10713000BB1BF2 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB71360F1D10713000BB1BF2 /* User.swift */; };
+		AB7136161D10C6B000BB1BF2 /* Posts.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7136151D10C6B000BB1BF2 /* Posts.swift */; };
+		AB7E87A61D0CE32D00750B76 /* LoginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7E87A51D0CE32D00750B76 /* LoginVC.swift */; };
+		AB7E87AA1D0CE39E00750B76 /* Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7E87A91D0CE39E00750B76 /* Extensions.swift */; };
+		AB7E87AC1D0CF12700750B76 /* CostumeTabBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7E87AB1D0CF12700750B76 /* CostumeTabBar.swift */; };
+		AB7E87AE1D0CF2F200750B76 /* FriendsFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB7E87AD1D0CF2F200750B76 /* FriendsFeedVC.swift */; };
+		AB9102241D12090F00221DA9 /* PicturesVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9102231D12090F00221DA9 /* PicturesVC.swift */; };
+		AB9102261D121D2600221DA9 /* MyPostsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = AB9102251D121D2600221DA9 /* MyPostsVC.swift */; };
+		ABBFA9FB1D0F931700BB4D5C /* EditProfileVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBFA9FA1D0F931700BB4D5C /* EditProfileVC.swift */; };
+		ABBFA9FE1D0F9C2200BB4D5C /* ActivityAboutVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBFA9FD1D0F9C2200BB4D5C /* ActivityAboutVC.swift */; };
+		ABBFAA001D0F9D6500BB4D5C /* NotificationsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBFA9FF1D0F9D6500BB4D5C /* NotificationsVC.swift */; };
+		ABBFAA041D0FC13000BB4D5C /* FirebaseRef.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABBFAA031D0FC13000BB4D5C /* FirebaseRef.swift */; };
+		ABC6BAD51D11DEBA0072B020 /* FollowersVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC6BAD41D11DEBA0072B020 /* FollowersVC.swift */; };
+		ABC6BAD71D11DEE60072B020 /* FollowingVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC6BAD61D11DEE60072B020 /* FollowingVC.swift */; };
+		ABC703FB1D23932700C0CEE3 /* GooglePlace.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC703FA1D23932700C0CEE3 /* GooglePlace.swift */; };
+		ABC703FD1D23934400C0CEE3 /* GoogleAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC703FC1D23934400C0CEE3 /* GoogleAPI.swift */; };
+		ABC703FF1D23A2EF00C0CEE3 /* NSOBject.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC703FE1D23A2EF00C0CEE3 /* NSOBject.swift */; };
+		ABC704011D2460CC00C0CEE3 /* MessaginVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC704001D2460CC00C0CEE3 /* MessaginVC.swift */; };
+		ABC704031D24845F00C0CEE3 /* RegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC704021D24845F00C0CEE3 /* RegisterVC.swift */; };
+		ABC704051D2491B500C0CEE3 /* CompleteRegisterVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC704041D2491B500C0CEE3 /* CompleteRegisterVC.swift */; };
+		ABC77A731D0C916600C46DD0 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC77A721D0C916600C46DD0 /* AppDelegate.swift */; };
+		ABC77A751D0C916600C46DD0 /* HomeController.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABC77A741D0C916600C46DD0 /* HomeController.swift */; };
+		ABC77A7A1D0C916600C46DD0 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = ABC77A791D0C916600C46DD0 /* Assets.xcassets */; };
+		ABC77A7D1D0C916600C46DD0 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ABC77A7B1D0C916600C46DD0 /* LaunchScreen.storyboard */; };
+		ABD047AC1D17AD610080D7E7 /* PostImages.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD047AB1D17AD610080D7E7 /* PostImages.swift */; };
+		ABD047B01D185F180080D7E7 /* ActivePostsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABD047AF1D185F180080D7E7 /* ActivePostsCell.swift */; };
+		ABEC49CB1D0F366700CFF1CC /* TagFriendsVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABEC49CA1D0F366700CFF1CC /* TagFriendsVC.swift */; };
+		ABF2C9851D264CF3004BB9E1 /* AllPicturesFeedVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF2C9841D264CF3004BB9E1 /* AllPicturesFeedVC.swift */; };
+		ABF8EC971D1B539700C8F644 /* CropView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF8EC961D1B539700C8F644 /* CropView.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		935C9218E9E69F16D26533FE /* Pods-Tyloo-NS.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tyloo-NS.debug.xcconfig"; path = "Pods/Target Support Files/Pods-Tyloo-NS/Pods-Tyloo-NS.debug.xcconfig"; sourceTree = "<group>"; };
+		95BB14EB45E07915A78B0265 /* Pods-Tyloo-NS.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-Tyloo-NS.release.xcconfig"; path = "Pods/Target Support Files/Pods-Tyloo-NS/Pods-Tyloo-NS.release.xcconfig"; sourceTree = "<group>"; };
+		AB043AA41D0F128D00B20823 /* CreatePostVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreatePostVC.swift; sourceTree = "<group>"; };
+		AB043AA61D0F185C00B20823 /* CameraVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CameraVC.swift; sourceTree = "<group>"; };
+		AB2094441D21AF44007B70C5 /* AccessCamera_PhotoLibraryVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccessCamera_PhotoLibraryVC.swift; sourceTree = "<group>"; };
+		AB2EFDB21D0E29E000B21A18 /* FeedCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedCell.swift; sourceTree = "<group>"; };
+		AB2EFDB41D0E29FD00B21A18 /* BaseCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BaseCell.swift; sourceTree = "<group>"; };
+		AB2EFDB61D0E319000B21A18 /* MenuBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MenuBar.swift; sourceTree = "<group>"; };
+		AB2EFDB81D0E346100B21A18 /* Constans.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Constans.swift; sourceTree = "<group>"; };
+		AB2EFDBE1D0E414300B21A18 /* ProfileInfo.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProfileInfo.swift; sourceTree = "<group>"; };
+		AB2EFDC01D0E82A400B21A18 /* SearchUsersVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SearchUsersVC.swift; sourceTree = "<group>"; };
+		AB2EFDC21D0E8F4400B21A18 /* AddVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddVC.swift; sourceTree = "<group>"; };
+		AB2FDCF61D10F2AF00686B8A /* UserCells.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UserCells.swift; sourceTree = "<group>"; };
+		AB325F191D14BFD700E2DDC4 /* ActivityAbouCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityAbouCell.swift; sourceTree = "<group>"; };
+		AB3B70881D1E166500A10D63 /* AllPicturesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllPicturesVC.swift; sourceTree = "<group>"; };
+		AB3B708A1D1F52C900A10D63 /* CoverPicturesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CoverPicturesVC.swift; sourceTree = "<group>"; };
+		AB3B708C1D1F5BAD00A10D63 /* PhotosVCAllPictures.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotosVCAllPictures.swift; sourceTree = "<group>"; };
+		AB4B423B1D271D9200739122 /* GoogleTableVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleTableVC.swift; sourceTree = "<group>"; };
+		AB4DA5741D26004C00CA500A /* SettingsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SettingsVC.swift; sourceTree = "<group>"; };
+		AB4F61EB1D1863F900387829 /* AddImageCameraVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AddImageCameraVC.swift; sourceTree = "<group>"; };
+		AB5EC4E41D164B21006159F6 /* peopleWith.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = peopleWith.swift; sourceTree = "<group>"; };
+		AB5EC4E61D1651AA006159F6 /* PeopleWithCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PeopleWithCell.swift; sourceTree = "<group>"; };
+		AB71360F1D10713000BB1BF2 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
+		AB7136151D10C6B000BB1BF2 /* Posts.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Posts.swift; sourceTree = "<group>"; };
+		AB7E87A51D0CE32D00750B76 /* LoginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginVC.swift; sourceTree = "<group>"; };
+		AB7E87A91D0CE39E00750B76 /* Extensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Extensions.swift; sourceTree = "<group>"; };
+		AB7E87AB1D0CF12700750B76 /* CostumeTabBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CostumeTabBar.swift; sourceTree = "<group>"; };
+		AB7E87AD1D0CF2F200750B76 /* FriendsFeedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FriendsFeedVC.swift; sourceTree = "<group>"; };
+		AB9102231D12090F00221DA9 /* PicturesVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PicturesVC.swift; sourceTree = "<group>"; };
+		AB9102251D121D2600221DA9 /* MyPostsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyPostsVC.swift; sourceTree = "<group>"; };
+		ABBFA9FA1D0F931700BB4D5C /* EditProfileVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = EditProfileVC.swift; sourceTree = "<group>"; };
+		ABBFA9FD1D0F9C2200BB4D5C /* ActivityAboutVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivityAboutVC.swift; sourceTree = "<group>"; };
+		ABBFA9FF1D0F9D6500BB4D5C /* NotificationsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NotificationsVC.swift; sourceTree = "<group>"; };
+		ABBFAA031D0FC13000BB4D5C /* FirebaseRef.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FirebaseRef.swift; sourceTree = "<group>"; };
+		ABC6BAD41D11DEBA0072B020 /* FollowersVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowersVC.swift; sourceTree = "<group>"; };
+		ABC6BAD61D11DEE60072B020 /* FollowingVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FollowingVC.swift; sourceTree = "<group>"; };
+		ABC703FA1D23932700C0CEE3 /* GooglePlace.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GooglePlace.swift; sourceTree = "<group>"; };
+		ABC703FC1D23934400C0CEE3 /* GoogleAPI.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = GoogleAPI.swift; sourceTree = "<group>"; };
+		ABC703FE1D23A2EF00C0CEE3 /* NSOBject.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NSOBject.swift; sourceTree = "<group>"; };
+		ABC704001D2460CC00C0CEE3 /* MessaginVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MessaginVC.swift; sourceTree = "<group>"; };
+		ABC704021D24845F00C0CEE3 /* RegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RegisterVC.swift; sourceTree = "<group>"; };
+		ABC704041D2491B500C0CEE3 /* CompleteRegisterVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CompleteRegisterVC.swift; sourceTree = "<group>"; };
+		ABC77A6F1D0C916600C46DD0 /* Tyloo-NS.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Tyloo-NS.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		ABC77A721D0C916600C46DD0 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
+		ABC77A741D0C916600C46DD0 /* HomeController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeController.swift; sourceTree = "<group>"; };
+		ABC77A791D0C916600C46DD0 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		ABC77A7C1D0C916600C46DD0 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
+		ABC77A7E1D0C916600C46DD0 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		ABD047AB1D17AD610080D7E7 /* PostImages.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PostImages.swift; sourceTree = "<group>"; };
+		ABD047AF1D185F180080D7E7 /* ActivePostsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ActivePostsCell.swift; sourceTree = "<group>"; };
+		ABEC49CA1D0F366700CFF1CC /* TagFriendsVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagFriendsVC.swift; sourceTree = "<group>"; };
+		ABF2C9841D264CF3004BB9E1 /* AllPicturesFeedVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllPicturesFeedVC.swift; sourceTree = "<group>"; };
+		ABF8EC961D1B539700C8F644 /* CropView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CropView.swift; sourceTree = "<group>"; };
+		B50C21B3D80E14391184251D /* Pods_Tyloo_NS.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_Tyloo_NS.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		ABC77A6C1D0C916600C46DD0 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				5D12030B1609A0DFE0DF11A2 /* Pods_Tyloo_NS.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		1B18AACF3E6669CB53EF5096 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				935C9218E9E69F16D26533FE /* Pods-Tyloo-NS.debug.xcconfig */,
+				95BB14EB45E07915A78B0265 /* Pods-Tyloo-NS.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		AB2EFDB11D0E292400B21A18 /* Controller */ = {
+			isa = PBXGroup;
+			children = (
+				ABC77A741D0C916600C46DD0 /* HomeController.swift */,
+				AB7E87AB1D0CF12700750B76 /* CostumeTabBar.swift */,
+				AB7E87A51D0CE32D00750B76 /* LoginVC.swift */,
+				ABC704021D24845F00C0CEE3 /* RegisterVC.swift */,
+				ABC704041D2491B500C0CEE3 /* CompleteRegisterVC.swift */,
+				AB7E87AD1D0CF2F200750B76 /* FriendsFeedVC.swift */,
+				AB9102231D12090F00221DA9 /* PicturesVC.swift */,
+				AB3B708A1D1F52C900A10D63 /* CoverPicturesVC.swift */,
+				AB3B708C1D1F5BAD00A10D63 /* PhotosVCAllPictures.swift */,
+				ABF2C9841D264CF3004BB9E1 /* AllPicturesFeedVC.swift */,
+				AB9102251D121D2600221DA9 /* MyPostsVC.swift */,
+				ABBFA9FD1D0F9C2200BB4D5C /* ActivityAboutVC.swift */,
+				AB5EC4E41D164B21006159F6 /* peopleWith.swift */,
+				AB3B70881D1E166500A10D63 /* AllPicturesVC.swift */,
+				AB2EFDC01D0E82A400B21A18 /* SearchUsersVC.swift */,
+				AB2EFDC21D0E8F4400B21A18 /* AddVC.swift */,
+				AB043AA41D0F128D00B20823 /* CreatePostVC.swift */,
+				ABC703FA1D23932700C0CEE3 /* GooglePlace.swift */,
+				ABC703FC1D23934400C0CEE3 /* GoogleAPI.swift */,
+				AB4B423B1D271D9200739122 /* GoogleTableVC.swift */,
+				ABEC49CA1D0F366700CFF1CC /* TagFriendsVC.swift */,
+				ABBFA9FF1D0F9D6500BB4D5C /* NotificationsVC.swift */,
+				ABBFA9FA1D0F931700BB4D5C /* EditProfileVC.swift */,
+				ABC6BAD41D11DEBA0072B020 /* FollowersVC.swift */,
+				ABC6BAD61D11DEE60072B020 /* FollowingVC.swift */,
+				AB4F61EB1D1863F900387829 /* AddImageCameraVC.swift */,
+				AB2094441D21AF44007B70C5 /* AccessCamera_PhotoLibraryVC.swift */,
+				ABC704001D2460CC00C0CEE3 /* MessaginVC.swift */,
+				AB4DA5741D26004C00CA500A /* SettingsVC.swift */,
+			);
+			name = Controller;
+			sourceTree = "<group>";
+		};
+		AB7E87A71D0CE36200750B76 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				ABC703FE1D23A2EF00C0CEE3 /* NSOBject.swift */,
+				AB2EFDB41D0E29FD00B21A18 /* BaseCell.swift */,
+				AB043AA61D0F185C00B20823 /* CameraVC.swift */,
+				AB2EFDB61D0E319000B21A18 /* MenuBar.swift */,
+				AB2EFDB21D0E29E000B21A18 /* FeedCell.swift */,
+				AB2EFDBE1D0E414300B21A18 /* ProfileInfo.swift */,
+				AB2FDCF61D10F2AF00686B8A /* UserCells.swift */,
+				AB325F191D14BFD700E2DDC4 /* ActivityAbouCell.swift */,
+				AB5EC4E61D1651AA006159F6 /* PeopleWithCell.swift */,
+				ABD047AF1D185F180080D7E7 /* ActivePostsCell.swift */,
+				ABF8EC961D1B539700C8F644 /* CropView.swift */,
+			);
+			name = View;
+			sourceTree = "<group>";
+		};
+		AB7E87A81D0CE39300750B76 /* Helper */ = {
+			isa = PBXGroup;
+			children = (
+				AB2EFDB81D0E346100B21A18 /* Constans.swift */,
+				AB7E87A91D0CE39E00750B76 /* Extensions.swift */,
+			);
+			name = Helper;
+			sourceTree = "<group>";
+		};
+		ABBFA9FC1D0F959B00BB4D5C /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				ABBFAA031D0FC13000BB4D5C /* FirebaseRef.swift */,
+				AB71360F1D10713000BB1BF2 /* User.swift */,
+				AB7136151D10C6B000BB1BF2 /* Posts.swift */,
+				ABD047AB1D17AD610080D7E7 /* PostImages.swift */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		ABC77A661D0C916600C46DD0 = {
+			isa = PBXGroup;
+			children = (
+				ABC77A711D0C916600C46DD0 /* Tyloo-NS */,
+				ABC77A701D0C916600C46DD0 /* Products */,
+				1B18AACF3E6669CB53EF5096 /* Pods */,
+				D45737E2BB8062EA8CCB1734 /* Frameworks */,
+			);
+			sourceTree = "<group>";
+		};
+		ABC77A701D0C916600C46DD0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				ABC77A6F1D0C916600C46DD0 /* Tyloo-NS.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		ABC77A711D0C916600C46DD0 /* Tyloo-NS */ = {
+			isa = PBXGroup;
+			children = (
+				ABBFA9FC1D0F959B00BB4D5C /* Model */,
+				AB2EFDB11D0E292400B21A18 /* Controller */,
+				AB7E87A81D0CE39300750B76 /* Helper */,
+				AB7E87A71D0CE36200750B76 /* View */,
+				ABC77A791D0C916600C46DD0 /* Assets.xcassets */,
+				ABC77A721D0C916600C46DD0 /* AppDelegate.swift */,
+				ABC77A7B1D0C916600C46DD0 /* LaunchScreen.storyboard */,
+				ABC77A7E1D0C916600C46DD0 /* Info.plist */,
+			);
+			path = "Tyloo-NS";
+			sourceTree = "<group>";
+		};
+		D45737E2BB8062EA8CCB1734 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				B50C21B3D80E14391184251D /* Pods_Tyloo_NS.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		ABC77A6E1D0C916600C46DD0 /* Tyloo-NS */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = ABC77A811D0C916600C46DD0 /* Build configuration list for PBXNativeTarget "Tyloo-NS" */;
+			buildPhases = (
+				8C5216182BF73F565E1468FB /* 📦 Check Pods Manifest.lock */,
+				ABC77A6B1D0C916600C46DD0 /* Sources */,
+				ABC77A6C1D0C916600C46DD0 /* Frameworks */,
+				ABC77A6D1D0C916600C46DD0 /* Resources */,
+				68E0F62581A80A4EA1261E6E /* 📦 Embed Pods Frameworks */,
+				E28A567395580605845FE578 /* 📦 Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "Tyloo-NS";
+			productName = "Tyloo-NS";
+			productReference = ABC77A6F1D0C916600C46DD0 /* Tyloo-NS.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		ABC77A671D0C916600C46DD0 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastSwiftUpdateCheck = 0730;
+				LastUpgradeCheck = 0730;
+				ORGANIZATIONNAME = "Kiarash Teymoury";
+				TargetAttributes = {
+					ABC77A6E1D0C916600C46DD0 = {
+						CreatedOnToolsVersion = 7.3.1;
+					};
+				};
+			};
+			buildConfigurationList = ABC77A6A1D0C916600C46DD0 /* Build configuration list for PBXProject "Tyloo-NS" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = ABC77A661D0C916600C46DD0;
+			productRefGroup = ABC77A701D0C916600C46DD0 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				ABC77A6E1D0C916600C46DD0 /* Tyloo-NS */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		ABC77A6D1D0C916600C46DD0 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				ABC77A7D1D0C916600C46DD0 /* LaunchScreen.storyboard in Resources */,
+				ABC77A7A1D0C916600C46DD0 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		68E0F62581A80A4EA1261E6E /* 📦 Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tyloo-NS/Pods-Tyloo-NS-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		8C5216182BF73F565E1468FB /* 📦 Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		E28A567395580605845FE578 /* 📦 Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "📦 Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-Tyloo-NS/Pods-Tyloo-NS-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		ABC77A6B1D0C916600C46DD0 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				AB2EFDC11D0E82A400B21A18 /* SearchUsersVC.swift in Sources */,
+				ABBFA9FE1D0F9C2200BB4D5C /* ActivityAboutVC.swift in Sources */,
+				AB7136101D10713000BB1BF2 /* User.swift in Sources */,
+				ABC703FF1D23A2EF00C0CEE3 /* NSOBject.swift in Sources */,
+				AB325F1A1D14BFD700E2DDC4 /* ActivityAbouCell.swift in Sources */,
+				AB7E87A61D0CE32D00750B76 /* LoginVC.swift in Sources */,
+				AB7E87AC1D0CF12700750B76 /* CostumeTabBar.swift in Sources */,
+				ABD047AC1D17AD610080D7E7 /* PostImages.swift in Sources */,
+				AB2EFDB91D0E346100B21A18 /* Constans.swift in Sources */,
+				ABC77A751D0C916600C46DD0 /* HomeController.swift in Sources */,
+				AB7136161D10C6B000BB1BF2 /* Posts.swift in Sources */,
+				ABD047B01D185F180080D7E7 /* ActivePostsCell.swift in Sources */,
+				AB5EC4E71D1651AA006159F6 /* PeopleWithCell.swift in Sources */,
+				AB043AA51D0F128D00B20823 /* CreatePostVC.swift in Sources */,
+				ABC77A731D0C916600C46DD0 /* AppDelegate.swift in Sources */,
+				AB2EFDB51D0E29FD00B21A18 /* BaseCell.swift in Sources */,
+				AB3B70891D1E166500A10D63 /* AllPicturesVC.swift in Sources */,
+				AB2EFDB71D0E319000B21A18 /* MenuBar.swift in Sources */,
+				AB3B708B1D1F52C900A10D63 /* CoverPicturesVC.swift in Sources */,
+				ABEC49CB1D0F366700CFF1CC /* TagFriendsVC.swift in Sources */,
+				ABC6BAD71D11DEE60072B020 /* FollowingVC.swift in Sources */,
+				AB9102241D12090F00221DA9 /* PicturesVC.swift in Sources */,
+				AB2FDCF71D10F2AF00686B8A /* UserCells.swift in Sources */,
+				ABC703FB1D23932700C0CEE3 /* GooglePlace.swift in Sources */,
+				ABBFAA041D0FC13000BB4D5C /* FirebaseRef.swift in Sources */,
+				ABC704011D2460CC00C0CEE3 /* MessaginVC.swift in Sources */,
+				AB7E87AE1D0CF2F200750B76 /* FriendsFeedVC.swift in Sources */,
+				AB9102261D121D2600221DA9 /* MyPostsVC.swift in Sources */,
+				AB2094451D21AF44007B70C5 /* AccessCamera_PhotoLibraryVC.swift in Sources */,
+				AB043AA71D0F185C00B20823 /* CameraVC.swift in Sources */,
+				AB4B423C1D271D9200739122 /* GoogleTableVC.swift in Sources */,
+				AB4F61EC1D1863F900387829 /* AddImageCameraVC.swift in Sources */,
+				AB2EFDBF1D0E414300B21A18 /* ProfileInfo.swift in Sources */,
+				AB2EFDB31D0E29E000B21A18 /* FeedCell.swift in Sources */,
+				AB2EFDC31D0E8F4400B21A18 /* AddVC.swift in Sources */,
+				ABF8EC971D1B539700C8F644 /* CropView.swift in Sources */,
+				ABC6BAD51D11DEBA0072B020 /* FollowersVC.swift in Sources */,
+				AB7E87AA1D0CE39E00750B76 /* Extensions.swift in Sources */,
+				ABBFAA001D0F9D6500BB4D5C /* NotificationsVC.swift in Sources */,
+				AB3B708D1D1F5BAD00A10D63 /* PhotosVCAllPictures.swift in Sources */,
+				ABC703FD1D23934400C0CEE3 /* GoogleAPI.swift in Sources */,
+				ABC704031D24845F00C0CEE3 /* RegisterVC.swift in Sources */,
+				ABC704051D2491B500C0CEE3 /* CompleteRegisterVC.swift in Sources */,
+				ABBFA9FB1D0F931700BB4D5C /* EditProfileVC.swift in Sources */,
+				AB5EC4E51D164B21006159F6 /* peopleWith.swift in Sources */,
+				AB4DA5751D26004C00CA500A /* SettingsVC.swift in Sources */,
+				ABF2C9851D264CF3004BB9E1 /* AllPicturesFeedVC.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		ABC77A7B1D0C916600C46DD0 /* LaunchScreen.storyboard */ = {
+			isa = PBXVariantGroup;
+			children = (
+				ABC77A7C1D0C916600C46DD0 /* Base */,
+			);
+			name = LaunchScreen.storyboard;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		ABC77A7F1D0C916600C46DD0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		ABC77A801D0C916600C46DD0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		ABC77A821D0C916600C46DD0 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 935C9218E9E69F16D26533FE /* Pods-Tyloo-NS.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Tyloo-NS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Q-Aproject.Tyloo-NS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		ABC77A831D0C916600C46DD0 /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 95BB14EB45E07915A78B0265 /* Pods-Tyloo-NS.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				INFOPLIST_FILE = "Tyloo-NS/Info.plist";
+				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_BUNDLE_IDENTIFIER = "Q-Aproject.Tyloo-NS";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		ABC77A6A1D0C916600C46DD0 /* Build configuration list for PBXProject "Tyloo-NS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABC77A7F1D0C916600C46DD0 /* Debug */,
+				ABC77A801D0C916600C46DD0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		ABC77A811D0C916600C46DD0 /* Build configuration list for PBXNativeTarget "Tyloo-NS" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				ABC77A821D0C916600C46DD0 /* Debug */,
+				ABC77A831D0C916600C46DD0 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = ABC77A671D0C916600C46DD0 /* Project object */;
+}
