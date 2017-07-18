@@ -12,5 +12,5 @@ Users are able to be part of an event and post pictures before and after to shar
 
 Users are able to create Events as shown in the images Below.
 
-![app screenshots](https://github.com/teymourk/Tyloo/blob/master/Tyloo/Audiblie.png)
-![app screenshots](https://github.com/teymourk/Tyloo/blob/master/Tyloo/HoemScreens.png)
+![app screenshots](https://github.com/teymourk/Tyloo/blob/master/Tyloo-NS/Audiblie.png)
+![app screenshots](https://github.com/teymourk/Tyloo/blob/master/Tyloo-NS/HoemScreens.png)
